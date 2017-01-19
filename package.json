@@ -1,0 +1,44 @@
+{
+  "name": "ariamodule",
+  "version": "0.0.0",
+  "description": "WAI-ARIA DOM implementation",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/aristov/ariamodule.git"
+  },
+  "keywords": [
+    "wai-aria",
+    "dom",
+    "html",
+    "xml",
+    "web",
+    "www",
+    "widget",
+    "roletype",
+    "role",
+    "structure",
+    "radio",
+    "checkbox",
+    "combobox",
+    "tree",
+    "grid",
+    "gridcell",
+    "treeitem",
+    "button",
+    "spinbutton",
+    "row",
+    "attribute",
+    "state",
+    "property"
+  ],
+  "author": "Vyacheslav Aristov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aristov/ariamodule/issues"
+  },
+  "homepage": "https://github.com/aristov/ariamodule#readme"
+}
