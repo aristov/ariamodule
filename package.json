@@ -40,5 +40,8 @@
   "bugs": {
     "url": "https://github.com/aristov/ariamodule/issues"
   },
-  "homepage": "https://github.com/aristov/ariamodule#readme"
+  "homepage": "https://github.com/aristov/ariamodule#readme",
+  "dependencies": {
+    "htmlmodule": "^0.4.3"
+  }
 }
