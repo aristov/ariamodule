@@ -2476,10 +2476,9 @@ class RoleType extends ARIADOMAssembler {
     }
 
     get owns() {
-        return this.node
-            .getAttribute('aria-owns')
-            .split(' ')
-            .map(id => document.getElementById(id))
+        const owns = this.node.getAttribute('aria-owns');
+        const handler = id => document.getElementById(id);
+        return owns? owns.split(' ').map(handler) : []
     }
 
     set relevant(relevant) {
@@ -2786,32 +2785,22 @@ class GridCell extends Cell {
 
     onEnterKeyDown(event) {
         if(this.selected === 'true') {
-            if(this.colSpan > 1) this.colSpan = 1;
-            else {
-                const filter = ({ selected }) => selected === 'true';
-                const cells = this.row.cells.filter(filter);
-                const first = cells[0];
-                const last = cells[cells.length - 1];
-                if(first.row.index === last.row.index) {
-                    if(first.index < last.index) {
-                        first.colSpan = last.index - first.index + 1;
-                        first.focus();
-                    }
+            const filter = ({ selected }) => selected === 'true';
+            let cells = this.grid.cells.filter(filter);
+            const first = cells[0];
+            if(cells.length > 1) {
+                if(cells.some(({ owns }) => owns.length)) {
+                    cells.forEach(cell => {
+                        if(cell.owns.length) cell.owns = [];
+                        cell.selected = 'false';
+                    });
+                }
+                else {
+                    first.owns = cells.slice(1);
+                    first.focus();
                 }
             }
-            if(this.rowSpan > 1) this.rowSpan = 1;
-            else {
-                const filter = ({ selected }) => selected === 'true';
-                const cells = this.column.filter(filter);
-                const first = cells[0];
-                const last = cells[cells.length - 1];
-                if(first.index === last.index) {
-                    if(first.row.index < last.row.index) {
-                        first.rowSpan = last.row.index - first.row.index + 1;
-                        first.focus();
-                    }
-                }
-            }
+            else first.owns = [];
         }
     }
 
@@ -2870,81 +2859,69 @@ class GridCell extends Cell {
     }
 
     get prev() {
-        let sibling = this.node;
-        do sibling = sibling.previousSibling;
-        while(sibling && sibling.hidden)
-        return sibling && sibling.assembler
+        const sibling = this.row.cells[this.index - 1];
+        return sibling && sibling.span
     }
 
     get next() {
-        let sibling = this.node;
-        do sibling = sibling.nextSibling;
-        while(sibling && sibling.hidden)
-        return sibling && sibling.assembler
+        const sibling = this.row.cells[this.index + this.colSpan];
+        return sibling && sibling.span
+    }
+
+    get topSibling() {
+        let sibling = this.column[this.row.index - 1];
+        return sibling && sibling.span
+    }
+
+    get bottomSibling() {
+        const sibling = this.column[this.row.index + this.rowSpan];
+        return sibling && sibling.span
     }
 
     get column() {
         return this.grid.rows.map(r => r.cells[this.index])
     }
 
-    get topSibling() {
-        /*const column = this.column
-        let row = this.row
-        let cell
-        do {
-            row = row.prev
-            cell = row && column[row.index]
-        }
-        while(cell && cell.hidden)
-        return cell && row.assembler*/
-
-        const sibling = this.column[this.row.index - 1];
-        return sibling && sibling.hidden? sibling.prev : sibling
-    }
-
-    get bottomSibling() {
-        const sibling = this.column[this.row.index + 1];
-        return sibling && sibling.hidden? sibling.prev : sibling
+    get span() {
+        if(this.hidden) {
+            const selector = `td[aria-owns~=${ this.id }]`;
+            const node = this.grid.node.querySelector(selector);
+            return node? node.assembler : this
+        } else return this
     }
 
     set colSpan(colSpan) {
-        const start = this.index;
-        const cells = this.row.cells;
-        const owns = [];
-        for(let i$$1 = start + 1; i$$1 < start + this.colSpan; i$$1++) {
-            cells[i$$1].hidden = false;
-        }
-        for(let i$$1 = start + 1; i$$1 < start + colSpan; i$$1++) {
-            const cell = cells[i$$1];
-            cell.hidden = true;
-            owns.push(cell);
-        }
         this.node.colSpan = colSpan;
-        this.owns = owns;
+    }
+
+    get colSpan() {
+        return this.node.colSpan
+    }
+
+    set rowSpan(rowSpan) {
+        this.node.rowSpan = rowSpan;
     }
 
     get rowSpan() {
         return this.node.rowSpan
     }
 
-    set rowSpan(rowSpan) {
-        const start = this.row.index;
-        const cells = this.column;
-        const owns = [];
-        for(let i$$1 = start + 1; i$$1 < start + this.rowSpan; i$$1++) {
-            cells[i$$1].hidden = false;
+    set owns(owns) {
+        this.owns.forEach(cell => cell.hidden = false);
+        this.colSpan = 1;
+        this.rowSpan = 1;
+        if(owns.length) {
+            const first = this;
+            const last = owns[owns.length - 1];
+            owns.forEach(cell => cell.hidden = true);
+            this.colSpan = last.index - first.index + 1;
+            this.rowSpan = last.row.index - first.row.index + 1;
         }
-        for(let i$$1 = start + 1; i$$1 < start + rowSpan; i$$1++) {
-            const cell = cells[i$$1];
-            cell.hidden = true;
-            owns.push(cell);
-        }
-        this.node.rowSpan = rowSpan;
-        this.owns = owns;
+        super.owns = owns;
     }
 
-    get colSpan() {
-        return this.node.colSpan
+    get owns() {
+        return super.owns
     }
 
     set hidden(hidden) {
