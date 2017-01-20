@@ -2548,7 +2548,8 @@ class Grid extends Table {
     }
 
     get cells() {
-        map$$1.call(this.table.cells, cell => cell.assembler);
+        const collection = this.node.querySelectorAll('td[role=gridcell]');
+        return map$$1.call(collection, cell => cell.assembler)
     }
 
     /**
@@ -2768,7 +2769,7 @@ class GridCell extends Cell {
     }
 
     set selected(selected) {
-        // console.log(this.grid.cells.filter(({ selected }) => selected === 'true'))
+        if(selected === 'true') this.grid.selected = 'false';
         this.node.setAttribute('aria-selected', selected);
     }
 
