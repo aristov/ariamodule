@@ -2859,12 +2859,15 @@ class GridCell extends Cell {
     }
 
     set colSpan(colSpan) {
-        this.node.colSpan = colSpan;
         const start = this.index;
         const cells = this.row.cells;
-        cells.forEach(c => {
-            c.hidden = c.index > start && c.index < start + colSpan;
-        });
+        for(let i$$1 = start + 1; i$$1 < start + this.colSpan; i$$1++) {
+            cells[i$$1].hidden = false;
+        }
+        for(let i$$1 = start + 1; i$$1 < start + colSpan; i$$1++) {
+            cells[i$$1].hidden = true;
+        }
+        this.node.colSpan = colSpan;
     }
 
     get colSpan() {
