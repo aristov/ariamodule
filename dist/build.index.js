@@ -2391,11 +2391,11 @@ class RoleType extends ARIADOMAssembler {
     }
 
     set hidden(hidden) {
-        this.node.setAttribute('aria-hidden', hidden);
+        this.node.setAttribute('aria-hidden', String(hidden));
     }
 
     get hidden() {
-        return this.node.getAttribute('aria-hidden')
+        return this.node.getAttribute('aria-hidden') === 'true'
     }
 
     set invalid(invalid) {
@@ -2652,6 +2652,10 @@ class Row extends Group {
         const sibling = this.node.nextSibling;
         return sibling && sibling.assembler
     }
+
+    get index() {
+        return this.node.rowIndex
+    }
 }
 
 // Object.assign(Row.prototype, Widget.prototype)
@@ -2723,6 +2727,9 @@ class GridCell extends Cell {
         if(event.key.startsWith('Arrow')) {
             this.onArrowKeyDown(event);
         }
+        if(event.key === 'Enter') {
+            this.onEnterKeyDown(event);
+        }
     }
 
     onKeyUp(event) {
@@ -2731,13 +2738,32 @@ class GridCell extends Cell {
 
     onArrowKeyDown(event) {
         event.preventDefault();
-        const sibling = {
-            ArrowLeft : this.prev,
-            ArrowRight : this.next,
-            ArrowUp : this.topSibling,
-            ArrowDown : this.bottomSibling
-        }[event.key];
+        const siblings = {
+            ArrowLeft : () => this.prev,
+            ArrowRight : () => this.next,
+            ArrowUp : () => this.topSibling,
+            ArrowDown : () => this.bottomSibling
+        };
+        const sibling = siblings[event.key]();
         if(sibling) sibling.focus();
+    }
+
+    onEnterKeyDown(event) {
+        if(this.selected === 'true') {
+            if(this.colSpan > 1) this.colSpan = 1;
+            else {
+                const filter = ({ selected }) => selected === 'true';
+                const cells = this.row.cells.filter(filter);
+                const first = cells[0];
+                const last = cells[cells.length - 1];
+                if(first.row.index === last.row.index) {
+                    if(first.index < last.index) {
+                        first.colSpan = last.index - first.index + 1;
+                        first.focus();
+                    }
+                }
+            }
+        }
     }
 
     focus() {
@@ -2795,23 +2821,62 @@ class GridCell extends Cell {
     }
 
     get prev() {
-        const sibling = this.node.previousSibling;
+        let sibling = this.node;
+        do sibling = sibling.previousSibling;
+        while(sibling && sibling.hidden)
         return sibling && sibling.assembler
     }
 
     get next() {
-        const sibling = this.node.nextSibling;
+        let sibling = this.node;
+        do sibling = sibling.nextSibling;
+        while(sibling && sibling.hidden)
         return sibling && sibling.assembler
     }
 
+    get column() {
+        return this.grid.rows.map(r => r.cells[this.index])
+    }
+
     get topSibling() {
-        const prevRow = this.row.prev;
-        return prevRow && prevRow.cells[this.index] || null
+        /*const column = this.column
+        let row = this.row
+        let cell
+        do {
+            row = row.prev
+            cell = row && column[row.index]
+        }
+        while(cell && cell.hidden)
+        return cell && row.assembler*/
+
+        const sibling = this.column[this.row.index - 1];
+        return sibling && sibling.hidden? sibling.prev : sibling
     }
 
     get bottomSibling() {
-        const nextRow = this.row.next;
-        return nextRow && nextRow.cells[this.index] || null
+        const sibling = this.column[this.row.index + 1];
+        return sibling && sibling.hidden? sibling.prev : sibling
+    }
+
+    set colSpan(colSpan) {
+        this.node.colSpan = colSpan;
+        const start = this.index;
+        const cells = this.row.cells;
+        cells.forEach(c => {
+            c.hidden = c.index > start && c.index < start + colSpan;
+        });
+    }
+
+    get colSpan() {
+        return this.node.colSpan
+    }
+
+    set hidden(hidden) {
+        this.node.hidden = hidden;
+    }
+
+    get hidden() {
+        return this.node.hidden
     }
 }
 
@@ -2826,10 +2891,10 @@ const rows = Array.from(new Array(10));
 const cells = Array.from(new Array(10));
 
 const testgrid = grid({
-    multiselectable : true,
+    // multiselectable : true,
     children : rows.map((r, j) =>
         row({
-            // multiselectable : true,
+            multiselectable : true,
             children : cells.map((c, i$$1) =>
                 gridcell({
                     disabled : i$$1 === 5 && j === 5,
