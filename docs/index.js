@@ -4,13 +4,19 @@ import { th } from 'htmlmodule'
 const rows = Array.from(new Array(10))
 const cells = Array.from(new Array(10))
 
-const testgrid = grid(rows.map((r, j) =>
-    row(cells.map((c, i) =>
-        i? gridcell({
-            disabled : i === 5 && j === 5,
-            selected : false,
-            children : j + '_' + c + '_' + i
-        }) : th(j + '_' + i)))
-))
+const testgrid = grid({
+    multiselectable : true,
+    children : rows.map((r, j) =>
+        row({
+            // multiselectable : true,
+            children : cells.map((c, i) =>
+                gridcell({
+                    disabled : i === 5 && j === 5,
+                    selected : false,
+                    children : j + '_test_' + i
+                }))
+        })
+    )
+})
 
 document.body.appendChild(testgrid.node)

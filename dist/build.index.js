@@ -167,18 +167,7 @@ const assembler = new HTMLDOMAssembler;
  * @param {Function} [init.ontoggle] Fired at details elements when they open or close
  * @return {HTMLElement|*}
  */
-function htmldom(tagName, init) {
- // todo @param {Function} [init.oninvalid] Fired at controls during form validation if they do not satisfy their constraints
- // todo @param {Function} [init.onload] Fired at an element containing a resource (e.g. img, embed) when its resource has finished loading
- // todo @param {Function} [init.onloadend] Fired at img elements after a successful load
- // todo @param {Function} [init.onloadstart] Fired at img elements when a load begins
- // todo @param {Function} [init.onpause] The element has been paused. Fired after the pause() method has returned
- // todo @param {Function} [init.onplay] The element is no longer paused. Fired after the play() method has returned, or when the autoplay attribute has caused playback to begin
- // todo @param {Function} [init.onratechange] Either the defaultPlaybackRate or the playbackRate attribute has just been updated
- // todo @param {Function} [init.onselect] Fired at form controls when their text selection is adjusted (whether by an API or by the user)
- // todo @param {Function} [init.onvolumechange] Either the volume attribute or the muted attribute has changed. Fired after the relevant attribute's setter has returned
-    return assembler.assemble(tagName, init)
-}
+
 
 
 /**
@@ -2048,9 +2037,7 @@ function htmldom(tagName, init) {
  * @param {String} [init.abbr] Alternative label to use for the header cell when referencing the cell in other contexts
  * @return {HTMLTableCellElement}
  */
-function th(init) {
-    return htmldom('th', init)
-}
+
 
 /**
  * [The `thead` element](https://html.spec.whatwg.org/#the-thead-element)
@@ -2528,6 +2515,7 @@ class Grid extends Table {
             className : 'grid',
         });
         if(init) this.init(init);
+        this.cells[0].tabIndex = 0;
     }
 
 
@@ -2612,6 +2600,7 @@ class Row extends Group {
     }
 
     set selected(selected) {
+        this.cells.forEach(cell => cell.selected = selected);
         this.node.setAttribute('aria-selected', selected);
     }
 
@@ -2706,7 +2695,7 @@ class Cell extends Section {
     }
 }
 
-const modKeys = ['metaKey', 'altKey', 'shiftKey', 'ctrlKey'];
+let shiftKey = false;
 
 class GridCell extends Cell {
 
@@ -2719,8 +2708,10 @@ class GridCell extends Cell {
         this.init({
             onfocus : this.onFocus.bind(this),
             onkeydown : this.onKeyDown.bind(this),
+            onkeyup : this.onKeyUp.bind(this),
         });
         if(init) this.init(init);
+        shiftKey = false;
     }
 
     onFocus() {
@@ -2728,15 +2719,18 @@ class GridCell extends Cell {
     }
 
     onKeyDown(event) {
-        if(modKeys.some(mod => event[mod])) {
-            this.onModKeyDown(event);
-        }
+        shiftKey = event.shiftKey;
         if(event.key.startsWith('Arrow')) {
             this.onArrowKeyDown(event);
         }
     }
 
+    onKeyUp(event) {
+        shiftKey = event.shiftKey;
+    }
+
     onArrowKeyDown(event) {
+        event.preventDefault();
         const sibling = {
             ArrowLeft : this.prev,
             ArrowRight : this.next,
@@ -2745,8 +2739,6 @@ class GridCell extends Cell {
         }[event.key];
         if(sibling) sibling.focus();
     }
-
-    onModKeyDown() {}
 
     focus() {
         this.node.focus();
@@ -2769,7 +2761,20 @@ class GridCell extends Cell {
     }
 
     set selected(selected) {
-        if(selected === 'true') this.grid.selected = 'false';
+        if(selected === 'true') {
+            if(shiftKey) {
+                if(this.row.multiselectable) {
+                    this.grid.rows.forEach(r => {
+                        if(r !== this.row) r.selected = 'false';
+                    });
+                } else if(this.grid.multiselectable) {
+                    this.grid.cells.forEach(c => {
+                        if(c.index !== this.index) c.selected = 'false';
+                    });
+                }
+            }
+            else this.grid.selected = 'false';
+        }
         this.node.setAttribute('aria-selected', selected);
     }
 
@@ -2820,16 +2825,21 @@ function gridcell(init) {
 const rows = Array.from(new Array(10));
 const cells = Array.from(new Array(10));
 
-const testgrid = grid(rows.map((r, j) =>
-    row(cells.map((c, i$$1) =>
-        i$$1? gridcell({
-            disabled : i$$1 === 5 && j === 5,
-            selected : false,
-            children : j + '_' + c + '_' + i$$1
-        }) : th(j + '_' + i$$1)))
-));
+const testgrid = grid({
+    multiselectable : true,
+    children : rows.map((r, j) =>
+        row({
+            // multiselectable : true,
+            children : cells.map((c, i$$1) =>
+                gridcell({
+                    disabled : i$$1 === 5 && j === 5,
+                    selected : false,
+                    children : j + '_test_' + i$$1
+                }))
+        })
+    )
+});
 
 document.body.appendChild(testgrid.node);
 
 }());
-//# sourceMappingURL=build.index.js.map
