@@ -18,3 +18,8 @@ th,
     cursor: default;
     color: #aaa;
 }
+
+.gridcell[aria-selected=true]
+{
+    background: #afe;
+}

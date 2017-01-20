@@ -8,6 +8,7 @@ const testgrid = grid(rows.map((r, j) =>
     row(cells.map((c, i) =>
         i? gridcell({
             disabled : i === 5 && j === 5,
+            selected : false,
             children : j + '_' + c + '_' + i
         }) : th(j + '_' + i)))
 ))

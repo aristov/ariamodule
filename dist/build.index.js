@@ -296,6 +296,14 @@ class Grid extends Table {
         return this.node.getAttribute('aria-level')
     }
 
+    set selected(selected) {
+        this.cells.forEach(cell => cell.selected = selected);
+    }
+
+    get cells() {
+        map.call(this.table.cells, cell => cell.assembler);
+    }
+
     /**
      *
      * @param {boolean} multiselectable
@@ -468,7 +476,9 @@ class GridCell extends Cell {
     }
 
     onFocus() {
-        // console.log('fuckus')
+        if(this.selected) {
+            // this.selected = 'true'
+        }
     }
 
     onKeyDown(event) {
@@ -481,26 +491,12 @@ class GridCell extends Cell {
     }
 
     onArrowKeyDown(event) {
-        const { target, key } = event;
-        const arrowMap = {
-            ArrowLeft : target.previousSibling,
-            ArrowRight : target.nextSibling,
+        const sibling = {
+            ArrowLeft : this.prev,
+            ArrowRight : this.next,
             ArrowUp : this.topSibling,
             ArrowDown : this.bottomSibling
-        };
-        const sibling = arrowMap[key];
-        /*if(event.key === 'ArrowLeft') {
-            sibling = target.previousSibling
-        }
-        if(event.key === 'ArrowRight') {
-            sibling = target.nextSibling
-        }
-        if(event.key === 'ArrowUp') {
-            sibling = this.topSibling
-        }
-        if(event.key === 'ArrowDown') {
-            sibling = this.bottomSibling
-        }*/
+        }[event.key];
         if(sibling) sibling.focus();
     }
 
@@ -527,11 +523,16 @@ class GridCell extends Cell {
     }
 
     set selected(selected) {
+        // console.log(this.grid.cells.filter(({ selected }) => selected === 'true'))
         this.node.setAttribute('aria-selected', selected);
     }
 
     get selected() {
         return this.node.getAttribute('aria-selected')
+    }
+
+    get grid() {
+        return this.node.closest('table').assembler
     }
 
     get row() {
@@ -541,6 +542,16 @@ class GridCell extends Cell {
 
     get index() {
         return this.node.cellIndex
+    }
+
+    get prev() {
+        const sibling = this.node.previousSibling;
+        return sibling && sibling.assembler
+    }
+
+    get next() {
+        const sibling = this.node.nextSibling;
+        return sibling && sibling.assembler
     }
 
     get topSibling() {
@@ -568,6 +579,7 @@ const testgrid = grid(rows.map((r, j) =>
     row(cells.map((c, i) =>
         i? gridcell({
             disabled : i === 5 && j === 5,
+            selected : false,
             children : j + '_' + c + '_' + i
         }) : htmlmodule.th(j + '_' + i)))
 ));
