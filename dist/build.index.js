@@ -167,7 +167,18 @@ const assembler = new HTMLDOMAssembler;
  * @param {Function} [init.ontoggle] Fired at details elements when they open or close
  * @return {HTMLElement|*}
  */
-
+function htmldom(tagName, init) {
+ // todo @param {Function} [init.oninvalid] Fired at controls during form validation if they do not satisfy their constraints
+ // todo @param {Function} [init.onload] Fired at an element containing a resource (e.g. img, embed) when its resource has finished loading
+ // todo @param {Function} [init.onloadend] Fired at img elements after a successful load
+ // todo @param {Function} [init.onloadstart] Fired at img elements when a load begins
+ // todo @param {Function} [init.onpause] The element has been paused. Fired after the pause() method has returned
+ // todo @param {Function} [init.onplay] The element is no longer paused. Fired after the play() method has returned, or when the autoplay attribute has caused playback to begin
+ // todo @param {Function} [init.onratechange] Either the defaultPlaybackRate or the playbackRate attribute has just been updated
+ // todo @param {Function} [init.onselect] Fired at form controls when their text selection is adjusted (whether by an API or by the user)
+ // todo @param {Function} [init.onvolumechange] Either the volume attribute or the muted attribute has changed. Fired after the relevant attribute's setter has returned
+    return assembler.assemble(tagName, init)
+}
 
 
 /**
@@ -1086,7 +1097,11 @@ const assembler = new HTMLDOMAssembler;
  * @param {String} [init.attributes.list] List of autocomplete options
  * @return {HTMLInputElement}
  */
-
+function input(init) {
+ // todo @param {String} [init.dirName] Name of form control to use for sending the element's directionality in form submission
+ // todo @param {Number} [init.minLength] Minimum length of value
+    return htmldom('input', init)
+}
 
 /**
  * [The `ins` element](https://html.spec.whatwg.org/#the-ins-element)
@@ -1819,7 +1834,9 @@ const assembler = new HTMLDOMAssembler;
  * @param {String|Array|Node|HTMLDOMAssembler|{}} [init] `NodeInit` dictionary
  * @return {HTMLSpanElement}
  */
-
+function span(init) {
+    return htmldom('span', init)
+}
 
 /**
  * [The `strong` element](https://html.spec.whatwg.org/#the-strong-element)
@@ -1933,7 +1950,9 @@ const assembler = new HTMLDOMAssembler;
  * @param {String|Array|Node|HTMLDOMAssembler|{}} [init] `NodeInit` dictionary
  * @return {HTMLTableSectionElement}
  */
-
+function tbody(init) {
+    return htmldom('tbody', init)
+}
 
 /**
  * [The `td` element](https://html.spec.whatwg.org/#the-td-element)
@@ -2303,6 +2322,14 @@ class ARIADOMAssembler extends HTMLDOMAssembler {
         super.init(NodeInit(init));
     }
 
+    set dataset(dataset) {
+        super.dataset = dataset;
+    }
+
+    get dataset() {
+        return this.node.dataset
+    }
+
     /**
      * Generate unique identifier
      * @returns {String} unique id
@@ -2424,11 +2451,11 @@ class RoleType extends ARIADOMAssembler {
     }
 
     set hidden(hidden) {
-        this.node.setAttribute('aria-hidden', String(hidden));
+        this.node.hidden = hidden;
     }
 
     get hidden() {
-        return this.node.getAttribute('aria-hidden') === 'true'
+        return this.node.hidden
     }
 
     set invalid(invalid) {
@@ -2772,21 +2799,23 @@ class GridCell extends Cell {
     }
 
     onArrowKeyDown(event) {
-        event.preventDefault();
-        const siblings = {
-            ArrowLeft : () => this.prev,
-            ArrowRight : () => this.next,
-            ArrowUp : () => this.topSibling,
-            ArrowDown : () => this.bottomSibling
-        };
-        const sibling = siblings[event.key]();
-        if(sibling) sibling.focus();
+        if(event.target === this.node) {
+            event.preventDefault();
+            const siblings = {
+                ArrowLeft : () => this.prev,
+                ArrowRight : () => this.next,
+                ArrowUp : () => this.topSibling,
+                ArrowDown : () => this.bottomSibling
+            };
+            const sibling = siblings[event.key]();
+            if(sibling) sibling.focus();
+        }
     }
 
     onEnterKeyDown(event) {
         if(this.selected === 'true') {
             const filter = ({ selected }) => selected === 'true';
-            let cells = this.grid.cells.filter(filter);
+            const cells = this.grid.cells.filter(filter);
             const first = cells[0];
             if(cells.length > 1) {
                 if(cells.some(({ owns }) => owns.length)) {
@@ -2800,7 +2829,18 @@ class GridCell extends Cell {
                     first.focus();
                 }
             }
-            else first.owns = [];
+            else if(first.owns.length) first.owns = [];
+            else if(this.text.hidden) {
+                this.input.hidden = true;
+                this.text.textContent = this.input.value;
+                this.text.hidden = false;
+                this.focus();
+            } else {
+                this.text.hidden = true;
+                this.input.value = this.text.textContent;
+                this.input.hidden = false;
+                this.input.focus();
+            }
         }
     }
 
@@ -2911,11 +2951,10 @@ class GridCell extends Cell {
         this.colSpan = 1;
         this.rowSpan = 1;
         if(owns.length) {
-            const first = this;
             const last = owns[owns.length - 1];
             owns.forEach(cell => cell.hidden = true);
-            this.colSpan = last.index - first.index + 1;
-            this.rowSpan = last.row.index - first.row.index + 1;
+            this.colSpan = last.index - this.index + 1;
+            this.rowSpan = last.row.index - this.row.index + 1;
         }
         super.owns = owns;
     }
@@ -2924,12 +2963,24 @@ class GridCell extends Cell {
         return super.owns
     }
 
-    set hidden(hidden) {
-        this.node.hidden = hidden;
+    set input(input$$1) {
+        this.node.append(input$$1);
     }
 
-    get hidden() {
-        return this.node.hidden
+    get input() {
+        let node = this.node.querySelector('input');
+        if(!node) {
+            this.input = node = input({ value : this.node.textContent });
+        }
+        return node
+    }
+
+    get text() {
+        return this.node.querySelector('span.text')
+    }
+
+    set children(children) {
+        super.children = span({ className : 'text', children });
     }
 }
 
@@ -2940,20 +2991,20 @@ function gridcell(init) {
     return new GridCell('td', init)
 }
 
-const rows = Array.from(new Array(10));
+const rows = Array.from(new Array(24));
 const cells = Array.from(new Array(10));
 
 const testgrid = grid({
     multiselectable : true,
-    children : rows.map((r, j) =>
+    children : tbody(rows.map((r, j) =>
         row({
             children : cells.map((c, i$$1) =>
                 gridcell({
                     disabled : i$$1 === 5 && j === 5,
                     selected : false,
-                    children : j + '_test_' + i$$1
+                    children : ''
                 }))
-        })
+        }))
     )
 });
 
