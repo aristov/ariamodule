@@ -5,10 +5,9 @@ const rows = Array.from(new Array(10))
 const cells = Array.from(new Array(10))
 
 const testgrid = grid({
-    // multiselectable : true,
+    multiselectable : true,
     children : rows.map((r, j) =>
         row({
-            multiselectable : true,
             children : cells.map((c, i) =>
                 gridcell({
                     disabled : i === 5 && j === 5,
