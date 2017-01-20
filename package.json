@@ -43,5 +43,9 @@
   "homepage": "https://github.com/aristov/ariamodule#readme",
   "dependencies": {
     "htmlmodule": "^0.4.3"
+  },
+  "devDependencies": {
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-watch": "^3.2.2"
   }
 }
