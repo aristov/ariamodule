@@ -5,7 +5,16 @@
     background: black;
 }
 
+th,
 .gridcell
 {
     background: white;
+    text-align: center;
+}
+
+.gridcell[aria-disabled=true]
+{
+    background: #ddd;
+    cursor: default;
+    color: #aaa;
 }

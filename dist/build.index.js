@@ -42,6 +42,10 @@ class ARIADOMAssembler extends htmlmodule.HTMLDOMAssembler {
             return res
         }, {})
     }
+
+    init(init) {
+        super.init(htmlmodule.NodeInit(init));
+    }
 }
 
 class RoleType extends ARIADOMAssembler {
@@ -94,12 +98,22 @@ class RoleType extends ARIADOMAssembler {
         return this.node.getAttribute('aria-details')
     }
 
+    /**
+     *
+     * @param {boolean} disabled
+     */
     set disabled(disabled) {
-        this.node.setAttribute('aria-disabled', disabled);
+        this.node.setAttribute('aria-disabled', String(disabled));
+        if(disabled) this.node.removeAttribute('tabindex');
+        else this.node.tabIndex = -1;
     }
 
+    /**
+     *
+     * @returns {boolean}
+     */
     get disabled() {
-        return this.node.getAttribute('aria-disabled')
+        return this.node.getAttribute('aria-disabled') === 'true'
     }
 
     set dropEffect(dropEffect) {
@@ -225,25 +239,52 @@ class Widget extends RoleType {
     }
 }
 
-class Composite extends Widget {
+class Structure extends RoleType {}
 
-    set activeDescendant(activeDescendant) {
-        this.node.setAttribute('aria-activedescendant', activeDescendant);
+class Section extends Structure {
+
+    set expanded(expanded) {
+        this.node.setAttribute('aria-expanded', expanded);
     }
 
-    get activeDescendant() {
-        return this.node.getAttribute('aria-activedescendant')
+    get expanded() {
+        return this.node.getAttribute('aria-expanded')
     }
 }
 
-class Grid extends Composite {
+class Table extends Section {
+
+    set colCount(colCount) {
+        this.node.setAttribute('aria-colcount', colCount);
+    }
+
+    get colCount() {
+        return this.node.getAttribute('aria-colcount')
+    }
+
+    set rowCount(rowCount) {
+        this.node.setAttribute('aria-rowcount', rowCount);
+    }
+
+    get rowCount() {
+        return this.node.getAttribute('aria-rowcount')
+    }
+}
+
+const { map } = Array.prototype;
+
+class Grid extends Table {
 
     constructor(object, init) {
         super(object, {
             role : 'grid',
             className : 'grid'
         });
-        if(init) this.init(htmlmodule.NodeInit(init));
+        if(init) this.init(init);
+    }
+
+    get rows() {
+        return map.call(this.node.rows, ({ assembler }) => assembler)
     }
 
     set level(level) {
@@ -254,12 +295,20 @@ class Grid extends Composite {
         return this.node.getAttribute('aria-level')
     }
 
+    /**
+     *
+     * @param {boolean} multiselectable
+     */
     set multiselectable(multiselectable) {
-        this.node.setAttribute('aria-multiselectable', multiselectable);
+        this.node.setAttribute('aria-multiselectable', String(multiselectable));
     }
 
+    /**
+     *
+     * @returns {boolean}
+     */
     get multiselectable() {
-        return this.node.getAttribute('aria-multiselectable')
+        return this.node.getAttribute('aria-multiselectable') === 'true'
     }
 
     set readOnly(readOnly) {
@@ -275,19 +324,6 @@ function grid(init) {
     return new Grid('table', init)
 }
 
-class Structure extends RoleType {}
-
-class Section extends Structure {
-
-    set expanded(expanded) {
-        this.node.setAttribute('aria-expanded', expanded);
-    }
-
-    get expanded() {
-        return this.node.getAttribute('aria-expanded')
-    }
-}
-
 class Group extends Section {
 
     set activeDescendant(activeDescendant) {
@@ -299,7 +335,16 @@ class Group extends Section {
     }
 }
 
+const { filter } = Array.prototype;
+
 class Row extends Group {
+    constructor(object, init) {
+        super(object, {
+            role : 'row',
+            className : 'row'
+        });
+        if(init) this.init(init);
+    }
 
     set level(level) {
         this.node.setAttribute('aria-level', level);
@@ -331,6 +376,10 @@ class Row extends Group {
 
     get rowIndex() {
         return this.node.getAttribute('aria-rowIndex')
+    }
+
+    get cells() {
+        return filter.call(this.node.cells, cell => cell.getAttribute('role') === 'gridcell')
     }
 }
 
@@ -423,7 +472,10 @@ const cells = Array.from(new Array(10));
 
 const testgrid = grid(rows.map((r, j) =>
     row(cells.map((c, i) =>
-        gridcell(j + '_' + c + '_' + i)))
+        i? gridcell({
+            disabled : i === 5 && j === 5,
+            children : j + '_' + c + '_' + i
+        }) : htmlmodule.th(j + '_' + i)))
 ));
 
 document.body.appendChild(testgrid.node);
