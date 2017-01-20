@@ -278,10 +278,11 @@ class Grid extends Table {
     constructor(object, init) {
         super(object, {
             role : 'grid',
-            className : 'grid'
+            className : 'grid',
         });
         if(init) this.init(init);
     }
+
 
     get rows() {
         return map.call(this.node.rows, ({ assembler }) => assembler)
@@ -335,7 +336,7 @@ class Group extends Section {
     }
 }
 
-const { filter } = Array.prototype;
+const { map: map$1 } = Array.prototype;
 
 class Row extends Group {
     constructor(object, init) {
@@ -377,9 +378,34 @@ class Row extends Group {
     get rowIndex() {
         return this.node.getAttribute('aria-rowIndex')
     }
+    /**
+     *
+     * @param {boolean} multiselectable
+     */
+    set multiselectable(multiselectable) {
+        this.node.setAttribute('aria-multiselectable', String(multiselectable));
+    }
+
+    /**
+     *
+     * @returns {boolean}
+     */
+    get multiselectable() {
+        return this.node.getAttribute('aria-multiselectable') === 'true'
+    }
 
     get cells() {
-        return filter.call(this.node.cells, cell => cell.getAttribute('role') === 'gridcell')
+        return map$1.call(this.node.cells, ({ assembler }) => assembler)
+    }
+
+    get prev() {
+        const sibling = this.node.previousSibling;
+        return sibling && sibling.assembler
+    }
+
+    get next() {
+        const sibling = this.node.nextSibling;
+        return sibling && sibling.assembler
     }
 }
 
@@ -424,15 +450,64 @@ class Cell extends Section {
     }
 }
 
+const modKeys = ['metaKey', 'altKey', 'shiftKey', 'ctrlKey'];
+
 class GridCell extends Cell {
 
     constructor(object, init) {
         super(object, {
             role : 'gridcell',
             className : 'gridcell',
-            tabIndex : -1
+            tabIndex : -1,
         });
-        if(init) this.init(htmlmodule.NodeInit(init));
+        this.init({
+            onfocus : this.onFocus.bind(this),
+            onkeydown : this.onKeyDown.bind(this),
+        });
+        if(init) this.init(init);
+    }
+
+    onFocus() {
+        // console.log('fuckus')
+    }
+
+    onKeyDown(event) {
+        if(modKeys.some(mod => event[mod])) {
+            this.onModKeyDown(event);
+        }
+        if(event.key.startsWith('Arrow')) {
+            this.onArrowKeyDown(event);
+        }
+    }
+
+    onArrowKeyDown(event) {
+        const { target, key } = event;
+        const arrowMap = {
+            ArrowLeft : target.previousSibling,
+            ArrowRight : target.nextSibling,
+            ArrowUp : this.topSibling,
+            ArrowDown : this.bottomSibling
+        };
+        const sibling = arrowMap[key];
+        /*if(event.key === 'ArrowLeft') {
+            sibling = target.previousSibling
+        }
+        if(event.key === 'ArrowRight') {
+            sibling = target.nextSibling
+        }
+        if(event.key === 'ArrowUp') {
+            sibling = this.topSibling
+        }
+        if(event.key === 'ArrowDown') {
+            sibling = this.bottomSibling
+        }*/
+        if(sibling) sibling.focus();
+    }
+
+    onModKeyDown() {}
+
+    focus() {
+        this.node.focus();
     }
 
     set readOnly(readOnly) {
@@ -457,6 +532,25 @@ class GridCell extends Cell {
 
     get selected() {
         return this.node.getAttribute('aria-selected')
+    }
+
+    get row() {
+        const parent = this.node.parentNode;
+        return parent && parent.assembler
+    }
+
+    get index() {
+        return this.node.cellIndex
+    }
+
+    get topSibling() {
+        const prevRow = this.row.prev;
+        return prevRow && prevRow.cells[this.index] || null
+    }
+
+    get bottomSibling() {
+        const nextRow = this.row.next;
+        return nextRow && nextRow.cells[this.index] || null
     }
 }
 
