@@ -1950,9 +1950,7 @@ function span(init) {
  * @param {String|Array|Node|HTMLDOMAssembler|{}} [init] `NodeInit` dictionary
  * @return {HTMLTableSectionElement}
  */
-function tbody(init) {
-    return htmldom('tbody', init)
-}
+
 
 /**
  * [The `td` element](https://html.spec.whatwg.org/#the-td-element)
@@ -2571,6 +2569,221 @@ class Table extends Section {
     }
 }
 
+const { map: map$$1 } = Array.prototype;
+
+class Grid extends Table {
+
+    constructor(object$$1, init) {
+        super(object$$1, {
+            role : 'grid',
+            className : 'grid',
+        });
+        if(init) this.init(init);
+        this.cells[0].tabIndex = 0;
+    }
+
+    get rows() {
+        return map$$1.call(this.node.rows, ({ assembler }) => assembler)
+    }
+
+    set level(level) {
+        this.node.setAttribute('aria-level', level);
+    }
+
+    get level() {
+        return this.node.getAttribute('aria-level')
+    }
+
+    set selected(selected) {
+        this.cells.forEach(cell => cell.selected = selected);
+    }
+
+    get cells() {
+        const collection = this.node.querySelectorAll('td[role=gridcell]');
+        return map$$1.call(collection, cell => cell.assembler)
+    }
+
+    /**
+     *
+     * @param {boolean} multiselectable
+     */
+    set multiselectable(multiselectable) {
+        this.node.setAttribute('aria-multiselectable', String(multiselectable));
+    }
+
+    /**
+     *
+     * @returns {boolean}
+     */
+    get multiselectable() {
+        return this.node.getAttribute('aria-multiselectable') === 'true'
+    }
+
+    set readOnly(readOnly) {
+        this.node.setAttribute('aria-readonly', readOnly);
+    }
+
+    get readOnly() {
+        return this.node.getAttribute('aria-readonly')
+    }
+
+    /**
+     *
+     * @param {GridCell} activeDescendant
+     */
+    set activeDescendant(activeDescendant) {
+        if(activeDescendant) {
+            this.node.setAttribute('aria-activedescendant', activeDescendant.id);
+            const activeElement = document.activeElement;
+            const focused = activeElement && activeElement.assembler;
+            if(focused && focused.selected) {
+                const row = focused.row;
+                const { min, max } = Math;
+                let cells, index1, index2;
+                if(row.multiselectable) {
+                    cells = row.cells;
+                    cells.forEach(cell => cell.selected = 'false');
+                    index1 = focused.index;
+                    index2 = activeDescendant.index;
+                } else if(this.multiselectable) {
+                    cells = focused.column;
+                    cells.forEach(cell => cell.selected = 'false');
+                    index1 = focused.row.index;
+                    index2 = activeDescendant.row.index;
+                }
+                if(cells) {
+                    const slice = cells.slice(min(index1, index2), max(index1, index2) + 1);
+                    slice.forEach(cell => cell.selected = 'true');
+                }
+            }
+        }
+        else this.node.removeAttribute('aria-activedescendant');
+    }
+
+    /**
+     *
+     * @returns {GridCell}
+     */
+    get activeDescendant() {
+        const id = this.node.getAttribute('aria-activedescendant');
+        const node = id && document.getElementById(id);
+        return node && node.assembler
+    }
+}
+
+function grid(init) {
+    return new Grid('table', init)
+}
+
+class Group extends Section {
+
+    set activeDescendant(activeDescendant) {
+        this.node.setAttribute('aria-activedescendant', activeDescendant);
+    }
+
+    get activeDescendant() {
+        return this.node.getAttribute('aria-activedescendant')
+    }
+}
+
+const { map: map$2 } = Array.prototype;
+
+class Row extends Group {
+    constructor(object, init) {
+        super(object, {
+            role : 'row',
+            className : 'row'
+        });
+        if(init) this.init(init);
+    }
+
+    set level(level) {
+        this.node.setAttribute('aria-level', level);
+    }
+
+    get level() {
+        return this.node.getAttribute('aria-level')
+    }
+
+    set selected(selected) {
+        this.cells.forEach(cell => cell.selected = selected);
+        this.node.setAttribute('aria-selected', selected);
+    }
+
+    get selected() {
+        return this.node.getAttribute('aria-selected')
+    }
+
+    set colIndex(colIndex) {
+        this.node.setAttribute('aria-colIndex', colIndex);
+    }
+
+    get colIndex() {
+        return this.node.getAttribute('aria-colIndex')
+    }
+
+    set rowIndex(rowIndex) {
+        this.node.setAttribute('aria-rowIndex', rowIndex);
+    }
+
+    get rowIndex() {
+        return this.node.getAttribute('aria-rowIndex')
+    }
+    /**
+     *
+     * @param {boolean} multiselectable
+     */
+    set multiselectable(multiselectable) {
+        this.node.setAttribute('aria-multiselectable', String(multiselectable));
+    }
+
+    /**
+     *
+     * @returns {boolean}
+     */
+    get multiselectable() {
+        return this.node.getAttribute('aria-multiselectable') === 'true'
+    }
+
+    get cells() {
+        return map$2.call(this.node.cells, ({ assembler }) => assembler)
+    }
+
+    get prev() {
+        const sibling = this.node.previousSibling;
+        return sibling && sibling.assembler
+    }
+
+    get next() {
+        const sibling = this.node.nextSibling;
+        return sibling && sibling.assembler
+    }
+
+    get index() {
+        return this.node.rowIndex
+    }
+}
+
+// Object.assign(Row.prototype, Widget.prototype)
+
+function row(init) {
+    return new Row('tr', init)
+}
+
+class RowGroup extends Structure {
+    constructor(object, init) {
+        super(object, {
+            role : 'rowgroup',
+            className : 'rowgroup'
+        });
+        if(init) this.init(init);
+    }
+}
+
+function rowgroup(init) {
+    return new RowGroup('tbody', init)
+}
+
 class Cell extends Section {
 
     set colIndex(colIndex) {
@@ -2606,8 +2819,6 @@ class Cell extends Section {
     }
 }
 
-let shiftKey = false;
-
 class GridCell extends Cell {
 
     constructor(object$$1, init) {
@@ -2615,27 +2826,26 @@ class GridCell extends Cell {
             role : 'gridcell',
             className : 'gridcell',
             tabIndex : -1,
+            dataset : { mode : 'navigation' }
         });
         this.init({
             onfocus : this.onFocus.bind(this),
             onkeydown : this.onKeyDown.bind(this),
-            onkeyup : this.onKeyUp.bind(this),
             onmouseenter : this.onMouseEnter.bind(this),
             ondblclick : this.onDoubleClick.bind(this),
         });
         if(init) this.init(init);
-        shiftKey = false;
     }
 
     onDoubleClick() {
-        this.editMode = true;
+        this.mode = 'edit';
     }
 
     onMouseEnter({ buttons }) {
         if(buttons === 1) {
-            shiftKey = true;
-            this.grid.activeDescendant = this;
-            shiftKey = false;
+            if(this.row.multiselectable || this.grid.multiselectable) {
+                this.grid.activeDescendant = this;
+            }
         }
     }
 
@@ -2651,7 +2861,6 @@ class GridCell extends Cell {
 
     onKeyDown(event) {
         const key = event.key;
-        shiftKey = event.shiftKey;
         if(key.startsWith('Arrow')) this.onArrowKeyDown(event);
         else if(key === 'Enter') this.onEnterKeyDown(event);
         else if(key === 'Escape') this.onEscapeKeyDown(event);
@@ -2672,19 +2881,15 @@ class GridCell extends Cell {
     }
 
     onCharacterKeyDown(event) {
-        this.editMode = true;
+        this.mode = 'edit';
     }
 
     onBackspaceKeyDown(event) {
-        if(!this.editMode) {
+        if(this.mode !== 'edit') {
             event.preventDefault();
             if(this.text.textContent) this.text.textContent = '';
             else if(this.owns.length) this.owns = [];
         }
-    }
-
-    onKeyUp(event) {
-    shiftKey = event.shiftKey;
     }
 
     onArrowKeyDown(event) {
@@ -2694,24 +2899,23 @@ class GridCell extends Cell {
             const cell = event.shiftKey? grid.activeDescendant : this;
             if(cell) {
                 const siblings = {
-                    ArrowLeft : () => cell.prev,
-                    ArrowRight : () => cell.next,
-                    ArrowUp : () => cell.topSibling,
-                    ArrowDown : () => cell.bottomSibling
+                    ArrowLeft : c => c.prev,
+                    ArrowRight : c => c.next,
+                    ArrowUp : c => c.topSibling,
+                    ArrowDown : c => c.bottomSibling
                 };
-                const sibling = siblings[event.key]();
+                const sibling = siblings[event.key](cell);
                 if(sibling) {
                     if(event.shiftKey) grid.activeDescendant = sibling;
                     else sibling.focus();
                 }
             }
-            // if(sibling) document.activeDescendant = sibling
         }
     }
 
     onEnterKeyDown(event) {
-        if(this.editMode) {
-            this.editMode = false;
+        if(this.mode === 'edit') {
+            this.mode = 'navigation';
             this.node.focus();
         }
         else if(this.selected === 'true') {
@@ -2730,40 +2934,41 @@ class GridCell extends Cell {
                     first.focus();
                 }
             }
-            else this.editMode = true;
+            else this.mode = 'edit';
         }
     }
 
     onEscapeKeyDown(event) {
-        if(this.editMode) this.editMode = false;
+        this.mode = 'navigation';
     }
 
     onInputBlur(event) {
-        this.editMode = false;
+        this.mode = 'navigation';
     }
 
     focus() {
         this.node.focus();
     }
 
-    set editMode(editMode) {
-        if(!this.readOnly && editMode !== this.editMode) {
-            if(editMode) {
+    set mode(mode) {
+        if(!this.readOnly && mode !== this.mode) {
+            if(mode === 'edit') {
                 this.text.hidden = true;
                 this.input.value = this.text.textContent;
                 this.input.hidden = false;
                 this.input.focus();
-            } else {
+            } else if(mode === 'navigation') {
                 this.input.hidden = true;
                 this.text.textContent = this.input.value;
                 this.text.hidden = false;
                 // this.focus()
             }
         }
+        this.dataset = { mode };
     }
 
-    get editMode() {
-        return this.text.hidden
+    get mode() {
+        return this.dataset.mode
     }
 
     set readOnly(readOnly) {
@@ -2904,223 +3109,17 @@ function gridcell(init) {
     return new GridCell('td', init)
 }
 
-const { map: map$$1 } = Array.prototype;
-
-class Grid extends Table {
-
-    constructor(object$$1, init) {
-        super(object$$1, {
-            role : 'grid',
-            className : 'grid',
-        });
-        this.init({
-            onkeydown : this.onKeyDown.bind(this)
-        });
-        if(init) this.init(init);
-        this.cells[0].tabIndex = 0;
-    }
-
-    onKeyDown(event) {
-        // if(event.shiftKey) this.mode = 'select'
-    }
-
-    get rows() {
-        return map$$1.call(this.node.rows, ({ assembler }) => assembler)
-    }
-
-    set level(level) {
-        this.node.setAttribute('aria-level', level);
-    }
-
-    get level() {
-        return this.node.getAttribute('aria-level')
-    }
-
-    set selected(selected) {
-        this.cells.forEach(cell => cell.selected = selected);
-    }
-
-    get cells() {
-        const collection = this.node.querySelectorAll('td[role=gridcell]');
-        return map$$1.call(collection, cell => cell.assembler)
-    }
-
-    /**
-     *
-     * @param {boolean} multiselectable
-     */
-    set multiselectable(multiselectable) {
-        this.node.setAttribute('aria-multiselectable', String(multiselectable));
-    }
-
-    /**
-     *
-     * @returns {boolean}
-     */
-    get multiselectable() {
-        return this.node.getAttribute('aria-multiselectable') === 'true'
-    }
-
-    set readOnly(readOnly) {
-        this.node.setAttribute('aria-readonly', readOnly);
-    }
-
-    get readOnly() {
-        return this.node.getAttribute('aria-readonly')
-    }
-
-    /**
-     *
-     * @param {GridCell} activeDescendant
-     */
-    set activeDescendant(activeDescendant) {
-        if(activeDescendant) {
-            this.node.setAttribute('aria-activedescendant', activeDescendant.id);
-            const activeElement = document.activeElement;
-            const focused = activeElement && activeElement.assembler;
-            if(focused && shiftKey) {
-                const row = focused.row;
-                const { min, max } = Math;
-                let cells, index1, index2;
-                if(row.multiselectable) {
-                    cells = row.cells;
-                    cells.forEach(cell => cell.selected = 'false');
-                    index1 = focused.index;
-                    index2 = activeDescendant.index;
-                } else if(this.multiselectable) {
-                    cells = focused.column;
-                    cells.forEach(cell => cell.selected = 'false');
-                    index1 = focused.row.index;
-                    index2 = activeDescendant.row.index;
-                }
-                const slice = cells.slice(min(index1, index2), max(index1, index2) + 1);
-                slice.forEach(cell => cell.selected = 'true');
-            }
-        }
-        else this.node.removeAttribute('aria-activedescendant');
-    }
-
-    /**
-     *
-     * @returns {GridCell}
-     */
-    get activeDescendant() {
-        const id = this.node.getAttribute('aria-activedescendant');
-        const node = id && document.getElementById(id);
-        return node && node.assembler
-    }
-}
-
-function grid(init) {
-    return new Grid('table', init)
-}
-
-class Group extends Section {
-
-    set activeDescendant(activeDescendant) {
-        this.node.setAttribute('aria-activedescendant', activeDescendant);
-    }
-
-    get activeDescendant() {
-        return this.node.getAttribute('aria-activedescendant')
-    }
-}
-
-const { map: map$2 } = Array.prototype;
-
-class Row extends Group {
-    constructor(object, init) {
-        super(object, {
-            role : 'row',
-            className : 'row'
-        });
-        if(init) this.init(init);
-    }
-
-    set level(level) {
-        this.node.setAttribute('aria-level', level);
-    }
-
-    get level() {
-        return this.node.getAttribute('aria-level')
-    }
-
-    set selected(selected) {
-        this.cells.forEach(cell => cell.selected = selected);
-        this.node.setAttribute('aria-selected', selected);
-    }
-
-    get selected() {
-        return this.node.getAttribute('aria-selected')
-    }
-
-    set colIndex(colIndex) {
-        this.node.setAttribute('aria-colIndex', colIndex);
-    }
-
-    get colIndex() {
-        return this.node.getAttribute('aria-colIndex')
-    }
-
-    set rowIndex(rowIndex) {
-        this.node.setAttribute('aria-rowIndex', rowIndex);
-    }
-
-    get rowIndex() {
-        return this.node.getAttribute('aria-rowIndex')
-    }
-    /**
-     *
-     * @param {boolean} multiselectable
-     */
-    set multiselectable(multiselectable) {
-        this.node.setAttribute('aria-multiselectable', String(multiselectable));
-    }
-
-    /**
-     *
-     * @returns {boolean}
-     */
-    get multiselectable() {
-        return this.node.getAttribute('aria-multiselectable') === 'true'
-    }
-
-    get cells() {
-        return map$2.call(this.node.cells, ({ assembler }) => assembler)
-    }
-
-    get prev() {
-        const sibling = this.node.previousSibling;
-        return sibling && sibling.assembler
-    }
-
-    get next() {
-        const sibling = this.node.nextSibling;
-        return sibling && sibling.assembler
-    }
-
-    get index() {
-        return this.node.rowIndex
-    }
-}
-
-// Object.assign(Row.prototype, Widget.prototype)
-
-function row(init) {
-    return new Row('tr', init)
-}
-
 const rows = Array.from(new Array(12));
 const cells = Array.from(new Array(10));
 
 const testgrid = grid({
-    multiselectable : true,
-    children : tbody(rows.map((r, j) =>
+    children : rowgroup(rows.map((r, j) =>
         row({
+            multiselectable : true,
             children : cells.map((c, i$$1) =>
                 gridcell({
-                    //disabled : i === 5 && j === 5,
-                    readOnly : false,
+                    // disabled : i === 5 && j === 5,
+                    // readOnly : false,
                     selected : false,
                     children : ''
                 }))
