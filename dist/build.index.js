@@ -2779,9 +2779,14 @@ class GridCell extends Cell {
             onfocus : this.onFocus.bind(this),
             onkeydown : this.onKeyDown.bind(this),
             onkeyup : this.onKeyUp.bind(this),
+            onmouseenter : this.onMouseEnter.bind(this),
         });
         if(init) this.init(init);
         shiftKey = false;
+    }
+
+    onMouseEnter({ buttons }) {
+        if(buttons === 1) this.focus();
     }
 
     onFocus() {
@@ -2805,24 +2810,14 @@ class GridCell extends Cell {
     onKeyDown(event) {
         const key = event.key;
         shiftKey = event.shiftKey;
-        if(key.startsWith('Arrow')) {
-            this.onArrowKeyDown(event);
-        }
-        else if(key === 'Enter') {
-            this.onEnterKeyDown(event);
-        }
-        else if(key === 'Escape') {
-            this.onEscapeKeyDown(event);
-        }
+        if(key.startsWith('Arrow')) this.onArrowKeyDown(event);
+        else if(key === 'Enter') this.onEnterKeyDown(event);
+        else if(key === 'Escape') this.onEscapeKeyDown(event);
         else if(/^a$/i.test(key) && (event.metaKey || event.ctrlKey)) {
             this.onSelectAllKeyDown(event);
         }
-        else if(/^[a-zA-Z0-9 ]$/.test(key)) {
-            this.onCharacterKeyDown(event);
-        }
-        else if(key === 'Backspace') {
-            this.onBackspaceKeyDown(event);
-        }
+        else if(/^[a-zA-Z0-9 ]$/.test(key)) this.onCharacterKeyDown(event);
+        else if(key === 'Backspace') this.onBackspaceKeyDown(event);
     }
 
     onSelectAllKeyDown(event) {
@@ -2840,7 +2835,9 @@ class GridCell extends Cell {
 
     onBackspaceKeyDown(event) {
         if(!this.editmode) {
+            event.preventDefault();
             this.text.textContent = '';
+            if(this.owns.length) this.owns = [];
         }
     }
 
@@ -2863,7 +2860,11 @@ class GridCell extends Cell {
     }
 
     onEnterKeyDown(event) {
-        if(this.selected === 'true') {
+        if(this.editmode) {
+            this.editmode = false;
+            this.node.focus();
+        }
+        else if(this.selected === 'true') {
             const filter = ({ selected }) => selected === 'true';
             const cells = this.grid.cells.filter(filter);
             const first = cells[0];
@@ -2879,8 +2880,8 @@ class GridCell extends Cell {
                     first.focus();
                 }
             }
-            else if(first.owns.length) first.owns = [];
-            else this.editmode = !this.editmode;
+            // else if(first.owns.length) first.owns = []
+            else this.editmode = true;
         }
     }
 
@@ -2907,7 +2908,7 @@ class GridCell extends Cell {
                 this.input.hidden = true;
                 this.text.textContent = this.input.value;
                 this.text.hidden = false;
-                this.focus();
+                // this.focus()
             }
         }
     }
@@ -3025,7 +3026,7 @@ class GridCell extends Cell {
         let node = this.node.querySelector('input');
         if(!node) {
             this.input = node = input({
-                value : this.node.textContent,
+                value : this.text.textContent,
                 onblur : this.onInputBlur.bind(this)
             });
         }
@@ -3048,7 +3049,7 @@ function gridcell(init) {
     return new GridCell('td', init)
 }
 
-const rows = Array.from(new Array(36));
+const rows = Array.from(new Array(48));
 const cells = Array.from(new Array(10));
 
 const testgrid = grid({
@@ -3057,7 +3058,7 @@ const testgrid = grid({
         row({
             children : cells.map((c, i$$1) =>
                 gridcell({
-                    disabled : i$$1 === 5 && j === 5,
+                    //disabled : i === 5 && j === 5,
                     selected : false,
                     children : ''
                 }))
