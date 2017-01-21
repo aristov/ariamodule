@@ -1,7 +1,7 @@
 import { grid, row, gridcell } from '../lib/index'
 import { tbody } from 'htmlmodule'
 
-const rows = Array.from(new Array(28))
+const rows = Array.from(new Array(12))
 const cells = Array.from(new Array(10))
 
 const testgrid = grid({
