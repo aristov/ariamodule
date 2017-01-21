@@ -24,7 +24,7 @@ table.grid th
 }
 table.grid td.gridcell
 {
-    width: 10%;
+    /*width: 10%;*/
     text-align: center;
     position: relative;
 }

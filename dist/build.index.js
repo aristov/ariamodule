@@ -3130,21 +3130,27 @@ function gridcell(init) {
     return new GridCell('td', init)
 }
 
-const rows = Array.from(new Array(24));
-const cells = Array.from(new Array(10));
+const rows = Array.from(new Array(18));
+const cells = Array.from(new Array(26));
 
 const testgrid = grid({
     multiselectable : true,
     children : [
-        thead(tr(cells.map((c, i$$1) => th('ABCDEFGHIJKLMNOPQRSTUVWXYZ'[i$$1])))),
+        thead(tr([
+            th(''),
+            cells.map((c, i$$1) => th('ABCDEFGHIJKLMNOPQRSTUVWXYZ'[i$$1]))
+        ])),
         rowgroup(rows.map((r, j) =>
             row({
-                children : cells.map((c, i$$1) =>
-                    gridcell({
+                children : [
+                    th(String(j)),
+                    cells.map((c, i$$1) => gridcell({
                         disabled : i$$1 === 5 && j === 5,
                         selected : false,
+                        style : { width : 95 / cells.length + '%' },
                         children : ''
                     }))
+                ]
             })))
     ]
 });
