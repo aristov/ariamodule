@@ -2621,9 +2621,14 @@ class GridCell extends Cell {
             onkeydown : this.onKeyDown.bind(this),
             onkeyup : this.onKeyUp.bind(this),
             onmouseenter : this.onMouseEnter.bind(this),
+            ondblclick : this.onDoubleClick.bind(this),
         });
         if(init) this.init(init);
         shiftKey = false;
+    }
+
+    onDoubleClick() {
+        this.editMode = true;
     }
 
     onMouseEnter({ buttons }) {
@@ -2640,6 +2645,8 @@ class GridCell extends Cell {
             this.selected = 'true';
             this.grid.activeDescendant = this;
         }
+        this.grid.cells.forEach(c => c.tabIndex = -1);
+        this.tabIndex = 0;
     }
 
     onKeyDown(event) {
@@ -2651,7 +2658,7 @@ class GridCell extends Cell {
         else if(/^a$/i.test(key) && (event.metaKey || event.ctrlKey)) {
             this.onSelectAllKeyDown(event);
         }
-        else if(/^[a-zA-Z0-9 ]$/.test(key)) this.onCharacterKeyDown(event);
+        else if(/^[a-zа-я0-9 ]$/i.test(key)) this.onCharacterKeyDown(event);
         else if(key === 'Backspace') this.onBackspaceKeyDown(event);
     }
 
@@ -2665,44 +2672,46 @@ class GridCell extends Cell {
     }
 
     onCharacterKeyDown(event) {
-        this.editmode = true;
+        this.editMode = true;
     }
 
     onBackspaceKeyDown(event) {
-        if(!this.editmode) {
+        if(!this.editMode) {
             event.preventDefault();
-            this.text.textContent = '';
-            if(this.owns.length) this.owns = [];
+            if(this.text.textContent) this.text.textContent = '';
+            else if(this.owns.length) this.owns = [];
         }
     }
 
     onKeyUp(event) {
-        shiftKey = event.shiftKey;
+    shiftKey = event.shiftKey;
     }
 
     onArrowKeyDown(event) {
         if(event.target === this.node) {
+            event.preventDefault();
             const grid = this.grid;
             const cell = event.shiftKey? grid.activeDescendant : this;
-            event.preventDefault();
-            const siblings = {
-                ArrowLeft : () => cell.prev,
-                ArrowRight : () => cell.next,
-                ArrowUp : () => cell.topSibling,
-                ArrowDown : () => cell.bottomSibling
-            };
-            const sibling = siblings[event.key]();
-            if(sibling) {
-                if(event.shiftKey) grid.activeDescendant = sibling;
-                else sibling.focus();
+            if(cell) {
+                const siblings = {
+                    ArrowLeft : () => cell.prev,
+                    ArrowRight : () => cell.next,
+                    ArrowUp : () => cell.topSibling,
+                    ArrowDown : () => cell.bottomSibling
+                };
+                const sibling = siblings[event.key]();
+                if(sibling) {
+                    if(event.shiftKey) grid.activeDescendant = sibling;
+                    else sibling.focus();
+                }
             }
             // if(sibling) document.activeDescendant = sibling
         }
     }
 
     onEnterKeyDown(event) {
-        if(this.editmode) {
-            this.editmode = false;
+        if(this.editMode) {
+            this.editMode = false;
             this.node.focus();
         }
         else if(this.selected === 'true') {
@@ -2716,30 +2725,30 @@ class GridCell extends Cell {
                         cell.selected = 'false';
                     });
                 }
-                else {
+                else if(!this.readOnly) {
                     first.owns = cells.slice(1);
                     first.focus();
                 }
             }
-            else this.editmode = true;
+            else this.editMode = true;
         }
     }
 
     onEscapeKeyDown(event) {
-        if(this.editmode) this.editmode = false;
+        if(this.editMode) this.editMode = false;
     }
 
     onInputBlur(event) {
-        this.editmode = false;
+        this.editMode = false;
     }
 
     focus() {
         this.node.focus();
     }
 
-    set editmode(editmode) {
-        if(editmode !== this.editmode) {
-            if(editmode) {
+    set editMode(editMode) {
+        if(!this.readOnly && editMode !== this.editMode) {
+            if(editMode) {
                 this.text.hidden = true;
                 this.input.value = this.text.textContent;
                 this.input.hidden = false;
@@ -2753,20 +2762,22 @@ class GridCell extends Cell {
         }
     }
 
-    get editmode() {
+    get editMode() {
         return this.text.hidden
     }
 
     set readOnly(readOnly) {
-        this.node.setAttribute('aria-readonly', readOnly);
+        if(readOnly) this.node.setAttribute('aria-readonly', 'true');
+        else this.node.removeAttribute('aria-readonly');
     }
 
     get readOnly() {
-        return this.node.getAttribute('aria-readonly')
+        return this.node.getAttribute('aria-readonly') === 'true'
     }
 
     set required(required) {
-        this.node.setAttribute('aria-required', required);
+        if(required) this.node.setAttribute('aria-required', 'true');
+        else this.node.removeAttribute('aria-required');
     }
 
     get required() {
@@ -2795,29 +2806,29 @@ class GridCell extends Cell {
 
     get prev() {
         const sibling = this.row.cells[this.index - 1];
-        return sibling && sibling.span
+        return sibling && sibling.owner
     }
 
     get next() {
         const sibling = this.row.cells[this.index + this.colSpan];
-        return sibling && sibling.span
+        return sibling && sibling.owner
     }
 
     get topSibling() {
         let sibling = this.column[this.row.index - 1];
-        return sibling && sibling.span
+        return sibling && sibling.owner
     }
 
     get bottomSibling() {
         const sibling = this.column[this.row.index + this.rowSpan];
-        return sibling && sibling.span
+        return sibling && sibling.owner
     }
 
     get column() {
         return this.grid.rows.map(r => r.cells[this.index])
     }
 
-    get span() {
+    get owner() {
         if(this.hidden) {
             const selector = `td[aria-owns~=${ this.id }]`;
             const node = this.grid.node.querySelector(selector);
@@ -2847,7 +2858,10 @@ class GridCell extends Cell {
         this.rowSpan = 1;
         if(owns.length) {
             const last = owns[owns.length - 1];
-            owns.forEach(cell => cell.hidden = true);
+            owns.forEach(cell => {
+                cell.hidden = true;
+                if(cell.selected) cell.selected = 'false';
+            });
             this.colSpan = last.index - this.index + 1;
             this.rowSpan = last.row.index - this.row.index + 1;
         }
@@ -2899,10 +2913,16 @@ class Grid extends Table {
             role : 'grid',
             className : 'grid',
         });
+        this.init({
+            onkeydown : this.onKeyDown.bind(this)
+        });
         if(init) this.init(init);
         this.cells[0].tabIndex = 0;
     }
 
+    onKeyDown(event) {
+        // if(event.shiftKey) this.mode = 'select'
+    }
 
     get rows() {
         return map$$1.call(this.node.rows, ({ assembler }) => assembler)
@@ -3100,6 +3120,7 @@ const testgrid = grid({
             children : cells.map((c, i$$1) =>
                 gridcell({
                     //disabled : i === 5 && j === 5,
+                    readOnly : false,
                     selected : false,
                     children : ''
                 }))

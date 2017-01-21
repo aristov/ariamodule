@@ -27,7 +27,6 @@ table.grid td.gridcell
     width: 10%;
     text-align: center;
     position: relative;
-    line-height: 10px;
 }
 table.grid th,
 table.grid td.gridcell

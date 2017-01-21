@@ -11,6 +11,7 @@ const testgrid = grid({
             children : cells.map((c, i) =>
                 gridcell({
                     //disabled : i === 5 && j === 5,
+                    readOnly : false,
                     selected : false,
                     children : ''
                 }))
