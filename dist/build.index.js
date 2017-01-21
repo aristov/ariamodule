@@ -2619,12 +2619,21 @@ class Grid extends Table {
         return this.node.getAttribute('aria-multiselectable') === 'true'
     }
 
+    /**
+     *
+     * @param {boolean} readOnly
+     */
     set readOnly(readOnly) {
-        this.node.setAttribute('aria-readonly', readOnly);
+        if(readOnly) this.node.setAttribute('aria-readonly', 'true');
+        else this.node.removeAttribute('aria-readonly');
     }
 
+    /**
+     *
+     * @returns {boolean}
+     */
     get readOnly() {
-        return this.node.getAttribute('aria-readonly')
+        return this.node.getAttribute('aria-readonly') === 'true'
     }
 
     /**
@@ -3011,22 +3020,22 @@ class GridCell extends Cell {
 
     get prev() {
         const sibling = this.row.cells[this.index - 1];
-        return sibling && sibling.owner
+        return sibling && !sibling.disabled? sibling.owner : null
     }
 
     get next() {
         const sibling = this.row.cells[this.index + this.colSpan];
-        return sibling && sibling.owner
+        return sibling && !sibling.disabled? sibling.owner : null
     }
 
     get topSibling() {
         let sibling = this.column[this.row.index - 1];
-        return sibling && sibling.owner
+        return sibling && !sibling.disabled? sibling.owner : null
     }
 
     get bottomSibling() {
         const sibling = this.column[this.row.index + this.rowSpan];
-        return sibling && sibling.owner
+        return sibling && !sibling.disabled? sibling.owner : null
     }
 
     get column() {
@@ -3113,13 +3122,12 @@ const rows = Array.from(new Array(12));
 const cells = Array.from(new Array(10));
 
 const testgrid = grid({
+    multiselectable : true,
     children : rowgroup(rows.map((r, j) =>
         row({
-            multiselectable : true,
             children : cells.map((c, i$$1) =>
                 gridcell({
-                    // disabled : i === 5 && j === 5,
-                    // readOnly : false,
+                    disabled : i$$1 === 5 && j === 5,
                     selected : false,
                     children : ''
                 }))
