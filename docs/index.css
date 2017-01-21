@@ -61,7 +61,7 @@ table.grid tbody tr:nth-child(4n + 4) td,
 table.grid tbody tr:nth-child(4n + 3) th,
 table.grid tbody tr:nth-child(4n + 4) th
 {
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.5);
 }
 table.grid tbody tr:nth-child(6n + 1) th,
 table.grid tbody tr:nth-child(6n + 1) td

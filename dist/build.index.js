@@ -2397,9 +2397,13 @@ class RoleType extends ARIADOMAssembler {
      * @param {boolean} disabled
      */
     set disabled(disabled) {
-        this.node.setAttribute('aria-disabled', String(disabled));
-        if(disabled) this.node.removeAttribute('tabindex');
-        else this.node.tabIndex = -1;
+        if(disabled) {
+            this.node.setAttribute('aria-disabled', 'true');
+            this.node.removeAttribute('tabindex');
+        } else  {
+            this.node.removeAttribute('aria-disabled');
+            this.node.tabIndex = -1;
+        }
     }
 
     /**
@@ -2781,16 +2785,62 @@ class GridCell extends Cell {
     }
 
     onFocus() {
-        if(this.selected) this.selected = 'true';
+        if(this.selected) {
+            if(shiftKey) {
+                if(this.row.multiselectable) {
+                    this.grid.rows.forEach(r => {
+                        if(r !== this.row) r.selected = 'false';
+                    });
+                } else if(this.grid.multiselectable) {
+                    this.grid.cells.forEach(c => {
+                        if(c.index !== this.index) c.selected = 'false';
+                    });
+                }
+            }
+            else this.grid.selected = 'false';
+            this.selected = 'true';
+        }
     }
 
     onKeyDown(event) {
+        const key = event.key;
         shiftKey = event.shiftKey;
-        if(event.key.startsWith('Arrow')) {
+        if(key.startsWith('Arrow')) {
             this.onArrowKeyDown(event);
         }
-        if(event.key === 'Enter') {
+        else if(key === 'Enter') {
             this.onEnterKeyDown(event);
+        }
+        else if(key === 'Escape') {
+            this.onEscapeKeyDown(event);
+        }
+        else if(/^a$/i.test(key) && (event.metaKey || event.ctrlKey)) {
+            this.onSelectAllKeyDown(event);
+        }
+        else if(/^[a-zA-Z0-9 ]$/.test(key)) {
+            this.onCharacterKeyDown(event);
+        }
+        else if(key === 'Backspace') {
+            this.onBackspaceKeyDown(event);
+        }
+    }
+
+    onSelectAllKeyDown(event) {
+        event.preventDefault();
+        if(this.row.multiselectable) {
+            this.row.selected = 'true';
+        } else if(this.grid.multiselectable) {
+            this.column.forEach(c => c.selected = 'true');
+        }
+    }
+
+    onCharacterKeyDown(event) {
+        this.editmode = true;
+    }
+
+    onBackspaceKeyDown(event) {
+        if(!this.editmode) {
+            this.text.textContent = '';
         }
     }
 
@@ -2830,22 +2880,40 @@ class GridCell extends Cell {
                 }
             }
             else if(first.owns.length) first.owns = [];
-            else if(this.text.hidden) {
-                this.input.hidden = true;
-                this.text.textContent = this.input.value;
-                this.text.hidden = false;
-                this.focus();
-            } else {
-                this.text.hidden = true;
-                this.input.value = this.text.textContent;
-                this.input.hidden = false;
-                this.input.focus();
-            }
+            else this.editmode = !this.editmode;
         }
+    }
+
+    onEscapeKeyDown(event) {
+        if(this.editmode) this.editmode = false;
+    }
+
+    onInputBlur(event) {
+        this.editmode = false;
     }
 
     focus() {
         this.node.focus();
+    }
+
+    set editmode(editmode) {
+        if(editmode !== this.editmode) {
+            if(editmode) {
+                this.text.hidden = true;
+                this.input.value = this.text.textContent;
+                this.input.hidden = false;
+                this.input.focus();
+            } else {
+                this.input.hidden = true;
+                this.text.textContent = this.input.value;
+                this.text.hidden = false;
+                this.focus();
+            }
+        }
+    }
+
+    get editmode() {
+        return this.text.hidden
     }
 
     set readOnly(readOnly) {
@@ -2865,20 +2933,6 @@ class GridCell extends Cell {
     }
 
     set selected(selected) {
-        if(selected === 'true') {
-            if(shiftKey) {
-                if(this.row.multiselectable) {
-                    this.grid.rows.forEach(r => {
-                        if(r !== this.row) r.selected = 'false';
-                    });
-                } else if(this.grid.multiselectable) {
-                    this.grid.cells.forEach(c => {
-                        if(c.index !== this.index) c.selected = 'false';
-                    });
-                }
-            }
-            else this.grid.selected = 'false';
-        }
         this.node.setAttribute('aria-selected', selected);
     }
 
@@ -2970,7 +3024,10 @@ class GridCell extends Cell {
     get input() {
         let node = this.node.querySelector('input');
         if(!node) {
-            this.input = node = input({ value : this.node.textContent });
+            this.input = node = input({
+                value : this.node.textContent,
+                onblur : this.onInputBlur.bind(this)
+            });
         }
         return node
     }
@@ -2991,7 +3048,7 @@ function gridcell(init) {
     return new GridCell('td', init)
 }
 
-const rows = Array.from(new Array(24));
+const rows = Array.from(new Array(36));
 const cells = Array.from(new Array(10));
 
 const testgrid = grid({
