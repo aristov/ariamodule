@@ -1,28 +1,29 @@
-import { grid, rowgroup, row, gridcell } from '../lib/index'
-import { thead, tr, th } from 'htmlmodule'
+import { grid, rowgroup, row, rowheader, columnheader, gridcell } from '../lib/index'
 
 const rows = Array.from(new Array(18))
-const cells = Array.from(new Array(26))
+const ABC = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+const cells = ABC.split('')
 
 const testgrid = grid({
     multiselectable : true,
     children : [
-        thead(tr([
-            th(''),
-            cells.map((c, i) => th('ABCDEFGHIJKLMNOPQRSTUVWXYZ'[i]))
-        ])),
+        rowgroup({
+            tagName : 'thead',
+            children : row([
+                columnheader(''),
+                cells.map(c => columnheader(c))
+            ])
+        }),
         rowgroup(rows.map((r, j) =>
-            row({
-                children : [
-                    th(String(j)),
-                    cells.map((c, i) => gridcell({
-                        disabled : i === 5 && j === 5,
-                        selected : false,
-                        style : { width : 95 / cells.length + '%' },
-                        children : ''
-                    }))
-                ]
-            })))
+            row([
+                rowheader(String(j)),
+                cells.map((c, i) => gridcell({
+                    disabled : i === 5 && j === 5,
+                    selected : false,
+                    style : { width : 95 / cells.length + '%' },
+                    children : ''
+                }))
+            ])))
     ]
 })
 

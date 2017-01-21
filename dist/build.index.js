@@ -2054,9 +2054,7 @@ function span(init) {
  * @param {String} [init.abbr] Alternative label to use for the header cell when referencing the cell in other contexts
  * @return {HTMLTableCellElement}
  */
-function th(init) {
-    return htmldom('th', init)
-}
+
 
 /**
  * [The `thead` element](https://html.spec.whatwg.org/#the-thead-element)
@@ -2072,9 +2070,7 @@ function th(init) {
  * @param {String|Array|Node|HTMLDOMAssembler|{}} [init] `NodeInit` dictionary
  * @return {HTMLTableSectionElement}
  */
-function thead(init) {
-    return htmldom('thead', init)
-}
+
 
 /*
  * [The `time` element](https://html.spec.whatwg.org/#the-time-element)
@@ -2133,9 +2129,7 @@ function thead(init) {
  * @param {String|Array|Node|HTMLDOMAssembler|{}} [init] `NodeInit` dictionary
  * @return {HTMLTableRowElement}
  */
-function tr(init) {
-    return htmldom('tr', init)
-}
+
 
 /**
  * [The `track` element](https://html.spec.whatwg.org/#the-track-element)
@@ -2692,119 +2686,6 @@ function grid(init) {
     return new Grid('table', init)
 }
 
-class Group extends Section {
-
-    set activeDescendant(activeDescendant) {
-        this.node.setAttribute('aria-activedescendant', activeDescendant);
-    }
-
-    get activeDescendant() {
-        return this.node.getAttribute('aria-activedescendant')
-    }
-}
-
-const { map: map$2 } = Array.prototype;
-
-class Row extends Group {
-    constructor(object, init) {
-        super(object, {
-            role : 'row',
-            className : 'row'
-        });
-        if(init) this.init(init);
-    }
-
-    set level(level) {
-        this.node.setAttribute('aria-level', level);
-    }
-
-    get level() {
-        return this.node.getAttribute('aria-level')
-    }
-
-    set selected(selected) {
-        this.cells.forEach(cell => cell.selected = selected);
-        this.node.setAttribute('aria-selected', selected);
-    }
-
-    get selected() {
-        return this.node.getAttribute('aria-selected')
-    }
-
-    set colIndex(colIndex) {
-        this.node.setAttribute('aria-colIndex', colIndex);
-    }
-
-    get colIndex() {
-        return this.node.getAttribute('aria-colIndex')
-    }
-
-    set rowIndex(rowIndex) {
-        this.node.setAttribute('aria-rowIndex', rowIndex);
-    }
-
-    get rowIndex() {
-        return this.node.getAttribute('aria-rowIndex')
-    }
-    /**
-     *
-     * @param {boolean} multiselectable
-     */
-    set multiselectable(multiselectable) {
-        this.node.setAttribute('aria-multiselectable', String(multiselectable));
-    }
-
-    /**
-     *
-     * @returns {boolean}
-     */
-    get multiselectable() {
-        return this.node.getAttribute('aria-multiselectable') === 'true'
-    }
-
-    get cells() {
-        return map$2.call(this.node.cells, ({ assembler }) => assembler)
-    }
-
-    get prev() {
-        const sibling = this.node.previousSibling;
-        return sibling && sibling.assembler
-    }
-
-    get next() {
-        const sibling = this.node.nextSibling;
-        return sibling && sibling.assembler
-    }
-
-    get index() {
-        return this.node.rowIndex - this.grid.rows[0].node.rowIndex
-    }
-
-    get grid() {
-        return this.node.closest('table').assembler
-    }
-}
-
-// Object.assign(Row.prototype, Widget.prototype)
-
-function row(init) {
-    return new Row('tr', init)
-}
-
-class RowGroup extends Structure {
-    constructor(object, init) {
-        super(object, {
-            role : 'rowgroup',
-            className : 'rowgroup'
-        });
-        if(init) this.init(init);
-    }
-}
-
-function rowgroup(init) {
-    return new RowGroup('tbody', init)
-}
-
 class Cell extends Section {
 
     set colIndex(colIndex) {
@@ -3130,28 +3011,174 @@ function gridcell(init) {
     return new GridCell('td', init)
 }
 
+class Group extends Section {
+
+    set activeDescendant(activeDescendant) {
+        this.node.setAttribute('aria-activedescendant', activeDescendant);
+    }
+
+    get activeDescendant() {
+        return this.node.getAttribute('aria-activedescendant')
+    }
+}
+
+const { map: map$2 } = Array.prototype;
+
+class Row extends Group {
+    constructor(object, init) {
+        super(object, {
+            role : 'row',
+            className : 'row'
+        });
+        if(init) this.init(init);
+    }
+
+    set level(level) {
+        this.node.setAttribute('aria-level', level);
+    }
+
+    get level() {
+        return this.node.getAttribute('aria-level')
+    }
+
+    set selected(selected) {
+        this.cells.forEach(cell => cell.selected = selected);
+        this.node.setAttribute('aria-selected', selected);
+    }
+
+    get selected() {
+        return this.node.getAttribute('aria-selected')
+    }
+
+    set colIndex(colIndex) {
+        this.node.setAttribute('aria-colIndex', colIndex);
+    }
+
+    get colIndex() {
+        return this.node.getAttribute('aria-colIndex')
+    }
+
+    set rowIndex(rowIndex) {
+        this.node.setAttribute('aria-rowIndex', rowIndex);
+    }
+
+    get rowIndex() {
+        return this.node.getAttribute('aria-rowIndex')
+    }
+    /**
+     *
+     * @param {boolean} multiselectable
+     */
+    set multiselectable(multiselectable) {
+        this.node.setAttribute('aria-multiselectable', String(multiselectable));
+    }
+
+    /**
+     *
+     * @returns {boolean}
+     */
+    get multiselectable() {
+        return this.node.getAttribute('aria-multiselectable') === 'true'
+    }
+
+    get cells() {
+        return map$2.call(this.node.cells, ({ assembler }) => assembler)
+    }
+
+    get prev() {
+        const sibling = this.node.previousSibling;
+        return sibling && sibling.assembler
+    }
+
+    get next() {
+        const sibling = this.node.nextSibling;
+        return sibling && sibling.assembler
+    }
+
+    get index() {
+        return this.node.rowIndex - this.grid.rows[0].node.rowIndex
+    }
+
+    get grid() {
+        return this.node.closest('table').assembler
+    }
+}
+
+// Object.assign(Row.prototype, Widget.prototype)
+
+function row(init) {
+    return new Row('tr', init)
+}
+
+class RowGroup extends Structure {
+    constructor(object$$1, init) {
+        super(init.tagName || object$$1, {
+            role : 'rowgroup',
+            className : 'rowgroup'
+        });
+        if('tagName' in init) delete init.tagName;
+        if(init) this.init(init);
+    }
+}
+
+function rowgroup(init) {
+    return new RowGroup('tbody', NodeInit(init))
+}
+
+class RowHeader extends Cell {
+    constructor(object, init) {
+        super(object, {
+            role : 'rowheader',
+            className : 'rowheader',
+            scope : 'row'
+        });
+        if(init) this.init(init);
+    }
+}
+
+function rowheader(init) {
+    return new RowHeader('th', init)
+}
+
+class ColumnHeader extends Cell {
+    constructor(object, init) {
+        super(object, {
+            role : 'columnheader',
+            className : 'columnheader',
+            scope : 'col'
+        });
+        if(init) this.init(init);
+    }
+}
+
+function columnheader(init) {
+    return new ColumnHeader('th', init)
+}
+
 const rows = Array.from(new Array(18));
-const cells = Array.from(new Array(26));
+const ABC = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const cells = ABC.split('');
 
 const testgrid = grid({
     multiselectable : true,
     children : [
-        thead(tr([
-            th(''),
-            cells.map((c, i$$1) => th('ABCDEFGHIJKLMNOPQRSTUVWXYZ'[i$$1]))
-        ])),
+        rowgroup({
+            tagName : 'thead',
+            children : row([
+                columnheader(''),
+                cells.map(c => columnheader(c))
+            ])
+        }),
         rowgroup(rows.map((r, j) =>
-            row({
-                children : [
-                    th(String(j)),
-                    cells.map((c, i$$1) => gridcell({
-                        disabled : i$$1 === 5 && j === 5,
-                        selected : false,
-                        style : { width : 95 / cells.length + '%' },
-                        children : ''
-                    }))
-                ]
-            })))
+            row([
+                rowheader(String(j)),
+                cells.map((c, i) => gridcell({
+                    disabled : i === 5 && j === 5,
+                    selected : false,
+                    style : { width : 95 / cells.length + '%' },
+                    children : ''
+                }))
+            ])))
     ]
 });
 
