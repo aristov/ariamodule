@@ -2728,7 +2728,8 @@ class GridCell extends Cell {
             role : 'gridcell',
             className : 'gridcell',
             tabIndex : -1,
-            dataset : { mode : 'navigation' }
+            dataset : { mode : 'navigation' },
+            children : ''
         });
         this.init({
             onfocus : this.onFocus.bind(this),
@@ -3155,7 +3156,7 @@ function columnheader(init) {
     return new ColumnHeader('th', init)
 }
 
-const rows = Array.from(new Array(18));
+const rows = Array.from(new Array(24));
 const ABC = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const cells = ABC.split('');
 
@@ -3165,20 +3166,18 @@ const testgrid = grid({
         rowgroup({
             tagName : 'thead',
             children : row([
-                columnheader(''),
+                columnheader(),
                 cells.map(c => columnheader(c))
             ])
         }),
-        rowgroup(rows.map((r, j) =>
-            row([
-                rowheader(String(j)),
-                cells.map((c, i) => gridcell({
-                    disabled : i === 5 && j === 5,
-                    selected : false,
-                    style : { width : 95 / cells.length + '%' },
-                    children : ''
-                }))
-            ])))
+        rowgroup(rows.map((r, j) => row([
+            rowheader(String(j)),
+            cells.map((c, i) => gridcell({
+                disabled : i === 5 && j === 5,
+                selected : false,
+                style : { width : 95 / cells.length + '%' }
+            }))
+        ])))
     ]
 });
 
