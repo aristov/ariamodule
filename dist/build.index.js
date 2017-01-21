@@ -3181,6 +3181,6 @@ const testgrid = grid({
     ]
 });
 
-document.body.appendChild(testgrid.node);
+document.body.append(testgrid.node);
 
 }());
