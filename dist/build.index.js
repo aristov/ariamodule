@@ -2054,7 +2054,9 @@ function span(init) {
  * @param {String} [init.abbr] Alternative label to use for the header cell when referencing the cell in other contexts
  * @return {HTMLTableCellElement}
  */
-
+function th(init) {
+    return htmldom('th', init)
+}
 
 /**
  * [The `thead` element](https://html.spec.whatwg.org/#the-thead-element)
@@ -2070,7 +2072,9 @@ function span(init) {
  * @param {String|Array|Node|HTMLDOMAssembler|{}} [init] `NodeInit` dictionary
  * @return {HTMLTableSectionElement}
  */
-
+function thead(init) {
+    return htmldom('thead', init)
+}
 
 /*
  * [The `time` element](https://html.spec.whatwg.org/#the-time-element)
@@ -2129,7 +2133,9 @@ function span(init) {
  * @param {String|Array|Node|HTMLDOMAssembler|{}} [init] `NodeInit` dictionary
  * @return {HTMLTableRowElement}
  */
-
+function tr(init) {
+    return htmldom('tr', init)
+}
 
 /**
  * [The `track` element](https://html.spec.whatwg.org/#the-track-element)
@@ -2569,7 +2575,7 @@ class Table extends Section {
     }
 }
 
-const { map: map$$1 } = Array.prototype;
+const { map: map$$1, filter } = Array.prototype;
 
 class Grid extends Table {
 
@@ -2583,7 +2589,9 @@ class Grid extends Table {
     }
 
     get rows() {
-        return map$$1.call(this.node.rows, ({ assembler }) => assembler)
+        const { rows } = this.node;
+        const handler = ({ assembler }) => assembler;
+        return filter.call(rows, handler).map(handler)
     }
 
     set level(level) {
@@ -2769,7 +2777,11 @@ class Row extends Group {
     }
 
     get index() {
-        return this.node.rowIndex
+        return this.node.rowIndex - this.grid.rows[0].node.rowIndex
+    }
+
+    get grid() {
+        return this.node.closest('table').assembler
     }
 }
 
@@ -2873,8 +2885,8 @@ class GridCell extends Cell {
         if(key.startsWith('Arrow')) this.onArrowKeyDown(event);
         else if(key === 'Enter') this.onEnterKeyDown(event);
         else if(key === 'Escape') this.onEscapeKeyDown(event);
-        else if(/^a$/i.test(key) && (event.metaKey || event.ctrlKey)) {
-            this.onSelectAllKeyDown(event);
+        else if(/^a$/i.test(key)) {
+            if(event.metaKey || event.ctrlKey) this.onSelectAllKeyDown(event);
         }
         else if(/^[a-zа-я0-9 ]$/i.test(key)) this.onCharacterKeyDown(event);
         else if(key === 'Backspace') this.onBackspaceKeyDown(event);
@@ -3118,21 +3130,23 @@ function gridcell(init) {
     return new GridCell('td', init)
 }
 
-const rows = Array.from(new Array(12));
+const rows = Array.from(new Array(24));
 const cells = Array.from(new Array(10));
 
 const testgrid = grid({
     multiselectable : true,
-    children : rowgroup(rows.map((r, j) =>
-        row({
-            children : cells.map((c, i$$1) =>
-                gridcell({
-                    disabled : i$$1 === 5 && j === 5,
-                    selected : false,
-                    children : ''
-                }))
-        }))
-    )
+    children : [
+        thead(tr(cells.map((c, i$$1) => th('ABCDEFGHIJKLMNOPQRSTUVWXYZ'[i$$1])))),
+        rowgroup(rows.map((r, j) =>
+            row({
+                children : cells.map((c, i$$1) =>
+                    gridcell({
+                        disabled : i$$1 === 5 && j === 5,
+                        selected : false,
+                        children : ''
+                    }))
+            })))
+    ]
 });
 
 document.body.appendChild(testgrid.node);
