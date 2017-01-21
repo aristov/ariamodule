@@ -2629,6 +2629,47 @@ class Grid extends Table {
     get readOnly() {
         return this.node.getAttribute('aria-readonly')
     }
+
+    /**
+     *
+     * @param {GridCell} activeDescendant
+     */
+    set activeDescendant(activeDescendant) {
+        if(activeDescendant) {
+            this.node.setAttribute('aria-activedescendant', activeDescendant.id);
+            const activeElement = document.activeElement;
+            const focused = activeElement && activeElement.assembler;
+            if(focused) {
+                const row = focused.row;
+                if(row.multiselectable) {
+                    const cells = row.cells;
+                    cells.forEach(cell => cell.selected = 'false');
+                    const index1 = focused.index;
+                    const index2 = activeDescendant.index;
+                    const slice = cells.slice(Math.min(index1, index2), Math.max(index1, index2) + 1);
+                    slice.forEach(cell => cell.selected = 'true');
+                } else if(this.multiselectable) {
+                    const column = focused.column;
+                    column.forEach(cell => cell.selected = 'false');
+                    const index1 = focused.row.index;
+                    const index2 = activeDescendant.row.index;
+                    const slice = column.slice(Math.min(index1, index2), Math.max(index1, index2) + 1);
+                    slice.forEach(cell => cell.selected = 'true');
+                }
+            }
+        }
+        else this.node.removeAttribute('aria-activedescendant');
+    }
+
+    /**
+     *
+     * @returns {GridCell}
+     */
+    get activeDescendant() {
+        const id = this.node.getAttribute('aria-activedescendant');
+        const node = id && document.getElementById(id);
+        return node && node.assembler
+    }
 }
 
 function grid(init) {
@@ -2786,7 +2827,7 @@ class GridCell extends Cell {
     }
 
     onMouseEnter({ buttons }) {
-        if(buttons === 1) this.focus();
+        if(buttons === 1) this.grid.activeDescendant = this;
     }
 
     onFocus() {
@@ -2880,7 +2921,6 @@ class GridCell extends Cell {
                     first.focus();
                 }
             }
-            // else if(first.owns.length) first.owns = []
             else this.editmode = true;
         }
     }
@@ -3049,7 +3089,7 @@ function gridcell(init) {
     return new GridCell('td', init)
 }
 
-const rows = Array.from(new Array(48));
+const rows = Array.from(new Array(28));
 const cells = Array.from(new Array(10));
 
 const testgrid = grid({
