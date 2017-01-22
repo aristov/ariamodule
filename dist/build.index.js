@@ -2375,11 +2375,11 @@ class RoleType extends ARIADOMAssembler {
     }
 
     set describedBy(describedBy) {
-        this.node.setAttribute('aria-describedBy', describedBy);
+        this.node.setAttribute('aria-describedby', describedBy);
     }
 
     get describedBy() {
-        return this.node.getAttribute('aria-describedBy')
+        return this.node.getAttribute('aria-describedby')
     }
 
     set details(details) {
@@ -2413,27 +2413,27 @@ class RoleType extends ARIADOMAssembler {
     }
 
     set dropEffect(dropEffect) {
-        this.node.setAttribute('aria-dropEffect', dropEffect);
+        this.node.setAttribute('aria-dropeffect', dropEffect);
     }
 
     get dropEffect() {
-        return this.node.getAttribute('aria-dropEffect')
+        return this.node.getAttribute('aria-dropeffect')
     }
 
     set errorMessage(errorMessage) {
-        this.node.setAttribute('aria-errorMessage', errorMessage);
+        this.node.setAttribute('aria-errormessage', errorMessage);
     }
 
     get errorMessage() {
-        return this.node.getAttribute('aria-errorMessage')
+        return this.node.getAttribute('aria-errormessage')
     }
 
     set flowTo(flowTo) {
-        this.node.setAttribute('aria-flowTo', flowTo);
+        this.node.setAttribute('aria-flowto', flowTo);
     }
 
     get flowTo() {
-        return this.node.getAttribute('aria-flowTo')
+        return this.node.getAttribute('aria-flowto')
     }
 
     set grabbed(grabbed) {
@@ -2445,11 +2445,11 @@ class RoleType extends ARIADOMAssembler {
     }
 
     set hasPopup(hasPopup) {
-        this.node.setAttribute('aria-hasPopup', hasPopup);
+        this.node.setAttribute('aria-haspopup', hasPopup);
     }
 
     get hasPopup() {
-        return this.node.getAttribute('aria-hasPopup')
+        return this.node.getAttribute('aria-haspopup')
     }
 
     set hidden(hidden) {
@@ -2469,11 +2469,11 @@ class RoleType extends ARIADOMAssembler {
     }
 
     set keyShortCuts(keyShortCuts) {
-        this.node.setAttribute('aria-keyShortCuts', keyShortCuts);
+        this.node.setAttribute('aria-keyshortcuts', keyShortCuts);
     }
 
     get keyShortCuts() {
-        return this.node.getAttribute('aria-keyShortCuts')
+        return this.node.getAttribute('aria-keyshortcuts')
     }
 
     set label(label) {
@@ -2485,11 +2485,11 @@ class RoleType extends ARIADOMAssembler {
     }
 
     set labelledBy(labelledBy) {
-        this.node.setAttribute('aria-labelledBy', labelledBy);
+        this.node.setAttribute('aria-labelledby', labelledBy);
     }
 
     get labelledBy() {
-        return this.node.getAttribute('aria-labelledBy')
+        return this.node.getAttribute('aria-labelledby')
     }
 
     set live(live) {
@@ -2519,21 +2519,11 @@ class RoleType extends ARIADOMAssembler {
     }
 
     set roleDescription(roleDescription) {
-        this.node.setAttribute('aria-roleDescription', roleDescription);
+        this.node.setAttribute('aria-roledescription', roleDescription);
     }
 
     get roleDescription() {
-        return this.node.getAttribute('aria-roleDescription')
-    }
-}
-
-class Widget extends RoleType {
-    set tabIndex(tabIndex) {
-        this.node.tabIndex = tabIndex;
-    }
-    get tabIndex() {
-        const node = this.node;
-        return node.hasAttribute('tabindex')? node.tabIndex : null
+        return this.node.getAttribute('aria-roledescription')
     }
 }
 
@@ -2547,6 +2537,66 @@ class Section extends Structure {
 
     get expanded() {
         return this.node.getAttribute('aria-expanded')
+    }
+}
+
+class Cell extends Section {
+
+    set colIndex(colIndex) {
+        this.node.setAttribute('aria-colindex', colIndex);
+    }
+
+    get colIndex() {
+        return this.node.getAttribute('aria-colindex')
+    }
+
+    set colSpan(colSpan) {
+        this.node.setAttribute('aria-colspan', colSpan);
+    }
+
+    get colSpan() {
+        return this.node.getAttribute('aria-colspan')
+    }
+
+    set rowIndex(rowIndex) {
+        this.node.setAttribute('aria-rowIndex', rowIndex);
+    }
+
+    get rowIndex() {
+        return this.node.getAttribute('aria-rowIndex')
+    }
+
+    set rowSpan(rowSpan) {
+        this.node.setAttribute('aria-rowSpan', rowSpan);
+    }
+
+    get rowSpan() {
+        return this.node.getAttribute('aria-rowSpan')
+    }
+}
+
+class ColumnHeader extends Cell {
+    constructor(object, init) {
+        super(object, {
+            role : 'columnheader',
+            className : 'columnheader',
+            scope : 'col'
+        });
+        if(init) this.init(init);
+    }
+}
+
+function columnheader(init) {
+    return new ColumnHeader('th', init)
+}
+
+class Widget extends RoleType {
+    set tabIndex(tabIndex) {
+        this.node.tabIndex = tabIndex;
+    }
+    get tabIndex() {
+        const node = this.node;
+        return node.hasAttribute('tabindex')? node.tabIndex : null
     }
 }
 
@@ -2569,7 +2619,7 @@ class Table extends Section {
     }
 }
 
-const { map: map$$1, filter } = Array.prototype;
+const { map: map$1, filter } = Array.prototype;
 
 class Grid extends Table {
 
@@ -2602,7 +2652,7 @@ class Grid extends Table {
 
     get cells() {
         const collection = this.node.querySelectorAll('td[role=gridcell]');
-        return map$$1.call(collection, cell => cell.assembler)
+        return map$1.call(collection, cell => cell.assembler)
     }
 
     /**
@@ -2684,41 +2734,6 @@ class Grid extends Table {
 
 function grid(init) {
     return new Grid('table', init)
-}
-
-class Cell extends Section {
-
-    set colIndex(colIndex) {
-        this.node.setAttribute('aria-colindex', colIndex);
-    }
-
-    get colIndex() {
-        return this.node.getAttribute('aria-colindex')
-    }
-
-    set colSpan(colSpan) {
-        this.node.setAttribute('aria-colspan', colSpan);
-    }
-
-    get colSpan() {
-        return this.node.getAttribute('aria-colspan')
-    }
-
-    set rowIndex(rowIndex) {
-        this.node.setAttribute('aria-rowIndex', rowIndex);
-    }
-
-    get rowIndex() {
-        return this.node.getAttribute('aria-rowIndex')
-    }
-
-    set rowSpan(rowSpan) {
-        this.node.setAttribute('aria-rowSpan', rowSpan);
-    }
-
-    get rowSpan() {
-        return this.node.getAttribute('aria-rowSpan')
-    }
 }
 
 class GridCell extends Cell {
@@ -3141,28 +3156,14 @@ function rowheader(init) {
     return new RowHeader('th', init)
 }
 
-class ColumnHeader extends Cell {
-    constructor(object, init) {
-        super(object, {
-            role : 'columnheader',
-            className : 'columnheader',
-            scope : 'col'
-        });
-        if(init) this.init(init);
-    }
-}
-
-function columnheader(init) {
-    return new ColumnHeader('th', init)
-}
-
 const SECOND = 1000;
 const MINUTE = 60 * SECOND;
 const HOUR = 60 * MINUTE;
 
 const date = new Date;
 const daystart = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-const start = new Date(daystart.getTime() + 9 * HOUR);
+const hourstart = 9;
+const start = new Date(daystart.getTime() + hourstart * HOUR);
 const duration = 15 * HOUR;
 const step = HOUR / 2;
 const timerows = Array.from(new Array(duration / step)).map((_, i) => {
@@ -3176,6 +3177,8 @@ function timeformat(h, m) {
     return [h < 10? '0' + h : h, m < 10? '0' + m : m].join(':')
 }
 
+const now = date.getTime();
+
 const testgrid = grid({
     multiselectable : true,
     children : [
@@ -3183,16 +3186,21 @@ const testgrid = grid({
             tagName : 'thead',
             children : row([
                 columnheader(date.getDate() + '/' + (date.getMonth() + 1)),
-                roomcolumns.map(c => columnheader(c))
+                roomcolumns.map(children => columnheader({
+                    style : { width : 95 / roomcolumns.length + '%' },
+                    children,
+                }))
             ])
         }),
-        rowgroup(timerows.map((r, j) => row({
+        rowgroup(timerows.map(r => row({
             dataset : { time : r.getTime() },
+            current : r.getTime() < now && now < r.getTime() + step?
+                'time' :
+                undefined,
             children : [
                 rowheader(timeformat(r.getHours(), r.getMinutes())),
                 roomcolumns.map(() => gridcell({
                     selected : false,
-                    style : { width : 95 / roomcolumns.length + '%' }
                 }))
             ]
         })))
