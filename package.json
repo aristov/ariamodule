@@ -1,8 +1,8 @@
 {
   "name": "ariamodule",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "WAI-ARIA DOM implementation",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "test"
   },
