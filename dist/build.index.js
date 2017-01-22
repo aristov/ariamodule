@@ -2623,13 +2623,13 @@ const { map: map$1, filter } = Array.prototype;
 
 class Grid extends Table {
 
-    constructor(object$$1, init) {
-        super(object$$1, {
+    init(init) {
+        super.init({
             role : 'grid',
             className : 'grid',
         });
-        if(init) this.init(init);
-        this.cells[0].tabIndex = 0;
+        super.init(init);
+        // console.log(Object.getOwnPropertyNames(Grid.prototype))
     }
 
     get rows() {
@@ -2723,6 +2723,10 @@ class Grid extends Table {
 
     set children(children) {
         super.children = children;
+        if(!this.cells.some(c => c.tabIndex === 0)) {
+            const first = this.cells[0];
+            if(first) first.tabIndex = 0;
+        }
     }
 
     /**
@@ -2742,21 +2746,20 @@ function grid(init) {
 
 class GridCell extends Cell {
 
-    constructor(object$$1, init) {
-        super(object$$1, {
+    init(init) {
+        super.init({
             role : 'gridcell',
             className : 'gridcell',
             tabIndex : -1,
             dataset : { mode : 'navigation' },
-            children : ''
-        });
-        this.init({
             onfocus : this.onFocus.bind(this),
             onkeydown : this.onKeyDown.bind(this),
             onmouseenter : this.onMouseEnter.bind(this),
             ondblclick : this.onDoubleClick.bind(this),
+            children : '',
         });
-        if(init) this.init(init);
+        super.init(init);
+        // console.log(Object.getOwnPropertyNames(GridCell.prototype))
     }
 
     onDoubleClick() {
@@ -3045,12 +3048,13 @@ class Group extends Section {
 const { map: map$2 } = Array.prototype;
 
 class Row extends Group {
-    constructor(object, init) {
-        super(object, {
+
+    init(init) {
+        super.init({
             role : 'row',
             className : 'row'
         });
-        if(init) this.init(init);
+        super.init(init);
     }
 
     set level(level) {
