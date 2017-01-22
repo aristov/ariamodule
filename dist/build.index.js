@@ -2721,6 +2721,10 @@ class Grid extends Table {
         else this.node.removeAttribute('aria-activedescendant');
     }
 
+    set children(children) {
+        super.children = children;
+    }
+
     /**
      *
      * @returns {GridCell}
@@ -3127,7 +3131,7 @@ function row(init) {
 }
 
 class RowGroup extends Structure {
-    constructor(object$$1, init) {
+    constructor(object$$1, init = {}) {
         super(init.tagName || object$$1, {
             role : 'rowgroup',
             className : 'rowgroup'
