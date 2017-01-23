@@ -2699,7 +2699,6 @@ class Grid extends Table {
             const focused = activeElement && activeElement.assembler;
             if(focused && focused.selected) {
                 const row = focused.row;
-                const { min, max } = Math;
                 let cells, index1, index2;
                 if(row.multiselectable) {
                     cells = row.cells;
@@ -2713,20 +2712,14 @@ class Grid extends Table {
                     index2 = activeDescendant.row.index;
                 }
                 if(cells) {
-                    const slice = cells.slice(min(index1, index2), max(index1, index2) + 1);
+                    const slice = cells.slice(
+                        Math.min(index1, index2),
+                        Math.max(index1, index2) + 1);
                     slice.forEach(cell => cell.selected = 'true');
                 }
             }
         }
         else this.node.removeAttribute('aria-activedescendant');
-    }
-
-    set children(children) {
-        super.children = children;
-        if(!this.cells.some(c => c.tabIndex === 0)) {
-            const first = this.cells[0];
-            if(first) first.tabIndex = 0;
-        }
     }
 
     /**
@@ -2737,6 +2730,14 @@ class Grid extends Table {
         const id = this.node.getAttribute('aria-activedescendant');
         const node = id && document.getElementById(id);
         return node && node.assembler
+    }
+
+    set children(children) {
+        super.children = children;
+        if(!this.cells.some(c => c.tabIndex === 0)) {
+            const first = this.cells[0];
+            if(first) first.tabIndex = 0;
+        }
     }
 }
 
@@ -2812,7 +2813,7 @@ class GridCell extends Cell {
     onBackspaceKeyDown(event) {
         if(this.mode !== 'edit') {
             event.preventDefault();
-            if(this.text.textContent) this.text.textContent = '';
+            if(this.value) this.value = '';
             else if(this.owns.length) this.owns = [];
         }
     }
@@ -2879,12 +2880,11 @@ class GridCell extends Cell {
         if(!this.readOnly && mode !== this.mode) {
             if(mode === 'edit') {
                 this.text.hidden = true;
-                this.input.value = this.text.textContent;
                 this.input.hidden = false;
                 this.input.focus();
             } else if(mode === 'navigation') {
+                this.value = this.input.value;
                 this.input.hidden = true;
-                this.text.textContent = this.input.value;
                 this.text.hidden = false;
                 // this.focus()
             }
@@ -3011,7 +3011,7 @@ class GridCell extends Cell {
         let node = this.node.querySelector('input');
         if(!node) {
             this.input = node = input({
-                value : this.text.textContent,
+                value : this.value,
                 onblur : this.onInputBlur.bind(this)
             });
         }
@@ -3024,6 +3024,15 @@ class GridCell extends Cell {
 
     set children(children) {
         super.children = span({ className : 'text', children });
+    }
+
+    set value(value) {
+        this.dataset.value = this.text.textContent = value;
+        if(!value) this.node.removeAttribute('data-value');
+    }
+
+    get value() {
+        return this.dataset.value
     }
 }
 
