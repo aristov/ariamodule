@@ -2257,6 +2257,7 @@ const ARIA_PREFIX = 'aria-';
 const ARIA_PREFIX_LENGTH = ARIA_PREFIX.length;
 
 class ARIADOMAssembler extends HTMLDOMAssembler {
+
     constructor(object$$1, init) {
         super();
         if(typeof object$$1 === 'string') this.assemble(object$$1, init);
@@ -2326,6 +2327,15 @@ class ARIADOMAssembler extends HTMLDOMAssembler {
 
     get dataset() {
         return this.node.dataset
+    }
+
+    set tabIndex(tabIndex) {
+        this.node.tabIndex = tabIndex;
+    }
+
+    get tabIndex() {
+        const node = this.node;
+        return node.hasAttribute('tabindex')? node.tabIndex : null
     }
 
     /**
@@ -2576,28 +2586,18 @@ class Cell extends Section {
 }
 
 class ColumnHeader extends Cell {
-    constructor(object, init) {
-        super(object, {
+    init(init) {
+        super.init({
             role : 'columnheader',
             className : 'columnheader',
             scope : 'col'
         });
-        if(init) this.init(init);
+        if(init) super.init(init);
     }
 }
 
 function columnheader(init) {
     return new ColumnHeader('th', init)
-}
-
-class Widget extends RoleType {
-    set tabIndex(tabIndex) {
-        this.node.tabIndex = tabIndex;
-    }
-    get tabIndex() {
-        const node = this.node;
-        return node.hasAttribute('tabindex')? node.tabIndex : null
-    }
 }
 
 class Table extends Section {
@@ -3034,8 +3034,8 @@ class GridCell extends Cell {
     }
 }
 
-const descriptor = Object.getOwnPropertyDescriptor(Widget.prototype, 'tabIndex');
-Object.defineProperty(GridCell.prototype, 'tabIndex', descriptor);
+// const descriptor = Object.getOwnPropertyDescriptor(Widget.prototype, 'tabIndex')
+// Object.defineProperty(GridCell.prototype, 'tabIndex', descriptor)
 
 function gridcell(init) {
     return new GridCell('td', init)
@@ -3157,13 +3157,13 @@ function rowgroup(init) {
 }
 
 class RowHeader extends Cell {
-    constructor(object, init) {
-        super(object, {
+    init(init) {
+        super.init({
             role : 'rowheader',
             className : 'rowheader',
             scope : 'row'
         });
-        if(init) this.init(init);
+        if(init) super.init(init);
     }
 }
 
