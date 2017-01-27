@@ -261,7 +261,7 @@ function mismatchWarn(prop, value, name) {
 const DEFAULT_NAMESPACE_URI$1 = '';
 const DEFAULT_QUALIFIED_NAME$1 = 'element';
 
-const { prototype : { forEach } } = Array;
+const { prototype : { forEach: forEach$1 } } = Array;
 const { document: document$2 } = window;
 
 class ElementAssembler extends NodeAssembler {
@@ -356,7 +356,7 @@ class ElementAssembler extends NodeAssembler {
     get attributes() {
         const attributes = {};
         const handler = ({ name, value }) => attributes[name] = value;
-        forEach.call(this.node.attributes, handler);
+        forEach$1.call(this.node.attributes, handler);
         return attributes
     }
 
@@ -449,7 +449,7 @@ class ElementAssembler extends NodeAssembler {
  * Comment
  */
 
-const { prototype : { reduce } } = Array;
+const { prototype : { forEach } } = Array;
 const ARIA_PREFIX = 'aria-';
 const ARIA_PREFIX_LENGTH = ARIA_PREFIX.length;
 
@@ -481,12 +481,13 @@ class ARIADOMAssembler extends ElementAssembler {
     }
 
     get aria() {
-        return reduce.call(this.node.attributes, (res, { name, value }) => {
+        const aria = {};
+        forEach.call(this.node.attributes, ({ name, value }) => {
             if(name.startsWith(ARIA_PREFIX)) {
-                res[name.slice(ARIA_PREFIX_LENGTH)] = value;
+                aria[name.slice(ARIA_PREFIX_LENGTH)] = value;
             }
-            return res
-        }, {})
+        });
+        return aria
     }
 
     /**
