@@ -2629,7 +2629,6 @@ class Grid extends Table {
             className : 'grid',
         });
         super.init(init);
-        // console.log(Object.getOwnPropertyNames(Grid.prototype))
     }
 
     get rows() {
@@ -2760,7 +2759,6 @@ class GridCell extends Cell {
             children : '',
         });
         super.init(init);
-        // console.log(Object.getOwnPropertyNames(GridCell.prototype))
     }
 
     onDoubleClick() {
@@ -3187,7 +3185,7 @@ const timerows = Array.from(new Array(duration / step)).map((_, i) => {
     return new Date(start.getTime() + i * step)
 });
 
-const ABC = 'Admin Neo Forte Piano Sol Fa p1 p2';
+const ABC = 'Neo Forte Piano Sol Fa';
 const roomcolumns = ABC.split(' ');
 
 function timeformat(h, m) {

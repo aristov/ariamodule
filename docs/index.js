@@ -14,7 +14,7 @@ const timerows = Array.from(new Array(duration / step)).map((_, i) => {
     return new Date(start.getTime() + i * step)
 })
 
-const ABC = 'Admin Neo Forte Piano Sol Fa p1 p2'
+const ABC = 'Neo Forte Piano Sol Fa'
 const roomcolumns = ABC.split(' ')
 
 function timeformat(h, m) {
