@@ -2,6 +2,819 @@
 'use strict';
 
 /**
+ * @module dommodule
+ * @class NodeAssembler
+ * @author Vyacheslav Aristov <vv.aristov@gmail.com>
+ * @licence MIT
+ */
+
+const { isArray } = Array;
+
+class NodeAssembler {
+
+    /**
+     * Create the new assembler instance,
+     * instantiate and initialize the node it a source is passed
+     * @param {Node|{}} [object] instantiation source
+     * @param {{}|String|Node|ElementAssembler|Array} [init] initializing object
+     */
+    constructor(object, init) {
+        if(object) this.assemble(object, init);
+    }
+
+    /**
+     * Instantiate and initialize the specified node
+     * @param {Node|{}} object node or descriptor
+     * @param {{}|String|Node|ElementAssembler|Array} [init] initializing object
+     * @returns {Node} instantiated and initialized DOM node
+     */
+    assemble(object, init) {
+        if(object instanceof Node) this.node = object;
+        else this.create(object);
+        return init? this.init(init) : this.node
+    }
+
+    /**
+     * Instantiate the given node
+     * @param {*} node
+     * @returns {*}
+     */
+    create(node) {
+        return this.node = node
+    }
+
+    /**
+     * Initialize the node with defined properties
+     * @param {*} init NodeInit object
+     * @returns {Node|*} initialized element
+     */
+    init(init) {
+        const node = this.node;
+        if(init && init.constructor !== Object) {
+            this.childNodes = init;
+            return node
+        }
+        for(let prop in init) {
+            const value = init[prop];
+            if(value !== undefined) {
+                if(prop in this) this[prop] = value;
+                else if(prop in node) node[prop] = value;
+                else this.onmismatch(prop, value);
+
+            }
+        }
+        return node
+    }
+
+    /**
+     * The init mismatch handler
+     * @param {String} prop mismatched property name
+     * @param {*} value mismatched property value
+     */
+    onmismatch(prop, value) {
+        mismatchWarn(prop, value, this.constructor.name);
+    }
+
+    /**
+     * Append the node to the specified parent
+     * @param {Node} parentNode
+     */
+    set parentNode(parentNode) {
+        parentNode.appendChild(this.node);
+    }
+
+    /**
+     * Get the parent node
+     * @returns {Node}
+     */
+    get parentNode() {
+        return this.node.parentNode
+    }
+
+    /**
+     * Append the child nodes to the node
+     * @param {String|Node|NodeAssembler|Array|*} childNodes
+     */
+    set childNodes(childNodes) {
+        if(isArray(childNodes)) {
+            childNodes.forEach(child => this.childNodes = child);
+        }
+        else if(childNodes) {
+            if(childNodes instanceof NodeAssembler) {
+                childNodes.parentNode = this.node;
+            }
+            else this.node.append(childNodes);
+        }
+    }
+
+    /**
+     * Get an array of child nodes
+     * @returns {*} {Array}
+     */
+    get childNodes() {
+        return Array.from(this.node.childNodes)
+    }
+
+    /**
+     * Replace or append the first child of the node
+     * @param {Node} firstChild
+     */
+    set firstChild(firstChild) {
+        const node = this.node;
+        const child = this.firstChild;
+        if(child) node.replaceChild(firstChild, child);
+        else node.appendChild(firstChild);
+    }
+
+    /**
+     * Get the first child of the node
+     * @returns {Node}
+     */
+    get firstChild() {
+        return this.node.firstChild
+    }
+
+    /**
+     * Replace or append the last child of the node
+     * @param {Node} lastChild
+     */
+    set lastChild(lastChild) {
+        const node = this.node;
+        const child = this.lastChild;
+        if(child) node.replaceChild(lastChild, child);
+        else node.appendChild(lastChild);
+    }
+
+    /**
+     * Get the last child of the node
+     * @returns {Node}
+     */
+    get lastChild() {
+        return this.node.lastChild
+    }
+
+    /**
+     * Replace or insert the previous sibling of the node
+     * @param {Node} previousSibling
+     */
+    set previousSibling(previousSibling) {
+        const node = this.node;
+        const sibling = this.previousSibling;
+        const parent = node.parentNode;
+        if(parent) {
+            if(sibling) parent.replaceChild(previousSibling, sibling);
+            else parent.insertBefore(previousSibling, node);
+        }
+        else throw Error('set previousSibling: node must have a parent!')
+    }
+
+    /**
+     * Get the previous sibling of the node
+     * @returns {Node}
+     */
+    get previousSibling() {
+        return this.node.previousSibling
+    }
+
+    /**
+     * Replace or append the next sibling of the node
+     * @param {Node} nextSibling
+     */
+    set nextSibling(nextSibling) {
+        const node = this.node;
+        const sibling = this.nextSibling;
+        const parent = node.parentNode;
+        if(parent) {
+            if(sibling) parent.replaceChild(nextSibling, sibling);
+            else parent.appendChild(nextSibling);
+        }
+        else throw Error('set nextSibling: node must have a parent!')
+    }
+
+    /**
+     * Get the next sibling of the node
+     * @returns {Node}
+     */
+    get nextSibling() {
+        return this.node.nextSibling
+    }
+
+    /**
+     * Set the text content of the node
+     * @param {String} textContent
+     */
+    set textContent(textContent) {
+        this.node.textContent = textContent;
+    }
+
+    /**
+     * Get the text content of the node
+     * @returns {String}
+     */
+    get textContent() {
+        return this.node.textContent
+    }
+
+    /**
+     * Not implemented:
+     *  nodeValue
+     *  parentElement
+     *  firstElementChild
+     *  lastElementChild
+     *  previousElementSibling
+     *  nextElementSibling
+     */
+}
+
+Object.defineProperty(NodeAssembler.prototype, 'node', { writable : true, value : null });
+
+/**
+ * Send the console warning on the init mismatch
+ * @param {String} prop
+ * @param {String} value
+ * @param {String} name
+ */
+function mismatchWarn(prop, value, name) {
+    const propval = [prop, `"${ value }"`].join('=');
+    console.warn(`The property ${ propval } is not found on the ${ name } instance!`);
+}
+
+/**
+ * Document assembler factory
+ * @param {{}|String} object
+ * @param {{}} init
+ * @returns {DocumentAssembler}
+ */
+
+/**
+ * DocumentType assembler factory
+ * @param {{}|Node} [object]
+ * @returns {DocumentTypeAssembler}
+ */
+
+/**
+ * DocumentFragment assembler factory
+ * @param {{}} init
+ * @returns {DocumentFragmentAssembler}
+ */
+
+const DEFAULT_NAMESPACE_URI$1 = '';
+const DEFAULT_QUALIFIED_NAME$1 = 'element';
+
+const { prototype : { forEach } } = Array;
+const { document: document$2 } = window;
+
+class ElementAssembler extends NodeAssembler {
+
+    /**
+     * Create the specified element node
+     * @param {{}|String} descriptor
+     * @param {String} [descriptor.namespaceURI]
+     * @param {String} descriptor.qualifiedName
+     * @returns {Element|*} created element
+     */
+    create(descriptor) {
+        const constructor = this.constructor;
+        if(typeof descriptor === 'string') {
+            return super.create(document$2.createElementNS(
+                constructor.namespaceURI,
+                descriptor))
+        }
+        else {
+            const {
+                namespaceURI = constructor.namespaceURI,
+                qualifiedName = constructor.qualifiedName
+            } = descriptor || constructor;
+            return super.create(document$2.createElementNS(namespaceURI, qualifiedName))
+        }
+    }
+
+    /**
+     * Set the unique identifier of the element
+     * @param {String} id
+     */
+    set id(id) {
+        this.node.id = id;
+    }
+
+    /**
+     * Get the unique identifier of the element
+     * @returns {String}
+     */
+    get id() {
+        return this.node.id
+    }
+
+    /**
+     * Set the class name of the element
+     * @param {String} className
+     */
+    set className(className) {
+        this.node.className = className;
+    }
+
+    /**
+     * Get the class name of the element
+     * @returns {String}
+     */
+    get className() {
+        return this.node.className
+    }
+
+    /**
+     * Set the class list of the element
+     * @param {Array} classList
+     */
+    set classList(classList) {
+        this.node.classList.add(...classList);
+    }
+
+    /**
+     * Get the class list of the element as an array
+     * @returns {Array}
+     */
+    get classList() {
+        return this.node.className.split(' ')
+    }
+
+    /**
+     * Set the content attributes of the element
+     * @param {{}} attributes dictionary object
+     */
+    set attributes(attributes) {
+        const node = this.node;
+        for(let name in attributes) {
+            const value = attributes[name];
+            if(typeof value === 'string') node.setAttribute(name, value);
+        }
+    }
+
+    /**
+     * Get the content attributes of the element
+     * @returns {{}}
+     */
+    get attributes() {
+        const attributes = {};
+        const handler = ({ name, value }) => attributes[name] = value;
+        forEach.call(this.node.attributes, handler);
+        return attributes
+    }
+
+    /**
+     * Set the children of the element
+     * @param {*} children
+     */
+    set children(children) {
+        this.childNodes = children;
+    }
+
+    /**
+     * Get the children of the element
+     * @returns {Array}
+     */
+    get children() {
+        return Array.from(this.node.children)
+    }
+
+    /**
+     * Default qualified name
+     * @returns {String}
+     */
+    static get qualifiedName() {
+        return DEFAULT_QUALIFIED_NAME$1
+    }
+
+    /**
+     * Default namespace URI
+     * @returns {String}
+     */
+    static get namespaceURI() {
+        return DEFAULT_NAMESPACE_URI$1
+    }
+}
+
+/**
+ * Element assembler factory
+ * @param {{}|String} object
+ * @param {{}} init
+ * @returns {ElementAssembler}
+ */
+
+/**
+ * Text assembler factory
+ * @param {{}|Node} [object]
+ * @param {{}|Node|String|NodeAssembler|Array} [init]
+ * @returns {TextAssembler}
+ */
+
+
+/**
+ * CDATASection assembler factory
+ * @param {{}|Node} [object]
+ * @param {{}|Node|String|NodeAssembler|Array} [init]
+ * @returns {CDATASectionAssembler}
+ */
+
+
+/**
+ * Comment assembler factory
+ * @param {{}|Node} [object]
+ * @param {{}|Node|String|NodeAssembler|Array} [init]
+ * @returns {CommentAssembler}
+ */
+
+
+/**
+ * ProcessingInstruction assembler factory
+ * @param {{}|Node} [object]
+ * @param {{}|Node|String|NodeAssembler|Array} [init]
+ * @returns {ProcessingInstructionAssembler}
+ */
+
+/**
+ * EventTarget
+ *
+ * Node
+ *
+ * Document
+ * DocumentType
+ * DocumentFragment
+ *
+ * Element
+ *
+ * CharacterData
+ * Text
+ * CDATASection
+ * ProcessingInstruction
+ * Comment
+ */
+
+const { prototype : { reduce } } = Array;
+const ARIA_PREFIX = 'aria-';
+const ARIA_PREFIX_LENGTH = ARIA_PREFIX.length;
+
+const XHTML_NAMESPACE_URI = 'http://www.w3.org/1999/xhtml';
+
+class ARIADOMAssembler extends ElementAssembler {
+
+    init(init) {
+        this.node.assembler = this;
+        return super.init(init)
+    }
+
+    set role(role) {
+        this.node.setAttribute('role', role);
+    }
+
+    get role() {
+        return this.node.getAttribute('role') || ''
+    }
+
+    set aria(aria) {
+        const node = this.node;
+        for(let name in aria) {
+            const value = aria[name];
+            if(typeof value === 'string') {
+                node.setAttribute(ARIA_PREFIX + name, value);
+            }
+        }
+    }
+
+    get aria() {
+        return reduce.call(this.node.attributes, (res, { name, value }) => {
+            if(name.startsWith(ARIA_PREFIX)) {
+                res[name.slice(ARIA_PREFIX_LENGTH)] = value;
+            }
+            return res
+        }, {})
+    }
+
+    /**
+     * Set the element's [unique identifier (ID)](https://www.w3.org/TR/dom/#concept-id).
+     * @param {String} id unique identifier of the element
+     */
+    set id(id) {
+        super.id = id;
+    }
+
+    /**
+     * @returns {String} unique identifier, autogenerated if need
+     */
+    get id() {
+        return super.id || (this.id = this.constructor.uniqid)
+    }
+
+    set dataset(dataset) {
+        Object.assign(this.node.dataset, dataset);
+    }
+
+    get dataset() {
+        return this.node.dataset
+    }
+
+    set style(style) {
+        Object.assign(this.node.style, style);
+    }
+
+    get style() {
+        return this.node.style
+    }
+
+    set tabIndex(tabIndex) {
+        this.node.tabIndex = tabIndex;
+    }
+
+    get tabIndex() {
+        const node = this.node;
+        return node.hasAttribute('tabindex')? node.tabIndex : null
+    }
+
+    /**
+     * Generate unique identifier
+     * @returns {String} unique id
+     */
+    static get uniqid() {
+        let id;
+        do id = this.name + Math.floor(Math.random() * 1e10);
+        while(document.getElementById(id))
+        return id
+    }
+
+    static get namespaceURI() {
+        return XHTML_NAMESPACE_URI
+    }
+}
+
+class RoleType extends ARIADOMAssembler {
+
+    set atomic(atomic) {
+        this.node.setAttribute('aria-atomic', atomic);
+    }
+
+    get atomic() {
+        return this.node.getAttribute('aria-atomic')
+    }
+
+    set busy(busy) {
+        this.node.setAttribute('aria-busy', busy);
+    }
+
+    get busy() {
+        return this.node.getAttribute('aria-busy')
+    }
+
+    set controls(controls) {
+        this.node.setAttribute('aria-controls', controls);
+    }
+
+    get controls() {
+        return this.node.getAttribute('aria-controls')
+    }
+
+    set current(current) {
+        this.node.setAttribute('aria-current', current);
+    }
+
+    get current() {
+        return this.node.getAttribute('aria-current')
+    }
+
+    set describedBy(describedBy) {
+        this.node.setAttribute('aria-describedby', describedBy);
+    }
+
+    get describedBy() {
+        return this.node.getAttribute('aria-describedby')
+    }
+
+    set details(details) {
+        this.node.setAttribute('aria-details', details);
+    }
+
+    get details() {
+        return this.node.getAttribute('aria-details')
+    }
+
+    /**
+     *
+     * @param {boolean} disabled
+     */
+    set disabled(disabled) {
+        if(disabled) {
+            this.node.setAttribute('aria-disabled', 'true');
+            this.node.removeAttribute('tabindex');
+        } else  {
+            this.node.removeAttribute('aria-disabled');
+            this.node.tabIndex = -1;
+        }
+    }
+
+    /**
+     *
+     * @returns {boolean}
+     */
+    get disabled() {
+        return this.node.getAttribute('aria-disabled') === 'true'
+    }
+
+    set dropEffect(dropEffect) {
+        this.node.setAttribute('aria-dropeffect', dropEffect);
+    }
+
+    get dropEffect() {
+        return this.node.getAttribute('aria-dropeffect')
+    }
+
+    set errorMessage(errorMessage) {
+        this.node.setAttribute('aria-errormessage', errorMessage);
+    }
+
+    get errorMessage() {
+        return this.node.getAttribute('aria-errormessage')
+    }
+
+    set flowTo(flowTo) {
+        this.node.setAttribute('aria-flowto', flowTo);
+    }
+
+    get flowTo() {
+        return this.node.getAttribute('aria-flowto')
+    }
+
+    set grabbed(grabbed) {
+        this.node.setAttribute('aria-grabbed', grabbed);
+    }
+
+    get grabbed() {
+        return this.node.getAttribute('aria-grabbed')
+    }
+
+    set hasPopup(hasPopup) {
+        this.node.setAttribute('aria-haspopup', hasPopup);
+    }
+
+    get hasPopup() {
+        return this.node.getAttribute('aria-haspopup')
+    }
+
+    set hidden(hidden) {
+        this.node.hidden = hidden;
+    }
+
+    get hidden() {
+        return this.node.hidden
+    }
+
+    set invalid(invalid) {
+        this.node.setAttribute('aria-invalid', invalid);
+    }
+
+    get invalid() {
+        return this.node.getAttribute('aria-invalid')
+    }
+
+    set keyShortCuts(keyShortCuts) {
+        this.node.setAttribute('aria-keyshortcuts', keyShortCuts);
+    }
+
+    get keyShortCuts() {
+        return this.node.getAttribute('aria-keyshortcuts')
+    }
+
+    set label(label) {
+        this.node.setAttribute('aria-label', label);
+    }
+
+    get label() {
+        return this.node.getAttribute('aria-label')
+    }
+
+    set labelledBy(labelledBy) {
+        this.node.setAttribute('aria-labelledby', labelledBy);
+    }
+
+    get labelledBy() {
+        return this.node.getAttribute('aria-labelledby')
+    }
+
+    set live(live) {
+        this.node.setAttribute('aria-live', live);
+    }
+
+    get live() {
+        return this.node.getAttribute('aria-live')
+    }
+
+    set owns(owns) {
+        this.node.setAttribute('aria-owns', owns.map(node => node.id).join(' '));
+    }
+
+    get owns() {
+        const owns = this.node.getAttribute('aria-owns');
+        const handler = id => document.getElementById(id);
+        return owns? owns.split(' ').map(handler) : []
+    }
+
+    set relevant(relevant) {
+        this.node.setAttribute('aria-relevant', relevant);
+    }
+
+    get relevant() {
+        return this.node.getAttribute('aria-relevant')
+    }
+
+    set roleDescription(roleDescription) {
+        this.node.setAttribute('aria-roledescription', roleDescription);
+    }
+
+    get roleDescription() {
+        return this.node.getAttribute('aria-roledescription')
+    }
+}
+
+class Structure extends RoleType {}
+
+class Section extends Structure {
+
+    set expanded(expanded) {
+        this.node.setAttribute('aria-expanded', expanded);
+    }
+
+    get expanded() {
+        return this.node.getAttribute('aria-expanded')
+    }
+}
+
+class Cell extends Section {
+
+    set colIndex(colIndex) {
+        this.node.setAttribute('aria-colindex', colIndex);
+    }
+
+    get colIndex() {
+        return this.node.getAttribute('aria-colindex')
+    }
+
+    set colSpan(colSpan) {
+        this.node.setAttribute('aria-colspan', colSpan);
+    }
+
+    get colSpan() {
+        return this.node.getAttribute('aria-colspan')
+    }
+
+    set rowIndex(rowIndex) {
+        this.node.setAttribute('aria-rowIndex', rowIndex);
+    }
+
+    get rowIndex() {
+        return this.node.getAttribute('aria-rowIndex')
+    }
+
+    set rowSpan(rowSpan) {
+        this.node.setAttribute('aria-rowSpan', rowSpan);
+    }
+
+    get rowSpan() {
+        return this.node.getAttribute('aria-rowSpan')
+    }
+}
+
+class ColumnHeader extends Cell {
+    init(init) {
+        super.init({
+            role : 'columnheader',
+            className : 'columnheader',
+            scope : 'col'
+        });
+        if(init) super.init(init);
+    }
+}
+
+function columnheader(init) {
+    return new ColumnHeader('th', init)
+}
+
+class Table extends Section {
+
+    set colCount(colCount) {
+        this.node.setAttribute('aria-colcount', colCount);
+    }
+
+    get colCount() {
+        return this.node.getAttribute('aria-colcount')
+    }
+
+    set rowCount(rowCount) {
+        this.node.setAttribute('aria-rowcount', rowCount);
+    }
+
+    get rowCount() {
+        return this.node.getAttribute('aria-rowcount')
+    }
+}
+
+/**
  * Converts any non-dictionary object argument to a `NodeInit` dictionary object
  * with a `children` property assigned to the passed object
  * @function NodeInit
@@ -16,8 +829,8 @@ function NodeInit(init) {
 }
 
 const { assign } = Object;
-const { isArray } = Array;
-const { document: document$1 } = window;
+const { isArray: isArray$1 } = Array;
+const { document: document$3 } = window;
 
 /**
  * - Assembler for `HTMLElement` DOM interface
@@ -62,12 +875,12 @@ class HTMLDOMAssembler {
      *  child node or string or assembler instance or array of listed
      */
     set children(children) {
-        if(isArray(children)) {
+        if(isArray$1(children)) {
             children.forEach(child => this.children = child);
         }
         else if(children) {
             const child = typeof children === 'string'?
-                document$1.createTextNode(children) :
+                document$3.createTextNode(children) :
                 children instanceof HTMLDOMAssembler?
                     children.node :
                     children;
@@ -96,7 +909,7 @@ class HTMLDOMAssembler {
          * Just created node, assigned to the assembler instance
          * @type {HTMLElement|*}
          */
-        return this.node = document$1.createElement(tagName)
+        return this.node = document$3.createElement(tagName)
     }
 
     /**
@@ -2252,374 +3065,7 @@ function span(init) {
  * It serves to simplify the development of a web-applications
  */
 
-const { prototype : { reduce } } = Array;
-const ARIA_PREFIX = 'aria-';
-const ARIA_PREFIX_LENGTH = ARIA_PREFIX.length;
-
-class ARIADOMAssembler extends HTMLDOMAssembler {
-
-    constructor(object$$1, init) {
-        super();
-        if(typeof object$$1 === 'string') this.assemble(object$$1, init);
-        else if(object$$1 instanceof Node) {
-            this.node = object$$1;
-            if(init) this.init(init);
-        }
-        if(this.node) this.node.assembler = this;
-    }
-
-    set role(role) {
-        this.node.setAttribute('role', role);
-    }
-
-    get role() {
-        return this.node.getAttribute('role') || ''
-    }
-
-    set aria(aria) {
-        const node = this.node;
-        for(let name in aria) {
-            const value = aria[name];
-            if(typeof value === 'string') {
-                node.setAttribute(ARIA_PREFIX + name, value);
-            }
-        }
-    }
-
-    get aria() {
-        return reduce.call(this.node.attributes, (res, { name, value }) => {
-            if(name.startsWith(ARIA_PREFIX)) {
-                res[name.slice(ARIA_PREFIX_LENGTH)] = value;
-            }
-            return res
-        }, {})
-    }
-
-    /**
-     * [HTML : the id attribute](https://www.w3.org/TR/html5/dom.html#the-id-attribute)
-     *
-     * Specifies element's [unique identifier (ID)](https://www.w3.org/TR/dom/#concept-id).
-     *
-     * The value must be unique amongst all the IDs in the element's home subtree and must contain
-     * at least one character. The value must not contain any space characters.
-     * @param {String} id unique identifier of the element
-     */
-    set id(id) {
-        this.node.id = id;
-    }
-
-    /**
-     * Identifiers are opaque strings. Particular meanings should not be derived from the value of the id attribute.
-     *
-     * @returns {String} unique identifier, autogenerated if need
-     */
-    get id() {
-        return this.node.id || (this.id = this.constructor.uniqid)
-    }
-
-    init(init) {
-        super.init(NodeInit(init));
-    }
-
-    set dataset(dataset) {
-        super.dataset = dataset;
-    }
-
-    get dataset() {
-        return this.node.dataset
-    }
-
-    set tabIndex(tabIndex) {
-        this.node.tabIndex = tabIndex;
-    }
-
-    get tabIndex() {
-        const node = this.node;
-        return node.hasAttribute('tabindex')? node.tabIndex : null
-    }
-
-    /**
-     * Generate unique identifier
-     * @returns {String} unique id
-     */
-    static get uniqid() {
-        let id;
-        do id = this.name + Math.floor(Math.random() * 1e10);
-        while(document.getElementById(id))
-        return id
-    }
-}
-
-class RoleType extends ARIADOMAssembler {
-
-    set atomic(atomic) {
-        this.node.setAttribute('aria-atomic', atomic);
-    }
-
-    get atomic() {
-        return this.node.getAttribute('aria-atomic')
-    }
-
-    set busy(busy) {
-        this.node.setAttribute('aria-busy', busy);
-    }
-
-    get busy() {
-        return this.node.getAttribute('aria-busy')
-    }
-
-    set controls(controls) {
-        this.node.setAttribute('aria-controls', controls);
-    }
-
-    get controls() {
-        return this.node.getAttribute('aria-controls')
-    }
-
-    set current(current) {
-        this.node.setAttribute('aria-current', current);
-    }
-
-    get current() {
-        return this.node.getAttribute('aria-current')
-    }
-
-    set describedBy(describedBy) {
-        this.node.setAttribute('aria-describedby', describedBy);
-    }
-
-    get describedBy() {
-        return this.node.getAttribute('aria-describedby')
-    }
-
-    set details(details) {
-        this.node.setAttribute('aria-details', details);
-    }
-
-    get details() {
-        return this.node.getAttribute('aria-details')
-    }
-
-    /**
-     *
-     * @param {boolean} disabled
-     */
-    set disabled(disabled) {
-        if(disabled) {
-            this.node.setAttribute('aria-disabled', 'true');
-            this.node.removeAttribute('tabindex');
-        } else  {
-            this.node.removeAttribute('aria-disabled');
-            this.node.tabIndex = -1;
-        }
-    }
-
-    /**
-     *
-     * @returns {boolean}
-     */
-    get disabled() {
-        return this.node.getAttribute('aria-disabled') === 'true'
-    }
-
-    set dropEffect(dropEffect) {
-        this.node.setAttribute('aria-dropeffect', dropEffect);
-    }
-
-    get dropEffect() {
-        return this.node.getAttribute('aria-dropeffect')
-    }
-
-    set errorMessage(errorMessage) {
-        this.node.setAttribute('aria-errormessage', errorMessage);
-    }
-
-    get errorMessage() {
-        return this.node.getAttribute('aria-errormessage')
-    }
-
-    set flowTo(flowTo) {
-        this.node.setAttribute('aria-flowto', flowTo);
-    }
-
-    get flowTo() {
-        return this.node.getAttribute('aria-flowto')
-    }
-
-    set grabbed(grabbed) {
-        this.node.setAttribute('aria-grabbed', grabbed);
-    }
-
-    get grabbed() {
-        return this.node.getAttribute('aria-grabbed')
-    }
-
-    set hasPopup(hasPopup) {
-        this.node.setAttribute('aria-haspopup', hasPopup);
-    }
-
-    get hasPopup() {
-        return this.node.getAttribute('aria-haspopup')
-    }
-
-    set hidden(hidden) {
-        this.node.hidden = hidden;
-    }
-
-    get hidden() {
-        return this.node.hidden
-    }
-
-    set invalid(invalid) {
-        this.node.setAttribute('aria-invalid', invalid);
-    }
-
-    get invalid() {
-        return this.node.getAttribute('aria-invalid')
-    }
-
-    set keyShortCuts(keyShortCuts) {
-        this.node.setAttribute('aria-keyshortcuts', keyShortCuts);
-    }
-
-    get keyShortCuts() {
-        return this.node.getAttribute('aria-keyshortcuts')
-    }
-
-    set label(label) {
-        this.node.setAttribute('aria-label', label);
-    }
-
-    get label() {
-        return this.node.getAttribute('aria-label')
-    }
-
-    set labelledBy(labelledBy) {
-        this.node.setAttribute('aria-labelledby', labelledBy);
-    }
-
-    get labelledBy() {
-        return this.node.getAttribute('aria-labelledby')
-    }
-
-    set live(live) {
-        this.node.setAttribute('aria-live', live);
-    }
-
-    get live() {
-        return this.node.getAttribute('aria-live')
-    }
-
-    set owns(owns) {
-        this.node.setAttribute('aria-owns', owns.map(node => node.id).join(' '));
-    }
-
-    get owns() {
-        const owns = this.node.getAttribute('aria-owns');
-        const handler = id => document.getElementById(id);
-        return owns? owns.split(' ').map(handler) : []
-    }
-
-    set relevant(relevant) {
-        this.node.setAttribute('aria-relevant', relevant);
-    }
-
-    get relevant() {
-        return this.node.getAttribute('aria-relevant')
-    }
-
-    set roleDescription(roleDescription) {
-        this.node.setAttribute('aria-roledescription', roleDescription);
-    }
-
-    get roleDescription() {
-        return this.node.getAttribute('aria-roledescription')
-    }
-}
-
-class Structure extends RoleType {}
-
-class Section extends Structure {
-
-    set expanded(expanded) {
-        this.node.setAttribute('aria-expanded', expanded);
-    }
-
-    get expanded() {
-        return this.node.getAttribute('aria-expanded')
-    }
-}
-
-class Cell extends Section {
-
-    set colIndex(colIndex) {
-        this.node.setAttribute('aria-colindex', colIndex);
-    }
-
-    get colIndex() {
-        return this.node.getAttribute('aria-colindex')
-    }
-
-    set colSpan(colSpan) {
-        this.node.setAttribute('aria-colspan', colSpan);
-    }
-
-    get colSpan() {
-        return this.node.getAttribute('aria-colspan')
-    }
-
-    set rowIndex(rowIndex) {
-        this.node.setAttribute('aria-rowIndex', rowIndex);
-    }
-
-    get rowIndex() {
-        return this.node.getAttribute('aria-rowIndex')
-    }
-
-    set rowSpan(rowSpan) {
-        this.node.setAttribute('aria-rowSpan', rowSpan);
-    }
-
-    get rowSpan() {
-        return this.node.getAttribute('aria-rowSpan')
-    }
-}
-
-class ColumnHeader extends Cell {
-    init(init) {
-        super.init({
-            role : 'columnheader',
-            className : 'columnheader',
-            scope : 'col'
-        });
-        if(init) super.init(init);
-    }
-}
-
-function columnheader(init) {
-    return new ColumnHeader('th', init)
-}
-
-class Table extends Section {
-
-    set colCount(colCount) {
-        this.node.setAttribute('aria-colcount', colCount);
-    }
-
-    get colCount() {
-        return this.node.getAttribute('aria-colcount')
-    }
-
-    set rowCount(rowCount) {
-        this.node.setAttribute('aria-rowcount', rowCount);
-    }
-
-    get rowCount() {
-        return this.node.getAttribute('aria-rowcount')
-    }
-}
-
-const { map: map$1, filter } = Array.prototype;
+const { map: map$$1, filter } = Array.prototype;
 
 class Grid extends Table {
 
@@ -2651,7 +3097,7 @@ class Grid extends Table {
 
     get cells() {
         const collection = this.node.querySelectorAll('td[role=gridcell]');
-        return map$1.call(collection, cell => cell.assembler)
+        return map$$1.call(collection, cell => cell.assembler)
     }
 
     /**
