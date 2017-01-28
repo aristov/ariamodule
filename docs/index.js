@@ -23,7 +23,7 @@ function timeformat(h, m) {
 
 const now = date.getTime()
 
-const testgrid = grid({
+grid({
     multiselectable : true,
     children : [
         rowGroup({
@@ -43,12 +43,10 @@ const testgrid = grid({
                 undefined,
             children : [
                 rowHeader(timeformat(r.getHours(), r.getMinutes())),
-                roomcolumns.map(() => gridCell({
-                    selected : false,
-                }))
+                roomcolumns.map(() => gridCell({ selected : false, }))
             ]
         })))
-    ]
+    ],
+    parentNode : document.body
 })
 
-document.body.append(testgrid.node)
