@@ -1,4 +1,4 @@
-import { columnheader, grid, gridcell, row, rowgroup, rowheader } from '../lib/index'
+import { columnHeader, grid, gridCell, row, rowGroup, rowHeader } from '../lib/index'
 
 const SECOND = 1000
 const MINUTE = 60 * SECOND
@@ -26,24 +26,24 @@ const now = date.getTime()
 const testgrid = grid({
     multiselectable : true,
     children : [
-        rowgroup({
+        rowGroup({
             tagName : 'thead',
             children : row([
-                columnheader(date.getDate() + '/' + (date.getMonth() + 1)),
-                roomcolumns.map(children => columnheader({
+                columnHeader(date.getDate() + '/' + (date.getMonth() + 1)),
+                roomcolumns.map(children => columnHeader({
                     style : { width : 95 / roomcolumns.length + '%' },
                     children,
                 }))
             ])
         }),
-        rowgroup(timerows.map(r => row({
+        rowGroup(timerows.map(r => row({
             dataset : { time : r.getTime() },
             current : r.getTime() < now && now < r.getTime() + step?
                 'time' :
                 undefined,
             children : [
-                rowheader(timeformat(r.getHours(), r.getMinutes())),
-                roomcolumns.map(() => gridcell({
+                rowHeader(timeformat(r.getHours(), r.getMinutes())),
+                roomcolumns.map(() => gridCell({
                     selected : false,
                 }))
             ]
