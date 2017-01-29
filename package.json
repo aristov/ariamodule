@@ -4,7 +4,7 @@
   "description": "WAI-ARIA DOM implementation",
   "main": "lib/index.js",
   "scripts": {
-    "start": "rollup -c -w"
+    "start": "webpack -w"
   },
   "repository": {
     "type": "git",
@@ -46,8 +46,6 @@
     "htmlmodule": "^0.4.3"
   },
   "devDependencies": {
-    "rollup": "^0.41.4",
-    "rollup-plugin-node-resolve": "^2.0.0",
-    "rollup-watch": "^3.2.2"
+    "webpack": "^2.2.0"
   }
 }
