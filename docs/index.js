@@ -25,6 +25,7 @@ const now = date.getTime()
 
 grid({
     multiselectable : true,
+    readOnly : true,
     children : [
         rowGroup({
             tagName : 'thead',
@@ -43,7 +44,7 @@ grid({
                 undefined,
             children : [
                 rowHeader(timeformat(r.getHours(), r.getMinutes())),
-                roomcolumns.map(() => gridCell({ selected : false, }))
+                roomcolumns.map(() => gridCell({ selected : false }))
             ]
         })))
     ],
