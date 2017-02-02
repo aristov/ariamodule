@@ -42,7 +42,7 @@
   },
   "homepage": "https://github.com/aristov/ariamodule#readme",
   "dependencies": {
-    "dommodule": "0.0.1",
+    "dommodule": "aristov/dommodule",
     "htmlmodule": "^0.4.3"
   },
   "devDependencies": {

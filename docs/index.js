@@ -25,7 +25,7 @@ const now = date.getTime()
 
 grid({
     multiselectable : true,
-    readOnly : true,
+    // readOnly : true,
     children : [
         rowGroup({
             tagName : 'thead',
