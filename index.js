@@ -1,1 +1,1 @@
-import './docs/index'
+import './tests/grid.test'
