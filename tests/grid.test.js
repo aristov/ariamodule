@@ -1,4 +1,4 @@
-import { grid, rowgroup, row, rowheader, columnheader, gridcell } from '../lib/index'
+import { grid, rowGroup, row, rowHeader, columnHeader, gridCell } from '../lib/index'
 
 const rows = Array.from(new Array(24))
 const ABC = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -7,16 +7,16 @@ const cells = ABC.split('')
 const testgrid = grid({
     multiselectable : true,
     children : [
-        rowgroup({
+        rowGroup({
             tagName : 'thead',
             children : row([
-                columnheader(),
-                cells.map(c => columnheader(c))
+                columnHeader(),
+                cells.map(c => columnHeader(c))
             ])
         }),
-        rowgroup(rows.map((r, j) => row([
-            rowheader(String(j)),
-            cells.map((c, i) => gridcell({
+        rowGroup(rows.map((r, j) => row([
+            rowHeader(String(j)),
+            cells.map((c, i) => gridCell({
                 disabled : i === 5 && j === 5,
                 selected : false,
                 style : { width : 95 / cells.length + '%' }
