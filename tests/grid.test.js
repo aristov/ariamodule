@@ -19,6 +19,7 @@ const testgrid = grid({
             cells.map((c, i) => gridCell({
                 disabled : i === 5 && j === 5,
                 selected : false,
+                // grabbed : false,
                 style : { width : 95 / cells.length + '%' }
             }))
         ])))
