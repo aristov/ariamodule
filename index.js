@@ -1,1 +1,1 @@
-import './tests/grid.test'
+import './tests/tree.test'

@@ -115,3 +115,28 @@ table.grid tbody tr.row td.gridcell[aria-disabled=true]
     cursor: default;
     color: #aaa;
 }
+
+/* ================================================================ */
+
+div.tree
+{
+    padding: 30px;
+    max-width: 300px;
+}
+div.tree div.treeitem
+{
+    cursor: default;
+    user-select: none;
+}
+div.tree div.treeitem[aria-expanded=false] > div.treeitem
+{
+    display: none;
+}
+div.tree div.treeitem > div.treeitem
+{
+    margin-left: 30px;
+}
+div.tree div.treeitem[aria-selected=true]
+{
+    background: rgba(255, 255, 187, 1);
+}
