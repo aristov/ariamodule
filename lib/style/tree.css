@@ -8,6 +8,7 @@
     cursor: default;
     user-select: none;
 }
+.tree .treeitem[aria-expanded=false] > .group,
 .tree .treeitem[aria-expanded=false] > .treeitem
 {
     display: none;

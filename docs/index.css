@@ -128,6 +128,11 @@ div.tree div.treeitem
     cursor: default;
     user-select: none;
 }
+div.tree div.treeitem[aria-expanded=false]::after
+{
+    content: ' ...';
+    font: 13px Arial;
+}
 div.tree div.treeitem[aria-expanded=false] > div.treeitem
 {
     display: none;
