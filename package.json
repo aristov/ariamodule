@@ -42,8 +42,8 @@
   },
   "homepage": "https://github.com/aristov/ariamodule#readme",
   "dependencies": {
-    "dommodule": "^0.4.4",
-    "htmlmodule": "^0.5.7"
+    "dommodule": "^0.4.6",
+    "htmlmodule": "^0.5.8"
   },
   "devDependencies": {
     "webpack": "^2.2.0"
