@@ -6,13 +6,18 @@ main({
     children : p([
         button({
             pressed : 'false',
-            errorMessage : 'errorspan',
+            labelledBy : 'label1,label2',
             children : 'Test button'
         }),
         span({
-            id : 'errorspan',
+            id : 'label1',
             style : { margin : '10px' },
-            children : 'Error!'
+            children : 'Label 1'
+        }),
+        span({
+            id : 'label2',
+            style : { margin : '10px' },
+            children : 'Label 2'
         })
     ])
 })
