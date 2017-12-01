@@ -1,6 +1,6 @@
 module.exports = {
-    entry: './index.js',
+    entry: './docs/index.js',
     output: {
-        filename: 'dist/build.index.js'
+        filename: './docs/build/build.index.js'
     }
 }
