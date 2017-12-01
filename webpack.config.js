@@ -1,6 +1,12 @@
+'use strict'
+
+const path = require('path')
+const buildPath = path.join(__dirname, 'docs/build')
+
 module.exports = {
     entry: './docs/index.js',
     output: {
-        filename: './docs/build/build.index.js'
+        path : buildPath,
+        filename: 'build.index.js'
     }
 }
