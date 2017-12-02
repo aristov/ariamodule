@@ -24,7 +24,7 @@ article({
             button({
                 pressed : 'true',
                 disabled : true,
-                children : 'Pressed disabled toggle button'
+                children : 'Pressed and disabled'
             })
         ])
     ]
