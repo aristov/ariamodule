@@ -2,7 +2,8 @@ body
 {
     font: 13px Arial;
 }
-[hidden]
+[hidden],
+[aria-hidden]
 {
     display: none !important;
 }
