@@ -1,6 +1,8 @@
 .backdrop
 {
-    display: table;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     position: fixed;
     top: 0;
     left: 0;
@@ -9,38 +11,34 @@
     background: rgba(0, 0, 0, 0.5);
     z-index: 1;
 }
-
 .backdrop > div
 {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
+    display: flex;
+    justify-content: center;
 }
-
-.dialog
-{
-    padding: 15px;
-}
-
-.dialog h3
-{
-    margin-top: 0;
-}
-
 .dialog
 {
     z-index: 2;
     box-sizing: border-box;
-    position: absolute;
     text-align: left;
     margin: 0;
+    padding: 15px;
+}
+.dialog:not([aria-modal=true])
+{
+    margin-top: 3px;
 }
 .dialog[aria-modal=true]
 {
     position: relative;
     display: inline-block;
 }
-
+.dialog .heading
+{
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 0 10px;
+}
 .dialog .closebutton
 {
     position: absolute;

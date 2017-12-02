@@ -1,5 +1,5 @@
-import { a, article, h1, h3, section } from 'htmlmodule'
-import { Button, Dialog, ModalDialog } from '../../lib/index'
+import { a, article, h1, section } from 'htmlmodule'
+import { Button, Dialog, Heading, ModalDialog } from '../../lib'
 
 class CancelButton extends Button {
     activate() {
@@ -12,38 +12,42 @@ article({
     parentNode : document.body,
     children : [
         h1(a('Dialog')),
-        section(new Button({
-            onclick : ({ target }) => {
-                const btn = Button.getInstance(target.attributes.role)
-                const dlg = btn.controls[0]
-                if(dlg) dlg.remove()
-                else {
-                    btn.after(new Dialog({
-                        trigger : btn,
+        section([
+            new Button({
+                onclick : ({ target }) => {
+                    const btn = Button.getInstance(target.attributes.role)
+                    const dlg = btn.controls[0]
+                    if(dlg) dlg.remove()
+                    else {
+                        btn.after(new Dialog({
+                            trigger : btn,
+                            children : [
+                                new Heading('Dialog title'),
+                                new Button('Ok'), ' ',
+                                new CancelButton('Cancel')
+                            ]
+                        }))
+                    }
+                },
+                expanded : 'false',
+                children : 'Simple dialog'
+            })
+        ]),
+        section([
+            new Button({
+                onclick : ({ target }) => {
+                    new ModalDialog({
+                        trigger : Button.getInstance(target.attributes.role),
                         children : [
-                            h3('Dialog title'),
+                            new Heading('Modal dialog title'),
                             new Button('Ok'), ' ',
                             new CancelButton('Cancel')
                         ]
-                    }))
-                }
-            },
-            expanded : 'false',
-            children : 'Simple dialog'
-        })),
-        section(new Button({
-            onclick : ({ target }) => {
-                new ModalDialog({
-                    trigger : Button.getInstance(target.attributes.role),
-                    children : [
-                        h3('Modal dialog title'),
-                        new Button('Ok'), ' ',
-                        new CancelButton('Cancel')
-                    ]
-                })
-            },
-            expanded : 'false',
-            children : 'Modal dialog'
-        }))
+                    })
+                },
+                expanded : 'false',
+                children : 'Modal dialog'
+            })
+        ])
     ]
 })
