@@ -36,6 +36,28 @@ article({
         section([
             new Button({
                 onclick : ({ target }) => {
+                    const btn = Button.getInstance(target.attributes.role)
+                    const dlg = btn.controls[0]
+                    if(dlg) dlg.remove()
+                    else {
+                        btn.after(new Dialog({
+                            trigger : btn,
+                            assertive : true,
+                            children : [
+                                new Heading('Dialog title'),
+                                new Button('Ok'), ' ',
+                                new CancelButton('Cancel')
+                            ]
+                        }))
+                    }
+                },
+                expanded : 'false',
+                children : 'Assertive dialog'
+            })
+        ]),
+        section([
+            new Button({
+                onclick : ({ target }) => {
                     new ModalDialog({
                         trigger : Button.getInstance(target.attributes.role),
                         children : [
@@ -47,6 +69,23 @@ article({
                 },
                 expanded : 'false',
                 children : 'Modal dialog'
+            })
+        ]),
+        section([
+            new Button({
+                onclick : ({ target }) => {
+                    new ModalDialog({
+                        trigger : Button.getInstance(target.attributes.role),
+                        assertive : true,
+                        children : [
+                            new Heading('Modal dialog title'),
+                            new Button('Ok'), ' ',
+                            new CancelButton('Cancel')
+                        ]
+                    })
+                },
+                expanded : 'false',
+                children : 'Assertive modal dialog'
             })
         ])
     ]

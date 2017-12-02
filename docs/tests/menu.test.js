@@ -12,7 +12,6 @@ article({
                     new MenuItem('Second menu item'),
                     new MenuItem('Third menu item')
                 ]),
-                expanded : 'false',
                 children : 'Simple menu'
             })
         ]),
@@ -32,7 +31,6 @@ article({
                         children : 'Third menu item'
                     })
                 ]),
-                expanded : 'false',
                 children : 'Menu item links'
             })
         ])
