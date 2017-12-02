@@ -1,5 +1,13 @@
 import { a, article, h1, h3, section } from 'htmlmodule'
-import { button, dialog } from '../../lib/index'
+import { Button, Dialog, button, dialog } from '../../lib/index'
+
+class CancelButton extends Button {
+    activate() {
+        const dialog = this.closest(Dialog)
+        // console.log(dialog)
+        if(dialog) dialog.cancel()
+    }
+}
 
 const $button = button({
     onclick : () => {
@@ -9,13 +17,12 @@ const $button = button({
             const _dialog = dialog({
                 // parentNode : _button.parentNode,
                 trigger : $button,
-                assertive : true,
                 children : [
                     h3('Dialog title'),
-                    button('Close')
+                    new CancelButton('Cancel')
                 ]
             })
-            $button.ownerElement.node.after(_dialog.ownerElement.node)
+            $button.after(_dialog)
         }
     },
     children : 'Simple dialog'
