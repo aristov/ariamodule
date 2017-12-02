@@ -35,6 +35,11 @@
     text-align: left;
     margin: 0;
 }
+.dialog[aria-modal=true]
+{
+    position: relative;
+    display: inline-block;
+}
 
 .dialog .closebutton
 {
