@@ -4,7 +4,7 @@ import { MenuButton, Menu, MenuItem, MenuItemLink } from '../../lib'
 article({
     parentNode : document.body,
     children : [
-        h1(a('Menu')),
+        h1(a('Menu button')),
         section([
             new MenuButton({
                 menu : new Menu([

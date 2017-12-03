@@ -22,3 +22,30 @@ article({
         ])
     ]
 })
+
+article({
+    parentNode : document.body,
+    children : [
+        h1(a('Text area')),
+        section([
+            new Textbox({
+                label : 'Simple',
+                multiline : true
+            })
+        ]),
+        section([
+            new Textbox({
+                label : 'Has placeholder',
+                placeholder : 'Hint',
+                multiline : true
+            })
+        ]),
+        section([
+            new Textbox({
+                label : 'Disabled',
+                disabled : true,
+                multiline : true
+            })
+        ])
+    ]
+})
