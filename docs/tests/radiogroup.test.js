@@ -1,48 +1,48 @@
 import { a, article, h1, section } from 'htmlmodule'
-import { radioGroup, radio } from '../../lib'
+import { RadioGroup, Radio } from '../../lib'
 
 article({
     parentNode : document.body,
     children : [
         h1(a('Radio group')),
         section([
-            radioGroup({
+            new RadioGroup({
                 label : 'Simple',
                 children : [
-                    radio({ value : '1', children : 'First' }),
-                    radio({ value : '2', children : 'Second' }),
-                    radio({ value : '3', children : 'Third' })
+                    new Radio({ value : '1', children : 'First' }),
+                    new Radio({ value : '2', children : 'Second' }),
+                    new Radio({ value : '3', children : 'Third' })
                 ]
             })
         ]),
         section([
-            radioGroup({
+            new RadioGroup({
                 label : 'Checked',
                 children : [
-                    radio({ value : '1', children : 'First' }),
-                    radio({
+                    new Radio({ value : '1', children : 'First' }),
+                    new Radio({
                         value : '2',
                         checked : 'true',
                         children : 'Second'
                     }),
-                    radio({ value : '3', children : 'Third' })
+                    new Radio({ value : '3', children : 'Third' })
                 ]
             })
         ]),
         section([
-            radioGroup({
+            new RadioGroup({
                 label : 'Single disabled',
                 children : [
-                    radio({
+                    new Radio({
                         value : '1',
                         disabled: true,
                         children : 'First'
                     }),
-                    radio({
+                    new Radio({
                         value : '2',
                         children : 'Second'
                     }),
-                    radio({
+                    new Radio({
                         value : '3',
                         children : 'Third'
                     })
@@ -50,20 +50,20 @@ article({
             })
         ]),
         section([
-            radioGroup({
+            new RadioGroup({
                 label : 'Checked and single disabled',
                 children : [
-                    radio({
+                    new Radio({
                         value : '1',
                         checked : true,
                         children : 'First'
                     }),
-                    radio({
+                    new Radio({
                         value : '2',
                         disabled: true,
                         children : 'Second'
                     }),
-                    radio({
+                    new Radio({
                         value : '3',
                         children : 'Third'
                     })
@@ -71,13 +71,13 @@ article({
             })
         ]),
         section([
-            radioGroup({
+            new RadioGroup({
                 label : 'Group disabled',
                 disabled : true,
                 children : [
-                    radio({ value : '1', children : 'First' }),
-                    radio({ value : '2', children : 'Second' }),
-                    radio({
+                    new Radio({ value : '1', children : 'First' }),
+                    new Radio({ value : '2', children : 'Second' }),
+                    new Radio({
                         value : '3',
                         checked : 'true',
                         children : 'Third'

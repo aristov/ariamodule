@@ -1,18 +1,18 @@
 import { a, article, h1, section } from 'htmlmodule'
-import { link } from '../../lib/index'
+import { Link } from '../../lib/index'
 
 article({
     parentNode : document.body,
     children : [
         h1(a('Link')),
         section([
-            link({
+            new Link({
                 href : '//yandex.ru',
                 children : 'Simple'
             })
         ]),
         section([
-            link({
+            new Link({
                 href : '//google.ru',
                 rel : 'external',
                 children : 'External'

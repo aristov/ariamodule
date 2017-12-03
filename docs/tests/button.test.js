@@ -1,27 +1,27 @@
 import { a, article, h1, section } from 'htmlmodule'
-import { button } from '../../lib/index'
+import { Button } from '../../lib/index'
 
 article({
     parentNode : document.body,
     children : [
         h1(a('Button')),
         section([
-            button('Simple')
+            new Button('Simple')
         ]),
         section([
-            button({
+            new Button({
                 pressed : 'true',
                 children : 'Pressed toggle button'
             })
         ]),
         section([
-            button({
+            new Button({
                 disabled : true,
                 children : 'Disabled'
             })
         ]),
         section([
-            button({
+            new Button({
                 pressed : 'true',
                 disabled : true,
                 children : 'Pressed and disabled'
