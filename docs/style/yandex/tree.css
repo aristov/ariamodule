@@ -51,12 +51,13 @@
 {
     display: none;
 }
-.treeitem .label
+.treeitem[aria-label]::before
 {
+    content: attr(aria-label);
     display: block;
     padding: 3px 2px;
 }
-.treeitem[aria-selected=true] > .label
+.treeitem[aria-selected=true][aria-label]::before
 {
     background: #ffeba0;
 }
@@ -70,7 +71,7 @@
     left: 5px;
     background: white;
 }
-.treeitem .label
+.treeitem[aria-label]::before
 {
     padding: 3px 23px;
 }
