@@ -79,3 +79,8 @@
 {
     border-color: transparent;
 }
+
+.grid .rowheader
+{
+    padding: 0 5px;
+}
