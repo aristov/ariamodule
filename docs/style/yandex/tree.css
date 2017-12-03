@@ -2,7 +2,7 @@
 {
     display: inline-block;
     padding-left: 20px;
-    -moz-user-select: none;
+    user-select: none;
 }
 .tree .group
 {
@@ -51,13 +51,12 @@
 {
     display: none;
 }
-.treeitem[aria-label]::before
+.treeitem .label
 {
-    content: attr(aria-label);
     display: block;
     padding: 3px 2px;
 }
-.treeitem[aria-selected=true][aria-label]::before
+.treeitem[aria-selected=true] > .label
 {
     background: #ffeba0;
 }
@@ -71,7 +70,7 @@
     left: 5px;
     background: white;
 }
-.treeitem[aria-label]::before
+.treeitem .label
 {
     padding: 3px 23px;
 }
