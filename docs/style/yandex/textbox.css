@@ -3,7 +3,7 @@
     display: inline-block;
     position: relative;
 }
-.textbox > .box
+.textbox input.box
 {
     background: #fff;
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -13,35 +13,37 @@
     box-sizing: border-box;
     width: 180px;
 }
-.textbox:hover > .box
+.textbox:hover input.box
 {
     border-color: rgba(0, 0, 0, 0.3);
 }
-.textbox > .box:focus,
-.textbox.focus > .box
+.textbox input.box:focus,
+.textbox.focus input.box
 {
     border-color: #ffdb4d;
     box-shadow: inset 0 0 0 1px #ffdb4d;
 }
 .textbox.disabled,
-.textbox > .box:disabled
+.textbox input.box:disabled
 {
     cursor: default;
     color: rgba(0, 0, 0, 0.5);
 }
-.textbox > .box:disabled
+.textbox input.box:disabled
 {
     background: rgba(0, 0, 0, 0.08);
     border-color: transparent;
 }
-.textbox[aria-label]::before
+.textbox > label
 {
-    content: attr(aria-label);
     display: block;
     margin-bottom: 5px;
     cursor: default;
 }
-.textbox.hasclear > .box
+
+/*================================================================*/
+
+.textbox.hasclear input.box
 {
     padding-right: 26px;
 }
