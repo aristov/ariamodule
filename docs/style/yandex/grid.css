@@ -23,7 +23,7 @@
     text-align: center;
     cursor: default;
 }
-.grid .gridcell input
+/*.grid .gridcell input
 {
     font: inherit;
     border: none;
@@ -31,6 +31,27 @@
     width: 100%;
     text-align: inherit;
     outline: none;
+}*/
+.grid .gridcell textarea
+{
+    font: inherit;
+    color: inherit;
+    text-align: inherit;
+    background: transparent;
+    border: none;
+    position: absolute;
+    padding: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    resize: none;
+    outline: none;
+}
+.grid .gridcell textarea:not([hidden])
+{
+    display: inline-block;
 }
 .grid .gridcell::before
 {
@@ -63,7 +84,7 @@
 {
     display: block;
     box-shadow: 0 0 0 1px #ffdb4d;
-    background: rgba(255, 235, 160, 0.05);
+    background: rgba(255, 235, 160, 0.8);
 }
 .grid[aria-disabled=true],
 .grid .gridcell[aria-disabled=true]
@@ -83,4 +104,22 @@
 .grid .rowheader
 {
     padding: 0 5px;
+}
+
+.grid .gridcell[aria-dropeffect=move][aria-grabbed=false]:focus
+{
+    cursor: -webkit-grab;
+}
+.grid .gridcell[aria-grabbed=true]:focus:not([aria-readonly=true])
+{
+    cursor: -webkit-grabbing;
+}
+.grid.grabbed .gridcell
+{
+    cursor: -webkit-grabbing;
+}
+.grid.grabbed,
+.grid .gridcell[aria-dropeffect=none]
+{
+    cursor: not-allowed;
 }
