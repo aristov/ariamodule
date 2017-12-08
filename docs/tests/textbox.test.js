@@ -1,5 +1,5 @@
 import { a, article, h1, section } from 'htmlmodule'
-import { Textbox } from '../../lib/index'
+import { Textbox, MultiTextbox } from '../../lib'
 
 article({
     parentNode : document.body,
@@ -26,22 +26,22 @@ article({
 article({
     parentNode : document.body,
     children : [
-        h1(a('Text area')),
+        h1(a('Multi textbox')),
         section([
-            new Textbox({
+            new MultiTextbox({
                 label : 'Simple',
                 multiline : true
             })
         ]),
         section([
-            new Textbox({
+            new MultiTextbox({
                 label : 'Has placeholder',
                 placeholder : 'Hint',
                 multiline : true
             })
         ]),
         section([
-            new Textbox({
+            new MultiTextbox({
                 label : 'Disabled',
                 disabled : true,
                 multiline : true
