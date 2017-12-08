@@ -2,6 +2,7 @@ import { a, article, h1, section } from 'htmlmodule'
 import {
     Grid,
     RowGroup,
+    HeadRowGroup,
     Row,
     GridCell,
     GridCellInput,
@@ -15,9 +16,9 @@ article({
         h1(a('Grid')),
         section([
             new Grid({
-                // label : 'Simple',
-                children : [
-                    new RowGroup(new Row([
+                label : 'Simple',
+                content : [
+                    new HeadRowGroup(new Row([
                         new RowHeader,
                         new ColumnHeader('One'),
                         new ColumnHeader('Two'),
@@ -36,10 +37,10 @@ article({
         ]),
         section([
             new Grid({
-                // label : 'Simple',
+                label : 'Multiselectable',
                 multiselectable : true,
-                children : [
-                    new RowGroup(new Row([
+                content : [
+                    new HeadRowGroup(new Row([
                         new RowHeader,
                         new ColumnHeader('One'),
                         new ColumnHeader('Two'),
@@ -56,12 +57,18 @@ article({
                 ]
             })
         ]),
+    ]
+})
+article({
+    parentNode : document.body,
+    children : [
+        h1(a('Data grid')),
         section([
             new Grid({
-                // label : 'Simple',
+                label : 'Multiselectable',
                 multiselectable : true,
-                children : [
-                    new RowGroup(new Row([
+                content : [
+                    new HeadRowGroup(new Row([
                         new RowHeader,
                         new ColumnHeader('One'),
                         new ColumnHeader('Two'),
@@ -80,10 +87,10 @@ article({
         ]),
         section([
             new Grid({
-                // label : 'Simple',
+                label : 'Draggable cells',
                 multiselectable : true,
-                children : [
-                    new RowGroup(new Row([
+                content : [
+                    new HeadRowGroup(new Row([
                         new RowHeader,
                         new ColumnHeader('One'),
                         new ColumnHeader('Two'),
