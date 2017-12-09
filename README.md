@@ -7,14 +7,14 @@ _work in progress_
 ## Installation
 
 ```
-npm install dommodule
+npm install ariamodule
 ```
 
 ## Development
 
 ```
-git clone git@github.com:aristov/dommodule.git
-cd dommodule
+git clone git@github.com:aristov/ariamodule.git
+cd ariamodule
 npm install
 npm run webpack
 ```
