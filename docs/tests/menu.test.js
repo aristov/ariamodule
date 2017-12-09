@@ -1,5 +1,21 @@
 import { a, article, h1, section } from 'htmlmodule'
-import { MenuButton, Menu, MenuItem, MenuItemLink } from '../../lib'
+import {
+    Button,
+    Dialog,
+    Heading,
+    Menu,
+    MenuButton,
+    MenuItem,
+    MenuItemLink,
+    ModalDialog,
+} from '../../lib'
+
+class CancelButton extends Button {
+    activate() {
+        const dialog = this.closest(Dialog)
+        if(dialog) dialog.cancel()
+    }
+}
 
 article({
     parentNode : document.body,
@@ -8,30 +24,26 @@ article({
         section([
             new MenuButton({
                 menu : new Menu([
-                    new MenuItem('First menu item'),
-                    new MenuItem('Second menu item'),
-                    new MenuItem('Third menu item')
-                ]),
-                children : 'Simple menu'
-            })
-        ]),
-        section([
-            new MenuButton({
-                menu : new Menu([
+                    new MenuItem('Simple menu item'),
                     new MenuItemLink({
                         href : '//yandex.ru',
-                        children : 'First menu item'
+                        children : 'Menu item link'
                     }),
-                    new MenuItemLink({
-                        href : '//google.com',
-                        children : 'Second menu item'
+                    new MenuItem({
+                        onclick : ({ target }) => {
+                            new ModalDialog({
+                                trigger : MenuItem.getInstance(target.attributes.role),
+                                children : [
+                                    new Heading('Modal dialog title'),
+                                    new Button('Ok'), ' ',
+                                    new CancelButton('Cancel')
+                                ]
+                            })
+                        },
+                        children : 'Menu item dialog'
                     }),
-                    new MenuItemLink({
-                        href : '//microsoft.com',
-                        children : 'Third menu item'
-                    })
                 ]),
-                children : 'Menu item links'
+                children : 'Simple menu'
             })
         ])
     ]
