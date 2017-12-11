@@ -1,5 +1,5 @@
 import { a, article, h1, section } from 'htmlmodule'
-import { Button, Dialog, Heading, ModalDialog } from '../../lib'
+import { Button, Dialog, Heading, AlertDialog } from '../../lib'
 
 class CancelButton extends Button {
     activate() {
@@ -58,7 +58,7 @@ article({
         section([
             new Button({
                 onclick : ({ target }) => {
-                    new ModalDialog({
+                    new AlertDialog({
                         trigger : Button.getInstance(target.attributes.role),
                         children : [
                             new Heading('Modal dialog title'),
@@ -74,7 +74,7 @@ article({
         section([
             new Button({
                 onclick : ({ target }) => {
-                    new ModalDialog({
+                    new AlertDialog({
                         trigger : Button.getInstance(target.attributes.role),
                         assertive : true,
                         children : [

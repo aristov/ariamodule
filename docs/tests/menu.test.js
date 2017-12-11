@@ -7,7 +7,7 @@ import {
     MenuButton,
     MenuItem,
     MenuItemLink,
-    ModalDialog,
+    AlertDialog,
 } from '../../lib'
 
 class CancelButton extends Button {
@@ -31,7 +31,7 @@ article({
                     }),
                     new MenuItem({
                         onclick : ({ target }) => {
-                            new ModalDialog({
+                            new AlertDialog({
                                 trigger : MenuItem.getInstance(target.attributes.role),
                                 children : [
                                     new Heading('Modal dialog title'),
