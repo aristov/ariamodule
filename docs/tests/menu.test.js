@@ -24,7 +24,7 @@ article({
         section([
             new MenuButton({
                 menu : new Menu([
-                    new MenuItem('Simple menu item'),
+                    new MenuItem('Menu item'),
                     new MenuItemLink({
                         href : '//yandex.ru',
                         children : 'Menu item link'
