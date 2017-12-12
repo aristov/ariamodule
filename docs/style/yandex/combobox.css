@@ -67,10 +67,3 @@
 {
     border-color: red;
 }
-.combobox[aria-label]::before
-{
-    content: attr(aria-label);
-    display: block;
-    margin-bottom: 5px;
-    cursor: default;
-}
