@@ -1,0 +1,76 @@
+.combobox
+{
+    display: inline-block;
+    position: relative;
+}
+.combobox .inlineblock
+{
+    position: relative;
+}
+.combobox .textbox .input
+{
+    border-right: none;
+}
+.combobox .textbox.focus + .button
+{
+    border-left-color: #ffdb4d;
+}
+.combobox .textbox:hover:not(.focus) + .button:not(:focus)
+{
+    border-left-color: rgba(0, 0, 0, 0.3);
+}
+.combobox .button
+{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    position: relative;
+}
+.combobox .button::before
+{
+    content: url(./images/arrow-down.svg);
+    position: absolute;
+    left: 8px;
+    top: 4px;
+    transition: transform 0.1s ease-out 0s;
+}
+.combobox .listbox
+{
+    position: absolute;
+    display: block;
+    min-width: 100%;
+    margin-top: 3px;
+}
+.combobox .listbox .box
+{
+    border: none;
+    box-shadow: none;
+    max-height: 296px;
+}
+.combobox:not([aria-expanded=true]) .listbox
+{
+    display: none;
+}
+.combobox[aria-expanded=true] .button::before
+{
+    transform: rotate(-180deg) translateY(-2px);
+}
+.combobox input[readonly]
+{
+    cursor: default;
+    -webkit-user-select: none;
+}
+.combobox[aria-invalid=true] .textbox .input
+{
+    border-color: red;
+}
+.combobox[aria-invalid=true] .textbox + .button
+{
+    border-color: red;
+}
+.combobox[aria-label]::before
+{
+    content: attr(aria-label);
+    display: block;
+    margin-bottom: 5px;
+    cursor: default;
+}

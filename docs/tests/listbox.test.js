@@ -8,7 +8,7 @@ article({
         section([
             new Listbox({
                 label : 'Simple',
-                children : [
+                options : [
                     new Option({ value : '1', children : 'First option' }),
                     new Option({ value : '2', children : 'Second option' }),
                     new Option({ value : '3', children : 'Third option' })
@@ -19,7 +19,7 @@ article({
             new Listbox({
                 label : 'Multiselectable',
                 multiselectable : true,
-                children : [
+                options : [
                     new Option({ value : '1', children : 'First option' }),
                     new Option({ value : '2', children : 'Second option' }),
                     new Option({ value : '3', children : 'Third option' })
@@ -30,7 +30,7 @@ article({
             new Listbox({
                 label : 'Disabled',
                 disabled : true,
-                children : [
+                options : [
                     new Option({ value : '1', children : 'First option' }),
                     new Option({ value : '2', children : 'Second option' }),
                     new Option({ value : '3', children : 'Third option' })
@@ -47,7 +47,7 @@ article({
         section([
             new Listbox({
                 label : 'Simple',
-                children : [
+                options : [
                     new Option({
                         value : '1',
                         checked : 'false',
@@ -70,7 +70,7 @@ article({
             new Listbox({
                 label : 'Multiselectable',
                 multiselectable : true,
-                children : [
+                options : [
                     new Option({
                         value : '1',
                         checked : 'false',
