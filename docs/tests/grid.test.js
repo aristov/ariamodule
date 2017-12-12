@@ -5,7 +5,7 @@ import {
     HeadRowGroup,
     Row,
     GridCell,
-    GridCellInput,
+    DataCell,
     ColumnHeader,
     RowHeader
 } from '../../lib'
@@ -24,12 +24,12 @@ article({
                         new ColumnHeader('Two'),
                         new ColumnHeader('Three')
                     ])),
-                    new RowGroup(['A', 'B', 'C'].map(value => {
+                    new RowGroup(['A', 'B', 'C'].map(header => {
                         return new Row([
-                            new RowHeader(value),
-                            new GridCell(),
-                            new GridCell(),
-                            new GridCell()
+                            new RowHeader(header),
+                            new GridCell,
+                            new GridCell,
+                            new GridCell
                         ])
                     }))
                 ]
@@ -46,9 +46,9 @@ article({
                         new ColumnHeader('Two'),
                         new ColumnHeader('Three')
                     ])),
-                    new RowGroup(['A', 'B', 'C'].map(value => {
+                    new RowGroup(['A', 'B', 'C'].map(header => {
                         return new Row([
-                            new RowHeader(value),
+                            new RowHeader(header),
                             new GridCell({ selected : 'false' }),
                             new GridCell({ selected : 'false' }),
                             new GridCell({ selected : 'false' })
@@ -74,12 +74,12 @@ article({
                         new ColumnHeader('Two'),
                         new ColumnHeader('Three')
                     ])),
-                    new RowGroup(['A', 'B', 'C'].map(value => {
+                    new RowGroup(['A', 'B', 'C'].map(header => {
                         return new Row([
-                            new RowHeader(value),
-                            new GridCellInput({ selected : 'false' }),
-                            new GridCellInput({ selected : 'false' }),
-                            new GridCellInput({ selected : 'false' })
+                            new RowHeader(header),
+                            new DataCell({ selected : 'false' }),
+                            new DataCell({ selected : 'false', grabbed : 'false', value : 'fuck' }),
+                            new DataCell({ selected : 'false' })
                         ])
                     }))
                 ]
@@ -96,13 +96,14 @@ article({
                         new ColumnHeader('Two'),
                         new ColumnHeader('Three')
                     ])),
-                    new RowGroup(['A', 'B', 'C'].map(value => {
+                    new RowGroup(['A', 'B', 'C'].map(header => {
                         return new Row([
-                            new RowHeader(value),
-                            [1, 2, 3].map(() => {
-                                return new GridCellInput({
+                            new RowHeader(header),
+                            [1, 2, 3].map((i) => {
+                                return new DataCell({
                                     grabbed : 'false',
-                                    selected : 'false'
+                                    selected : 'false',
+                                    value : i === 2? 'fuck' : undefined
                                 })
                             })
                         ])
