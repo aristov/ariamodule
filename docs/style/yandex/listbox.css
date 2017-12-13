@@ -29,7 +29,7 @@
 {
     padding: 0 30px;
 }
-.listbox:not([aria-disabled=true]) .option:hover/*:not([aria-selected])*/
+.listbox:not([aria-disabled=true]) .option:hover
 {
     background: rgba(0, 0, 0, 0.01);
 }
@@ -57,14 +57,8 @@
     box-shadow: 0 0 0 1px #ffdb4d;
 }
 
-/* option selected */
-/*.listbox:not([aria-disabled=true]) .option[aria-selected=true]:not([aria-checked])
-{
-    background: rgba(0, 0, 0, 0.1);
-}*/
-
 .listbox:focus span[role=option].option[aria-selected=true],
-.listbox:not([aria-disabled=true]) .option[aria-selected=true]:not([aria-checked])
+.listbox:not([aria-disabled=true]) .option[aria-selected=true]
 {
     background: #ffeba0;
 }

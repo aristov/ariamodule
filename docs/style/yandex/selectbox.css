@@ -42,6 +42,7 @@
 }
 .selectbox .listbox
 {
+    min-width: 150px;
     display: block;
 }
 .selectbox .listbox .box
@@ -52,7 +53,7 @@
 {
     transform: rotate(-180deg) translateY(-2px);
 }
-.selectbox[aria-expanded=false] .listbox
+.selectbox:not([aria-expanded=true]) .listbox
 {
     display: none;
 }
