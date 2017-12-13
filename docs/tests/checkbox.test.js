@@ -6,25 +6,25 @@ article({
     children : [
         h1(a('Checkbox')),
         section([
-            new Checkbox('Simple')
+            new Checkbox({ label : 'Simple' })
         ]),
         section([
             new Checkbox({
-                checked : 'true',
-                children : 'Checked'
+                label : 'Checked',
+                checked : 'true'
             })
         ]),
         section([
             new Checkbox({
-                disabled : true,
-                children : 'Disabled'
+                label : 'Disabled',
+                disabled : true
             })
         ]),
         section([
             new Checkbox({
+                label : 'Checked and disabled',
                 checked : 'true',
-                disabled : true,
-                children : 'Checked and disabled'
+                disabled : true
             })
         ])
     ]
