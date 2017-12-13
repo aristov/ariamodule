@@ -33,9 +33,8 @@
 {
     opacity: 0.2;
 }
-.selectbox[aria-label]::before
+.selectbox label
 {
-    content: attr(aria-label);
     display: block;
     margin-bottom: 5px;
     cursor: default;
