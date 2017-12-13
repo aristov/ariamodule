@@ -78,7 +78,7 @@ article({
                         return new Row([
                             new RowHeader(header),
                             new DataCell({ selected : 'false' }),
-                            new DataCell({ selected : 'false', grabbed : 'false', value : 'fuck' }),
+                            new DataCell({ selected : 'false' }),
                             new DataCell({ selected : 'false' })
                         ])
                     }))
@@ -99,11 +99,10 @@ article({
                     new RowGroup(['A', 'B', 'C'].map(header => {
                         return new Row([
                             new RowHeader(header),
-                            [1, 2, 3].map((i) => {
+                            [1, 2, 3].map(() => {
                                 return new DataCell({
                                     grabbed : 'false',
-                                    selected : 'false',
-                                    value : i === 2? 'fuck' : undefined
+                                    selected : 'false'
                                 })
                             })
                         ])
