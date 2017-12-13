@@ -10,20 +10,39 @@ article({
                 label : 'Simple',
                 options : [
                     new Option({
-                        // checked : 'false',
                         value : '1',
                         children : 'First option'
                     }),
                     new Option({
-                        // checked : 'false',
                         value : '2',
                         children : 'Second option'
                     }),
                     new Option({
-                        // checked : 'false',
                         value : '3',
                         children : 'Third option'
+                    })
+                ]
+            })
+        ]),
+        section([
+            new Selectbox({
+                label : 'Checkable',
+                options : [
+                    new Option({
+                        checked : 'false',
+                        value : '1',
+                        children : 'First option'
                     }),
+                    new Option({
+                        checked : 'false',
+                        value : '2',
+                        children : 'Second option'
+                    }),
+                    new Option({
+                        checked : 'false',
+                        value : '3',
+                        children : 'Third option'
+                    })
                 ]
             })
         ])
