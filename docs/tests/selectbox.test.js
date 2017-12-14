@@ -8,6 +8,7 @@ article({
         section([
             new Selectbox({
                 label : 'Simple',
+                name : 'selectbox-simple',
                 options : [
                     new Option({
                         value : '1',
@@ -27,6 +28,7 @@ article({
         section([
             new Selectbox({
                 label : 'Multiselectable',
+                name : 'selectbox-multiselectable',
                 multiselectable : true,
                 options : [
                     new Option({
@@ -43,10 +45,17 @@ article({
                     })
                 ]
             })
-        ]),
+        ])
+    ]
+})
+article({
+    parentNode : document.body,
+    children : [
+        h1(a('Check selectbox')),
         section([
             new Selectbox({
-                label : 'Checkable',
+                label : 'Simple',
+                name : 'check-selectbox-simple',
                 options : [
                     new Option({
                         checked : 'false',
@@ -68,7 +77,8 @@ article({
         ]),
         section([
             new Selectbox({
-                label : 'Checkable multiselectable',
+                label : 'Multiselectable',
+                name : 'check-selectbox-multiselectable',
                 multiselectable : true,
                 options : [
                     new Option({
