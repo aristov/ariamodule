@@ -6,17 +6,22 @@ article({
     children : [
         h1(a('Textbox')),
         section([
-            new Textbox({ label : 'Simple' })
+            new Textbox({
+                label : 'Simple',
+                name : 'textbox-simple'
+            })
         ]),
         section([
             new Textbox({
                 label : 'Has placeholder',
+                name : 'textbox-placeholder',
                 placeholder : 'Hint'
             })
         ]),
         section([
             new Textbox({
                 label : 'Disabled',
+                name : 'textbox-disabled',
                 disabled : true
             })
         ])
@@ -30,12 +35,14 @@ article({
         section([
             new MultiTextbox({
                 label : 'Simple',
+                name : 'textbox-multiline',
                 multiline : true
             })
         ]),
         section([
             new MultiTextbox({
                 label : 'Has placeholder',
+                name : 'textbox-multiline-placeholder',
                 placeholder : 'Hint',
                 multiline : true
             })
@@ -43,6 +50,7 @@ article({
         section([
             new MultiTextbox({
                 label : 'Disabled',
+                name : 'textbox-multiline-disabled',
                 disabled : true,
                 multiline : true
             })
