@@ -22,6 +22,9 @@ h1 a:not(:hover)
 .selectbox .button
 {
     min-width: 130px;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .tabpanel
 {
