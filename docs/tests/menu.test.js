@@ -1,4 +1,4 @@
-import { a, article, h1, section } from 'htmlmodule'
+import { a, article, h1, p, section } from 'htmlmodule'
 import {
     Button,
     Dialog,
@@ -34,7 +34,8 @@ article({
                             new AlertDialog({
                                 trigger : MenuItem.getInstance(target.attributes.role),
                                 children : [
-                                    new Heading('Modal dialog title'),
+                                    new Heading('Dialog from menu'),
+                                    p('This dialog demonstrates how to create a dialog from a popup menu.'),
                                     new Button('Ok'), ' ',
                                     new CancelButton('Cancel')
                                 ]
