@@ -8,6 +8,7 @@ article({
         section([
             new Listbox({
                 label : 'Simple',
+                name : 'listbox-simple',
                 options : [
                     new Option({ value : '1', children : 'First option' }),
                     new Option({ value : '2', children : 'Second option' }),
@@ -18,6 +19,7 @@ article({
         section([
             new Listbox({
                 label : 'Multiselectable',
+                name : 'listbox-multiselectable',
                 multiselectable : true,
                 options : [
                     new Option({ value : '1', children : 'First option' }),
@@ -47,6 +49,7 @@ article({
         section([
             new Listbox({
                 label : 'Simple',
+                name : 'check-listbox-simple',
                 options : [
                     new Option({
                         value : '1',
@@ -69,6 +72,7 @@ article({
         section([
             new Listbox({
                 label : 'Multiselectable',
+                name : 'check-listbox-multiselectable',
                 multiselectable : true,
                 options : [
                     new Option({
