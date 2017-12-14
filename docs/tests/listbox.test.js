@@ -26,7 +26,7 @@ article({
                 ]
             })
         ]),
-        section([
+        /*section([
             new Listbox({
                 label : 'Disabled',
                 disabled : true,
@@ -36,7 +36,7 @@ article({
                     new Option({ value : '3', children : 'Third option' })
                 ]
             })
-        ])
+        ])*/
     ]
 })
 
