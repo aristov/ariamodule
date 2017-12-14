@@ -58,3 +58,11 @@
 {
     border-color: transparent;
 }
+.dialog
+{
+    max-width: 300px;
+}
+.dialog p
+{
+    color: rgba(0, 0, 0, 0.8);
+}

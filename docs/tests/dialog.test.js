@@ -1,4 +1,4 @@
-import { a, article, h1, section } from 'htmlmodule'
+import { a, article, h1, kbd, p, section } from 'htmlmodule'
 import { Button, Dialog, Heading, AlertDialog } from '../../lib'
 
 class CancelButton extends Button {
@@ -22,7 +22,9 @@ article({
                         btn.after(new Dialog({
                             trigger : btn,
                             children : [
-                                new Heading('Dialog title'),
+                                new Heading('Dialog'),
+                                p('This is a simple dialog.'),
+                                p(['It closes on the ', kbd('Escape'), ' key press or an outside click.']),
                                 new Button('Ok'), ' ',
                                 new CancelButton('Cancel')
                             ]
@@ -44,7 +46,9 @@ article({
                             trigger : btn,
                             assertive : true,
                             children : [
-                                new Heading('Dialog title'),
+                                new Heading('Assertive dialog'),
+                                p('This dialog is assertive.'),
+                                p(['It doesn\'t close on the ', kbd('Escape'), ' key press or an outside click.']),
                                 new Button('Ok'), ' ',
                                 new CancelButton('Cancel')
                             ]
@@ -61,14 +65,16 @@ article({
                     new AlertDialog({
                         trigger : Button.getInstance(target.attributes.role),
                         children : [
-                            new Heading('Modal dialog title'),
+                            new Heading('Alert dialog'),
+                            p('This is a simple alert dialog.'),
+                            p(['It is modal, but it closes on the ', kbd('Escape'), ' key press or an outside click.']),
                             new Button('Ok'), ' ',
                             new CancelButton('Cancel')
                         ]
                     })
                 },
                 expanded : 'false',
-                children : 'Modal dialog'
+                children : 'Alert dialog'
             })
         ]),
         section([
@@ -78,14 +84,16 @@ article({
                         trigger : Button.getInstance(target.attributes.role),
                         assertive : true,
                         children : [
-                            new Heading('Modal dialog title'),
+                            new Heading('Assertive alert dialog'),
+                            p('This modal dialog is assertive.'),
+                            p(['It doesn\'t close on the ', kbd('Escape'), ' key press or an outside click.']),
                             new Button('Ok'), ' ',
                             new CancelButton('Cancel')
                         ]
                     })
                 },
                 expanded : 'false',
-                children : 'Assertive modal dialog'
+                children : 'Assertive alert dialog'
             })
         ])
     ]
