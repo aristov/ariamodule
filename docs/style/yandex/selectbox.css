@@ -33,7 +33,7 @@
 {
     opacity: 0.2;
 }
-.selectbox label
+.selectbox > label
 {
     display: block;
     margin-bottom: 5px;

@@ -31,9 +31,8 @@
 {
     margin-right: 10px;
 }
-.radiogroup[aria-label]::before
+.radiogroup > label
 {
-    content: attr(aria-label);
     display: block;
     margin-bottom: 5px;
     cursor: default;

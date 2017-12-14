@@ -95,9 +95,8 @@
 {
     opacity: 0.4;
 }
-.listbox[aria-label]::before
+.listbox > label
 {
-    content: attr(aria-label);
     display: block;
     margin-bottom: 5px;
     cursor: default;
