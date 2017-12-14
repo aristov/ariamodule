@@ -75,6 +75,11 @@
     left: 10px;
 }
 
+.listbox[aria-readonly=true]
+{
+    opacity: 0.7;
+}
+
 .listbox[aria-disabled=true] .box
 {
     background: rgba(0, 0, 0, 0.08);

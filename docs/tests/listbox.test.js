@@ -28,6 +28,18 @@ article({
                 ]
             })
         ]),
+        section([
+            new Listbox({
+                label : 'Read only',
+                readOnly : true,
+                name : 'listbox-readonly',
+                options : [
+                    new Option({ value : '1', children : 'First option' }),
+                    new Option({ value : '2', children : 'Second option' }),
+                    new Option({ value : '3', children : 'Third option' })
+                ]
+            })
+        ]),
         /*section([
             new Listbox({
                 label : 'Disabled',
@@ -93,5 +105,29 @@ article({
                 ]
             })
         ]),
+        section([
+            new Listbox({
+                label : 'Read only',
+                name : 'check-listbox-readonly',
+                readOnly : true,
+                options : [
+                    new Option({
+                        value : '1',
+                        checked : 'false',
+                        children : 'First option'
+                    }),
+                    new Option({
+                        value : '2',
+                        checked : 'false',
+                        children : 'Second option'
+                    }),
+                    new Option({
+                        value : '3',
+                        checked : 'false',
+                        children : 'Third option'
+                    })
+                ]
+            })
+        ])
     ]
 })

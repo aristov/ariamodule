@@ -21,6 +21,21 @@ article({
         ]),
         section([
             new Checkbox({
+                label : 'Read only',
+                readOnly : true,
+                name : 'checkbox-readonly',
+            })
+        ]),
+        section([
+            new Checkbox({
+                label : 'Checked read only',
+                checked : 'true',
+                readOnly : true,
+                name : 'checkbox-readonly',
+            })
+        ]),
+        section([
+            new Checkbox({
                 label : 'Disabled',
                 name : 'checkbox-disabled',
                 disabled : true

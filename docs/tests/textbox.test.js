@@ -20,6 +20,13 @@ article({
         ]),
         section([
             new Textbox({
+                label : 'Read only',
+                readOnly : true,
+                name : 'textbox-simple'
+            })
+        ]),
+        section([
+            new Textbox({
                 label : 'Disabled',
                 name : 'textbox-disabled',
                 disabled : true

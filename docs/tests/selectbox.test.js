@@ -45,7 +45,26 @@ article({
                     })
                 ]
             })
-        ])
+        ]),
+        new Selectbox({
+            label : 'Read only',
+            readOnly : true,
+            name : 'selectbox-readonly',
+            options : [
+                new Option({
+                    value : '1',
+                    children : 'First option'
+                }),
+                new Option({
+                    value : '2',
+                    children : 'Second option'
+                }),
+                new Option({
+                    value : '3',
+                    children : 'Third option'
+                })
+            ]
+        })
     ]
 })
 article({
@@ -80,6 +99,30 @@ article({
                 label : 'Multiselectable',
                 name : 'check-selectbox-multiselectable',
                 multiselectable : true,
+                options : [
+                    new Option({
+                        checked : 'false',
+                        value : '1',
+                        children : 'First option'
+                    }),
+                    new Option({
+                        checked : 'false',
+                        value : '2',
+                        children : 'Second option'
+                    }),
+                    new Option({
+                        checked : 'false',
+                        value : '3',
+                        children : 'Third option'
+                    })
+                ]
+            })
+        ]),
+        section([
+            new Selectbox({
+                label : 'Read only',
+                name : 'check-selectbox-readonly',
+                readOnly : true,
                 options : [
                     new Option({
                         checked : 'false',
