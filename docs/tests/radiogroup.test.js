@@ -9,9 +9,9 @@ article({
             new RadioGroup({
                 label : 'Simple',
                 radios : [
-                    new Radio({ value : '1', children : 'First' }),
-                    new Radio({ value : '2', children : 'Second' }),
-                    new Radio({ value : '3', children : 'Third' })
+                    new Radio({ value : '1', label : 'First' }),
+                    new Radio({ value : '2', label : 'Second' }),
+                    new Radio({ value : '3', label : 'Third' })
                 ]
             })
         ]),
@@ -19,13 +19,13 @@ article({
             new RadioGroup({
                 label : 'Checked',
                 radios : [
-                    new Radio({ value : '1', children : 'First' }),
+                    new Radio({ value : '1', label : 'First' }),
                     new Radio({
                         value : '2',
                         checked : 'true',
-                        children : 'Second'
+                        label : 'Second'
                     }),
-                    new Radio({ value : '3', children : 'Third' })
+                    new Radio({ value : '3', label : 'Third' })
                 ]
             })
         ]),
@@ -36,15 +36,15 @@ article({
                     new Radio({
                         value : '1',
                         disabled: true,
-                        children : 'First'
+                        label : 'First'
                     }),
                     new Radio({
                         value : '2',
-                        children : 'Second'
+                        label : 'Second'
                     }),
                     new Radio({
                         value : '3',
-                        children : 'Third'
+                        label : 'Third'
                     })
                 ]
             })
@@ -56,16 +56,16 @@ article({
                     new Radio({
                         value : '1',
                         checked : true,
-                        children : 'First'
+                        label : 'First'
                     }),
                     new Radio({
                         value : '2',
                         disabled: true,
-                        children : 'Second'
+                        label : 'Second'
                     }),
                     new Radio({
                         value : '3',
-                        children : 'Third'
+                        label : 'Third'
                     })
                 ]
             })
@@ -75,12 +75,12 @@ article({
                 label : 'Group disabled',
                 disabled : true,
                 radios : [
-                    new Radio({ value : '1', children : 'First' }),
-                    new Radio({ value : '2', children : 'Second' }),
+                    new Radio({ value : '1', label : 'First' }),
+                    new Radio({ value : '2', label : 'Second' }),
                     new Radio({
                         value : '3',
                         checked : 'true',
-                        children : 'Third'
+                        label : 'Third'
                     })
                 ]
             })
