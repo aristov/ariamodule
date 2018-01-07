@@ -15,7 +15,7 @@
 {
     border-left-color: #ffdb4d;
 }
-.combobox .textbox:hover:not(.focus) + .button:not(:focus)
+.combobox:not([aria-disabled=true]) .textbox:hover:not(.focus) + .button:not(:focus)
 {
     border-left-color: rgba(0, 0, 0, 0.3);
 }
