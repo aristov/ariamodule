@@ -15,7 +15,7 @@ article({
         section([
             new Button({
                 onclick : ({ target }) => {
-                    const btn = Button.getRole(target)
+                    const btn = Button.prototype.getRole(target)
                     const dlg = btn.controls[0]
                     if(dlg) dlg.remove()
                     else {
@@ -38,7 +38,7 @@ article({
         section([
             new Button({
                 onclick : ({ target }) => {
-                    const btn = Button.getRole(target)
+                    const btn = Button.prototype.getRole(target)
                     const dlg = btn.controls[0]
                     if(dlg) dlg.remove()
                     else {
@@ -63,7 +63,7 @@ article({
             new Button({
                 onclick : ({ target }) => {
                     new AlertDialog({
-                        trigger : Button.getRole(target),
+                        trigger : Button.prototype.getRole(target),
                         children : [
                             new Heading('Alert dialog'),
                             p('This is a simple alert dialog.'),
@@ -81,7 +81,7 @@ article({
             new Button({
                 onclick : ({ target }) => {
                     new AlertDialog({
-                        trigger : Button.getRole(target),
+                        trigger : Button.prototype.getRole(target),
                         assertive : true,
                         children : [
                             new Heading('Assertive alert dialog'),
