@@ -1,7 +1,8 @@
 .tablist
 {
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.1);
+    border-width: 1px 0;
     user-select: none;
 }
 .tablist:hover
@@ -18,7 +19,9 @@
     position: relative;
     cursor: pointer;
     outline: none;
-    border-top: 2px solid transparent;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 2px 0 0;
 }
 .tablist .tab:hover
 {
@@ -28,7 +31,7 @@
 {
     color: black;
     cursor: default;
-    border-top: 2px solid black;
+    border-color: black;
 }
 .tablist .tab:focus
 {
@@ -37,4 +40,16 @@
 .tabpanel:not([aria-expanded=true])
 {
     display: none;
+}
+.tablist[aria-orientation=vertical]
+{
+    display: inline-block;
+    border-width: 0 1px;
+}
+.tablist[aria-orientation=vertical] .tab
+{
+    display: block;
+    border-width: 0 0 0 2px;
+    margin: 10px 0;
+    padding: 0 18px;
 }
