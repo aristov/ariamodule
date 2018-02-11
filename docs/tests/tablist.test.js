@@ -2,7 +2,7 @@ import { a, article, h1, section } from 'htmlmodule'
 import { TabList, Tab, TabPanel } from '../../lib'
 
 article({
-    parentNode : document.body,
+    // parentNode : document.body,
     children : [
         h1(a('Tab list')),
         section([
@@ -36,6 +36,30 @@ article({
                 expanded : 'false',
                 children : '3'
             })
+        ])
+    ]
+})
+
+article({
+    parentNode : document.body,
+    children : [
+        h1(a('Tab list')),
+        section([
+            new TabList([
+                new Tab({
+                    panel : new TabPanel('1'),
+                    selected : 'true',
+                    children : 'First'
+                }),
+                new Tab({
+                    panel : new TabPanel('2'),
+                    children : 'Second'
+                }),
+                new Tab({
+                    panel : new TabPanel('3'),
+                    children : 'Third'
+                })
+            ])
         ])
     ]
 })
