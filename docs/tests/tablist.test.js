@@ -1,4 +1,4 @@
-import { a, article, h1, label, section } from 'htmlmodule'
+import { a, article, h1, section } from 'htmlmodule'
 import { TabList, Tab, TabPanel } from '../../lib'
 
 article({
