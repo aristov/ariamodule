@@ -10,7 +10,7 @@
     text-align: left;
     margin-bottom: 5px;
 }
-.grid .gridcell
+.grid td.cell
 {
     border: 1px solid rgba(0, 0, 0, 0.15);
     outline: none;
@@ -21,7 +21,7 @@
     text-align: center;
     cursor: default;
 }
-/*.grid .gridcell input
+/*.grid td.cell input
 {
     font: inherit;
     border: none;
@@ -30,7 +30,7 @@
     text-align: inherit;
     outline: none;
 }*/
-.grid .gridcell textarea
+.grid td.cell textarea
 {
     font: inherit;
     color: inherit;
@@ -48,11 +48,11 @@
     outline: none;
     box-shadow: 0 0 0 2px #ffdb4d;
 }
-.grid .gridcell textarea:not([hidden])
+.grid td.cell textarea:not([hidden])
 {
     display: inline-block;
 }
-.grid .gridcell::before
+.grid td.cell::before
 {
     content: '';
     /*display: none;*/
@@ -63,39 +63,40 @@
     bottom: 0;
     left: 0;
 }
-/*.grid:not([aria-disabled=true]):hover .gridcell
+/*.grid:not([aria-disabled=true]):hover td.cell
 {
     border-color: rgba(0, 0, 0, 0.2);
 }
-.grid:not([aria-disabled=true]) .gridcell:hover
+.grid:not([aria-disabled=true]) td.cell:hover
 {
     background: rgba(0, 0, 0, 0.01);
 }*/
-.grid .gridcell:focus::before,
-.grid .gridcell.focus::before
+.grid td.cell:focus::before,
+.grid td.cell.focus::before,
+.grid .gridrow:focus td.cell::before
 {
     display: block;
     border-color: #ffdb4d;
     box-shadow: 0 0 0 1px #ffdb4d;
     z-index: 1;
 }
-.grid .gridcell[aria-selected=true]
+.grid td.cell[aria-selected=true]
 {
     /*display: block;*/
     /*box-shadow: 0 0 0 1px #ffdb4d;*/
     background: rgba(255, 235, 160, 0.8);
 }
 .grid[aria-disabled=true],
-.grid .gridcell[aria-disabled=true]
+.grid td.cell[aria-disabled=true]
 {
     color: rgba(0, 0, 0, 0.5);
 }
-.grid[aria-disabled=true] .gridcell,
-.grid .gridcell[aria-disabled=true]
+.grid[aria-disabled=true] td.cell,
+.grid td.cell[aria-disabled=true]
 {
     background: rgba(0, 0, 0, 0.08);
 }
-.grid[aria-disabled=true] .gridcell
+.grid[aria-disabled=true] td.cell
 {
     border-color: transparent;
 }
@@ -105,20 +106,24 @@
     padding: 0 5px;
 }
 
-.grid .gridcell[aria-dropeffect=move][aria-grabbed=false]:focus
+.grid td.cell[aria-dropeffect=move][aria-grabbed=false]:focus
 {
     cursor: -webkit-grab;
 }
-.grid .gridcell[aria-grabbed=true]:focus:not([aria-readonly=true])
+.grid td.cell[aria-grabbed=true]:focus:not([aria-readonly=true])
 {
     cursor: -webkit-grabbing;
 }
-.grid.grabbed .gridcell
+.grid.grabbed td.cell
 {
     cursor: -webkit-grabbing;
 }
 .grid.grabbed,
-.grid .gridcell[aria-dropeffect=none]
+.grid td.cell[aria-dropeffect=none]
 {
     cursor: not-allowed;
+}
+.grid .gridrow
+{
+    outline: none;
 }
