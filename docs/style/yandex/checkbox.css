@@ -7,9 +7,11 @@
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+    position: relative;
 }
-.checkbox .box
+.checkbox::before
 {
+    content: '';
     background: #fff;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 3px;
@@ -17,35 +19,34 @@
     width: 12px;
     height: 12px;
     margin-right: 6px;
-    position: relative;
     vertical-align: top;
 }
-.checkbox:hover .box
+.checkbox:hover::before
 {
     border-color: rgba(0, 0, 0, 0.3);
 }
-.checkbox:focus .box
+.checkbox:focus::before
 {
     border-color: #ffdb4d;
 }
-.checkbox:focus .box
+.checkbox:focus::before
 {
     box-shadow: inset 0 0 0 1px #ffdb4d;
 }
-.checkbox:active .box,
-.checkbox.active .box
+.checkbox:active::before,
+.checkbox.active::before
 {
     background: #f3f1ed;
 }
-.checkbox[aria-checked=true] .box,
-.checkbox[aria-checked=mixed] .box
+.checkbox[aria-checked=true]::before,
+.checkbox[aria-checked=mixed]::before
 {
     background: #ffeba0;
 }
-.checkbox[aria-checked=true]:active .box,
-.checkbox[aria-checked=mixed]:active .box,
-.checkbox[aria-checked=true].active .box,
-.checkbox[aria-checked=mixed].active .box
+.checkbox[aria-checked=true]:active::before,
+.checkbox[aria-checked=mixed]:active::before,
+.checkbox[aria-checked=true].active::before,
+.checkbox[aria-checked=mixed].active::before
 {
     background: #fee481;
 }
@@ -59,35 +60,35 @@
     cursor: default;
     color: rgba(0, 0, 0, 0.5);
 }
-.checkbox[aria-disabled=true] .box
+.checkbox[aria-disabled=true]::before
 {
     background: rgba(0, 0, 0, 0.08);
     border-color: transparent;
 }
-.checkbox[aria-checked=true][aria-disabled=true] .box
+.checkbox[aria-checked=true][aria-disabled=true]::before
 {
     background: rgba(0, 0, 0, 0.15);
     border-color: transparent;
 }
-.checkbox[aria-checked=true][aria-disabled=true] .box::before
+.checkbox[aria-checked=true][aria-disabled=true]::after
 {
     opacity: 0.4;
 }
-.checkbox[aria-checked=true] .box::before
+.checkbox[aria-checked=true]::after
 {
     content: url(images/checkmark.svg);
     position: absolute;
-    top: -6px;
-    left: 1px;
+    top: -5px;
+    left: 2px;
 }
-.checkbox[aria-checked=mixed] .box::before
+.checkbox[aria-checked=mixed]::after
 {
     content: '';
     display: inline-block;
     background: #000;
     width: 8px;
     height: 2px;
-    top: 5px;
-    left: 2px;
+    top: 6px;
+    left: 3px;
     position: absolute;
 }
