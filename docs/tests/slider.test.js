@@ -9,11 +9,13 @@ article({
         section([
             new Span({
                 className : 'slidertrack',
-                children : new Slider({
-                    valueMin : 40,
-                    valueNow : 50,
-                    valueMax : 60
-                })
+                children : new Slider
+            })
+        ]),
+        section([
+            new Span({
+                className : 'slidertrack',
+                children : new Slider({ valueMin : -10, valueMax : 10, valueNow : -5 })
             })
         ])
     ]
