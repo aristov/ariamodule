@@ -15,7 +15,11 @@ article({
         section([
             new Span({
                 className : 'slidertrack',
-                children : new Slider({ valueMin : -10, valueMax : 10, valueNow : -5 })
+                children : new Slider({
+                    valueMin : -10,
+                    valueNow : -5,
+                    valueMax : 10
+                })
             })
         ])
     ]
