@@ -70,12 +70,15 @@ article({
                         new ColumnHeader('Three')
                     ])),
                     new RowGroup(['A', 'B', 'C'].map(header => {
-                        return new GridRow([
-                            new RowHeader(header),
-                            new Cell,
-                            new Cell,
-                            new Cell
-                        ])
+                        return new GridRow({
+                            selected : 'false',
+                            children : [
+                                new RowHeader(header),
+                                new Cell,
+                                new Cell,
+                                new Cell
+                            ]
+                        })
                     }))
                 ]
             })
