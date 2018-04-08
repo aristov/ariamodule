@@ -19,7 +19,6 @@
     "url": "git+ssh://git@github.com/aristov/ariamodule.git"
   },
   "keywords": [
-    "JavaScript",
     "WAI-ARIA",
     "HTML",
     "DOM",
@@ -88,8 +87,8 @@
   },
   "homepage": "https://github.com/aristov/ariamodule#readme",
   "dependencies": {
-    "dommodule": "^0.5.2",
-    "htmlmodule": "^0.5.19"
+    "dommodule": "^0.5.4",
+    "htmlmodule": "^0.5.20"
   },
   "devDependencies": {
     "webpack": "^3.9.1"
