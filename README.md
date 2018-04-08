@@ -16,7 +16,7 @@ npm install ariamodule
 git clone git@github.com:aristov/ariamodule.git
 cd ariamodule
 npm install
-npm run webpack
+npm run watch
 ```
 
 ## License

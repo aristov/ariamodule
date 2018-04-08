@@ -12,7 +12,7 @@
   "scripts": {
     "build": "webpack",
     "publish": "git push && git push --tags",
-    "webpack": "webpack -w"
+    "watch": "webpack -w"
   },
   "repository": {
     "type": "git",
