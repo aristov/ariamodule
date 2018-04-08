@@ -4,7 +4,7 @@ const path = require('path')
 const buildPath = path.join(__dirname, 'docs/build')
 
 module.exports = {
-    entry: './docs/index.js',
+    entry: './docs/tests/index.test.js',
     output: {
         path : buildPath,
         filename: 'build.index.js'
