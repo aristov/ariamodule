@@ -75,7 +75,8 @@
     left: 10px;
 }
 
-.listbox[aria-readonly=true]
+.listbox[aria-readonly=true] label,
+.listbox[aria-readonly=true] .box
 {
     opacity: 0.7;
 }
