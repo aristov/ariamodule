@@ -9,9 +9,18 @@ article({
             new RadioGroup({
                 label : 'Simple',
                 radios : [
-                    new Radio({ value : '1', label : 'First' }),
-                    new Radio({ value : '2', label : 'Second' }),
-                    new Radio({ value : '3', label : 'Third' })
+                    new Radio({
+                        label : 'First',
+                        value : '1'
+                    }),
+                    new Radio({
+                        label : 'Second',
+                        value : '2'
+                    }),
+                    new Radio({
+                        label : 'Third',
+                        value : '3'
+                    })
                 ]
             })
         ]),
@@ -19,13 +28,19 @@ article({
             new RadioGroup({
                 label : 'Checked',
                 radios : [
-                    new Radio({ value : '1', label : 'First' }),
                     new Radio({
-                        value : '2',
-                        checked : 'true',
-                        label : 'Second'
+                        label : 'First',
+                        value : '1'
                     }),
-                    new Radio({ value : '3', label : 'Third' })
+                    new Radio({
+                        label : 'Second',
+                        value : '2',
+                        checked : 'true'
+                    }),
+                    new Radio({
+                        label : 'Third',
+                        value : '3'
+                    })
                 ]
             })
         ]),
@@ -34,17 +49,17 @@ article({
                 label : 'Single disabled',
                 radios : [
                     new Radio({
+                        label : 'First',
                         value : '1',
-                        disabled: true,
-                        label : 'First'
+                        disabled : true
                     }),
                     new Radio({
-                        value : '2',
-                        label : 'Second'
+                        label : 'Second',
+                        value : '2'
                     }),
                     new Radio({
-                        value : '3',
-                        label : 'Third'
+                        label : 'Third',
+                        value : '3'
                     })
                 ]
             })
@@ -54,18 +69,18 @@ article({
                 label : 'Checked and single disabled',
                 radios : [
                     new Radio({
+                        label : 'First',
                         value : '1',
-                        checked : true,
-                        label : 'First'
+                        checked : 'true'
                     }),
                     new Radio({
+                        label : 'Second',
                         value : '2',
-                        disabled: true,
-                        label : 'Second'
+                        disabled : true
                     }),
                     new Radio({
-                        value : '3',
-                        label : 'Third'
+                        label : 'Third',
+                        value : '3'
                     })
                 ]
             })
@@ -75,12 +90,18 @@ article({
                 label : 'Group disabled',
                 disabled : true,
                 radios : [
-                    new Radio({ value : '1', label : 'First' }),
-                    new Radio({ value : '2', label : 'Second' }),
                     new Radio({
+                        label : 'First',
+                        value : '1'
+                    }),
+                    new Radio({
+                        label : 'Second',
+                        value : '2'
+                    }),
+                    new Radio({
+                        label : 'Third',
                         value : '3',
-                        checked : 'true',
-                        label : 'Third'
+                        checked : 'true'
                     })
                 ]
             })
