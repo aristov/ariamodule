@@ -54,7 +54,7 @@
     display: block;
     padding: 3px 23px;
 }
-.treeitem[aria-selected=true]:focus > label
+.treeitem[aria-selected=true] > label
 {
     background: #ffeba0;
 }
