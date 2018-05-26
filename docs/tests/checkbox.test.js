@@ -1,4 +1,3 @@
-// import { form, input, label } from 'htmlmodule'
 import { a, article, h1, section } from 'htmlmodule'
 import { Checkbox } from '../../lib'
 
@@ -8,73 +7,46 @@ article({
         h1(a('Checkbox')),
         section([
             new Checkbox({
-                label : 'Simple',
                 name : 'checkbox-simple',
+                children : 'Simple'
             })
         ]),
         section([
             new Checkbox({
-                label : 'Checked',
                 name : 'checkbox-checked',
-                checked : 'true',
+                checked : true,
+                children : 'Checked'
             })
         ]),
         section([
             new Checkbox({
-                label : 'Read only',
-                readOnly : true,
                 name : 'checkbox-readonly',
-            })
-        ]),
-        section([
-            new Checkbox({
-                label : 'Checked read only',
-                checked : 'true',
                 readOnly : true,
-                name : 'checkbox-readonly',
+                children : 'Read only'
             })
         ]),
         section([
             new Checkbox({
-                label : 'Disabled',
+                name : 'checkbox-readonly',
+                checked : true,
+                readOnly : true,
+                children : 'Checked read only'
+            })
+        ]),
+        section([
+            new Checkbox({
                 name : 'checkbox-disabled',
-                disabled : true
+                disabled : true,
+                children : 'Disabled'
             })
         ]),
         section([
             new Checkbox({
-                label : 'Checked and disabled',
                 name : 'checkbox-checked-disabled',
-                checked : 'true',
-                disabled : true
+                checked : true,
+                disabled : true,
+                children : 'Checked and disabled'
             })
         ])
     ]
 })
-
-/*article({
-    parentNode : document.body,
-    children : form([
-        h1('Native checkbox'),
-        section([
-            label([
-                input({
-                    type : 'checkbox',
-                    name : 'checkbox-no-value',
-                }),
-                'Native checkbox'
-            ])
-        ]),
-        section([
-            label([
-                input({
-                    type : 'checkbox',
-                    name : 'checkbox-has-value',
-                    value : 'test',
-                    checked : true
-                }),
-                'Native checkbox'
-            ])
-        ])
-    ])
-})*/
