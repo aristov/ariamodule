@@ -10,7 +10,7 @@ article({
         ]),
         section([
             new Button({
-                pressed : 'true',
+                pressed : true,
                 children : 'Pressed toggle button'
             })
         ]),
@@ -22,7 +22,7 @@ article({
         ]),
         section([
             new Button({
-                pressed : 'true',
+                pressed : true,
                 disabled : true,
                 children : 'Pressed and disabled'
             })
