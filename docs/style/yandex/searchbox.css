@@ -1,4 +1,30 @@
-.searchbox .box
+.searchbox .input
 {
+    padding-right: 26px;
     border-radius: 3px;
+}
+.searchbox .clearbutton
+{
+    display: none;
+    width: 27px;
+    height: 27px;
+    background: url(images/cross.svg) no-repeat 50% 50%;
+    position: absolute;
+    right: 1px;
+    opacity: 0.25;
+    outline: none;
+}
+.searchbox:not(.readonly):hover .clearbutton,
+.searchbox:not(.readonly).focus .clearbutton
+{
+    display: inline-block;
+}
+.searchbox:not(.disabled) .clearbutton:hover
+{
+    cursor: pointer;
+    opacity: 1;
+}
+.searchbox[aria-invalid=true] .input
+{
+    border-color: red;
 }
