@@ -20,7 +20,7 @@
 {
     box-shadow: 0 0 0 2px #ffdb4d;
 }
-.treeitem[aria-expanded] > [role=button]
+.treeitem[aria-expanded] > .button
 {
     position: absolute;
     color: rgba(0, 0, 0, 0.5);
@@ -32,16 +32,16 @@
     border-radius: 2px;
     background: white;
 }
-.treeitem[aria-expanded] > [role=button]:hover
+.treeitem[aria-expanded] > .button:hover
 {
     border-color: rgba(0, 0, 0, 0.3);
     color: #000;
 }
-.treeitem[aria-expanded=false] > [role=button]::before
+.treeitem[aria-expanded=false] > .button::before
 {
     content: '+';
 }
-.treeitem[aria-expanded=true] > [role=button]::before
+.treeitem[aria-expanded=true] > .button::before
 {
     content: '−';
 }
