@@ -1,73 +1,58 @@
 import { a, article, h1, section } from 'htmlmodule'
 import { TabList, Tab, TabPanel } from '../../lib'
 
+const panels = [
+    new TabPanel('1'),
+    new TabPanel('2'),
+    new TabPanel('3')
+]
+let tabList
+
 article({
     parentNode : document.body,
-    id : 'example-tablist',
     children : [
         h1(a('Tab list')),
         section([
             h1('Horizontal'),
             new TabList([
                 new Tab({
-                    id : 'tab1',
-                    controls : 'tabpanel1',
-                    selected : 'true',
+                    controls : panels[0],
                     children : 'First'
                 }),
                 new Tab({
-                    id : 'tab2',
-                    controls : 'tabpanel2',
+                    selected : true,
+                    controls : panels[1],
                     children : 'Second'
                 }),
                 new Tab({
-                    id : 'tab3',
-                    controls : 'tabpanel3',
+                    controls : panels[2],
                     children : 'Third'
                 })
             ]),
+            panels
+        ]),
+        section([
+            h1('Vertical'),
+            tabList = new TabList({
+                orientation : 'vertical',
+                children : [
+                    new Tab('First'),
+                    new Tab('Second'),
+                    new Tab('Third')
+                ]
+            }),
             new TabPanel({
-                id : 'tabpanel1',
-                labelledBy : 'tab1',
-                expanded : 'true',
+                labelledBy : tabList.tabs[0],
                 children : '1'
             }),
             new TabPanel({
-                id : 'tabpanel2',
-                labelledBy : 'tab2',
-                expanded : 'false',
+                labelledBy : tabList.tabs[1],
                 children : '2'
             }),
             new TabPanel({
-                id : 'tabpanel3',
-                labelledBy : 'tab3',
-                expanded : 'false',
+                labelledBy : tabList.tabs[2],
                 children : '3'
             })
-        ]),
-        section({
-            id : 'tablist-vertical',
-            children : [
-                h1('Vertical'),
-                new TabList({
-                    orientation : 'vertical',
-                    children : [
-                        new Tab({
-                            panel : new TabPanel('1'),
-                            selected : 'true',
-                            children : 'First'
-                        }),
-                        new Tab({
-                            panel : new TabPanel('2'),
-                            children : 'Second'
-                        }),
-                        new Tab({
-                            panel : new TabPanel('3'),
-                            children : 'Third'
-                        })
-                    ]
-                })
-            ]
-        })
+        ])
     ]
 })
