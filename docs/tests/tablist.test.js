@@ -1,5 +1,5 @@
 import { a, article, h1, section } from 'htmlmodule'
-import { TabList, Tab, TabPanel } from '../../lib'
+import { Group, TabList, Tab, TabPanel } from '../../lib'
 
 const panels = [
     new TabPanel('1'),
@@ -53,6 +53,37 @@ article({
                 labelledBy : tabList.tabs[2],
                 children : '3'
             })
+        ])
+    ]
+})
+
+let groups
+
+article({
+    parentNode : document.body,
+    children : [
+        h1(a('Tab list + Groups')),
+        section([
+            new TabList({
+                controls : groups = [
+                    new Group([
+                        new TabPanel('1'),
+                        new TabPanel('2'),
+                        new TabPanel('3')
+                    ]),
+                    new Group([
+                        new TabPanel('A'),
+                        new TabPanel('B'),
+                        new TabPanel('C')
+                    ])
+                ],
+                children : [
+                    new Tab('First'),
+                    new Tab('Second'),
+                    new Tab('Third')
+                ]
+            }),
+            groups
         ])
     ]
 })
