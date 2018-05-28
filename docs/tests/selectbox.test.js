@@ -77,17 +77,17 @@ article({
                 name : 'check-selectbox-simple',
                 options : [
                     new Option({
-                        checked : 'false',
+                        checked : false,
                         value : '1',
                         children : 'First option'
                     }),
                     new Option({
-                        checked : 'false',
+                        checked : false,
                         value : '2',
                         children : 'Second option'
                     }),
                     new Option({
-                        checked : 'false',
+                        checked : false,
                         value : '3',
                         children : 'Third option'
                     })
@@ -101,17 +101,17 @@ article({
                 multiselectable : true,
                 options : [
                     new Option({
-                        checked : 'false',
+                        checked : false,
                         value : '1',
                         children : 'First option'
                     }),
                     new Option({
-                        checked : 'false',
+                        checked : false,
                         value : '2',
                         children : 'Second option'
                     }),
                     new Option({
-                        checked : 'false',
+                        checked : false,
                         value : '3',
                         children : 'Third option'
                     })
@@ -125,17 +125,17 @@ article({
                 readOnly : true,
                 options : [
                     new Option({
-                        checked : 'false',
+                        checked : false,
                         value : '1',
                         children : 'First option'
                     }),
                     new Option({
-                        checked : 'false',
+                        checked : false,
                         value : '2',
                         children : 'Second option'
                     }),
                     new Option({
-                        checked : 'false',
+                        checked : false,
                         value : '3',
                         children : 'Third option'
                     })

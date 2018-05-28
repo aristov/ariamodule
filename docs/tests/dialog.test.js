@@ -31,7 +31,7 @@ article({
                         }))
                     }
                 },
-                expanded : 'false',
+                expanded : false,
                 children : 'Simple dialog'
             })
         ]),
@@ -55,7 +55,7 @@ article({
                         }))
                     }
                 },
-                expanded : 'false',
+                expanded : false,
                 children : 'Assertive dialog'
             })
         ]),
@@ -73,7 +73,7 @@ article({
                         ]
                     })
                 },
-                expanded : 'false',
+                expanded : false,
                 children : 'Alert dialog'
             })
         ]),
@@ -92,7 +92,7 @@ article({
                         ]
                     })
                 },
-                expanded : 'false',
+                expanded : false,
                 children : 'Assertive alert dialog'
             })
         ])

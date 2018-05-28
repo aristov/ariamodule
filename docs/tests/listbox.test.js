@@ -65,17 +65,17 @@ article({
                 options : [
                     new Option({
                         value : '1',
-                        checked : 'false',
+                        checked : false,
                         children : 'First option'
                     }),
                     new Option({
                         value : '2',
-                        checked : 'false',
+                        checked : false,
                         children : 'Second option'
                     }),
                     new Option({
                         value : '3',
-                        checked : 'false',
+                        checked : false,
                         children : 'Third option'
                     })
                 ]
@@ -89,17 +89,17 @@ article({
                 options : [
                     new Option({
                         value : '1',
-                        checked : 'false',
+                        checked : false,
                         children : 'First option'
                     }),
                     new Option({
                         value : '2',
-                        checked : 'false',
+                        checked : false,
                         children : 'Second option'
                     }),
                     new Option({
                         value : '3',
-                        checked : 'false',
+                        checked : false,
                         children : 'Third option'
                     })
                 ]
@@ -113,17 +113,17 @@ article({
                 options : [
                     new Option({
                         value : '1',
-                        checked : 'false',
+                        checked : false,
                         children : 'First option'
                     }),
                     new Option({
                         value : '2',
-                        checked : 'false',
+                        checked : false,
                         children : 'Second option'
                     }),
                     new Option({
                         value : '3',
-                        checked : 'false',
+                        checked : false,
                         children : 'Third option'
                     })
                 ]
