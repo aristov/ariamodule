@@ -3,8 +3,7 @@ import { Button, Dialog, Heading, AlertDialog } from '../../lib'
 
 class CancelButton extends Button {
     activate() {
-        const dialog = this.closest(Dialog)
-        if(dialog) dialog.cancel()
+        this.closest(Dialog).cancel()
     }
 }
 
@@ -17,10 +16,14 @@ article({
                 onclick : ({ target }) => {
                     const btn = Button.getRoleOf(target)
                     const dlg = btn.controls[0]
-                    if(dlg) dlg.remove()
+                    if(dlg) {
+                        dlg.remove()
+                    }
                     else {
-                        btn.after(new Dialog({
-                            trigger : btn,
+                        new Dialog({
+                            previousSibling : target,
+                            trigger : target,
+                            classList : 'popup',
                             children : [
                                 new Heading('Dialog'),
                                 p('This is a simple dialog.'),
@@ -28,7 +31,7 @@ article({
                                 new Button('Ok'), ' ',
                                 new CancelButton('Cancel')
                             ]
-                        }))
+                        })
                     }
                 },
                 expanded : false,
@@ -40,11 +43,16 @@ article({
                 onclick : ({ target }) => {
                     const btn = Button.getRoleOf(target)
                     const dlg = btn.controls[0]
-                    if(dlg) dlg.remove()
+                    if(dlg) {
+                        dlg.remove()
+                    }
                     else {
-                        btn.after(new Dialog({
-                            trigger : btn,
-                            assertive : true,
+                        new Dialog({
+                            previousSibling : target,
+                            trigger : target,
+                            oncancel : event => event.preventDefault(),
+                            // oncancel : event => false, // todo
+                            classList : 'popup',
                             children : [
                                 new Heading('Assertive dialog'),
                                 p('This dialog is assertive.'),
@@ -52,7 +60,7 @@ article({
                                 new Button('Ok'), ' ',
                                 new CancelButton('Cancel')
                             ]
-                        }))
+                        })
                     }
                 },
                 expanded : false,
@@ -63,7 +71,8 @@ article({
             new Button({
                 onclick : ({ target }) => {
                     new AlertDialog({
-                        trigger : Button.getRoleOf(target),
+                        trigger : target,
+                        classList : 'popup',
                         children : [
                             new Heading('Alert dialog'),
                             p('This is a simple alert dialog.'),
@@ -81,8 +90,9 @@ article({
             new Button({
                 onclick : ({ target }) => {
                     new AlertDialog({
-                        trigger : Button.getRoleOf(target),
-                        assertive : true,
+                        trigger : target,
+                        oncancel : event => event.preventDefault(),
+                        classList : 'popup',
                         children : [
                             new Heading('Assertive alert dialog'),
                             p('This modal dialog is assertive.'),
