@@ -13,11 +13,15 @@
 }
 .dialog
 {
-    z-index: 2;
+    position: absolute;
+    display: inline-block;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 10px 20px -5px rgba(0, 0, 0, 0.4);
+    background: #fff;
     box-sizing: border-box;
-    text-align: left;
     padding: 15px;
+    margin: 50px;
     overflow: scroll;
+    z-index: 2;
 }
 .dialog:not([aria-modal=true])
 {
@@ -33,6 +37,10 @@
     font-size: 16px;
     font-weight: bold;
     margin: 0 0 10px;
+}
+.dialog .button
+{
+    margin-right: 5px;
 }
 .dialog .closebutton
 {
