@@ -1,4 +1,3 @@
-.backdrop,
 .dialog[aria-modal=true]
 {
     display: flex;
@@ -11,14 +10,8 @@
     left: -100px;
     background: rgba(0, 0, 0, 0.5);
     z-index: 1;
-    /*transition: opacity .3s;*/
+    transition: opacity .3s;
     animation: backdrop .3s;
-}
-.backdrop[hidden]
-{
-    /*display: flex;
-    opacity: 0;*/
-    display: none;
 }
 .dialog:not([aria-modal=true]),
 .dialog[aria-modal=true] > div
@@ -32,16 +25,26 @@
     padding: 15px;
     overflow: scroll;
     z-index: 2;
-    /*transition: opacity .3s, transform .3s;*/
+    transition: opacity .3s, transform .3s;
     animation: dialog .3s;
 }
 .dialog:not([aria-modal=true])
 {
     margin: 50px;
 }
-.dialog[aria-hidden=true]
+.dialog[aria-hidden=true]:not(.transition)
 {
     display: none;
+}
+.dialog[aria-modal=true].transition
+{
+    opacity: 0;
+}
+.dialog:not([aria-modal=true]).transition,
+.dialog[aria-modal=true].transition > div
+{
+    transform: scale(2);
+    opacity: 0;
 }
 
 /*================================================================*/
