@@ -5,7 +5,7 @@ body
 [hidden],
 [aria-hidden=true]
 {
-    display: none !important;
+    display: none;
 }
 
 /*
