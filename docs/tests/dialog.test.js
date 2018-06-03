@@ -16,7 +16,6 @@ article({
         section([
             new Button({
                 controls : dialog = new Dialog({
-                    hidden : true,
                     content : [
                         new Heading('Dialog'),
                         p('This is a simple dialog.'),
@@ -56,6 +55,7 @@ article({
                                 new CancelButton('Cancel')
                             ]
                         })
+                        btn.controls[0].expanded = true
                     }
                 },
                 hasPopup : 'dialog',
@@ -79,6 +79,7 @@ article({
                                 new CancelButton('Cancel')
                             ]
                         })
+                        btn.controls[0].expanded = true
                     }
                 },
                 hasPopup : 'dialog',
@@ -89,7 +90,6 @@ article({
             new Button({
                 controls : new Dialog({
                     modal : true,
-                    hidden : true,
                     content : [
                         new Heading('Appended modal dialog'),
                         p('This is a simple dialog.'),
@@ -116,6 +116,7 @@ article({
                                 new CancelButton('Cancel')
                             ]
                         })
+                        btn.controls[0].expanded = true
                     }
                 },
                 hasPopup : 'dialog',
@@ -138,6 +139,7 @@ article({
                                 new CancelButton('Cancel')
                             ]
                         })
+                        btn.controls[0].expanded = true
                     }
                 },
                 children : 'Create assertive modal dialog'

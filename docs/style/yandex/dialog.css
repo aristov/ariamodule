@@ -1,73 +1,96 @@
 .dialog
 {
+    position: absolute;
     display: inline-block;
     margin: 50px;
-    position: absolute;
+    /*animation: dialog .3s;*/
     transition: opacity .3s;
 }
 .dialog[aria-modal=true]
 {
-    align-items: center;
-    animation: modaldialog .3s;
-    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: -100px;
+    right: -100px;
+    left: -100px;
     bottom: -100px;
     display: flex;
     justify-content: center;
-    left: -100px;
-    position: fixed;
-    right: -100px;
-    top: -100px;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
     z-index: 1;
 }
 .dialog > div
 {
-    animation: dialog .3s;
     background: #fff;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 10px 20px -5px rgba(0, 0, 0, 0.4);
     box-sizing: border-box;
     max-width: 300px;
     overflow: scroll;
     padding: 15px;
+    /*animation: dialogcontent .3s;*/
     transition: transform .3s;
     z-index: 2;
 }
-.dialog.transition
+
+.dialog:not([aria-expanded])
+{
+    z-index: -1;
+}
+.dialog:not([aria-expanded]),
+.dialog[aria-expanded=false]
 {
     opacity: 0;
 }
-.dialog[aria-hidden=true]:not(.transition)
+.dialog:not([aria-expanded]) > div
 {
-    display: none;
+    transform: scale(.5);
 }
-.dialog.transition > div
+.dialog[aria-expanded=false] > div
 {
-transform: scale(2);
-transform: scale(2);        
+    transform: scale(2);
 }
 
 /*================================================================*/
 
-@keyframes modaldialog
+.dialog.transition
 {
-    from
-    {
-        opacity: 0;
-    }
-    to
-    {
-        opacity: 1;
-    }
+    opacity: 0;
 }
+/*.dialog:not([aria-hidden=false]):not(.transition)
+{
+    opacity: 0;
+    z-index: -1;
+}*/
+/*.dialog:not([aria-hidden=false]) > div
+{
+    transform: scale(.5);
+}*/
+.dialog.transition > div
+{
+    transform: scale(2);
+}
+
+/*================================================================*/
+
 @keyframes dialog
 {
     from
     {
         opacity: 0;
-        transform: scale(0);
     }
     to
     {
         opacity: 1;
+    }
+}
+@keyframes dialogcontent
+{
+    from
+    {
+        transform: scale(0);
+    }
+    to
+    {
         transform: none;
     }
 }
