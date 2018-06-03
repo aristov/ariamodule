@@ -55,7 +55,6 @@ article({
                                 new CancelButton('Cancel')
                             ]
                         })
-                        // btn.controls[0].expanded = true
                     }
                 },
                 hasPopup : 'dialog',
@@ -79,7 +78,6 @@ article({
                                 new CancelButton('Cancel')
                             ]
                         })
-                        // btn.controls[0].expanded = true
                     }
                 },
                 hasPopup : 'dialog',
@@ -117,7 +115,6 @@ article({
                                 new CancelButton('Cancel')
                             ]
                         })
-                        // btn.controls[0].expanded = true
                     }
                 },
                 hasPopup : 'dialog',
@@ -141,7 +138,6 @@ article({
                                 new CancelButton('Cancel')
                             ]
                         })
-                        // btn.controls[0].expanded = true
                     }
                 },
                 children : 'Create assertive modal dialog'

@@ -30,10 +30,6 @@
     z-index: 2;
 }
 
-.dialog:not([aria-expanded])
-{
-    z-index: -1;
-}
 .dialog:not([aria-expanded]),
 .dialog[aria-expanded=false]
 {
