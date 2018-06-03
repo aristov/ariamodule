@@ -24,6 +24,7 @@ article({
                 ]),
                 children : 'Show dialog'
             }),
+            dialog,
         ]),
         section([
             new Button({
@@ -81,7 +82,6 @@ article({
                 children : 'Create assertive dialog'
             })
         ]),
-        dialog,
         section([
             new Button({
                 controls : new Dialog({

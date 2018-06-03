@@ -3,8 +3,11 @@
     position: absolute;
     display: inline-block;
     margin: 0 20px;
-    transition: opacity .5s;
-    /*transition: opacity 1ms;*/
+}
+/*.transition .dialog*/
+.dialog
+{
+    transition: opacity .3s;
 }
 .dialog[aria-modal=true]
 {
@@ -27,8 +30,12 @@
     max-width: 300px;
     overflow: scroll;
     padding: 15px;
-    transition: transform .5s;
     z-index: 2;
+}
+/*.transition .dialog > div*/
+.dialog > div
+{
+    transition: transform .3s;
 }
 .dialog[aria-hidden=true][aria-expanded=false]
 {
