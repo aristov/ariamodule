@@ -7,13 +7,13 @@ class CancelButton extends Button {
     }
 }
 
-// let dialog
+let dialog
 
 article({
     parentNode : document.body,
     children : [
         h1(a('Dialog')),
-        /*section([
+        section([
             new Button({
                 controls : dialog = new Dialog({
                     content : [
@@ -27,7 +27,7 @@ article({
                 children : 'Show dialog'
             }),
         ]),
-        dialog,*/
+        dialog,
         section([
             new Button({
                 controls : new Dialog([
