@@ -17,7 +17,7 @@ article({
             new Button({
                 controls : dialog = new Dialog({
                     hidden : true,
-                    children : [
+                    content : [
                         new Heading('Dialog'),
                         p('This is a simple dialog.'),
                         p(['It closes on the ', kbd('Escape'), ' key press or an outside click.']),
@@ -48,7 +48,7 @@ article({
                     if(!btn.controls.length) {
                         btn.controls = new Dialog({
                             previousSibling : target,
-                            children : [
+                            content : [
                                 new Heading('Created dialog'),
                                 p('This is a simple dialog.'),
                                 p(['It closes on the ', kbd('Escape'), ' key press or an outside click.']),
@@ -71,7 +71,7 @@ article({
                             previousSibling : target,
                             oncancel : event => event.preventDefault(),
                             // oncancel : event => false, // todo
-                            children : [
+                            content : [
                                 new Heading('Assertive dialog'),
                                 p('This dialog is assertive.'),
                                 p(['It doesn\'t close on the ', kbd('Escape'), ' key press or an outside click.']),
@@ -90,7 +90,7 @@ article({
                 controls : new Dialog({
                     modal : true,
                     hidden : true,
-                    children : [
+                    content : [
                         new Heading('Appended modal dialog'),
                         p('This is a simple dialog.'),
                         p(['It closes on the ', kbd('Escape'), ' key press or an outside click.']),
@@ -108,7 +108,7 @@ article({
                     if(!btn.controls.length) {
                         btn.controls = new Dialog({
                             modal : true,
-                            children : [
+                            content : [
                                 new Heading('Created modal dialog'),
                                 p('This is a simple modal dialog.'),
                                 p(['It is modal, but it closes on the ', kbd('Escape'), ' key press or an outside click.']),
@@ -130,7 +130,7 @@ article({
                         btn.controls = new Dialog({
                             oncancel : event => event.preventDefault(),
                             modal : true,
-                            children : [
+                            content : [
                                 new Heading('Assertive modal dialog'),
                                 p('This modal dialog is assertive.'),
                                 p(['It doesn\'t close on the ', kbd('Escape'), ' key press or an outside click.']),

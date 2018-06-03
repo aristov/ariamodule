@@ -87,7 +87,7 @@
   },
   "homepage": "https://github.com/aristov/ariamodule#readme",
   "dependencies": {
-    "dommodule": "aristov/dommodule#event-handlers",
+    "dommodule": "aristov/dommodule#v0.6",
     "htmlmodule": "aristov/htmlmodule#v0.6"
   },
   "devDependencies": {

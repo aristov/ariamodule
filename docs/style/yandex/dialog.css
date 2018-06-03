@@ -1,55 +1,53 @@
+.dialog
+{
+    display: inline-block;
+    margin: 50px;
+    position: absolute;
+    transition: opacity .3s;
+}
 .dialog[aria-modal=true]
 {
+    align-items: center;
+    animation: modaldialog .3s;
+    background: rgba(0, 0, 0, 0.5);
+    bottom: -100px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: -100px;
-    right: -100px;
-    bottom: -100px;
     left: -100px;
-    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    right: -100px;
+    top: -100px;
     z-index: 1;
-    transition: opacity .3s;
-    animation: backdrop .3s;
 }
-.dialog:not([aria-modal=true]),
-.dialog[aria-modal=true] > div
+.dialog > div
 {
-    position: absolute;
-    display: inline-block;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 10px 20px -5px rgba(0, 0, 0, 0.4);
+    animation: dialog .3s;
     background: #fff;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 10px 20px -5px rgba(0, 0, 0, 0.4);
     box-sizing: border-box;
     max-width: 300px;
-    padding: 15px;
     overflow: scroll;
+    padding: 15px;
+    transition: transform .3s;
     z-index: 2;
-    transition: opacity .3s, transform .3s;
-    animation: dialog .3s;
 }
-.dialog:not([aria-modal=true])
+.dialog.transition
 {
-    margin: 50px;
+    opacity: 0;
 }
 .dialog[aria-hidden=true]:not(.transition)
 {
     display: none;
 }
-.dialog[aria-modal=true].transition
+.dialog.transition > div
 {
-    opacity: 0;
-}
-.dialog:not([aria-modal=true]).transition,
-.dialog[aria-modal=true].transition > div
-{
-    transform: scale(2);
-    opacity: 0;
+transform: scale(2);
+transform: scale(2);        
 }
 
 /*================================================================*/
 
-@keyframes backdrop
+@keyframes modaldialog
 {
     from
     {
