@@ -15,15 +15,13 @@ article({
         h1(a('Dialog')),
         section([
             new Button({
-                controls : dialog = new Dialog({
-                    content : [
-                        new Heading('Dialog'),
-                        p('This is a simple dialog.'),
-                        p(['It closes on the ', kbd('Escape'), ' key press or an outside click.']),
-                        new Button('Ok'),
-                        new CancelButton('Cancel')
-                    ]
-                }),
+                controls : dialog = new Dialog([
+                    new Heading('Static dialog'),
+                    p('This is a simple dialog.'),
+                    p(['It closes on the ', kbd('Escape'), ' key press or an outside click.']),
+                    new Button('Ok'),
+                    new CancelButton('Cancel')
+                ]),
                 children : 'Show dialog'
             }),
         ]),
@@ -84,6 +82,22 @@ article({
             })
         ]),
         dialog,
+        section([
+            new Button({
+                controls : new Dialog({
+                    parentNode : document.body,
+                    modal : true,
+                    content : [
+                        new Heading('Static modal dialog'),
+                        p('This is a simple dialog.'),
+                        p(['It closes on the ', kbd('Escape'), ' key press or an outside click.']),
+                        new Button('Ok'),
+                        new CancelButton('Cancel')
+                    ]
+                }),
+                children : 'Show modal dialog'
+            })
+        ]),
         section([
             new Button({
                 controls : new Dialog({
