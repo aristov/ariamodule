@@ -7,13 +7,13 @@ class CancelButton extends Button {
     }
 }
 
-let dialog, modalDialog
+// let dialog
 
 article({
     parentNode : document.body,
     children : [
         h1(a('Dialog')),
-        section([
+        /*section([
             new Button({
                 controls : dialog = new Dialog({
                     content : [
@@ -27,7 +27,7 @@ article({
                 children : 'Show dialog'
             }),
         ]),
-        dialog,
+        dialog,*/
         section([
             new Button({
                 controls : new Dialog([
@@ -46,7 +46,7 @@ article({
                     const btn = Button.getRoleOf(target)
                     if(!btn.controls.length) {
                         btn.controls = new Dialog({
-                            previousSibling : target,
+                            // previousSibling : target,
                             content : [
                                 new Heading('Created dialog'),
                                 p('This is a simple dialog.'),
@@ -55,7 +55,7 @@ article({
                                 new CancelButton('Cancel')
                             ]
                         })
-                        setTimeout(() => btn.controls[0].expanded = true, 0)
+                        btn.controls[0].expanded = true
                     }
                 },
                 hasPopup : 'dialog',
@@ -68,7 +68,7 @@ article({
                     const btn = Button.getRoleOf(target)
                     if(!btn.controls.length) {
                         btn.controls = new Dialog({
-                            previousSibling : target,
+                            // previousSibling : target,
                             oncancel : event => event.preventDefault(),
                             // oncancel : event => false, // todo
                             content : [
