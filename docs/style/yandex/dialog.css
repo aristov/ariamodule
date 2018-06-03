@@ -3,7 +3,6 @@
     position: absolute;
     display: inline-block;
     margin: 50px;
-    /*animation: dialog .3s;*/
     transition: opacity .3s;
 }
 .dialog[aria-modal=true]
@@ -27,7 +26,6 @@
     max-width: 300px;
     overflow: scroll;
     padding: 15px;
-    /*animation: dialogcontent .3s;*/
     transition: transform .3s;
     z-index: 2;
 }
@@ -48,51 +46,6 @@
 .dialog[aria-expanded=false] > div
 {
     transform: scale(2);
-}
-
-/*================================================================*/
-
-.dialog.transition
-{
-    opacity: 0;
-}
-/*.dialog:not([aria-hidden=false]):not(.transition)
-{
-    opacity: 0;
-    z-index: -1;
-}*/
-/*.dialog:not([aria-hidden=false]) > div
-{
-    transform: scale(.5);
-}*/
-.dialog.transition > div
-{
-    transform: scale(2);
-}
-
-/*================================================================*/
-
-@keyframes dialog
-{
-    from
-    {
-        opacity: 0;
-    }
-    to
-    {
-        opacity: 1;
-    }
-}
-@keyframes dialogcontent
-{
-    from
-    {
-        transform: scale(0);
-    }
-    to
-    {
-        transform: none;
-    }
 }
 
 /*================================================================*/

@@ -55,7 +55,7 @@ article({
                                 new CancelButton('Cancel')
                             ]
                         })
-                        btn.controls[0].expanded = true
+                        setTimeout(() => btn.controls[0].expanded = true, 0)
                     }
                 },
                 hasPopup : 'dialog',
