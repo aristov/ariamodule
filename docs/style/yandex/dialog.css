@@ -2,7 +2,7 @@
 {
     position: absolute;
     display: inline-block;
-    margin: 0 50px;
+    margin: 0 20px;
     transition: opacity .5s;
     /*transition: opacity 1ms;*/
 }
@@ -30,20 +30,20 @@
     transition: transform .5s;
     z-index: 2;
 }
-/*.dialog:not([aria-hidden]),*/
-.dialog[aria-hidden=true]
+.dialog[aria-hidden=true][aria-expanded=false]
 {
     display: none;
 }
-.dialog:not([aria-expanded=true])
+.dialog[aria-hidden=false][aria-expanded=false],
+.dialog[aria-hidden=true][aria-expanded=true]
 {
     opacity: 0;
 }
-.dialog:not([aria-expanded]) > div
+.dialog[aria-hidden=false][aria-expanded=false] > div
 {
     transform: scale(.5);
 }
-.dialog[aria-expanded=false] > div
+.dialog[aria-hidden=true][aria-expanded=true] > div
 {
     transform: scale(2);
 }
