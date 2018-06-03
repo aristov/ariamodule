@@ -140,6 +140,7 @@ article({
                         })
                     }
                 },
+                hasPopup : 'dialog',
                 children : 'Create assertive modal dialog'
             })
         ])
