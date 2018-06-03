@@ -3,7 +3,7 @@ import { AlertDialog, Button, Dialog, Heading } from '../../lib'
 
 class CancelButton extends Button {
     activate() {
-        this.closest(Dialog).cancel()
+        this.closest(Dialog).expanded = false
     }
 }
 
@@ -46,7 +46,7 @@ article({
                     const btn = Button.getRoleOf(target)
                     if(!btn.controls.length) {
                         btn.controls = new Dialog({
-                            // previousSibling : target,
+                            expanded : true,
                             content : [
                                 new Heading('Created dialog'),
                                 p('This is a simple dialog.'),
@@ -55,7 +55,7 @@ article({
                                 new CancelButton('Cancel')
                             ]
                         })
-                        btn.controls[0].expanded = true
+                        // btn.controls[0].expanded = true
                     }
                 },
                 hasPopup : 'dialog',
@@ -68,9 +68,9 @@ article({
                     const btn = Button.getRoleOf(target)
                     if(!btn.controls.length) {
                         btn.controls = new Dialog({
-                            // previousSibling : target,
                             oncancel : event => event.preventDefault(),
                             // oncancel : event => false, // todo
+                            expanded : true,
                             content : [
                                 new Heading('Assertive dialog'),
                                 p('This dialog is assertive.'),
@@ -79,7 +79,7 @@ article({
                                 new CancelButton('Cancel')
                             ]
                         })
-                        btn.controls[0].expanded = true
+                        // btn.controls[0].expanded = true
                     }
                 },
                 hasPopup : 'dialog',
@@ -108,6 +108,7 @@ article({
                     if(!btn.controls.length) {
                         btn.controls = new Dialog({
                             modal : true,
+                            expanded : true,
                             content : [
                                 new Heading('Created modal dialog'),
                                 p('This is a simple modal dialog.'),
@@ -116,7 +117,7 @@ article({
                                 new CancelButton('Cancel')
                             ]
                         })
-                        btn.controls[0].expanded = true
+                        // btn.controls[0].expanded = true
                     }
                 },
                 hasPopup : 'dialog',
@@ -131,6 +132,7 @@ article({
                         btn.controls = new Dialog({
                             oncancel : event => event.preventDefault(),
                             modal : true,
+                            expanded : true,
                             content : [
                                 new Heading('Assertive modal dialog'),
                                 p('This modal dialog is assertive.'),
@@ -139,7 +141,7 @@ article({
                                 new CancelButton('Cancel')
                             ]
                         })
-                        btn.controls[0].expanded = true
+                        // btn.controls[0].expanded = true
                     }
                 },
                 children : 'Create assertive modal dialog'
