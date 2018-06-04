@@ -1,6 +1,8 @@
 import { a, article, h1, kbd, p, section } from 'htmlmodule'
 import { AlertDialog, Button, Dialog, Heading } from '../../lib'
 
+// todo AlertDialog
+
 class CancelButton extends Button {
     activate() {
         this.closest(Dialog).expanded = false
