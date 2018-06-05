@@ -67,8 +67,7 @@ article({
                     const btn = Button.getRoleOf(target)
                     if(!btn.controls.length) {
                         btn.controls = new Dialog({
-                            oncancel : event => event.preventDefault(),
-                            // oncancel : event => false, // todo
+                            oncancel : event => false, // fixme on touch
                             expanded : true,
                             content : [
                                 new Heading('Assertive dialog'),
