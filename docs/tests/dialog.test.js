@@ -2,6 +2,7 @@ import { a, article, h1, kbd, p, section } from 'htmlmodule'
 import { AlertDialog, Button, Dialog, Heading } from '../../lib'
 
 // todo AlertDialog
+// todo disposable dialogs
 
 class CancelButton extends Button {
     activate() {
@@ -67,7 +68,8 @@ article({
                     const btn = Button.getRoleOf(target)
                     if(!btn.controls.length) {
                         btn.controls = new Dialog({
-                            oncancel : event => false, // fixme on touch
+                            oncancel : event => event.preventDefault(),
+                            // oncancel : event => false, // fixme (Safari and Firefox)
                             expanded : true,
                             content : [
                                 new Heading('Assertive dialog'),
