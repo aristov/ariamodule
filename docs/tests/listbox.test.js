@@ -10,21 +10,60 @@ article({
                 label : 'Simple',
                 name : 'listbox-simple',
                 options : [
-                    new Option({ value : '1', children : 'First option' }),
-                    new Option({ value : '2', children : 'Second option' }),
-                    new Option({ value : '3', children : 'Third option' })
+                    new Option({
+                        value : '1',
+                        children : 'First option'
+                    }),
+                    new Option({
+                        value : '2',
+                        children : 'Second option'
+                    }),
+                    new Option({
+                        value : '3',
+                        children : 'Third option'
+                    })
                 ]
             })
         ]),
-        null&&section([
+        section([
+            new Listbox({
+                label : 'Selected',
+                name : 'listbox-selected',
+                options : [
+                    new Option({
+                        value : '1',
+                        children : 'First option'
+                    }),
+                    new Option({
+                        value : '2',
+                        selected : true,
+                        children : 'Second option'
+                    }),
+                    new Option({
+                        value : '3',
+                        children : 'Third option'
+                    })
+                ]
+            })
+        ]),
+        null && section([
             new Listbox({
                 label : 'Multiselectable',
                 name : 'listbox-multiselectable',
                 multiselectable : true,
                 options : [
-                    new Option({ value : '1', children : 'First option' }),
-                    new Option({ value : '2', children : 'Second option' }),
-                    new Option({ value : '3', children : 'Third option' })
+                    new Option({
+                        value : '1',
+                        children : 'First option'
+                    }),
+                    new Option({
+                        value : '2',
+                        children : 'Second option'
+                    }),
+                    new Option({
+                        value : '3',
+                        children : 'Third option'
+                    })
                 ]
             })
         ]),
@@ -34,9 +73,18 @@ article({
                 readOnly : true,
                 name : 'listbox-readonly',
                 options : [
-                    new Option({ value : '1', children : 'First option' }),
-                    new Option({ value : '2', children : 'Second option' }),
-                    new Option({ value : '3', children : 'Third option' })
+                    new Option({
+                        value : '1',
+                        children : 'First option'
+                    }),
+                    new Option({
+                        value : '2',
+                        children : 'Second option'
+                    }),
+                    new Option({
+                        value : '3',
+                        children : 'Third option'
+                    })
                 ]
             })
         ]),
@@ -45,16 +93,25 @@ article({
                 label : 'Disabled',
                 disabled : true,
                 options : [
-                    new Option({ value : '1', children : 'First option' }),
-                    new Option({ value : '2', children : 'Second option' }),
-                    new Option({ value : '3', children : 'Third option' })
+                    new Option({
+                        value : '1',
+                        children : 'First option'
+                    }),
+                    new Option({
+                        value : '2',
+                        children : 'Second option'
+                    }),
+                    new Option({
+                        value : '3',
+                        children : 'Third option'
+                    })
                 ]
             })
         ])
     ]
 })
 
-0&&article({
+0 && article({
     parentNode : document.body,
     children : [
         h1(a('Check listbox')),
