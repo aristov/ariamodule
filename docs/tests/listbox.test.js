@@ -16,7 +16,7 @@ article({
                 ]
             })
         ]),
-        section([
+        null&&section([
             new Listbox({
                 label : 'Multiselectable',
                 name : 'listbox-multiselectable',
@@ -40,7 +40,7 @@ article({
                 ]
             })
         ]),
-        /*section([
+        section([
             new Listbox({
                 label : 'Disabled',
                 disabled : true,
@@ -50,11 +50,11 @@ article({
                     new Option({ value : '3', children : 'Third option' })
                 ]
             })
-        ])*/
+        ])
     ]
 })
 
-article({
+0&&article({
     parentNode : document.body,
     children : [
         h1(a('Check listbox')),
