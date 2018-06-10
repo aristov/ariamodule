@@ -21,6 +21,14 @@ article({
                     new Option({
                         value : '3',
                         children : 'Third option'
+                    }),
+                    new Option({
+                        value : '4',
+                        children : 'Fourth option'
+                    }),
+                    new Option({
+                        value : '5',
+                        children : 'Fifth option'
                     })
                 ]
             })
@@ -46,7 +54,7 @@ article({
                 ]
             })
         ]),
-        null && section([
+        section([
             new Listbox({
                 label : 'Multiselectable',
                 name : 'listbox-multiselectable',
@@ -63,6 +71,14 @@ article({
                     new Option({
                         value : '3',
                         children : 'Third option'
+                    }),
+                    new Option({
+                        value : '4',
+                        children : 'Fourth option'
+                    }),
+                    new Option({
+                        value : '5',
+                        children : 'Fifth option'
                     })
                 ]
             })
