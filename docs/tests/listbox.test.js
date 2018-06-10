@@ -79,6 +79,22 @@ article({
                     new Option({
                         value : '5',
                         children : 'Fifth option'
+                    }),
+                    new Option({
+                        value : '6',
+                        children : 'Sixth option'
+                    }),
+                    new Option({
+                        value : '7',
+                        children : 'Seventh option'
+                    }),
+                    new Option({
+                        value : '8',
+                        children : 'Eighth option'
+                    }),
+                    new Option({
+                        value : '9',
+                        children : 'Ninth option'
                     })
                 ]
             })
