@@ -1,12 +1,12 @@
 import { a, article, h1, section } from 'htmlmodule'
-import { Listbox, Option } from '../../lib'
+import { ListBox, Option } from '../../lib'
 
 article({
     parentNode : document.body,
     children : [
-        h1(a('Listbox')),
+        h1(a('ListBox')),
         section([
-            new Listbox({
+            new ListBox({
                 label : 'Simple',
                 name : 'listbox-simple',
                 options : [
@@ -34,7 +34,7 @@ article({
             })
         ]),
         section([
-            new Listbox({
+            new ListBox({
                 label : 'Selected',
                 name : 'listbox-selected',
                 options : [
@@ -55,7 +55,7 @@ article({
             })
         ]),
         section([
-            new Listbox({
+            new ListBox({
                 label : 'Multiselectable',
                 name : 'listbox-multiselectable',
                 multiselectable : true,
@@ -100,7 +100,7 @@ article({
             })
         ]),
         section([
-            new Listbox({
+            new ListBox({
                 label : 'Read only',
                 readOnly : true,
                 name : 'listbox-readonly',
@@ -121,7 +121,7 @@ article({
             })
         ]),
         section([
-            new Listbox({
+            new ListBox({
                 label : 'Disabled',
                 disabled : true,
                 options : [
@@ -148,7 +148,7 @@ article({
     children : [
         h1(a('Check listbox')),
         section([
-            new Listbox({
+            new ListBox({
                 label : 'Simple',
                 name : 'check-listbox-simple',
                 options : [
@@ -171,7 +171,7 @@ article({
             })
         ]),
         section([
-            new Listbox({
+            new ListBox({
                 label : 'Multiselectable',
                 name : 'check-listbox-multiselectable',
                 multiselectable : true,
@@ -195,7 +195,7 @@ article({
             })
         ]),
         section([
-            new Listbox({
+            new ListBox({
                 label : 'Read only',
                 name : 'check-listbox-readonly',
                 readOnly : true,

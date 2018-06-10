@@ -3,7 +3,9 @@
     display: inline-block;
     outline: none;
     white-space: nowrap;
-    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 .listbox .box
 {
