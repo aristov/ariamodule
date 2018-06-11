@@ -21,7 +21,7 @@ h1 a:not(:hover)
 
 .listbox .box
 {
-    max-height: 150px;
+    max-height: 140px;
 }
 .selectbox .button
 {
