@@ -1,14 +1,13 @@
-import { Assembler } from 'esmodule'
 import { RoleAttrAssembler } from '../../lib'
 import '../../lib/aria/html'
 
 Object.defineProperties(EventTarget.prototype, {
-    '__instance__' : {
+    __instance__ : {
         get() {
-            return Assembler.getInstanceOf(this)
+            return RoleAttrAssembler.getInstanceOf(this)
         }
     },
-    '__role__' : {
+    __role__ : {
         get() {
             return RoleAttrAssembler.getRoleOf(this)
         }
