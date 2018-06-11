@@ -1,13 +1,13 @@
-import { a, article, h1, section } from 'htmlmodule'
+import { a, article, h1, label, section } from 'htmlmodule'
 import { ListBox, Option } from '../../lib'
 
 article({
     parentNode : document.body,
     children : [
-        h1(a('ListBox')),
+        h1(a('List box')),
         section([
             new ListBox({
-                label : 'Simple',
+                label : label('Simple'),
                 name : 'listbox-simple',
                 options : [
                     new Option({
@@ -35,7 +35,7 @@ article({
         ]),
         section([
             new ListBox({
-                label : 'Selected',
+                label : label('Selected'),
                 name : 'listbox-selected',
                 options : [
                     new Option({
@@ -56,7 +56,7 @@ article({
         ]),
         section([
             new ListBox({
-                label : 'Multiselectable',
+                label : label('Multiselectable'),
                 name : 'listbox-multiselectable',
                 multiselectable : true,
                 options : [
@@ -101,7 +101,7 @@ article({
         ]),
         section([
             new ListBox({
-                label : 'Read only',
+                label : label('Read only'),
                 readOnly : true,
                 name : 'listbox-readonly',
                 options : [
@@ -122,7 +122,7 @@ article({
         ]),
         section([
             new ListBox({
-                label : 'Disabled',
+                label : label('Disabled'),
                 disabled : true,
                 options : [
                     new Option({

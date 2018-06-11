@@ -30,26 +30,32 @@
 {
     padding: 0 30px;
 }
+.listbox label
+{
+    display: block;
+    margin-bottom: 5px;
+    cursor: default;
+}
+
+.listbox:hover
+{
+    border-color: rgba(0, 0, 0, 0.3);
+}
 .listbox:not([aria-disabled=true]) .option:hover
 {
     background: rgba(0, 0, 0, 0.01);
 }
-
-/* hover */
 
 .listbox:hover .box
 {
     border-color: rgba(0, 0, 0, 0.3);
 }
 
-/* focus */
-
 .listbox:focus .box
 {
     border-color: #ffdb4d;
     box-shadow: 0 0 0 1px #ffdb4d;
 }
-
 .listbox:focus span[role=option].option[aria-selected=true],
 .listbox:not([aria-disabled=true]) .option[aria-selected=true]
 {
@@ -68,8 +74,8 @@
     left: 10px;
 }
 
-.listbox[aria-readonly=true] label,
-.listbox[aria-readonly=true] .box
+.listbox[aria-readonly=true] .box,
+.listbox[aria-readonly=true] label
 {
     opacity: 0.7;
 }
@@ -93,10 +99,4 @@
 .listbox[aria-disabled=true] .option[aria-checked=true]::before
 {
     opacity: 0.4;
-}
-.listbox > label
-{
-    display: block;
-    margin-bottom: 5px;
-    cursor: default;
 }
