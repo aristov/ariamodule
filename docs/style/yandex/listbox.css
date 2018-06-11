@@ -15,6 +15,7 @@
     position: relative;
     overflow: auto;
     outline: none;
+    padding: 4px 0;
 }
 .listbox .option
 {
@@ -32,14 +33,6 @@
 .listbox:not([aria-disabled=true]) .option:hover
 {
     background: rgba(0, 0, 0, 0.01);
-}
-.listbox .option:first-child
-{
-    margin-top: 4px;
-}
-.listbox .option:last-child
-{
-    margin-bottom: 4px;
 }
 
 /* hover */
