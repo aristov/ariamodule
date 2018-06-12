@@ -7,7 +7,7 @@
     -webkit-user-select: none;
     -ms-user-select: none;
 }
-.listbox .box
+.listbox > span
 {
     background: #fff;
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -46,23 +46,23 @@
     background: rgba(0, 0, 0, 0.01);
 }
 
-.listbox:hover .box
+.listbox:hover > span
 {
     border-color: rgba(0, 0, 0, 0.3);
 }
 
-.listbox:focus .box
+.listbox:focus > span
 {
     border-color: #ffdb4d;
     box-shadow: 0 0 0 1px #ffdb4d;
 }
-.listbox:focus span[role=option].option[aria-selected=true],
+.listbox:focus .option[aria-selected=true],
 .listbox:not([aria-disabled=true]) .option[aria-selected=true]
 {
     background: #ffeba0;
 }
-.listbox:focus span[role=option].option[aria-selected=true]:active,
-.listbox:focus span[role=option].option[aria-selected=true].active
+.listbox:focus .option[aria-selected=true]:active,
+.listbox:focus .option[aria-selected=true].active
 {
     background: #fee481;
 }
@@ -74,13 +74,13 @@
     left: 10px;
 }
 
-.listbox[aria-readonly=true] .box,
+.listbox[aria-readonly=true] > span,
 .listbox[aria-readonly=true] label
 {
     opacity: 0.7;
 }
 
-.listbox[aria-disabled=true] .box
+.listbox[aria-disabled=true] > span
 {
     background: rgba(0, 0, 0, 0.08);
     border-color: transparent;

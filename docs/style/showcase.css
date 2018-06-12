@@ -19,7 +19,7 @@ h1 a:not(:hover)
     text-decoration: none;
 }
 
-.listbox .box
+.listbox > span
 {
     max-height: 144px;
 }

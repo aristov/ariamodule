@@ -1,4 +1,4 @@
-import { a, article, h1, label, section } from 'htmlmodule'
+import { a, article, h1, label, section, span } from 'htmlmodule'
 import { ListBox, Option } from '../../lib'
 
 article({
@@ -55,7 +55,7 @@ article({
                 label : label('Selected'),
                 name : 'listbox-multiselectable',
                 multiselectable : true,
-                options : [
+                children : span([
                     new Option({
                         value : '1',
                         children : 'First option'
@@ -95,7 +95,7 @@ article({
                         value : '9',
                         children : 'Ninth option'
                     })
-                ]
+                ])
             })
         ]),
     ]
