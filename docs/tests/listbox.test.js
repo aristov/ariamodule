@@ -53,7 +53,7 @@ article({
         section([
             new ListBox({
                 label : label('Selected'),
-                name : 'listbox-multiselectable',
+                name : 'listbox-multiselectable-selected',
                 multiselectable : true,
                 children : span([
                     new Option({
