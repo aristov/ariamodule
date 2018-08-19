@@ -47,36 +47,6 @@
 
 /*================================================================*/
 
-.textbox.hasclear .input
-{
-    padding-right: 26px;
-}
-.textbox .clearbutton
-{
-    display: none;
-    width: 27px;
-    height: 27px;
-    background: url(images/cross.svg) no-repeat 50% 50%;
-    position: absolute;
-    right: 1px;
-    opacity: 0.25;
-    outline: none;
-}
-.textbox:hover .clearbutton,
-.textbox.focus .clearbutton
-{
-    display: inline-block;
-}
-.textbox:not(.disabled) .clearbutton:hover
-{
-    cursor: pointer;
-    opacity: 1;
-}
-.textbox[aria-invalid=true] > .input
-{
-    border-color: red;
-}
-
 .textboxgroup
 {
     display: inline-block;

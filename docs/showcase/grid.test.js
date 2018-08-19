@@ -51,9 +51,9 @@ article({
                     new RowGroup(['A', 'B', 'C'].map(header => {
                         return new Row([
                             new RowHeader(header),
-                            new GridCell({ selected : 'false' }),
-                            new GridCell({ selected : 'false' }),
-                            new GridCell({ selected : 'false' })
+                            new GridCell({ selected : false }),
+                            new GridCell({ selected : false }),
+                            new GridCell({ selected : false })
                         ])
                     }))
                 ]
@@ -71,7 +71,7 @@ article({
                     ])),
                     new RowGroup(['A', 'B', 'C'].map(header => {
                         return new GridRow({
-                            selected : 'false',
+                            selected : false,
                             children : [
                                 new RowHeader(header),
                                 new Cell,
@@ -103,9 +103,9 @@ article({
                     new RowGroup(['A', 'B', 'C'].map(header => {
                         return new Row([
                             new RowHeader(header),
-                            new DataCell({ selected : 'false' }),
-                            new DataCell({ selected : 'false' }),
-                            new DataCell({ selected : 'false' })
+                            new DataCell({ selected : false }),
+                            new DataCell({ selected : false }),
+                            new DataCell({ selected : false })
                         ])
                     }))
                 ]
@@ -127,8 +127,8 @@ article({
                             new RowHeader(header),
                             [1, 2, 3].map(() => {
                                 return new DataCell({
-                                    grabbed : 'false',
-                                    selected : 'false'
+                                    grabbed : false,
+                                    selected : false
                                 })
                             })
                         ])

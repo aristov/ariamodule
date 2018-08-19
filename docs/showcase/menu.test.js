@@ -32,7 +32,7 @@ article({
                     new MenuItem({
                         onclick : ({ target }) => {
                             new AlertDialog({
-                                trigger : MenuItem.prototype.getRole(target),
+                                trigger : MenuItem.getRoleOf(target),
                                 children : [
                                     new Heading('Dialog from menu'),
                                     p('This dialog demonstrates how to create a dialog from a popup menu.'),

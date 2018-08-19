@@ -9,7 +9,7 @@ article({
             new Tree([
                 new TreeItem({
                     label : 'First',
-                    expanded : 'true',
+                    expanded : true,
                     group : new Group([
                         new TreeItem({ label : 'Nested 1' }),
                         new TreeItem({ label : 'Nested 2' })
@@ -17,15 +17,15 @@ article({
                 }),
                 new TreeItem({
                     label : 'Second',
-                    expanded : 'true',
+                    expanded : true,
                     group : new Group([
                         new TreeItem({
                             label : 'Nested 1',
-                            expanded : 'true',
+                            expanded : true,
                             group : new Group([
                                 new TreeItem({
                                     label : 'Subnested',
-                                    expanded : 'true',
+                                    expanded : true,
                                     group : new Group([
                                         new TreeItem({ label : 'Deepnested 1' }),
                                         new TreeItem({ label : 'Deepnested 2' })
@@ -35,7 +35,7 @@ article({
                         }),
                         new TreeItem({
                             label : 'Nested 2',
-                            expanded : 'false',
+                            expanded : false,
                             group : new Group([
                                 new TreeItem({ label : 'Subnested 1' }),
                                 new TreeItem({ label : 'Subnested 2' })
@@ -45,11 +45,11 @@ article({
                 }),
                 new TreeItem({
                     label : 'Third',
-                    expanded : 'true',
+                    expanded : true,
                     group : new Group([
                         new TreeItem({
                             label : 'Nested 1',
-                            expanded : 'false',
+                            expanded : false,
                             group : new Group([
                                 new TreeItem({ label : 'Subnested I' }),
                                 new TreeItem({ label : 'Subnested II' }),

@@ -1,0 +1,92 @@
+.dialog
+{
+    position: absolute;
+    display: inline-block;
+    margin: 0 20px;
+    z-index: 1;
+}
+/*.transition .dialog*/
+.dialog
+{
+    transition: opacity .3s;
+}
+.dialog[aria-modal=true]
+{
+    position: fixed;
+    top: -100px;
+    right: -100px;
+    left: -100px;
+    bottom: -100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+}
+.dialog > div
+{
+    background: #fff;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 10px 20px -5px rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
+    max-width: 300px;
+    overflow: scroll;
+    padding: 15px;
+    z-index: 2;
+}
+/*.transition .dialog > div*/
+.dialog > div
+{
+    transition: transform .3s;
+}
+.dialog[aria-hidden=true][aria-expanded=false]
+{
+    display: none;
+}
+.dialog[aria-hidden=false][aria-expanded=false],
+.dialog[aria-hidden=true][aria-expanded=true]
+{
+    opacity: 0;
+}
+.dialog[aria-hidden=false][aria-expanded=false] > div
+{
+    transform: scale(.5);
+}
+.dialog[aria-hidden=true][aria-expanded=true] > div
+{
+    transform: scale(2);
+}
+
+/*================================================================*/
+
+.dialog .heading
+{
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 0 10px;
+}
+.dialog .button
+{
+    margin-right: 5px;
+}
+.dialog .closebutton
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    background-image: url(images/cross.svg);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    opacity: 0.5;
+}
+.dialog .closebutton:hover
+{
+    opacity: 1;
+}
+.dialog .closebutton:not(:focus)
+{
+    border-color: transparent;
+}
+.dialog p
+{
+    color: rgba(0, 0, 0, 0.8);
+}

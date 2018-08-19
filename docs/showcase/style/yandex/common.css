@@ -3,9 +3,9 @@ body
     font: 13px Arial;
 }
 [hidden],
-[aria-hidden]
+[aria-hidden=true]
 {
-    display: none !important;
+    display: none;
 }
 
 /*

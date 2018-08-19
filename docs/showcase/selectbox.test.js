@@ -1,12 +1,12 @@
 import { a, article, h1, section } from 'htmlmodule'
-import { Selectbox, Option } from '../../lib'
+import { SelectBox, Option } from '../../lib'
 
 article({
     parentNode : document.body,
     children : [
-        h1(a('Selectbox')),
+        h1(a('SelectBox')),
         section([
-            new Selectbox({
+            new SelectBox({
                 label : 'Simple',
                 name : 'selectbox-simple',
                 options : [
@@ -26,7 +26,7 @@ article({
             })
         ]),
         section([
-            new Selectbox({
+            new SelectBox({
                 label : 'Multiselectable',
                 name : 'selectbox-multiselectable',
                 multiselectable : true,
@@ -46,7 +46,7 @@ article({
                 ]
             })
         ]),
-        new Selectbox({
+        new SelectBox({
             label : 'Read only',
             readOnly : true,
             name : 'selectbox-readonly',
@@ -67,27 +67,28 @@ article({
         })
     ]
 })
-article({
+
+0 && article({
     parentNode : document.body,
     children : [
         h1(a('Check selectbox')),
         section([
-            new Selectbox({
+            new SelectBox({
                 label : 'Simple',
                 name : 'check-selectbox-simple',
                 options : [
                     new Option({
-                        checked : 'false',
+                        checked : false,
                         value : '1',
                         children : 'First option'
                     }),
                     new Option({
-                        checked : 'false',
+                        checked : false,
                         value : '2',
                         children : 'Second option'
                     }),
                     new Option({
-                        checked : 'false',
+                        checked : false,
                         value : '3',
                         children : 'Third option'
                     })
@@ -95,23 +96,23 @@ article({
             })
         ]),
         section([
-            new Selectbox({
+            new SelectBox({
                 label : 'Multiselectable',
                 name : 'check-selectbox-multiselectable',
                 multiselectable : true,
                 options : [
                     new Option({
-                        checked : 'false',
+                        checked : false,
                         value : '1',
                         children : 'First option'
                     }),
                     new Option({
-                        checked : 'false',
+                        checked : false,
                         value : '2',
                         children : 'Second option'
                     }),
                     new Option({
-                        checked : 'false',
+                        checked : false,
                         value : '3',
                         children : 'Third option'
                     })
@@ -119,23 +120,23 @@ article({
             })
         ]),
         section([
-            new Selectbox({
+            new SelectBox({
                 label : 'Read only',
                 name : 'check-selectbox-readonly',
                 readOnly : true,
                 options : [
                     new Option({
-                        checked : 'false',
+                        checked : false,
                         value : '1',
                         children : 'First option'
                     }),
                     new Option({
-                        checked : 'false',
+                        checked : false,
                         value : '2',
                         children : 'Second option'
                     }),
                     new Option({
-                        checked : 'false',
+                        checked : false,
                         value : '3',
                         children : 'Third option'
                     })
