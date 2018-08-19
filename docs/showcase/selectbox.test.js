@@ -4,7 +4,7 @@ import { SelectBox, Option } from '../../lib'
 article({
     parentNode : document.body,
     children : [
-        h1(a('SelectBox')),
+        h1(a('Select box')),
         section([
             new SelectBox({
                 label : 'Simple',

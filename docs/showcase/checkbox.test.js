@@ -1,32 +1,32 @@
 import { a, article, h1, section } from 'htmlmodule'
-import { Checkbox } from '../../lib'
+import { CheckBox } from '../../lib'
 
 article({
     parentNode : document.body,
     children : [
-        h1(a('Checkbox')),
+        h1(a('Check box')),
         section([
-            new Checkbox({
+            new CheckBox({
                 name : 'checkbox-simple',
                 children : 'Simple'
             })
         ]),
         section([
-            new Checkbox({
+            new CheckBox({
                 name : 'checkbox-checked',
                 checked : true,
                 children : 'Checked'
             })
         ]),
         section([
-            new Checkbox({
+            new CheckBox({
                 name : 'checkbox-readonly',
                 readOnly : true,
                 children : 'Read only'
             })
         ]),
         section([
-            new Checkbox({
+            new CheckBox({
                 name : 'checkbox-readonly',
                 checked : true,
                 readOnly : true,
@@ -34,14 +34,14 @@ article({
             })
         ]),
         section([
-            new Checkbox({
+            new CheckBox({
                 name : 'checkbox-disabled',
                 disabled : true,
                 children : 'Disabled'
             })
         ]),
         section([
-            new Checkbox({
+            new CheckBox({
                 name : 'checkbox-checked-disabled',
                 checked : true,
                 disabled : true,
