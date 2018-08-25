@@ -7,13 +7,12 @@ import {
     MenuButton,
     MenuItem,
     MenuItemLink,
-    AlertDialog,
+    Dialog,
 } from '../../lib'
 
 class CancelButton extends Button {
     activate() {
-        const dialog = this.closest(Dialog)
-        if(dialog) dialog.cancel()
+        this.closest(Dialog).expanded = false
     }
 }
 
@@ -31,9 +30,11 @@ article({
                     }),
                     new MenuItem({
                         onclick : ({ target }) => {
-                            new AlertDialog({
-                                trigger : MenuItem.getRoleOf(target),
-                                children : [
+                            new Dialog({
+                                modal : true,
+                                expanded : true,
+                                trigger : target,
+                                content : [
                                     new Heading('Dialog from menu'),
                                     p('This dialog demonstrates how to create a dialog from a popup menu.'),
                                     new Button('Ok'), ' ',
@@ -41,6 +42,7 @@ article({
                                 ]
                             })
                         },
+                        hasPopup : 'dialog',
                         children : 'Menu item dialog'
                     }),
                 ]),
