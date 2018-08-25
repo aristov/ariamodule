@@ -1,4 +1,4 @@
-import { a, article, h1, section } from 'htmlmodule'
+import { a, article, h1, label, section } from 'htmlmodule'
 import { Group, Tree, TreeItem } from '../../lib'
 
 article({
@@ -8,55 +8,55 @@ article({
         section([
             new Tree([
                 new TreeItem({
-                    label : 'First',
+                    label : label('First'),
                     expanded : true,
                     group : new Group([
-                        new TreeItem({ label : 'Nested 1' }),
-                        new TreeItem({ label : 'Nested 2' })
+                        new TreeItem({ label : label('Nested 1') }),
+                        new TreeItem({ label : label('Nested 2') })
                     ])
                 }),
                 new TreeItem({
-                    label : 'Second',
+                    label : label('Second'),
                     expanded : true,
                     group : new Group([
                         new TreeItem({
-                            label : 'Nested 1',
+                            label : label('Nested 1'),
                             expanded : true,
                             group : new Group([
                                 new TreeItem({
-                                    label : 'Subnested',
+                                    label : label('Subnested'),
                                     expanded : true,
                                     group : new Group([
-                                        new TreeItem({ label : 'Deepnested 1' }),
-                                        new TreeItem({ label : 'Deepnested 2' })
+                                        new TreeItem({ label : label('Deepnested 1') }),
+                                        new TreeItem({ label : label('Deepnested 2') })
                                     ])
                                 })
                             ])
                         }),
                         new TreeItem({
-                            label : 'Nested 2',
+                            label : label('Nested 2'),
                             expanded : false,
                             group : new Group([
-                                new TreeItem({ label : 'Subnested 1' }),
-                                new TreeItem({ label : 'Subnested 2' })
+                                new TreeItem({ label : label('Subnested 1') }),
+                                new TreeItem({ label : label('Subnested 2') })
                             ])
                         })
                     ])
                 }),
                 new TreeItem({
-                    label : 'Third',
+                    label : label('Third'),
                     expanded : true,
                     group : new Group([
                         new TreeItem({
-                            label : 'Nested 1',
+                            label : label('Nested 1'),
                             expanded : false,
                             group : new Group([
-                                new TreeItem({ label : 'Subnested I' }),
-                                new TreeItem({ label : 'Subnested II' }),
-                                new TreeItem({ label : 'Subnested III' })
+                                new TreeItem({ label : label('Subnested I') }),
+                                new TreeItem({ label : label('Subnested II') }),
+                                new TreeItem({ label : label('Subnested III') })
                             ])
                         }),
-                        new TreeItem({ label : 'Nested 2' })
+                        new TreeItem({ label : label('Nested 2') })
                     ])
                 })
             ])
