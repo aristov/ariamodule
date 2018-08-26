@@ -1,15 +1,15 @@
-import { RoleAttrAssembler } from '../../lib'
+import { Role } from '../../lib'
 import '../../lib/aria/html'
 
 Object.defineProperties(EventTarget.prototype, {
     __instance__ : {
         get() {
-            return RoleAttrAssembler.getInstanceOf(this)
+            return Role.getInstanceOf(this)
         }
     },
     __role__ : {
         get() {
-            return RoleAttrAssembler.getRoleOf(this)
+            return Role.getRoleOf(this)
         }
     }
 })
