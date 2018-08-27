@@ -1,4 +1,4 @@
-import { a, article, h1, section } from 'htmlmodule'
+import { a, article, h1, label, section } from 'htmlmodule'
 import { SearchBox } from '../../lib'
 
 article({
@@ -7,27 +7,27 @@ article({
         h1(a('Search box')),
         section([
             new SearchBox({
-                label : 'Simple',
+                label : label('Simple'),
                 name : 'searchbox-simple'
             })
         ]),
         section([
             new SearchBox({
-                label : 'With request',
+                label : label('With request'),
                 name : 'searchbox-placeholder',
                 value : 'Press ESC key'
             })
         ]),
         section([
             new SearchBox({
-                label : 'Read only',
-                name : 'searchbox-simple',
+                label : label('Read only'),
+                name : 'searchbox-readonly',
                 readOnly : true
             })
         ]),
         section([
             new SearchBox({
-                label : 'Disabled',
+                label : label('Disabled'),
                 name : 'searchbox-disabled',
                 disabled : true
             })

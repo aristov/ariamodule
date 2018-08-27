@@ -1,4 +1,4 @@
-import { a, article, h1, section } from 'htmlmodule'
+import { a, article, h1, label, section } from 'htmlmodule'
 import { ComboBox } from '../../lib'
 import countrySuggest from './stub/countrysuggest'
 
@@ -8,7 +8,7 @@ article({
         h1(a('Combo box')),
         section([
             new ComboBox({
-                label : 'Simple',
+                label : label('Simple'),
                 options : countrySuggest.map(({ id, name }) => ({
                     value : id,
                     textContent : name
