@@ -6,7 +6,8 @@ const panels = [
     new TabPanel('2'),
     new TabPanel('3')
 ]
-let tabList
+
+let tabs
 
 article({
     parentNode : document.body,
@@ -33,24 +34,24 @@ article({
         ]),
         section([
             h1('Vertical'),
-            tabList = new TabList({
+            new TabList({
                 orientation : 'vertical',
-                children : [
+                children : tabs = [
                     new Tab('First'),
                     new Tab('Second'),
                     new Tab('Third')
                 ]
             }),
             new TabPanel({
-                labelledBy : tabList.tabs[0],
+                labelledBy : tabs[0],
                 children : '1'
             }),
             new TabPanel({
-                labelledBy : tabList.tabs[1],
+                labelledBy : tabs[1],
                 children : '2'
             }),
             new TabPanel({
-                labelledBy : tabList.tabs[2],
+                labelledBy : tabs[2],
                 children : '3'
             })
         ])
