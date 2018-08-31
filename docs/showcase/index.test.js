@@ -18,7 +18,7 @@ Object.defineProperties(EventTarget.prototype, {
 // import './button.test'
 // import './checkbox.test'
 // import './radiogroup.test'
-import './listbox.test'
+// import './listbox.test'
 import './selectbox.test'
 // import './textbox.test'
 // import './searchbox.test'
