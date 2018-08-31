@@ -1,4 +1,4 @@
-import { a, article, h1, section } from 'htmlmodule'
+import { a, article, h1, section, label } from 'htmlmodule'
 import { SelectBox, Option } from '../../lib'
 
 article({
@@ -7,7 +7,7 @@ article({
         h1(a('Select box')),
         section([
             new SelectBox({
-                label : 'Simple',
+                label : label('Simple'),
                 name : 'selectbox-simple',
                 options : [
                     new Option({
@@ -27,7 +27,28 @@ article({
         ]),
         section([
             new SelectBox({
-                label : 'Multiselectable',
+                label : label('Selected'),
+                name : 'selectbox-selected',
+                value : '2',
+                options : [
+                    new Option({
+                        value : '1',
+                        children : 'First option'
+                    }),
+                    new Option({
+                        value : '2',
+                        children : 'Second option'
+                    }),
+                    new Option({
+                        value : '3',
+                        children : 'Third option'
+                    })
+                ]
+            })
+        ]),
+        section([
+            new SelectBox({
+                label : label('Multiselectable'),
                 name : 'selectbox-multiselectable',
                 multiselectable : true,
                 options : [
@@ -46,25 +67,48 @@ article({
                 ]
             })
         ]),
-        new SelectBox({
-            label : 'Read only',
-            readOnly : true,
-            name : 'selectbox-readonly',
-            options : [
-                new Option({
-                    value : '1',
-                    children : 'First option'
-                }),
-                new Option({
-                    value : '2',
-                    children : 'Second option'
-                }),
-                new Option({
-                    value : '3',
-                    children : 'Third option'
-                })
-            ]
-        })
+        section([
+            new SelectBox({
+                label : label('Read only'),
+                readOnly : true,
+                name : 'selectbox-readonly',
+                options : [
+                    new Option({
+                        value : '1',
+                        children : 'First option'
+                    }),
+                    new Option({
+                        value : '2',
+                        children : 'Second option'
+                    }),
+                    new Option({
+                        value : '3',
+                        children : 'Third option'
+                    })
+                ]
+            }),
+        ]),
+        section([
+            new SelectBox({
+                label : label('Disabled'),
+                disabled : true,
+                name : 'selectbox-disabled',
+                options : [
+                    new Option({
+                        value : '1',
+                        children : 'First option'
+                    }),
+                    new Option({
+                        value : '2',
+                        children : 'Second option'
+                    }),
+                    new Option({
+                        value : '3',
+                        children : 'Third option'
+                    })
+                ]
+            })
+        ])
     ]
 })
 
@@ -74,7 +118,7 @@ article({
         h1(a('Check selectbox')),
         section([
             new SelectBox({
-                label : 'Simple',
+                label : label('Simple'),
                 name : 'check-selectbox-simple',
                 options : [
                     new Option({
@@ -97,7 +141,7 @@ article({
         ]),
         section([
             new SelectBox({
-                label : 'Multiselectable',
+                label : label('Multiselectable'),
                 name : 'check-selectbox-multiselectable',
                 multiselectable : true,
                 options : [
@@ -121,7 +165,7 @@ article({
         ]),
         section([
             new SelectBox({
-                label : 'Read only',
+                label : label('Read only'),
                 name : 'check-selectbox-readonly',
                 readOnly : true,
                 options : [

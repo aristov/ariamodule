@@ -25,16 +25,16 @@
     right: 6px;
     transition: transform 0.1s ease-out 0s;
 }
-.selectbox[aria-readonly=true] label,
-.selectbox[aria-readonly=true] .button
+.selectbox.readonly label,
+.selectbox.readonly .button
 {
     opacity: 0.7;
 }
-.selectbox[aria-disabled=true]
+.selectbox.disabled
 {
     color: rgba(0, 0, 0, 0.5);
 }
-.selectbox[aria-disabled=true] .button::after
+.selectbox.disabled .button::after
 {
     opacity: 0.2;
 }
@@ -46,18 +46,22 @@
 }
 .selectbox .listbox
 {
-    min-width: 150px;
+    position: absolute;
     display: block;
+    min-width: 150px;
+    background: #fff;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 10px 20px -5px rgba(0, 0, 0, 0.4);
+    z-index: 1;
 }
 .selectbox .listbox > span
 {
     border: none;
 }
-.selectbox[aria-expanded=true] .button::after
+.selectbox .button[aria-expanded=true]::after
 {
     transform: rotate(-180deg) translateY(-2px);
 }
-.selectbox:not([aria-expanded=true]) .listbox
+.selectbox .listbox:not([aria-expanded=true])
 {
     display: none;
 }
