@@ -2,9 +2,10 @@
 {
     color: #04b;
 }
-.link:not(:focus):not(:hover)
+.link:not([aria-disabled]):focus,
+.link:not([aria-disabled]):hover
 {
-    text-decoration: none;
+    text-decoration: underline;
 }
 .link:focus
 {
@@ -16,8 +17,8 @@
     color: #c00;
     cursor: pointer;
 }
-.link:active,
-.link.active
+.link:not([aria-disabled]):active,
+.link:not([aria-disabled]).active
 {
     background: #f3f1ed;
 }
@@ -26,7 +27,7 @@
     color: #ccc;
     cursor: default;
 }
-.link[rel~=external]:not(:hover)
+.link.external:not(:hover)
 {
     color: #070;
 }
