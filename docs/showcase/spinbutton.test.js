@@ -33,6 +33,22 @@ article({
         ]),
         section([
             new SpinButton({
+                label : label('Custom step'),
+                valueNow : 50,
+                step : 50
+            })
+        ]),
+        section([
+            new SpinButton({
+                label : label('Fractional'),
+                valueMin : 0,
+                valueMax : 1,
+                valueNow : .5,
+                step : .1
+            })
+        ]),
+        section([
+            new SpinButton({
                 label : label('Read only'),
                 valueNow : 30,
                 readOnly : true
