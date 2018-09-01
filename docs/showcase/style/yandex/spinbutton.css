@@ -1,0 +1,77 @@
+.spinbutton
+{
+    display: inline-block;
+    outline: none;
+}
+.spinbutton .box
+{
+    display: inline-block;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 4px;
+}
+.spinbutton span[contenteditable]
+{
+    display: inline-block;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, .2);
+    border-width: 0 1px;
+    padding: 5px;
+    width: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
+    vertical-align: top;
+    cursor: text;
+    outline: none;
+}
+.spinbutton .button
+{
+    padding: 5px 10px;
+    border: none;
+}
+.spinbutton .button:first-of-type
+{
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.spinbutton .button:last-of-type
+{
+    border-left: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.spinbutton label
+{
+    display: block;
+    margin-bottom: 5px;
+    cursor: default;
+}
+.spinbutton:hover .box,
+.spinbutton:hover span[contenteditable]
+{
+    border-color: rgba(0, 0, 0, .3);
+}
+.spinbutton.focus .box
+{
+    border-color: #ffdb4d;
+    box-shadow: 0 0 0 1px #ffdb4d;
+}
+.spinbutton[aria-disabled=true]
+{
+    color: rgba(0, 0, 0, .5);
+}
+.spinbutton[aria-disabled=true] .box
+{
+    border-color: transparent;
+}
+.spinbutton[aria-disabled=true] span[contenteditable]
+{
+    border-color: transparent;
+    background: rgba(0, 0, 0, .08);
+    cursor: default;
+}
+.spinbutton[aria-disabled=true]:not([aria-valuenow]) span[contenteditable]::before
+{
+    content: ' ';
+}
