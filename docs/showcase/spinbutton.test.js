@@ -59,7 +59,9 @@ article({
             new SpinButton({
                 label : label('Read only'),
                 name : 'spinbutton-readonly',
-                valueNow : 30,
+                valueMin : -100,
+                valueMax : 100,
+                valueNow : 7,
                 readOnly : true
             })
         ]),
