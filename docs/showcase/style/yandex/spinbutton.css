@@ -29,13 +29,13 @@
     padding: 5px 10px;
     border: none;
 }
-.spinbutton .button:first-of-type
+.spinbutton .button:first-child
 {
     border-right: none;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
-.spinbutton .button:last-of-type
+.spinbutton .button:last-child
 {
     border-left: none;
     border-top-left-radius: 0;

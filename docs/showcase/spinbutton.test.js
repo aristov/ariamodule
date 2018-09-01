@@ -6,11 +6,15 @@ article({
     children : [
         h1(a('Spin button')),
         section([
-            new SpinButton({ label : label('Simple') })
+            new SpinButton({
+                label : label('Simple'),
+                name : 'spinbutton-simple'
+            })
         ]),
         section([
             new SpinButton({
                 label : label('Non-negative'),
+                name : 'spinbutton-non-negative',
                 valueMin : 0,
                 valueNow : 0
             })
@@ -18,6 +22,7 @@ article({
         section([
             new SpinButton({
                 label : label('Bounded'),
+                name : 'spinbutton-bounded',
                 valueMin : 1,
                 valueMax : 9,
                 valueNow : 5
@@ -26,6 +31,7 @@ article({
         section([
             new SpinButton({
                 label : label('Negative bounded'),
+                name : 'spinbutton-negative-bounded',
                 valueMin : -9,
                 valueMax : -1,
                 valueNow : -5
@@ -34,6 +40,7 @@ article({
         section([
             new SpinButton({
                 label : label('Custom step'),
+                name : 'spinbutton-custom-step',
                 valueNow : 50,
                 step : 50
             })
@@ -41,7 +48,8 @@ article({
         section([
             new SpinButton({
                 label : label('Fractional'),
-                valueMin : 0,
+                name : 'spinbutton-fractional',
+                valueMin : -1,
                 valueMax : 1,
                 valueNow : .5,
                 step : .1
@@ -50,6 +58,7 @@ article({
         section([
             new SpinButton({
                 label : label('Read only'),
+                name : 'spinbutton-readonly',
                 valueNow : 30,
                 readOnly : true
             })
@@ -57,6 +66,7 @@ article({
         section([
             new SpinButton({
                 label : label('Filled disabled'),
+                name : 'spinbutton-disabled',
                 valueNow : 42,
                 disabled : true
             })
