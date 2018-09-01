@@ -9,14 +9,14 @@
     border: 1px solid rgba(0, 0, 0, .2);
     border-radius: 4px;
 }
-.spinbutton span[contenteditable]
+.spinbutton .text
 {
     display: inline-block;
     border-style: solid;
     border-color: rgba(0, 0, 0, .2);
     border-width: 0 1px;
     padding: 5px;
-    width: 30px;
+    width: 40px;
     white-space: nowrap;
     overflow: hidden;
     text-align: center;
@@ -48,14 +48,18 @@
     cursor: default;
 }
 .spinbutton:hover .box,
-.spinbutton:hover span[contenteditable]
+.spinbutton:hover:not(:focus):not([aria-disabled=true]) .text
 {
     border-color: rgba(0, 0, 0, .3);
 }
-.spinbutton.focus .box
+.spinbutton:focus .box
 {
     border-color: #ffdb4d;
     box-shadow: 0 0 0 1px #ffdb4d;
+}
+.spinbutton[aria-readonly=true]
+{
+    opacity: .7;
 }
 .spinbutton[aria-disabled=true]
 {
@@ -65,13 +69,13 @@
 {
     border-color: transparent;
 }
-.spinbutton[aria-disabled=true] span[contenteditable]
+.spinbutton[aria-disabled=true] .text
 {
     border-color: transparent;
     background: rgba(0, 0, 0, .08);
     cursor: default;
 }
-.spinbutton[aria-disabled=true]:not([aria-valuenow]) span[contenteditable]::before
+.spinbutton:not([aria-valuenow]) .text::before
 {
     content: ' ';
 }

@@ -10,6 +10,13 @@ article({
         ]),
         section([
             new SpinButton({
+                label : label('Non-negative'),
+                valueMin : 0,
+                valueNow : 0
+            })
+        ]),
+        section([
+            new SpinButton({
                 label : label('Bounded'),
                 valueMin : 1,
                 valueMax : 9,
@@ -18,8 +25,17 @@ article({
         ]),
         section([
             new SpinButton({
-                label : label('Disabled'),
-                disabled : true
+                label : label('Negative bounded'),
+                valueMin : -9,
+                valueMax : -1,
+                valueNow : -5
+            })
+        ]),
+        section([
+            new SpinButton({
+                label : label('Read only'),
+                valueNow : 30,
+                readOnly : true
             })
         ]),
         section([
