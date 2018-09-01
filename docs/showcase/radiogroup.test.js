@@ -8,6 +8,7 @@ article({
         section([
             new RadioGroup({
                 label : label('Simple'),
+                name : 'radiogroup-simple',
                 children : [
                     new Radio({
                         value : '1',
@@ -27,6 +28,7 @@ article({
         section([
             new RadioGroup({
                 label : label('Checked'),
+                name : 'radiogroup-checked',
                 children : [
                     new Radio({
                         value : '1',
@@ -47,6 +49,7 @@ article({
         section([
             new RadioGroup({
                 label : label('Single disabled'),
+                name : 'radiogroup-single-disabled',
                 children : [
                     new Radio({
                         value : '1',
@@ -67,6 +70,7 @@ article({
         section([
             new RadioGroup({
                 label : label('Checked and single disabled'),
+                name : 'radiogroup-checked-and-single-disabled',
                 children : [
                     new Radio({
                         value : '1',
@@ -89,6 +93,7 @@ article({
             new RadioGroup({
                 disabled : true,
                 label : label('Group disabled'),
+                name : 'radiogroup-group-disabled',
                 children : [
                     new Radio({
                         value : '1',
