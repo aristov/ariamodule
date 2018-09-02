@@ -46,13 +46,8 @@
 }
 .selectbox .listbox
 {
-    position: absolute;
     display: block;
     min-width: 150px;
-    background: #fff;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, .06), 0 10px 20px -5px rgba(0, 0, 0, .4);
-    z-index: 1;
-    transition: opacity .2s, transform .2s;
 }
 .selectbox .listbox > span
 {
@@ -70,17 +65,4 @@
 .selectbox .listbox .option[aria-selected=true].active
 {
     background: #fee481;
-}
-.selectbox .listbox[aria-hidden=true][aria-expanded=false]
-{
-    display: none;
-}
-.selectbox .listbox[aria-hidden=false][aria-expanded=false],
-.selectbox .listbox[aria-hidden=true][aria-expanded=true]
-{
-    opacity: 0;
-}
-.selectbox .listbox[aria-hidden=false][aria-expanded=false]
-{
-    transform: translateY(20px);
 }

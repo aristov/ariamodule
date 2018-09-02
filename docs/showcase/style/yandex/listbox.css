@@ -100,3 +100,24 @@
 {
     opacity: 0.4;
 }
+.listbox[aria-expanded]
+{
+    position: absolute;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .06), 0 10px 20px -5px rgba(0, 0, 0, .4);
+    background: #fff;
+    z-index: 1;
+    transition: opacity .2s, transform .2s;
+}
+.listbox[aria-hidden=true][aria-expanded=false]
+{
+    display: none;
+}
+.listbox[aria-hidden=false][aria-expanded=false],
+.listbox[aria-hidden=true][aria-expanded=true]
+{
+    opacity: 0;
+}
+.listbox[aria-hidden=false][aria-expanded=false]
+{
+    transform: translateY(20px);
+}

@@ -3,10 +3,6 @@
     display: inline-block;
     position: relative;
 }
-.combobox .inlineblock
-{
-    position: relative;
-}
 .combobox .textbox .input
 {
     border-right: none;
@@ -35,7 +31,6 @@
 }
 .combobox .listbox
 {
-    position: absolute;
     display: block;
     min-width: 100%;
     margin-top: 3px;
@@ -45,10 +40,6 @@
     border: none;
     box-shadow: none;
     max-height: 296px;
-}
-.combobox:not([aria-expanded=true]) .listbox
-{
-    display: none;
 }
 .combobox[aria-expanded=true] .button::before
 {
