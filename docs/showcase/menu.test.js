@@ -4,6 +4,7 @@ import {
     Dialog,
     Heading,
     Menu,
+    MenuBar,
     MenuButton,
     MenuItem,
     MenuItemLink,
@@ -26,7 +27,8 @@ article({
                     new MenuItem('Menu item'),
                     new MenuItemLink({
                         href : '//yandex.ru',
-                        children : 'Menu item link'
+                        target : '_blank',
+                        children : 'Follow link'
                     }),
                     new MenuItem({
                         onclick : ({ target }) => {
@@ -43,11 +45,47 @@ article({
                             })
                         },
                         hasPopup : 'dialog',
-                        children : 'Menu item dialog'
+                        children : 'Show dialog...'
                     }),
                 ]),
                 children : 'Simple menu'
             })
+        ])
+    ]
+})
+
+article({
+    parentNode : document.body,
+    children : [
+        h1(a('Menu bar')),
+        section([
+            new MenuBar([
+                new MenuItem('Menu item'),
+                new MenuItem({
+                    ownerElement : a({
+                        href : '//yandex.ru',
+                        target : '_blank'
+                    }),
+                    children : 'Follow link'
+                }),
+                new MenuItem({
+                    onclick : ({ target }) => {
+                        new Dialog({
+                            modal : true,
+                            expanded : true,
+                            trigger : target,
+                            content : [
+                                new Heading('Dialog from menu'),
+                                p('This dialog demonstrates how to create a dialog from a popup menu.'),
+                                new Button('Ok'), ' ',
+                                new CancelButton('Cancel')
+                            ]
+                        })
+                    },
+                    hasPopup : 'dialog',
+                    children : 'Show dialog...'
+                }),
+            ])
         ])
     ]
 })

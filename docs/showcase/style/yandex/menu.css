@@ -36,10 +36,30 @@
     color: #000;
     text-decoration: none;
 }
-.menu a.menuitem:focus[href]
+.menu a.menuitem[href]:focus
 {
     color: #c00;
     text-decoration: underline;
+}
+
+.menubar .menuitem
+{
+    display: inline-block;
+    border: 1px solid rgba(0, 0, 0, .2);
+}
+.menubar .menuitem:first-child
+{
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+.menubar .menuitem:last-child
+{
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+.menubar .menuitem:not(:last-child)
+{
+    border-right: none;
 }
 
 .menubutton
