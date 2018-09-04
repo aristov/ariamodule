@@ -11,6 +11,7 @@ import {
     MenuItemCheckBox,
     MenuItemRadio,
     MenuItemLink,
+    Navigation,
     Separator
 } from './ariamodule'
 
@@ -18,6 +19,20 @@ class CancelButton extends Button {
     activate() {
         this.closest(Dialog).expanded = false
     }
+}
+
+function openDialog(event) {
+    new Dialog({
+        modal : true,
+        expanded : true,
+        trigger : event.target,
+        content : [
+            new Heading('Dialog from menu'),
+            p('This dialog demonstrates how to create a dialog from a popup menu.'),
+            new Button('Ok'), ' ',
+            new CancelButton('Cancel')
+        ]
+    })
 }
 
 article({
@@ -36,19 +51,7 @@ article({
                     new MenuItem({
                         children : 'Open dialog...',
                         hasPopup : 'dialog',
-                        onclick : ({ target }) => {
-                            new Dialog({
-                                modal : true,
-                                expanded : true,
-                                trigger : target,
-                                content : [
-                                    new Heading('Dialog from menu'),
-                                    p('This dialog demonstrates how to create a dialog from a popup menu.'),
-                                    new Button('Ok'), ' ',
-                                    new CancelButton('Cancel')
-                                ]
-                            })
-                        }
+                        onclick : openDialog
                     }),
                 ]),
                 children : 'Simple menu'
@@ -60,7 +63,56 @@ article({
 article({
     parentNode : document.body,
     children : [
-        h1(a('Menu bar')),
+        h1(a('Navigation menu bar')),
+        section([
+            new Navigation([
+                new MenuBar([
+                    new MenuItemLink({
+                        href : 'http://w3.org/TR/dom/',
+                        target : '_blank',
+                        children : 'DOM spec'
+                    }),
+                    new MenuItemLink({
+                        href : 'http://w3.org/TR/html/',
+                        target : '_blank',
+                        children : 'HTML spec'
+                    }),
+                    new MenuItemLink({
+                        href : 'https://www.w3.org/TR/wai-aria-1.1/',
+                        target : '_blank',
+                        children : 'WAI-ARIA spec'
+                    })
+                ])
+            ])
+        ])
+    ]
+})
+
+article({
+    parentNode : document.body,
+    children : [
+        h1(a('Simple menu bar')),
+        section([
+            new MenuBar([
+                new MenuItem('Menu item'),
+                new MenuItem({
+                    disabled : true,
+                    children : 'Disabled item'
+                }),
+                new MenuItem({
+                    hasPopup : 'dialog',
+                    onclick : openDialog,
+                    children : 'Open dialog...'
+                })
+            ])
+        ])
+    ]
+})
+
+article({
+    parentNode : document.body,
+    children : [
+        h1(a('Complex menu bar')),
         section([
             new MenuBar([
                 new MenuItem({
@@ -90,21 +142,13 @@ article({
                         ]),
                         new Separator,
                         new MenuItem({
+                            disabled : true,
+                            children : 'Disabled item'
+                        }),
+                        new MenuItem({
                             children : 'Open dialog...',
                             hasPopup : 'dialog',
-                            onclick : event => {
-                                new Dialog({
-                                    modal : true,
-                                    expanded : true,
-                                    trigger : event.target,
-                                    content : [
-                                        new Heading('Dialog from menu'),
-                                        p('This dialog demonstrates how to create a dialog from a popup menu.'),
-                                        new Button('Ok'), ' ',
-                                        new CancelButton('Cancel')
-                                    ]
-                                })
-                            }
+                            onclick : openDialog
                         })
                     ])
                 }),
@@ -123,8 +167,12 @@ article({
                     children : 'Radio menu groups',
                     controls : new Menu([
                         new Group([
-                            new MenuItemRadio('First group - radio one'),
-                            new MenuItemRadio('First group - radio two')
+                            new MenuItemRadio({
+                                disabled : true,
+                                children : 'First group - radio one'
+                            }),
+                            new MenuItemRadio('First group - radio two'),
+                            new MenuItemRadio('First group - radio three')
                         ]),
                         new Separator,
                         new Group([
@@ -132,7 +180,11 @@ article({
                                 checked : true,
                                 children : 'Second group - radio one'
                             }),
-                            new MenuItemRadio('Second group - radio two')
+                            new MenuItemRadio('Second group - radio two'),
+                            new MenuItemRadio({
+                                disabled : true,
+                                children : 'Second group - radio three'
+                            }),
                         ])
                     ])
                 })

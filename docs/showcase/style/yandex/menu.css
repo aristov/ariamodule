@@ -51,6 +51,7 @@
     color: #000;
     text-decoration: none;
 }
+.menu .menuitem[href]:hover,
 .menu .menuitem[href]:focus
 {
     color: #c00;
@@ -113,6 +114,19 @@
 .menubar:hover
 {
     border-color: rgba(0, 0, 0, .3);
+}
+.navigation .menubar
+{
+    border: none;
+}
+.navigation .menubar .menuitem
+{
+    padding: 0;
+    margin-right: 20px;
+}
+.navigation .menubar .menuitem:focus
+{
+    background: transparent;
 }
 
 .menubutton
