@@ -20,7 +20,7 @@
 {
     display: block;
     position: relative;
-    padding: 0 13px;
+    padding: 0 25px;
     line-height: 25px;
     cursor: pointer;
     outline: none;
@@ -55,36 +55,38 @@
     color: #c00;
     text-decoration: underline;
 }
-.menu .menuitemcheckbox
+/*.menu .menuitemcheckbox
 {
     padding-left: 30px;
-}
+}*/
 .menu .menuitemcheckbox[aria-checked=true]::before
 {
     content: url(images/checkmark-small.svg);
     position: absolute;
     top: 2px;
-    left: 10px;
+    left: 6px;
 }
 
+.menu .separator
+{
+    border-top: 1px solid rgba(0, 0, 0, .2);
+    margin: 3px 0;
+}
+
+.menubar
+{
+    border: 1px solid rgba(0, 0, 0, .2);
+    padding: 0;
+    border-radius: 3px;
+}
 .menubar > .menuitem
 {
     display: inline-block;
-    border: 1px solid rgba(0, 0, 0, .2);
+    padding: 0 10px;
 }
-.menubar > .menuitem:first-child
+.menubar:hover
 {
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-}
-.menubar > .menuitem:last-child
-{
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
-}
-.menubar > .menuitem:not(:last-child)
-{
-    border-right: none;
+    border-color: rgba(0, 0, 0, .3);
 }
 
 .menubutton

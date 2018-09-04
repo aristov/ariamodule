@@ -3,6 +3,7 @@ import {
     Button,
     Dialog,
     Heading,
+    Group,
     Menu,
     MenuBar,
     MenuButton,
@@ -10,7 +11,7 @@ import {
     MenuItemCheckBox,
     MenuItemRadio,
     MenuItemLink,
-    Dialog
+    Separator
 } from './ariamodule'
 
 class CancelButton extends Button {
@@ -79,29 +80,57 @@ article({
                     children : 'Radio submenu'
                 }),
                 new MenuItem({
-                    ownerElement : a({
-                        href : '//yandex.ru',
-                        target : '_blank'
-                    }),
-                    children : 'Follow link'
+                    controls : new Menu([
+                        new Group([
+                            new MenuItemRadio('First group - radio one'),
+                            new MenuItemRadio('First group - radio two')
+                        ]),
+                        new Separator,
+                        new Group([
+                            new MenuItemRadio('Second group - radio one'),
+                            new MenuItemRadio('Second group - radio two')
+                        ])
+                    ]),
+                    children : 'Grouped radio submenu'
                 }),
                 new MenuItem({
-                    onclick : event => {
-                        new Dialog({
-                            modal : true,
-                            expanded : true,
-                            trigger : event.target,
-                            content : [
-                                new Heading('Dialog from menu'),
-                                p('This dialog demonstrates how to create a dialog from a popup menu.'),
-                                new Button('Ok'), ' ',
-                                new CancelButton('Cancel')
-                            ]
-                        })
-                    },
-                    hasPopup : 'dialog',
-                    children : 'Open dialog...'
-                }),
+                    controls : new Menu([
+                        new MenuItem('Empty command'),
+                        new MenuItem({
+                            ownerElement : a({
+                                href : '//www.w3.org/TR/wai-aria/#menu',
+                                target : '_blank'
+                            }),
+                            children : 'Follow link'
+                        }),
+                        new Separator,
+                        new MenuItemCheckBox('Check item'),
+                        new Separator,
+                        new Group([
+                            new MenuItemRadio('First radio'),
+                            new MenuItemRadio('Second radio')
+                        ]),
+                        new Separator,
+                        new MenuItem({
+                            onclick : event => {
+                                new Dialog({
+                                    modal : true,
+                                    expanded : true,
+                                    trigger : event.target,
+                                    content : [
+                                        new Heading('Dialog from menu'),
+                                        p('This dialog demonstrates how to create a dialog from a popup menu.'),
+                                        new Button('Ok'), ' ',
+                                        new CancelButton('Cancel')
+                                    ]
+                                })
+                            },
+                            hasPopup : 'dialog',
+                            children : 'Open dialog...'
+                        }),
+                    ]),
+                    children : 'Mixed submenu'
+                })
             ])
         ])
     ]
