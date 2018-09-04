@@ -2,11 +2,18 @@
 {
     outline: none;
     white-space: nowrap;
-    background: #fff;
     padding: 4px 0;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+}
+.menu[aria-expanded]
+{
+    position: absolute;
+    margin: 1px;
+    background: #fff;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 10px 20px -5px rgba(0, 0, 0, 0.4);
+    z-index: 1;
 }
 .menu .menuitem
 {
@@ -22,7 +29,8 @@
 {
     border-color: rgba(0, 0, 0, 0.3);
 }
-.menu .menuitem:focus
+.menu .menuitem:focus,
+.menu .menuitem[aria-expanded=true]
 {
     background: #ffeba0;
 }
@@ -42,22 +50,22 @@
     text-decoration: underline;
 }
 
-.menubar .menuitem
+.menubar > .menuitem
 {
     display: inline-block;
     border: 1px solid rgba(0, 0, 0, .2);
 }
-.menubar .menuitem:first-child
+.menubar > .menuitem:first-child
 {
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
 }
-.menubar .menuitem:last-child
+.menubar > .menuitem:last-child
 {
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
 }
-.menubar .menuitem:not(:last-child)
+.menubar > .menuitem:not(:last-child)
 {
     border-right: none;
 }

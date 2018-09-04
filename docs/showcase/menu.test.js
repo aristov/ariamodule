@@ -7,8 +7,9 @@ import {
     MenuBar,
     MenuButton,
     MenuItem,
+    MenuItemCheckBox,
     MenuItemLink,
-    Dialog,
+    Dialog
 } from '../../lib'
 
 class CancelButton extends Button {
@@ -45,7 +46,7 @@ article({
                             })
                         },
                         hasPopup : 'dialog',
-                        children : 'Show dialog...'
+                        children : 'Open dialog...'
                     }),
                 ]),
                 children : 'Simple menu'
@@ -60,7 +61,14 @@ article({
         h1(a('Menu bar')),
         section([
             new MenuBar([
-                new MenuItem('Menu item'),
+                new MenuItem({
+                    controls : new Menu([
+                        new MenuItemCheckBox('Check box 1'),
+                        new MenuItemCheckBox('Check box 2'),
+                        new MenuItemCheckBox('Check box 3')
+                    ]),
+                    children : 'Show submenu'
+                }),
                 new MenuItem({
                     ownerElement : a({
                         href : '//yandex.ru',
@@ -83,7 +91,7 @@ article({
                         })
                     },
                     hasPopup : 'dialog',
-                    children : 'Show dialog...'
+                    children : 'Open dialog...'
                 }),
             ])
         ])
