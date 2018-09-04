@@ -29,11 +29,13 @@ article({
                 menu : new Menu([
                     new MenuItem('Menu item'),
                     new MenuItemLink({
+                        children : 'Follow link',
                         href : '//yandex.ru',
-                        target : '_blank',
-                        children : 'Follow link'
+                        target : '_blank'
                     }),
                     new MenuItem({
+                        children : 'Open dialog...',
+                        hasPopup : 'dialog',
                         onclick : ({ target }) => {
                             new Dialog({
                                 modal : true,
@@ -46,9 +48,7 @@ article({
                                     new CancelButton('Cancel')
                                 ]
                             })
-                        },
-                        hasPopup : 'dialog',
-                        children : 'Open dialog...'
+                        }
                     }),
                 ]),
                 children : 'Simple menu'
@@ -64,47 +64,25 @@ article({
         section([
             new MenuBar([
                 new MenuItem({
+                    children : 'Mixed menu',
                     controls : new Menu([
-                        new MenuItemCheckBox('First check item'),
-                        new MenuItemCheckBox('Second check item'),
-                        new MenuItemCheckBox('Third check item')
-                    ]),
-                    children : 'Check box submenu'
-                }),
-                new MenuItem({
-                    controls : new Menu([
-                        new MenuItemRadio('First radio item'),
-                        new MenuItemRadio('Second radio item'),
-                        new MenuItemRadio('Third radio item')
-                    ]),
-                    children : 'Radio submenu'
-                }),
-                new MenuItem({
-                    controls : new Menu([
-                        new Group([
-                            new MenuItemRadio('First group - radio one'),
-                            new MenuItemRadio('First group - radio two')
-                        ]),
+                        new MenuItemCheckBox('Check item'),
                         new Separator,
-                        new Group([
-                            new MenuItemRadio('Second group - radio one'),
-                            new MenuItemRadio('Second group - radio two')
-                        ])
-                    ]),
-                    children : 'Grouped radio submenu'
-                }),
-                new MenuItem({
-                    controls : new Menu([
-                        new MenuItem('Empty command'),
                         new MenuItem({
+                            children : 'Nested submenu',
+                            controls : new Menu([
+                                new MenuItemRadio('First radio item'),
+                                new MenuItemRadio('Second radio item'),
+                                new MenuItemRadio('Third radio item')
+                            ])
+                        }),
+                        new MenuItem({
+                            children : 'Follow link',
                             ownerElement : a({
                                 href : '//www.w3.org/TR/wai-aria/#menu',
                                 target : '_blank'
-                            }),
-                            children : 'Follow link'
+                            })
                         }),
-                        new Separator,
-                        new MenuItemCheckBox('Check item'),
                         new Separator,
                         new Group([
                             new MenuItemRadio('First radio'),
@@ -112,6 +90,8 @@ article({
                         ]),
                         new Separator,
                         new MenuItem({
+                            children : 'Open dialog...',
+                            hasPopup : 'dialog',
                             onclick : event => {
                                 new Dialog({
                                     modal : true,
@@ -124,12 +104,37 @@ article({
                                         new CancelButton('Cancel')
                                     ]
                                 })
-                            },
-                            hasPopup : 'dialog',
-                            children : 'Open dialog...'
+                            }
+                        })
+                    ])
+                }),
+                new MenuItem({
+                    children : 'Check menu',
+                    controls : new Menu([
+                        new MenuItemCheckBox('First check item'),
+                        new MenuItemCheckBox({
+                            checked : true,
+                            children : 'Second check item'
                         }),
-                    ]),
-                    children : 'Mixed submenu'
+                        new MenuItemCheckBox('Third check item')
+                    ])
+                }),
+                new MenuItem({
+                    children : 'Radio menu groups',
+                    controls : new Menu([
+                        new Group([
+                            new MenuItemRadio('First group - radio one'),
+                            new MenuItemRadio('First group - radio two')
+                        ]),
+                        new Separator,
+                        new Group([
+                            new MenuItemRadio({
+                                checked : true,
+                                children : 'Second group - radio one'
+                            }),
+                            new MenuItemRadio('Second group - radio two')
+                        ])
+                    ])
                 })
             ])
         ])
