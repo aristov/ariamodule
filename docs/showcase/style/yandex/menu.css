@@ -39,15 +39,31 @@
 {
     background: #fee481;
 }
-.menu a.menuitem
+.menu .menuitem[aria-disabled=true]
+{
+    color: rgba(0, 0, 0, 0.5);
+    cursor: default;
+}
+.menu .menuitem[href]
 {
     color: #000;
     text-decoration: none;
 }
-.menu a.menuitem[href]:focus
+.menu .menuitem[href]:focus
 {
     color: #c00;
     text-decoration: underline;
+}
+.menu .menuitemcheckbox
+{
+    padding: 0 30px;
+}
+.menu .menuitemcheckbox[aria-checked=true]::before
+{
+    content: url(images/checkmark-small.svg);
+    position: absolute;
+    top: 2px;
+    left: 10px;
 }
 
 .menubar > .menuitem
