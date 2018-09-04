@@ -1,6 +1,7 @@
 .menu
 {
     position: relative;
+    display: block;
     outline: none;
     white-space: nowrap;
     padding: 4px 0;
@@ -14,6 +15,7 @@
     margin: 1px;
     background: #fff;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 10px 20px -5px rgba(0, 0, 0, 0.4);
+    transition: opacity .2s, transform .2s;
     z-index: 1;
 }
 .menu .menuitem
@@ -78,6 +80,23 @@
 .menu[aria-expanded] .menu
 {
     margin-top: -3px;
+}
+.menu[aria-hidden=true][aria-expanded=false]
+{
+    display: none;
+}
+.menu[aria-hidden=false][aria-expanded=false],
+.menu[aria-hidden=true][aria-expanded=true]
+{
+    opacity: 0;
+}
+.menu[aria-hidden=false][aria-expanded=false]
+{
+    transform: translateY(20px);
+}
+.menu[aria-expanded] .menu[aria-hidden=false][aria-expanded=false]
+{
+    transform: translateX(20px);
 }
 
 .menubar
