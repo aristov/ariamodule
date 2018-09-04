@@ -1,5 +1,6 @@
 .menu
 {
+    position: relative;
     outline: none;
     white-space: nowrap;
     padding: 4px 0;
@@ -56,7 +57,7 @@
 }
 .menu .menuitemcheckbox
 {
-    padding: 0 30px;
+    padding-left: 30px;
 }
 .menu .menuitemcheckbox[aria-checked=true]::before
 {

@@ -8,9 +8,10 @@ import {
     MenuButton,
     MenuItem,
     MenuItemCheckBox,
+    MenuItemRadio,
     MenuItemLink,
     Dialog
-} from '../../lib'
+} from './ariamodule'
 
 class CancelButton extends Button {
     activate() {
@@ -63,11 +64,19 @@ article({
             new MenuBar([
                 new MenuItem({
                     controls : new Menu([
-                        new MenuItemCheckBox('Check box 1'),
-                        new MenuItemCheckBox('Check box 2'),
-                        new MenuItemCheckBox('Check box 3')
+                        new MenuItemCheckBox('First check item'),
+                        new MenuItemCheckBox('Second check item'),
+                        new MenuItemCheckBox('Third check item')
                     ]),
-                    children : 'Show submenu'
+                    children : 'Check box submenu'
+                }),
+                new MenuItem({
+                    controls : new Menu([
+                        new MenuItemRadio('First radio item'),
+                        new MenuItemRadio('Second radio item'),
+                        new MenuItemRadio('Third radio item')
+                    ]),
+                    children : 'Radio submenu'
                 }),
                 new MenuItem({
                     ownerElement : a({
@@ -77,11 +86,11 @@ article({
                     children : 'Follow link'
                 }),
                 new MenuItem({
-                    onclick : ({ target }) => {
+                    onclick : event => {
                         new Dialog({
                             modal : true,
                             expanded : true,
-                            trigger : target,
+                            trigger : event.target,
                             content : [
                                 new Heading('Dialog from menu'),
                                 p('This dialog demonstrates how to create a dialog from a popup menu.'),
