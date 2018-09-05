@@ -103,6 +103,7 @@
 
 .menubar
 {
+    display: inline-block;
     border: 1px solid rgba(0, 0, 0, .2);
     padding: 0;
     border-radius: 3px;
@@ -119,13 +120,13 @@
 .menubar[aria-orientation=vertical]
 {
     display: inline-block;
-    padding: 3px 0;
+    padding: 4px 0;
 }
 .menubar[aria-orientation=vertical] > .menuitem
 {
     display: block;
 }
-.navigation .menubar
+/*.navigation .menubar
 {
     border: none;
 }
@@ -137,7 +138,7 @@
 .navigation .menubar .menuitem:focus
 {
     background: transparent;
-}
+}*/
 
 .menubutton
 {

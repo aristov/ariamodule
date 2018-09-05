@@ -28,12 +28,64 @@ function openDialog(event) {
         trigger : event.target,
         content : [
             new Heading('Dialog from menu'),
-            p('This dialog demonstrates how to create a dialog from a popup menu.'),
+            p('This dialog demonstrates how to create a dialog from a menu.'),
             new Button('Ok'), ' ',
             new CancelButton('Cancel')
         ]
     })
 }
+
+article({
+    parentNode : document.body,
+    children : [
+        h1(a('Menu bar')),
+        section([
+            h1(a('Simple')),
+            new MenuBar([
+                new MenuItem('Menu item'),
+                new MenuItem({
+                    disabled : true,
+                    children : 'Disabled item'
+                }),
+                new MenuItem({
+                    hasPopup : 'dialog',
+                    onclick : openDialog,
+                    children : 'Open dialog...'
+                })
+            ])
+        ]),
+        section([
+            h1(a('Navigation')),
+            new Navigation([
+                new MenuBar([
+                    new MenuItemLink({
+                        href : 'http://w3.org/TR/dom/',
+                        target : '_blank',
+                        children : 'DOM spec'
+                    }),
+                    new MenuItemLink({
+                        href : 'http://w3.org/TR/html/',
+                        target : '_blank',
+                        children : 'HTML spec'
+                    }),
+                    new MenuItemLink({
+                        href : 'https://www.w3.org/TR/wai-aria-1.1/',
+                        target : '_blank',
+                        children : 'WAI-ARIA spec'
+                    })
+                ])
+            ])
+        ]),
+        section([
+            h1(a('Complex')),
+            complexMenuBar()
+        ]),
+        section([
+            h1(a('Vertical')),
+            complexMenuBar('vertical')
+        ])
+    ]
+})
 
 article({
     parentNode : document.body,
@@ -56,75 +108,6 @@ article({
                 ]),
                 children : 'Simple menu'
             })
-        ])
-    ]
-})
-
-article({
-    parentNode : document.body,
-    children : [
-        h1(a('Navigation menu bar')),
-        section([
-            new Navigation([
-                new MenuBar([
-                    new MenuItemLink({
-                        href : 'http://w3.org/TR/dom/',
-                        target : '_blank',
-                        children : 'DOM spec'
-                    }),
-                    new MenuItemLink({
-                        href : 'http://w3.org/TR/html/',
-                        target : '_blank',
-                        children : 'HTML spec'
-                    }),
-                    new MenuItemLink({
-                        href : 'https://www.w3.org/TR/wai-aria-1.1/',
-                        target : '_blank',
-                        children : 'WAI-ARIA spec'
-                    })
-                ])
-            ])
-        ])
-    ]
-})
-
-article({
-    parentNode : document.body,
-    children : [
-        h1(a('Simple menu bar')),
-        section([
-            new MenuBar([
-                new MenuItem('Menu item'),
-                new MenuItem({
-                    disabled : true,
-                    children : 'Disabled item'
-                }),
-                new MenuItem({
-                    hasPopup : 'dialog',
-                    onclick : openDialog,
-                    children : 'Open dialog...'
-                })
-            ])
-        ])
-    ]
-})
-
-article({
-    parentNode : document.body,
-    children : [
-        h1(a('Complex menu bar')),
-        section([
-            complexMenuBar()
-        ])
-    ]
-})
-
-article({
-    parentNode : document.body,
-    children : [
-        h1(a('Vertical menu bar')),
-        section([
-            complexMenuBar('vertical')
         ])
     ]
 })
@@ -182,7 +165,7 @@ function complexMenuBar(orientation) {
                 ])
             }),
             new MenuItem({
-                children : 'Radio menu groups',
+                children : 'Radio groups',
                 controls : new Menu([
                     new Group([
                         new MenuItemRadio({
