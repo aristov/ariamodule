@@ -78,7 +78,8 @@
     border: 4px solid transparent;
     border-left: 6px solid rgba(0, 0, 0, .7);
 }
-.menu[aria-expanded] .menu
+.menu[aria-expanded] .menu,
+.menubar[aria-orientation=vertical] .menu
 {
     margin-top: -3px;
 }
@@ -114,6 +115,15 @@
 .menubar:hover
 {
     border-color: rgba(0, 0, 0, .3);
+}
+.menubar[aria-orientation=vertical]
+{
+    display: inline-block;
+    padding: 3px 0;
+}
+.menubar[aria-orientation=vertical] > .menuitem
+{
+    display: block;
 }
 .navigation .menubar
 {
