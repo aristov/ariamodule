@@ -44,7 +44,7 @@
 }
 .radio:focus::before
 {
-    box-shadow: inset 0 0 0 1px #ffdb4d;
+    box-shadow: 0 0 0 1px #ffdb4d;
 }
 .radio:active::before,
 .radio.active::before

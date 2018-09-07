@@ -1,5 +1,5 @@
 import { a, article, h1, section } from 'htmlmodule'
-import { CheckBox } from '../../lib'
+import { CheckBox } from './ariamodule'
 
 article({
     parentNode : document.body,
@@ -16,6 +16,13 @@ article({
                 name : 'checkbox-checked',
                 checked : true,
                 children : 'Checked'
+            })
+        ]),
+        section([
+            new CheckBox({
+                name : 'checkbox-mixed',
+                checked : 'mixed',
+                children : 'Mixed'
             })
         ]),
         section([
