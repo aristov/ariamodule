@@ -1,0 +1,32 @@
+.switch
+{
+    line-height: 1.8;
+}
+.switch::before
+{
+    width: 50px;
+    height: 20px;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+.switch[aria-checked=true]::after,
+.switch:not([aria-checked=true])::after
+{
+    content: '';
+    position: absolute;
+    display: block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #aaa;
+    top: 2px;
+    transition: left .1s;
+}
+.switch:not([aria-checked=true])::after
+{
+    left: 2px;
+}
+.switch[aria-checked=true]::after
+{
+    left: 32px;
+}

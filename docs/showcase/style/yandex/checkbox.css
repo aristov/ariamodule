@@ -20,6 +20,7 @@
     height: 12px;
     margin-right: 6px;
     vertical-align: top;
+    transition: background-color .1s;
 }
 .checkbox:hover::before
 {
@@ -67,7 +68,7 @@
     background: rgba(0, 0, 0, 0.15);
     border-color: transparent;
 }
-.checkbox[aria-checked=true][aria-disabled=true]::after
+.checkbox[aria-disabled=true]::after
 {
     opacity: 0.4;
 }
