@@ -9,24 +9,42 @@
     border-radius: 10px;
     margin-right: 10px;
 }
+.switch[aria-checked]::before
+{
+    background: transparent;
+}
 .switch[aria-checked=true]::after,
 .switch:not([aria-checked=true])::after
 {
     content: '';
     position: absolute;
     display: block;
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
+    border: 1px solid rgba(0, 0, 0, .1);
     border-radius: 50%;
-    background: #aaa;
-    top: 2px;
+    background: rgba(0, 0, 0, .1);
+    top: 3px;
     transition: left .1s;
 }
 .switch:not([aria-checked=true])::after
 {
-    left: 2px;
+    left: 3px;
 }
 .switch[aria-checked=true]::after
 {
-    left: 32px;
+    left: 33px;
+    background: #ffeba0;
+}
+.checkbox[aria-checked].active::before
+{
+    background: #f3f1ed;
+}
+.switch[aria-checked=true][aria-disabled=true]::before
+{
+    background: rgba(0, 0, 0, 0.08);
+}
+.switch[aria-checked=true][aria-disabled=true]::after
+{
+    background: rgba(0, 0, 0, 0.15);
 }

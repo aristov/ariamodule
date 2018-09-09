@@ -14,6 +14,16 @@ article({
                     textContent : name
                 }))
             })
+        ]),
+        section([
+            new ComboBox({
+                label : label('Disabled'),
+                disabled : true,
+                options : countrySuggest.map(({ id, name }) => ({
+                    value : id,
+                    textContent : name
+                }))
+            })
         ])
     ]
 })
