@@ -3,6 +3,10 @@
     display: inline-block;
     position: relative;
 }
+.combobox .textbox
+{
+    vertical-align: bottom;
+}
 .combobox .textbox .input
 {
     border-right: none;

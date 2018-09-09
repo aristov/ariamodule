@@ -1,5 +1,5 @@
 import { a, article, h1, label, section } from 'htmlmodule'
-import { TextBox, MultiTextBox } from '../../lib'
+import { TextBox } from './ariamodule'
 
 article({
     parentNode : document.body,
@@ -13,11 +13,18 @@ article({
         ]),
         section([
             new TextBox({
-                label : label('Has placeholder'),
+                label : label('With placeholder'),
                 name : 'textbox-placeholder',
                 placeholder : 'Hint'
             })
         ]),
+        /*section([
+            new TextBox({
+                label : label('Multiline'),
+                name : 'textbox-multiline',
+                multiline : true
+            })
+        ]),*/
         section([
             new TextBox({
                 label : label('Read only'),
@@ -30,36 +37,6 @@ article({
                 label : label('Disabled'),
                 name : 'textbox-disabled',
                 disabled : true
-            })
-        ])
-    ]
-})
-
-article({
-    parentNode : document.body,
-    children : [
-        h1(a('Multi text box')),
-        section([
-            new MultiTextBox({
-                label : label('Simple'),
-                name : 'textbox-multiline',
-                multiline : true
-            })
-        ]),
-        section([
-            new MultiTextBox({
-                label : label('Has placeholder'),
-                name : 'textbox-multiline-placeholder',
-                placeholder : 'Hint',
-                multiline : true
-            })
-        ]),
-        section([
-            new MultiTextBox({
-                label : label('Disabled'),
-                name : 'textbox-multiline-disabled',
-                disabled : true,
-                multiline : true
             })
         ])
     ]

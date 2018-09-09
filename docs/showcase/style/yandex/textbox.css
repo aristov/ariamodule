@@ -5,38 +5,59 @@
 }
 .textbox .input
 {
+    display: block;
     background: #fff;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    font: inherit;
-    padding: 5px 8px;
+    padding: 0 8px;
+}
+.textbox .edit
+{
+    display: block;
+    width: 160px;
+    height: 15px;
+    padding: 5px 0;
     outline: none;
-    box-sizing: border-box;
-    width: 180px;
+    overflow: hidden;
+    white-space: nowrap;
 }
 .textbox:hover .input
 {
     border-color: rgba(0, 0, 0, 0.3);
 }
-.textbox .input:focus,
 .textbox.focus .input
 {
     border-color: #ffdb4d;
     box-shadow: 0 0 0 1px #ffdb4d;
 }
-.textbox.readonly
+.textbox[aria-readonly=true]
 {
     opacity: 0.7;
 }
-.textbox.disabled,
-.textbox .input:disabled
+.textbox[aria-disabled=true]
 {
     cursor: default;
     color: rgba(0, 0, 0, 0.5);
 }
-.textbox .input:disabled
+.textbox[aria-disabled] .input
 {
     background: rgba(0, 0, 0, 0.08);
     border-color: transparent;
+}
+.textbox[aria-multiline] .edit
+{
+    height: 60px;
+    white-space: normal;
+    overflow: auto;
+}
+.textbox .placeholder
+{
+    position: absolute;
+    padding: 5px 0;
+    color: #aaa;
+}
+.textbox[data-value] .placeholder
+{
+    display: none;
 }
 .textbox > label
 {

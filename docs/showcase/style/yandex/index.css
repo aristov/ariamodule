@@ -4,7 +4,6 @@
 @import url(buttongroup.css);
 @import url(checkbox.css);
 @import url(switch.css);
-@import url(combobox.css);
 @import url(datebox.css);
 @import url(datepicker.css);
 @import url(dialog.css);
@@ -16,13 +15,13 @@
 @import url(passwordbox.css);
 @import url(popup.css);
 @import url(radiogroup.css);
+@import url(textbox.css);
 @import url(searchbox.css);
+@import url(combobox.css);
 @import url(searchgroup.css);
 @import url(selectbox.css);
 @import url(slider.css);
 @import url(spinbutton.css);
 @import url(tablist.css);
-@import url(tabmenu.css);
-@import url(textbox.css);
 @import url(tree.css);
 @import url(progressbar.css);

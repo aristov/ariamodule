@@ -10,7 +10,8 @@
     height: 27px;
     background: url(images/cross.svg) no-repeat 50% 50%;
     position: absolute;
-    right: 1px;
+    right: 0;
+    bottom: 0;
     opacity: 0.25;
     outline: none;
 }
