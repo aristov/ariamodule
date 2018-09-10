@@ -54,6 +54,10 @@
     cursor: default;
     -webkit-user-select: none;
 }
+.combobox[aria-disabled=true] .button::before
+{
+    opacity: .3;
+}
 .combobox[aria-invalid=true] .textbox .input
 {
     border-color: red;
