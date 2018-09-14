@@ -1,5 +1,5 @@
 import { a, article, h1, label, section } from 'htmlmodule'
-import { ComboBox } from '../../lib'
+import { ComboBox } from './ariamodule'
 import countrySuggest from './stub/countrysuggest'
 
 article({

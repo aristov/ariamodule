@@ -10,7 +10,7 @@ import {
     DataCell,
     RowHeader,
     ColumnHeader
-} from '../../lib'
+} from './ariamodule'
 
 article({
     parentNode : document.body,

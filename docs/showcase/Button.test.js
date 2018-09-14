@@ -1,5 +1,5 @@
 import { a, article, h1, section } from 'htmlmodule'
-import { Button } from '../../lib/index'
+import { Button } from './ariamodule'
 
 article({
     parentNode : document.body,

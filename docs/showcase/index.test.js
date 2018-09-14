@@ -1,34 +1,21 @@
-import { Role } from '../../lib'
 import '../../lib/aria/html'
+import './debug'
 
-Object.defineProperties(EventTarget.prototype, {
-    __instance__ : {
-        get() {
-            return Role.getInstanceOf(this)
-        }
-    },
-    __role__ : {
-        get() {
-            return Role.getRoleOf(this)
-        }
-    }
-})
-
-import './link.test'
-import './button.test'
-import './checkbox.test'
-import './switch.test'
-import './radiogroup.test'
-import './listbox.test'
-import './selectbox.test'
-import './spinbutton.test'
-import './slider.test'
-import './textbox.test'
-import './searchbox.test'
-import './combobox.test'
-import './menu.test'
-import './dialog.test'
-import './tree.test'
-import './grid.test'
-import './tablist.test'
-import './progressbar.test'
+import './Link.test'
+import './Button.test'
+import './CheckBox.test'
+import './Switch.test'
+import './RadioGroup.test'
+import './ListBox.test'
+import './SelectBox.test'
+import './SpinButton.test'
+import './Slider.test'
+import './TextBox.test'
+import './SearchBox.test'
+import './ComboBox.test'
+import './Menu.test'
+import './Dialog.test'
+import './Tree.test'
+import './Grid.test'
+import './TabList.test'
+import './ProgressBar.test'

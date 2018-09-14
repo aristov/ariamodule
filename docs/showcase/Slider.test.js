@@ -1,5 +1,5 @@
 import { a, article, h1, label, section, Span } from 'htmlmodule'
-import { Slider } from '../../lib'
+import { Slider } from './ariamodule'
 
 class SliderTrack extends Span {}
 

@@ -1,5 +1,5 @@
 import { a, article, h1, label, section } from 'htmlmodule'
-import { RadioGroup, Radio } from '../../lib'
+import { RadioGroup, Radio } from './ariamodule'
 
 article({
     parentNode : document.body,

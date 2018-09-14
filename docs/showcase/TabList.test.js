@@ -1,5 +1,5 @@
 import { a, article, h1, section } from 'htmlmodule'
-import { Group, TabList, Tab, TabPanel } from '../../lib'
+import { Group, TabList, Tab, TabPanel } from './ariamodule'
 
 const panels = [
     new TabPanel('1'),

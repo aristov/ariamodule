@@ -1,5 +1,5 @@
 import { a, article, h1, label, section } from 'htmlmodule'
-import { Group, Tree, TreeItem } from '../../lib'
+import { Group, Tree, TreeItem } from './ariamodule'
 
 article({
     parentNode : document.body,

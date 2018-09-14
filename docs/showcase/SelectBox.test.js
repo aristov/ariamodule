@@ -1,14 +1,14 @@
-import { a, article, h1, label, section, span } from 'htmlmodule'
-import { ListBox, Option } from '../../lib'
+import { a, article, h1, section, label } from 'htmlmodule'
+import { SelectBox, Option } from './ariamodule'
 
 article({
     parentNode : document.body,
     children : [
-        h1(a('List box')),
+        h1(a('Select box')),
         section([
-            new ListBox({
+            new SelectBox({
                 label : label('Simple'),
-                name : 'listbox-simple',
+                name : 'selectbox-simple',
                 options : [
                     new Option({
                         value : '1',
@@ -21,14 +21,39 @@ article({
                     new Option({
                         value : '3',
                         children : 'Third option'
+                    }),
+                    new Option({
+                        value : '4',
+                        children : 'Fourth option'
+                    }),
+                    new Option({
+                        value : '5',
+                        children : 'Fifth option'
+                    }),
+                    new Option({
+                        value : '6',
+                        children : 'Sixth option'
+                    }),
+                    new Option({
+                        value : '7',
+                        children : 'Seventh option'
+                    }),
+                    new Option({
+                        value : '8',
+                        children : 'Eighth option'
+                    }),
+                    new Option({
+                        value : '9',
+                        children : 'Ninth option'
                     })
                 ]
             })
         ]),
         section([
-            new ListBox({
+            new SelectBox({
                 label : label('Selected'),
-                name : 'listbox-selected',
+                name : 'selectbox-selected',
+                value : '2',
                 options : [
                     new Option({
                         value : '1',
@@ -36,7 +61,6 @@ article({
                     }),
                     new Option({
                         value : '2',
-                        selected : true,
                         children : 'Second option'
                     }),
                     new Option({
@@ -47,10 +71,55 @@ article({
             })
         ]),
         section([
-            new ListBox({
+            new SelectBox({
+                label : label('Multi-selectable'),
+                name : 'selectbox-multiselectable',
+                multiSelectable : true,
+                options : [
+                    new Option({
+                        value : '1',
+                        children : 'First option'
+                    }),
+                    new Option({
+                        value : '2',
+                        children : 'Second option'
+                    }),
+                    new Option({
+                        value : '3',
+                        children : 'Third option'
+                    }),
+                    new Option({
+                        value : '4',
+                        children : 'Fourth option'
+                    }),
+                    new Option({
+                        value : '5',
+                        children : 'Fifth option'
+                    }),
+                    new Option({
+                        value : '6',
+                        children : 'Sixth option'
+                    }),
+                    new Option({
+                        value : '7',
+                        children : 'Seventh option'
+                    }),
+                    new Option({
+                        value : '8',
+                        children : 'Eighth option'
+                    }),
+                    new Option({
+                        value : '9',
+                        children : 'Ninth option'
+                    })
+                ]
+            })
+        ]),
+        section([
+            new SelectBox({
                 label : label('Read only'),
                 readOnly : true,
-                name : 'listbox-readonly',
+                name : 'selectbox-readonly',
                 options : [
                     new Option({
                         value : '1',
@@ -65,12 +134,13 @@ article({
                         children : 'Third option'
                     })
                 ]
-            })
+            }),
         ]),
         section([
-            new ListBox({
+            new SelectBox({
                 label : label('Disabled'),
                 disabled : true,
+                name : 'selectbox-disabled',
                 options : [
                     new Option({
                         value : '1',
@@ -90,176 +160,76 @@ article({
     ]
 })
 
-article({
-    parentNode : document.body,
-    children : [
-        h1(a('Multi list box')),
-        section([
-            new ListBox({
-                label : label('Multi-selectable'),
-                name : 'listbox-multiselectable',
-                multiSelectable : true,
-                options : [
-                    new Option({
-                        value : '1',
-                        children : 'First option'
-                    }),
-                    new Option({
-                        value : '2',
-                        children : 'Second option'
-                    }),
-                    new Option({
-                        value : '3',
-                        children : 'Third option'
-                    }),
-                    new Option({
-                        value : '4',
-                        children : 'Fourth option'
-                    }),
-                    new Option({
-                        value : '5',
-                        children : 'Fifth option'
-                    }),
-                    new Option({
-                        value : '6',
-                        children : 'Sixth option'
-                    }),
-                    new Option({
-                        value : '7',
-                        children : 'Seventh option'
-                    }),
-                    new Option({
-                        value : '8',
-                        children : 'Eighth option'
-                    }),
-                    new Option({
-                        value : '9',
-                        children : 'Ninth option'
-                    })
-                ]
-            })
-        ]),
-        section([
-            new ListBox({
-                label : label('Selected'),
-                name : 'listbox-multiselectable-selected',
-                multiSelectable : true,
-                children : span([
-                    new Option({
-                        value : '1',
-                        children : 'First option'
-                    }),
-                    new Option({
-                        value : '2',
-                        children : 'Second option'
-                    }),
-                    new Option({
-                        value : '3',
-                        selected : true,
-                        children : 'Third option'
-                    }),
-                    new Option({
-                        value : '4',
-                        selected : true,
-                        children : 'Fourth option'
-                    }),
-                    new Option({
-                        value : '5',
-                        selected : true,
-                        children : 'Fifth option'
-                    }),
-                    new Option({
-                        value : '6',
-                        children : 'Sixth option'
-                    }),
-                    new Option({
-                        value : '7',
-                        children : 'Seventh option'
-                    }),
-                    new Option({
-                        value : '8',
-                        children : 'Eighth option'
-                    }),
-                    new Option({
-                        value : '9',
-                        children : 'Ninth option'
-                    })
-                ])
-            })
-        ]),
-    ]
-})
-
 0 && article({
     parentNode : document.body,
     children : [
-        h1(a('Check listbox')),
+        h1(a('Check selectbox')),
         section([
-            new ListBox({
-                label : 'Simple',
-                name : 'check-listbox-simple',
+            new SelectBox({
+                label : label('Simple'),
+                name : 'check-selectbox-simple',
                 options : [
                     new Option({
-                        value : '1',
                         checked : false,
+                        value : '1',
                         children : 'First option'
                     }),
                     new Option({
-                        value : '2',
                         checked : false,
+                        value : '2',
                         children : 'Second option'
                     }),
                     new Option({
-                        value : '3',
                         checked : false,
+                        value : '3',
                         children : 'Third option'
                     })
                 ]
             })
         ]),
         section([
-            new ListBox({
-                label : 'Multi-selectable',
-                name : 'check-listbox-multiselectable',
+            new SelectBox({
+                label : label('Multi-selectable'),
+                name : 'check-selectbox-multiselectable',
                 multiSelectable : true,
                 options : [
                     new Option({
-                        value : '1',
                         checked : false,
+                        value : '1',
                         children : 'First option'
                     }),
                     new Option({
-                        value : '2',
                         checked : false,
+                        value : '2',
                         children : 'Second option'
                     }),
                     new Option({
-                        value : '3',
                         checked : false,
+                        value : '3',
                         children : 'Third option'
                     })
                 ]
             })
         ]),
         section([
-            new ListBox({
-                label : 'Read only',
-                name : 'check-listbox-readonly',
+            new SelectBox({
+                label : label('Read only'),
+                name : 'check-selectbox-readonly',
                 readOnly : true,
                 options : [
                     new Option({
-                        value : '1',
                         checked : false,
+                        value : '1',
                         children : 'First option'
                     }),
                     new Option({
-                        value : '2',
                         checked : false,
+                        value : '2',
                         children : 'Second option'
                     }),
                     new Option({
-                        value : '3',
                         checked : false,
+                        value : '3',
                         children : 'Third option'
                     })
                 ]

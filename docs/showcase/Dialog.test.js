@@ -1,5 +1,5 @@
 import { a, article, h1, kbd, p, section } from 'htmlmodule'
-import { AlertDialog, Button, Dialog, Heading } from '../../lib'
+import { AlertDialog, Button, Dialog, Heading } from './ariamodule'
 
 // todo AlertDialog
 // todo disposable dialogs

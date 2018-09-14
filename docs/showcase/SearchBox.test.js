@@ -1,5 +1,5 @@
 import { a, article, h1, label, section } from 'htmlmodule'
-import { SearchBox } from '../../lib'
+import { SearchBox } from './ariamodule'
 
 article({
     parentNode : document.body,
