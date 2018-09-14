@@ -1,7 +1,25 @@
 .popup
 {
+    display: block;
     position: absolute;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 10px 20px -5px rgba(0, 0, 0, 0.4);
     background: #fff;
+    font-size: 50px;
+    padding: 50px;
+    transition: opacity .3s, transform .3s;
     z-index: 1;
+}
+.popup[hidden='']
+{
+    display: none;
+}
+.popup[hidden='from']
+{
+    opacity: 0;
+    transform: scale(.5);
+}
+.popup[hidden='to']
+{
+    opacity: 0;
+    transform: scale(2);
 }
