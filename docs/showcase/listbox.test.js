@@ -96,9 +96,9 @@ article({
         h1(a('Multi list box')),
         section([
             new ListBox({
-                label : label('Multiselectable'),
+                label : label('Multi-selectable'),
                 name : 'listbox-multiselectable',
-                multiselectable : true,
+                multiSelectable : true,
                 options : [
                     new Option({
                         value : '1',
@@ -143,7 +143,7 @@ article({
             new ListBox({
                 label : label('Selected'),
                 name : 'listbox-multiselectable-selected',
-                multiselectable : true,
+                multiSelectable : true,
                 children : span([
                     new Option({
                         value : '1',
@@ -219,9 +219,9 @@ article({
         ]),
         section([
             new ListBox({
-                label : 'Multiselectable',
+                label : 'Multi-selectable',
                 name : 'check-listbox-multiselectable',
-                multiselectable : true,
+                multiSelectable : true,
                 options : [
                     new Option({
                         value : '1',

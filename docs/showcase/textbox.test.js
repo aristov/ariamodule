@@ -21,8 +21,8 @@ article({
         /*section([
             new TextBox({
                 label : label('Multiline'),
-                name : 'textbox-multiline',
-                multiline : true
+                name : 'textbox-multiLine',
+                multiLine : true
             })
         ]),*/
         section([

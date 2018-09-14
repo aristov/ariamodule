@@ -39,8 +39,8 @@ article({
         ]),
         section([
             new Grid({
-                label : 'Multiselectable',
-                multiselectable : true,
+                label : 'Multi-selectable',
+                multiSelectable : true,
                 content : [
                     new HeadRowGroup(new Row([
                         new RowHeader,
@@ -91,8 +91,8 @@ article({
         h1(a('Data grid')),
         section([
             new Grid({
-                label : 'Multiselectable',
-                multiselectable : true,
+                label : 'Multi-selectable',
+                multiSelectable : true,
                 content : [
                     new HeadRowGroup(new Row([
                         new RowHeader,
@@ -114,7 +114,7 @@ article({
         section([
             new Grid({
                 label : 'Draggable cells',
-                multiselectable : true,
+                multiSelectable : true,
                 content : [
                     new HeadRowGroup(new Row([
                         new RowHeader,

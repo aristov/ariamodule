@@ -72,9 +72,9 @@ article({
         ]),
         section([
             new SelectBox({
-                label : label('Multiselectable'),
+                label : label('Multi-selectable'),
                 name : 'selectbox-multiselectable',
-                multiselectable : true,
+                multiSelectable : true,
                 options : [
                     new Option({
                         value : '1',
@@ -189,9 +189,9 @@ article({
         ]),
         section([
             new SelectBox({
-                label : label('Multiselectable'),
+                label : label('Multi-selectable'),
                 name : 'check-selectbox-multiselectable',
-                multiselectable : true,
+                multiSelectable : true,
                 options : [
                     new Option({
                         checked : false,
