@@ -38,6 +38,31 @@ function openDialog(event) {
 article({
     parentNode : document.body,
     children : [
+        h1(a('Menu button')),
+        section([
+            new MenuButton({
+                controls : new Menu([
+                    new MenuItem('Menu item'),
+                    new MenuItemLink({
+                        children : 'Follow link',
+                        href : '//yandex.ru',
+                        target : '_blank'
+                    }),
+                    new MenuItem({
+                        children : 'Open dialog...',
+                        hasPopup : 'dialog',
+                        onclick : openDialog
+                    }),
+                ]),
+                children : 'Simple menu'
+            })
+        ])
+    ]
+})
+
+article({
+    parentNode : document.body,
+    children : [
         h1(a('Menu bar')),
         section([
             h1(a('Simple')),
@@ -83,31 +108,6 @@ article({
         section([
             h1(a('Vertical')),
             complexMenuBar('vertical')
-        ])
-    ]
-})
-
-article({
-    parentNode : document.body,
-    children : [
-        h1(a('Menu button')),
-        section([
-            new MenuButton({
-                menu : new Menu([
-                    new MenuItem('Menu item'),
-                    new MenuItemLink({
-                        children : 'Follow link',
-                        href : '//yandex.ru',
-                        target : '_blank'
-                    }),
-                    new MenuItem({
-                        children : 'Open dialog...',
-                        hasPopup : 'dialog',
-                        onclick : openDialog
-                    }),
-                ]),
-                children : 'Simple menu'
-            })
         ])
     ]
 })
