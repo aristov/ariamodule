@@ -6,7 +6,6 @@ import {
     Group,
     Menu,
     MenuBar,
-    MenuButton,
     MenuItem,
     MenuItemCheckBox,
     MenuItemRadio,
@@ -40,20 +39,8 @@ article({
     children : [
         h1(a('Menu button')),
         section([
-            new MenuButton({
-                controls : new Menu([
-                    new MenuItem('Menu item'),
-                    new MenuItemLink({
-                        children : 'Follow link',
-                        href : '//yandex.ru',
-                        target : '_blank'
-                    }),
-                    new MenuItem({
-                        children : 'Open dialog...',
-                        hasPopup : 'dialog',
-                        onclick : openDialog
-                    }),
-                ]),
+            new Button({
+                controls : complexMenu(),
                 children : 'Simple menu'
             })
         ])
@@ -112,46 +99,50 @@ article({
     ]
 })
 
+function complexMenu() {
+    return new Menu([
+        new MenuItemCheckBox('Check item'),
+        new Separator,
+        new MenuItem({
+            children : 'Nested submenu',
+            controls : new Menu([
+                new MenuItemRadio('First radio item'),
+                new MenuItemRadio('Second radio item'),
+                new MenuItemRadio('Third radio item')
+            ])
+        }),
+        new MenuItem({
+            children : 'Follow link',
+            ownerElement : a({
+                href : '//www.w3.org/TR/wai-aria/#menu',
+                target : '_blank'
+            })
+        }),
+        new Separator,
+        new Group([
+            new MenuItemRadio('First radio'),
+            new MenuItemRadio('Second radio')
+        ]),
+        new Separator,
+        new MenuItem({
+            disabled : true,
+            children : 'Disabled item'
+        }),
+        new MenuItem({
+            children : 'Open dialog...',
+            hasPopup : 'dialog',
+            onclick : openDialog
+        })
+    ])
+}
+
 function complexMenuBar(orientation) {
     return new MenuBar({
         orientation,
         children : [
             new MenuItem({
                 children : 'Mixed menu',
-                controls : new Menu([
-                    new MenuItemCheckBox('Check item'),
-                    new Separator,
-                    new MenuItem({
-                        children : 'Nested submenu',
-                        controls : new Menu([
-                            new MenuItemRadio('First radio item'),
-                            new MenuItemRadio('Second radio item'),
-                            new MenuItemRadio('Third radio item')
-                        ])
-                    }),
-                    new MenuItem({
-                        children : 'Follow link',
-                        ownerElement : a({
-                            href : '//www.w3.org/TR/wai-aria/#menu',
-                            target : '_blank'
-                        })
-                    }),
-                    new Separator,
-                    new Group([
-                        new MenuItemRadio('First radio'),
-                        new MenuItemRadio('Second radio')
-                    ]),
-                    new Separator,
-                    new MenuItem({
-                        disabled : true,
-                        children : 'Disabled item'
-                    }),
-                    new MenuItem({
-                        children : 'Open dialog...',
-                        hasPopup : 'dialog',
-                        onclick : openDialog
-                    })
-                ])
+                controls : complexMenu()
             }),
             new MenuItem({
                 children : 'Check menu',

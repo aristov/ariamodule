@@ -28,7 +28,7 @@ const popup = new Popup({
 // import './SearchBox.test'
 // import './ComboBox.test'
 import './Menu.test'
-// import './Dialog.test'
+import './Dialog.test'
 // import './Tree.test'
 // import './Grid.test'
 // import './TabList.test'
