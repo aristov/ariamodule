@@ -7,10 +7,10 @@
 {
     vertical-align: bottom;
 }
-.combobox .textbox .input
+/*.combobox .textbox .input
 {
     border-right: none;
-}
+}*/
 .combobox .textbox.focus + .button
 {
     border-left-color: #ffdb4d;
@@ -45,6 +45,10 @@
     box-shadow: none;
     max-height: 296px;
 }
+.combobox .listbox .option[aria-hidden=true]
+{
+    display: none;
+}
 .combobox[aria-expanded=true] .button::before
 {
     transform: rotate(-180deg) translateY(-2px);
@@ -52,7 +56,7 @@
 .combobox input[readonly]
 {
     cursor: default;
-    -webkit-user-select: none;
+    user-select: none;
 }
 .combobox[aria-disabled=true] .button::before
 {

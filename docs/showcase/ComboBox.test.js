@@ -1,6 +1,6 @@
 import { a, article, h1, label, section } from 'htmlmodule'
-import { ComboBox } from './ariamodule'
-import countrySuggest from './stub/countrysuggest'
+import { ComboBox, Option } from './ariamodule'
+import suggest from './stub/suggest'
 
 article({
     parentNode : document.body,
@@ -9,20 +9,21 @@ article({
         section([
             new ComboBox({
                 label : label('Simple'),
-                options : countrySuggest.map(({ id, name }) => ({
-                    value : id,
-                    textContent : name
-                }))
+                options : suggest.map(name => new Option(name))
+            })
+        ]),
+        section([
+            new ComboBox({
+                label : label('Autocomplete list'),
+                autoComplete : 'list',
+                options : suggest.map(name => new Option(name))
             })
         ]),
         section([
             new ComboBox({
                 label : label('Disabled'),
                 disabled : true,
-                options : countrySuggest.map(({ id, name }) => ({
-                    value : id,
-                    textContent : name
-                }))
+                options : suggest.map(name => new Option(name))
             })
         ])
     ]
