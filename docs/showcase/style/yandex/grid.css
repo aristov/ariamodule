@@ -1,24 +1,93 @@
 .grid
 {
+    display: table;
+    border-spacing: 2px;
     user-select: none;
 }
-.grid > caption
+.grid .rowgroup
 {
-    text-align: left;
-    margin-bottom: 5px;
+    display: table-row-group;
 }
-.grid td.cell
+.grid .row
 {
+    display: table-row;
+    outline: none;
+}
+.grid .cell
+{
+    display: table-cell;
     border: 1px solid rgba(0, 0, 0, 0.15);
     outline: none;
-    width: 80px;
-    height: 16px;
+    min-width: 80px;
     position: relative;
     padding: 5px;
     text-align: center;
+    box-sizing: border-box;
     cursor: default;
 }
-.grid td.cell textarea
+.grid .columnheader,
+.grid .rowheader
+{
+    border-color: transparent;
+}
+.grid .rowheader
+{
+    min-width: auto;
+    padding-right: 15px;
+}
+.grid .cell:focus,
+.grid .cell.focus,
+.grid .row:focus .cell:not(.rowheader)
+{
+    border-color: #ffdb4d;
+    box-shadow: inset 0 0 0 1px #ffdb4d;
+    z-index: 1;
+}
+.grid .cell[aria-selected=true],
+.grid .row[aria-selected=true] .cell:not(.rowheader)
+{
+    border-color: #ffdb4d;
+    background: rgba(255, 235, 160, 0.8);
+}
+.grid[aria-disabled=true],
+.grid .cell[aria-disabled=true]
+{
+    color: rgba(0, 0, 0, 0.5);
+}
+.grid[aria-disabled=true] .cell,
+.grid .cell[aria-disabled=true]
+{
+    background: rgba(0, 0, 0, 0.08);
+}
+.grid[aria-disabled=true] .cell
+{
+    border-color: transparent;
+}
+.grid .cell[aria-dropeffect=move][aria-grabbed=false]:focus
+{
+    cursor: -webkit-grab;
+}
+.grid .cell[aria-grabbed=true]:focus:not([aria-readonly=true])
+{
+    cursor: -webkit-grabbing;
+}
+.grid.grabbed .cell
+{
+    cursor: -webkit-grabbing;
+}
+.grid.grabbed,
+.grid .cell[aria-dropeffect=none]
+{
+    cursor: not-allowed;
+}
+
+
+.grid .caption
+{
+    display: table-caption;
+    margin-bottom: 5px;
+}
+.grid .cell textarea
 {
     font: inherit;
     color: inherit;
@@ -36,69 +105,7 @@
     outline: none;
     box-shadow: 0 0 0 2px #ffdb4d;
 }
-.grid td.cell textarea:not([hidden])
+.grid .cell textarea:not([hidden])
 {
     display: inline-block;
-}
-/*.grid:not([aria-disabled=true]):hover td.cell
-{
-    border-color: rgba(0, 0, 0, 0.2);
-}
-.grid:not([aria-disabled=true]) td.cell:hover
-{
-    background: rgba(0, 0, 0, 0.01);
-}*/
-.grid td.cell:focus,
-.grid td.cell.focus,
-.grid .gridrow:focus td.cell
-{
-    border-color: #ffdb4d;
-    box-shadow: inset 0 0 0 1px #ffdb4d;
-    z-index: 1;
-}
-.grid td.cell[aria-selected=true],
-.grid .gridrow[aria-selected=true] td.cell
-{
-    background: rgba(255, 235, 160, 0.8);
-}
-.grid[aria-disabled=true],
-.grid td.cell[aria-disabled=true]
-{
-    color: rgba(0, 0, 0, 0.5);
-}
-.grid[aria-disabled=true] td.cell,
-.grid td.cell[aria-disabled=true]
-{
-    background: rgba(0, 0, 0, 0.08);
-}
-.grid[aria-disabled=true] td.cell
-{
-    border-color: transparent;
-}
-
-.grid .rowheader
-{
-    padding: 0 5px;
-}
-
-.grid td.cell[aria-dropeffect=move][aria-grabbed=false]:focus
-{
-    cursor: -webkit-grab;
-}
-.grid td.cell[aria-grabbed=true]:focus:not([aria-readonly=true])
-{
-    cursor: -webkit-grabbing;
-}
-.grid.grabbed td.cell
-{
-    cursor: -webkit-grabbing;
-}
-.grid.grabbed,
-.grid td.cell[aria-dropeffect=none]
-{
-    cursor: not-allowed;
-}
-.grid .gridrow
-{
-    outline: none;
 }

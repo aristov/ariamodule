@@ -1,15 +1,15 @@
-import { a, article, h1, section } from 'htmlmodule'
+import { a, article, h1, label, section } from 'htmlmodule'
 import {
-    Grid,
-    Row,
-    GridRow,
-    RowGroup,
-    HeadRowGroup,
+    Caption,
     Cell,
-    GridCell,
+    ColumnHeader,
     DataCell,
-    RowHeader,
-    ColumnHeader
+    Grid,
+    GridCell,
+    GridRow,
+    Row,
+    RowGroup,
+    RowHeader
 } from './ariamodule'
 
 article({
@@ -17,32 +17,30 @@ article({
     children : [
         h1(a('Grid')),
         section([
-            new Grid({
-                label : 'Simple',
-                content : [
-                    new HeadRowGroup(new Row([
-                        new RowHeader,
-                        new ColumnHeader('One'),
-                        new ColumnHeader('Two'),
-                        new ColumnHeader('Three')
-                    ])),
-                    new RowGroup(['A', 'B', 'C'].map(header => {
-                        return new Row([
-                            new RowHeader(header),
-                            new GridCell,
-                            new GridCell,
-                            new GridCell
-                        ])
-                    }))
-                ]
-            })
+            new Grid([
+                new Caption('Simple'),
+                new RowGroup(new Row([
+                    new RowHeader,
+                    new ColumnHeader('One'),
+                    new ColumnHeader('Two'),
+                    new ColumnHeader('Three')
+                ])),
+                new RowGroup(['A', 'B', 'C'].map(header => {
+                    return new Row([
+                        new RowHeader(header),
+                        new GridCell,
+                        new GridCell,
+                        new GridCell
+                    ])
+                }))
+            ])
         ]),
         section([
             new Grid({
-                label : 'Multi-selectable',
                 multiSelectable : true,
-                content : [
-                    new HeadRowGroup(new Row([
+                children : [
+                    new Caption('Multi-selectable'),
+                    new RowGroup(new Row([
                         new RowHeader,
                         new ColumnHeader('One'),
                         new ColumnHeader('Two'),
@@ -60,28 +58,26 @@ article({
             })
         ]),
         section([
-            new Grid({
-                label : 'Interactive rows',
-                content : [
-                    new HeadRowGroup(new Row([
-                        new RowHeader,
-                        new ColumnHeader('One'),
-                        new ColumnHeader('Two'),
-                        new ColumnHeader('Three')
-                    ])),
-                    new RowGroup(['A', 'B', 'C'].map(header => {
-                        return new GridRow({
-                            selected : false,
-                            children : [
-                                new RowHeader(header),
-                                new Cell,
-                                new Cell,
-                                new Cell
-                            ]
-                        })
-                    }))
-                ]
-            })
+            new Grid([
+                new Caption('Interactive rows'),
+                new RowGroup(new Row([
+                    new RowHeader,
+                    new ColumnHeader('One'),
+                    new ColumnHeader('Two'),
+                    new ColumnHeader('Three')
+                ])),
+                new RowGroup(['A', 'B', 'C'].map(header => {
+                    return new GridRow({
+                        selected : false,
+                        children : [
+                            new RowHeader(header),
+                            new Cell,
+                            new Cell,
+                            new Cell
+                        ]
+                    })
+                }))
+            ])
         ])
     ]
 })
@@ -91,10 +87,10 @@ article({
         h1(a('Data grid')),
         section([
             new Grid({
-                label : 'Multi-selectable',
                 multiSelectable : true,
-                content : [
-                    new HeadRowGroup(new Row([
+                children : [
+                    new Caption('Multi-selectable'),
+                    new RowGroup(new Row([
                         new RowHeader,
                         new ColumnHeader('One'),
                         new ColumnHeader('Two'),
@@ -113,10 +109,10 @@ article({
         ]),
         section([
             new Grid({
-                label : 'Draggable cells',
                 multiSelectable : true,
-                content : [
-                    new HeadRowGroup(new Row([
+                children : [
+                    new Caption('Draggable cells'),
+                    new RowGroup(new Row([
                         new RowHeader,
                         new ColumnHeader('One'),
                         new ColumnHeader('Two'),
