@@ -18,7 +18,7 @@
     display: table-cell;
     border: 1px solid rgba(0, 0, 0, 0.15);
     outline: none;
-    min-width: 80px;
+    min-width: 50px;
     position: relative;
     padding: 5px;
     text-align: center;
@@ -36,7 +36,6 @@
     padding-right: 15px;
 }
 .grid .cell:focus,
-.grid .cell.focus,
 .grid .row:focus .cell:not(.rowheader)
 {
     border-color: #ffdb4d;
@@ -58,9 +57,6 @@
 .grid .cell[aria-disabled=true]
 {
     background: rgba(0, 0, 0, 0.08);
-}
-.grid[aria-disabled=true] .cell
-{
     border-color: transparent;
 }
 .grid .cell[aria-dropeffect=move][aria-grabbed=false]:focus
