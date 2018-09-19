@@ -8,5 +8,14 @@ module.exports = {
     output: {
         path : buildPath,
         filename: 'build.index.js'
+    },
+    module : {
+        rules : process.env.NODE_ENV === 'production'? [
+            {
+                test : /\.js$/,
+                exclude: /(node_modules\/babel-polyfill|node_modules\/dom4|node_modules\/shim-keyboard-event-key)/,
+                use : { loader : 'babel-loader' }
+            }
+        ] : []
     }
 }

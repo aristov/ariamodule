@@ -14,7 +14,7 @@ article({
         section([
             new Link({
                 onclick : event => location = '//google.ru',
-                classList : 'external',
+                classList : ['external'],
                 children : 'External'
             })
         ]),

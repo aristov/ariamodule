@@ -13,7 +13,7 @@
     border: 1px solid rgba(0, 0, 0, 0.2);
     display: block;
     position: relative;
-    overflow: auto;
+    overflow-y: auto;
     outline: none;
     padding: 4px 0;
 }
@@ -37,10 +37,6 @@
     cursor: default;
 }
 
-.listbox:hover
-{
-    border-color: rgba(0, 0, 0, 0.3);
-}
 .listbox:not([aria-disabled=true]) .option:hover
 {
     background: rgba(0, 0, 0, 0.01);

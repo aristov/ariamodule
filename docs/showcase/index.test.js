@@ -1,3 +1,6 @@
+import 'babel-polyfill'
+import 'dom4'
+import 'shim-keyboard-event-key'
 import './debug'
 
 import './Link.test'

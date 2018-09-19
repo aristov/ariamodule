@@ -1,6 +1,8 @@
 import { Role } from './ariamodule'
 
-Object.defineProperties(EventTarget.prototype, {
+const prototype = (window.EventTarget || Node).prototype
+
+Object.defineProperties(prototype, {
     __instance__ : {
         get() {
             return Role.getInstanceOf(this)
