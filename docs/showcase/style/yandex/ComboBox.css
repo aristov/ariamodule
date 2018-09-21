@@ -1,31 +1,27 @@
-.combobox
+.ComboBox
 {
     display: inline-block;
     position: relative;
 }
-.combobox .textbox
+.ComboBox .TextBox
 {
     vertical-align: bottom;
 }
-/*.combobox .textbox .input
-{
-    border-right: none;
-}*/
-.combobox .textbox.focus + .button
+.ComboBox .TextBox.focus + .Button
 {
     border-left-color: #ffdb4d;
 }
-.combobox:not([aria-disabled=true]) .textbox:hover:not(.focus) + .button:not(:focus)
+.ComboBox:not([aria-disabled=true]) .TextBox:hover:not(.focus) + .Button:not(:focus)
 {
     border-left-color: rgba(0, 0, 0, 0.3);
 }
-.combobox .button
+.ComboBox .Button
 {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     position: relative;
 }
-.combobox .button::before
+.ComboBox .Button::before
 {
     content: url(./images/arrow-down.svg);
     position: absolute;
@@ -33,40 +29,35 @@
     top: 4px;
     transition: transform 0.1s ease-out 0s;
 }
-.combobox .listbox
+.ComboBox .ListBox
 {
     display: block;
     min-width: 100%;
     margin-top: 3px;
 }
-.combobox .listbox > span
+.ComboBox .ListBox > span
 {
     border: none;
     box-shadow: none;
     max-height: 296px;
 }
-.combobox .listbox .option[aria-hidden=true]
+.ComboBox .ListBox .Option[aria-hidden=true]
 {
     display: none;
 }
-.combobox[aria-expanded=true] .button::before
+.ComboBox[aria-expanded=true] .Button::before
 {
     transform: rotate(-180deg) translateY(-2px);
 }
-.combobox input[readonly]
-{
-    cursor: default;
-    user-select: none;
-}
-.combobox[aria-disabled=true] .button::before
+.ComboBox[aria-disabled=true] .Button::before
 {
     opacity: .3;
 }
-.combobox[aria-invalid=true] .textbox .input
+.ComboBox[aria-invalid=true] .TextBox .input
 {
     border-color: red;
 }
-.combobox[aria-invalid=true] .textbox + .button
+.ComboBox[aria-invalid=true] .TextBox + .Button
 {
     border-color: red;
 }

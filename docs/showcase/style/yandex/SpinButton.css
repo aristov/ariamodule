@@ -1,15 +1,15 @@
-.spinbutton
+.SpinButton
 {
     display: inline-block;
     outline: none;
 }
-.spinbutton .box
+.SpinButton .box
 {
     display: inline-block;
     border: 1px solid rgba(0, 0, 0, .2);
     border-radius: 4px;
 }
-.spinbutton .text
+.SpinButton .text
 {
     display: inline-block;
     border-style: solid;
@@ -24,58 +24,58 @@
     cursor: text;
     outline: none;
 }
-.spinbutton .button
+.SpinButton .Button
 {
     padding: 5px 10px;
     border: none;
 }
-.spinbutton .button:first-child
+.SpinButton .Button:first-child
 {
     border-right: none;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
-.spinbutton .button:last-child
+.SpinButton .Button:last-child
 {
     border-left: none;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
-.spinbutton label
+.SpinButton label
 {
     display: block;
     margin-bottom: 5px;
     cursor: default;
 }
-.spinbutton:hover .box,
-.spinbutton:hover:not(:focus):not([aria-disabled=true]) .text
+.SpinButton:hover .box,
+.SpinButton:hover:not(:focus):not([aria-disabled=true]) .text
 {
     border-color: rgba(0, 0, 0, .3);
 }
-.spinbutton:focus .box
+.SpinButton:focus .box
 {
     border-color: #ffdb4d;
     box-shadow: 0 0 0 1px #ffdb4d;
 }
-.spinbutton[aria-readonly=true]
+.SpinButton[aria-readonly=true]
 {
     opacity: .7;
 }
-.spinbutton[aria-disabled=true]
+.SpinButton[aria-disabled=true]
 {
     color: rgba(0, 0, 0, .5);
 }
-.spinbutton[aria-disabled=true] .box
+.SpinButton[aria-disabled=true] .box
 {
     border-color: transparent;
 }
-.spinbutton[aria-disabled=true] .text
+.SpinButton[aria-disabled=true] .text
 {
     border-color: transparent;
     background: rgba(0, 0, 0, .08);
     cursor: default;
 }
-.spinbutton:not([aria-valuenow]) .text::before
+.SpinButton:not([aria-valuenow]) .text::before
 {
     content: ' ';
 }

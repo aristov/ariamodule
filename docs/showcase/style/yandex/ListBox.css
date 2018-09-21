@@ -1,4 +1,4 @@
-.listbox
+.ListBox
 {
     display: inline-block;
     outline: none;
@@ -7,7 +7,7 @@
     -webkit-user-select: none;
     -ms-user-select: none;
 }
-.listbox > span
+.ListBox > span
 {
     background: #fff;
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -17,7 +17,7 @@
     outline: none;
     padding: 4px 0;
 }
-.listbox .option
+.ListBox .Option
 {
     display: block;
     position: relative;
@@ -26,43 +26,43 @@
     line-height: 25px;
     cursor: pointer;
 }
-.listbox .option[aria-checked]
+.ListBox .Option[aria-checked]
 {
     padding: 0 30px;
 }
-.listbox label
+.ListBox label
 {
     display: block;
     margin-bottom: 5px;
     cursor: default;
 }
 
-.listbox:not([aria-disabled=true]) .option:hover
+.ListBox:not([aria-disabled=true]) .Option:hover
 {
     background: rgba(0, 0, 0, 0.01);
 }
 
-.listbox:hover > span
+.ListBox:hover > span
 {
     border-color: rgba(0, 0, 0, 0.3);
 }
 
-.listbox:focus > span
+.ListBox:focus > span
 {
     border-color: #ffdb4d;
     box-shadow: 0 0 0 1px #ffdb4d;
 }
-.listbox:focus .option[aria-selected=true],
-.listbox:not([aria-disabled=true]) .option[aria-selected=true]
+.ListBox:focus .Option[aria-selected=true],
+.ListBox:not([aria-disabled=true]) .Option[aria-selected=true]
 {
     background: #ffeba0;
 }
-.listbox:focus .option[aria-selected=true]:active,
-.listbox:focus .option[aria-selected=true].active
+.ListBox:focus .Option[aria-selected=true]:active,
+.ListBox:focus .Option[aria-selected=true].active
 {
     background: #fee481;
 }
-.listbox .option[aria-checked=true]::before
+.ListBox .Option[aria-checked=true]::before
 {
     content: url(images/checkmark-small.svg);
     position: absolute;
@@ -70,33 +70,33 @@
     left: 10px;
 }
 
-.listbox[aria-readonly=true] > span,
-.listbox[aria-readonly=true] label
+.ListBox[aria-readonly=true] > span,
+.ListBox[aria-readonly=true] label
 {
     opacity: 0.7;
 }
 
-.listbox[aria-disabled=true] > span
+.ListBox[aria-disabled=true] > span
 {
     background: rgba(0, 0, 0, 0.08);
     border-color: transparent;
 }
-.listbox[aria-disabled=true],
-.listbox[aria-disabled=true] .option
+.ListBox[aria-disabled=true],
+.ListBox[aria-disabled=true] .Option
 {
     cursor: default;
     color: rgba(0, 0, 0, 0.5);
 }
 
-.listbox[aria-disabled=true] .option[aria-selected=true]:not([aria-checked])
+.ListBox[aria-disabled=true] .Option[aria-selected=true]:not([aria-checked])
 {
     background: rgba(0, 0, 0, 0.1);
 }
-.listbox[aria-disabled=true] .option[aria-checked=true]::before
+.ListBox[aria-disabled=true] .Option[aria-checked=true]::before
 {
     opacity: 0.4;
 }
-.listbox[aria-expanded]
+.ListBox[aria-expanded]
 {
     position: absolute;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .06), 0 10px 20px -5px rgba(0, 0, 0, .4);
@@ -104,16 +104,16 @@
     z-index: 1;
     transition: opacity .2s, transform .2s;
 }
-.listbox[aria-hidden=true][aria-expanded=false]
+.ListBox[aria-hidden=true][aria-expanded=false]
 {
     display: none;
 }
-.listbox[aria-hidden=false][aria-expanded=false],
-.listbox[aria-hidden=true][aria-expanded=true]
+.ListBox[aria-hidden=false][aria-expanded=false],
+.ListBox[aria-hidden=true][aria-expanded=true]
 {
     opacity: 0;
 }
-.listbox[aria-hidden=false][aria-expanded=false]
+.ListBox[aria-hidden=false][aria-expanded=false]
 {
     transform: translateY(20px);
 }

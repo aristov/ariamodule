@@ -1,0 +1,73 @@
+.Button
+{
+    display: inline-block;
+    outline: none;
+    white-space: nowrap;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    padding: 5px 12px;
+    box-sizing: border-box;
+    user-select: none;
+}
+.Button:hover
+{
+    border-color: rgba(0, 0, 0, 0.3);
+}
+.Button:focus
+{
+    border-color: var(--focus-color);
+    box-shadow: 0 0 0 1px var(--focus-color);
+}
+.Button:active,
+.Button.active
+{
+    background: #f3f1ed;
+}
+.Button[aria-pressed=true]
+{
+    background: #ffeba0;
+}
+.Button[aria-pressed=true]:active,
+.Button[aria-pressed=true].active
+{
+    background: #fee481;
+}
+.Button[aria-disabled=true]
+{
+    cursor: default;
+    color: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.08);
+    border-color: transparent;
+}
+.Button[aria-pressed=true][aria-disabled=true]
+{
+    background: rgba(0, 0, 0, 0.15);
+    border-color: transparent;
+}
+
+/*================================================================*/
+
+.Button[aria-haspopup=menu]
+{
+    position: relative;
+    padding-right: 24px;
+}
+.Button[aria-haspopup=menu]::after
+{
+    content: url(images/arrow-down.svg);
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    transition: transform 0.1s ease-out 0s;
+}
+.Button[aria-haspopup=menu][aria-expanded=true]
+{
+    border-color: var(--focus-color);
+    box-shadow: 0 0 0 1px var(--focus-color);
+}
+.Button[aria-haspopup=menu][aria-expanded=true]::after
+{
+    transform: rotate(-180deg) translateY(-2px);
+}

@@ -1,9 +1,9 @@
-.searchbox .input
+.SearchBox .input
 {
     padding-right: 26px;
     border-radius: 3px;
 }
-.searchbox .clearbutton
+.SearchBox .clearbutton
 {
     display: none;
     width: 27px;
@@ -15,17 +15,17 @@
     opacity: 0.25;
     outline: none;
 }
-.searchbox:not(.readonly):hover .clearbutton,
-.searchbox:not(.readonly).focus .clearbutton
+.SearchBox:not(.readonly):hover .clearbutton,
+.SearchBox:not(.readonly).focus .clearbutton
 {
     display: inline-block;
 }
-.searchbox:not(.disabled) .clearbutton:hover
+.SearchBox:not(.disabled) .clearbutton:hover
 {
     cursor: pointer;
     opacity: 1;
 }
-.searchbox[aria-invalid=true] .input
+.SearchBox[aria-invalid=true] .input
 {
     border-color: red;
 }

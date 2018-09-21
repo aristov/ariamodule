@@ -1,0 +1,69 @@
+.TextBox
+{
+    display: inline-block;
+    position: relative;
+}
+.TextBox .input
+{
+    display: block;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 0 8px;
+    width: 180px;
+    box-sizing: border-box;
+}
+.TextBox .edit
+{
+    display: block;
+    width: 100%;
+    height: 15px;
+    padding: 5px 0;
+    outline: none;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.TextBox:hover .input
+{
+    border-color: rgba(0, 0, 0, 0.3);
+}
+.TextBox.focus .input
+{
+    border-color: #ffdb4d;
+    box-shadow: 0 0 0 1px #ffdb4d;
+}
+.TextBox[aria-readonly=true]
+{
+    opacity: 0.7;
+}
+.TextBox[aria-disabled=true]
+{
+    cursor: default;
+    color: rgba(0, 0, 0, 0.5);
+}
+.TextBox[aria-disabled] .input
+{
+    background: rgba(0, 0, 0, 0.08);
+    border-color: transparent;
+}
+.TextBox[aria-multiline] .edit
+{
+    height: 60px;
+    white-space: normal;
+    overflow: auto;
+}
+.TextBox .placeholder
+{
+    position: absolute;
+    padding: 5px 0;
+    color: #aaa;
+}
+.TextBox[data-value] .placeholder
+{
+    display: none;
+}
+.TextBox > label
+{
+    display: block;
+    margin-bottom: 5px;
+    cursor: default;
+}

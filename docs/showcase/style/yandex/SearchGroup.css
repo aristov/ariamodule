@@ -1,18 +1,18 @@
-.searchgroup .searchbox .box
+.SearchGroup .SearchBox .box
 {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     border-right: none;
 }
-.searchgroup .searchbox.focus + .button
+.SearchGroup .SearchBox.focus + .Button
 {
     border-left-color: #ffdb4d;
 }
-.searchgroup .searchbox:hover:not(.focus) + .button:not(.accent):not(:focus)
+.SearchGroup .SearchBox:hover:not(.focus) + .Button:not(.accent):not(:focus)
 {
     border-left-color: rgba(0, 0, 0, 0.3);
 }
-.searchgroup .button
+.SearchGroup .Button
 {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;

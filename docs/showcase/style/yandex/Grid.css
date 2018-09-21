@@ -1,0 +1,66 @@
+.Grid
+{
+    display: table;
+    border-spacing: 2px;
+    user-select: none;
+}
+.Grid .RowGroup
+{
+    display: table-row-group;
+}
+.Grid .Row
+{
+    display: table-row;
+    outline: none;
+}
+.Grid .Cell
+{
+    display: table-cell;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    outline: none;
+    min-width: 50px;
+    position: relative;
+    padding: 5px;
+    text-align: center;
+    box-sizing: border-box;
+    cursor: default;
+}
+.Grid .ColumnHeader,
+.Grid .RowHeader
+{
+    border-color: transparent;
+}
+.Grid .RowHeader
+{
+    min-width: auto;
+    padding-right: 15px;
+}
+.Grid .Caption
+{
+    display: table-caption;
+    margin-bottom: 5px;
+}
+.Grid .GridCell:focus,
+.Grid .Row:focus .Cell:not(.RowHeader)
+{
+    border-color: #ffdb4d;
+    box-shadow: inset 0 0 0 1px #ffdb4d;
+    z-index: 1;
+}
+.Grid .GridCell[aria-selected=true],
+.Grid .Row[aria-selected=true] .Cell:not(.RowHeader)
+{
+    border-color: #ffdb4d;
+    background: rgba(255, 235, 160, 0.8);
+}
+.Grid[aria-disabled=true],
+.Grid .GridCell[aria-disabled=true]
+{
+    color: rgba(0, 0, 0, 0.5);
+}
+.Grid[aria-disabled=true] .Cell,
+.Grid .GridCell[aria-disabled=true]
+{
+    background: rgba(0, 0, 0, 0.08);
+    border-color: transparent;
+}

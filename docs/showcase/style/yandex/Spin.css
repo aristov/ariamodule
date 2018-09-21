@@ -1,15 +1,15 @@
-.spin
+.Spin
 {
     display: inline-block;
     box-sizing: border-box;
     border: 2px solid transparent;
     border-radius: 50%;
-    animation: spin 1s infinite linear;
+    animation: Spin 1s infinite linear;
     width: 28px;
     height: 28px;
 }
 
-@keyframes spin
+@keyframes Spin
 {
     from
     {

@@ -9,7 +9,7 @@
     border-radius: 3px;
     position: relative;
 }
-.slider
+.Slider
 {
     display: block;
     position: absolute;
@@ -21,11 +21,11 @@
     margin-top: -12px;
     outline: none;
 }
-.slider:hover
+.Slider:hover
 {
     border-color: rgba(0, 0, 0, 0.3);
 }
-.slider:focus
+.Slider:focus
 {
     border-color: #ffdb4d;
     box-shadow: 0 0 0 1px #ffdb4d;

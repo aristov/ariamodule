@@ -1,15 +1,15 @@
-.tablist
+.TabList
 {
     border-style: solid;
     border-color: rgba(0, 0, 0, 0.1);
     border-width: 1px 0;
     user-select: none;
 }
-.tablist:hover
+.TabList:hover
 {
     border-color: rgba(0, 0, 0, 0.2);
 }
-.tablist .tab
+.TabList .Tab
 {
     color: #aaa;
     display: inline-block;
@@ -23,33 +23,33 @@
     border-color: transparent;
     border-width: 2px 0 0;
 }
-.tablist .tab:hover
+.TabList .Tab:hover
 {
     color: #c00;
 }
-.tablist .tab[aria-selected=true]
+.TabList .Tab[aria-selected=true]
 {
     color: black;
     cursor: default;
     border-color: black;
 }
-.tablist .tab:focus
+.TabList .Tab:focus
 {
     border-color: #ffdb4d;
 }
-.tabpanel:not([aria-expanded=true])
-{
-    display: none;
-}
-.tablist[aria-orientation=vertical]
+.TabList[aria-orientation=vertical]
 {
     display: inline-block;
     border-width: 0 1px;
 }
-.tablist[aria-orientation=vertical] .tab
+.TabList[aria-orientation=vertical] .Tab
 {
     display: block;
     border-width: 0 0 0 2px;
     margin: 10px 0;
     padding: 0 18px;
+}
+.TabPanel:not([aria-expanded=true])
+{
+    display: none;
 }

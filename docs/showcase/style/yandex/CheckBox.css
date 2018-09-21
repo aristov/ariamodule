@@ -1,4 +1,4 @@
-.checkbox
+.CheckBox
 {
     display: inline-block;
     outline: none;
@@ -7,7 +7,7 @@
     user-select: none;
     position: relative;
 }
-.checkbox::before
+.CheckBox::before
 {
     content: '';
     background: #fff;
@@ -20,64 +20,64 @@
     vertical-align: top;
     transition: background-color .1s;
 }
-.checkbox:hover::before
+.CheckBox:hover::before
 {
     border-color: rgba(0, 0, 0, 0.3);
 }
-.checkbox:focus::before
+.CheckBox:focus::before
 {
-    border-color: #ffdb4d;
-    box-shadow: 0 0 0 1px #ffdb4d;
+    border-color: var(--focus-color);
+    box-shadow: 0 0 0 1px var(--focus-color);
 }
-.checkbox:active::before,
-.checkbox.active::before
+.CheckBox:active::before,
+.CheckBox.active::before
 {
     background: #f3f1ed;
 }
-.checkbox[aria-checked=true]::before,
-.checkbox[aria-checked=mixed]::before
+.CheckBox[aria-checked=true]::before,
+.CheckBox[aria-checked=mixed]::before
 {
     background: #ffeba0;
 }
-.checkbox[aria-checked=true]:active::before,
-.checkbox[aria-checked=mixed]:active::before,
-.checkbox[aria-checked=true].active::before,
-.checkbox[aria-checked=mixed].active::before
+.CheckBox[aria-checked=true]:active::before,
+.CheckBox[aria-checked=mixed]:active::before,
+.CheckBox[aria-checked=true].active::before,
+.CheckBox[aria-checked=mixed].active::before
 {
     background: #fee481;
 }
-.checkbox[aria-readonly=true]
+.CheckBox[aria-readonly=true]
 {
     opacity: 0.7;
 }
 
-.checkbox[aria-disabled=true]
+.CheckBox[aria-disabled=true]
 {
     cursor: default;
     color: rgba(0, 0, 0, 0.5);
 }
-.checkbox[aria-disabled=true]::before
+.CheckBox[aria-disabled=true]::before
 {
     background: rgba(0, 0, 0, 0.08);
     border-color: transparent;
 }
-.checkbox[aria-checked=true][aria-disabled=true]::before
+.CheckBox[aria-checked=true][aria-disabled=true]::before
 {
     background: rgba(0, 0, 0, 0.15);
     border-color: transparent;
 }
-.checkbox[aria-disabled=true]::after
+.CheckBox[aria-disabled=true]::after
 {
     opacity: 0.4;
 }
-.checkbox[aria-checked=true]::after
+.CheckBox[aria-checked=true]::after
 {
     content: url(images/checkmark.svg);
     position: absolute;
     top: -5px;
     left: 2px;
 }
-.checkbox[aria-checked=mixed]::after
+.CheckBox[aria-checked=mixed]::after
 {
     content: '';
     display: inline-block;

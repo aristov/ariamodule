@@ -1,26 +1,26 @@
-.tree
+.Tree
 {
     display: inline-block;
     padding-left: 0;
     user-select: none;
 }
-.tree .group
+.Tree .Group
 {
     display: block;
     padding-left: 20px;
 }
-.treeitem
+.TreeItem
 {
     display: block;
     position: relative;
     cursor: pointer;
     outline: none;
 }
-.treeitem:focus
+.TreeItem:focus
 {
     box-shadow: 0 0 0 2px #ffdb4d;
 }
-.treeitem[aria-expanded] > .button
+.TreeItem[aria-expanded] > .Button
 {
     position: absolute;
     color: rgba(0, 0, 0, 0.5);
@@ -32,29 +32,29 @@
     border-radius: 2px;
     background: white;
 }
-.treeitem[aria-expanded] > .button:hover
+.TreeItem[aria-expanded] > .Button:hover
 {
     border-color: rgba(0, 0, 0, 0.3);
     color: #000;
 }
-.treeitem[aria-expanded=false] > .button::before
+.TreeItem[aria-expanded=false] > .Button::before
 {
     content: '+';
 }
-.treeitem[aria-expanded=true] > .button::before
+.TreeItem[aria-expanded=true] > .Button::before
 {
     content: '−';
 }
-.treeitem[aria-expanded=false] .group
+.TreeItem[aria-expanded=false] .Group
 {
     display: none;
 }
-.treeitem > label
+.TreeItem > label
 {
     display: block;
     padding: 3px 23px;
 }
-.treeitem[aria-selected=true] > label
+.TreeItem[aria-selected=true] > label
 {
     background: #ffeba0;
 }

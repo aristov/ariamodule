@@ -1,3 +1,7 @@
+:root
+{
+    --focus-color: #ffdb4d;
+}
 body
 {
     font: 13px Arial;
@@ -7,17 +11,3 @@ body
 {
     display: none;
 }
-
-/*
-.group
-{
-    display: inline-block;
-}
-.group[aria-label]::before
-{
-    content: attr(aria-label);
-    display: block;
-    margin-bottom: 5px;
-    cursor: default;
-}
-*/

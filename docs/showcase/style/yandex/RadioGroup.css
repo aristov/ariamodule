@@ -1,18 +1,18 @@
-.radiogroup
+.RadioGroup
 {
     display: inline-block;
 }
-.radiogroup .radio
+.RadioGroup .Radio
 {
     margin-right: 10px;
 }
-.radiogroup > label
+.RadioGroup > label
 {
     display: block;
     margin-bottom: 5px;
     cursor: default;
 }
-.radio
+.Radio
 {
     position: relative;
     display: inline-block;
@@ -21,7 +21,7 @@
     user-select: none;
     cursor: pointer;
 }
-.radio::before
+.Radio::before
 {
     content: '';
     background: #fff;
@@ -34,28 +34,28 @@
     vertical-align: top;
     border-radius: 50%;
 }
-.radio:hover::before
+.Radio:hover::before
 {
     border-color: rgba(0, 0, 0, 0.3);
 }
-.radio:focus::before
+.Radio:focus::before
 {
     border-color: #ffdb4d;
 }
-.radio:focus::before
+.Radio:focus::before
 {
     box-shadow: 0 0 0 1px #ffdb4d;
 }
-.radio:active::before,
-.radio.active::before
+.Radio:active::before,
+.Radio.active::before
 {
     background: #f3f1ed;
 }
-.radio[aria-checked=true]::before
+.Radio[aria-checked=true]::before
 {
     background: #ffeba0;
 }
-.radio[aria-checked=true]::after
+.Radio[aria-checked=true]::after
 {
     content: '';
     width: 6px;
@@ -66,41 +66,41 @@
     top: 4px;
     left: 4px;
 }
-.radio[aria-checked=true]:active::before,
-.radio[aria-checked=true].active::before
+.Radio[aria-checked=true]:active::before,
+.Radio[aria-checked=true].active::before
 {
     background: #fee481;
 }
-.radio[aria-disabled=true],
-.radiogroup[aria-disabled=true],
-.radiogroup[aria-disabled=true] .radio
+.Radio[aria-disabled=true],
+.RadioGroup[aria-disabled=true],
+.RadioGroup[aria-disabled=true] .Radio
 {
     cursor: default;
     color: rgba(0, 0, 0, 0.5);
 }
-.radio[aria-disabled=true]::before,
-.radiogroup[aria-disabled=true] .radio::before
+.Radio[aria-disabled=true]::before,
+.RadioGroup[aria-disabled=true] .Radio::before
 {
     background: rgba(0, 0, 0, 0.08);
     border-color: transparent;
 }
-.radio[aria-checked=true][aria-disabled=true]::before,
-.radiogroup[aria-disabled=true] .radio[aria-checked=true]::before
+.Radio[aria-checked=true][aria-disabled=true]::before,
+.RadioGroup[aria-disabled=true] .Radio[aria-checked=true]::before
 {
     background: rgba(0, 0, 0, 0.15);
     border-color: transparent;
 }
-.radio[aria-checked=true][aria-disabled=true]::after,
-.radiogroup[aria-disabled=true] .radio[aria-checked=true]::after
+.Radio[aria-checked=true][aria-disabled=true]::after,
+.RadioGroup[aria-disabled=true] .Radio[aria-checked=true]::after
 {
     opacity: 0.4;
 }
-.radiogroup[aria-orientation=vertical]
+.RadioGroup[aria-orientation=vertical]
 {
     display: flex;
     flex-direction: column;
 }
-.radiogroup[aria-orientation=vertical] .radio
+.RadioGroup[aria-orientation=vertical] .Radio
 {
     margin-bottom: 10px;
 }

@@ -1,4 +1,4 @@
-.progressbar
+.ProgressBar
 {
     position: relative;
     width: 250px;
@@ -8,7 +8,7 @@
     border-radius: 3px;
     overflow: hidden;
 }
-.progressbar div
+.ProgressBar div
 {
     position: absolute;
     height: 100%;
