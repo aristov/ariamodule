@@ -144,7 +144,7 @@ article({
                 label : label('Selected'),
                 name : 'listbox-multiselectable-selected',
                 multiSelectable : true,
-                children : span([
+                options : [
                     new Option({
                         value : '1',
                         children : 'First option'
@@ -184,7 +184,7 @@ article({
                         value : '9',
                         children : 'Ninth option'
                     })
-                ])
+                ]
             })
         ]),
     ]

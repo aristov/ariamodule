@@ -1,99 +1,99 @@
+:root
+{
+    --radio-border-radius: 50%;
+}
 .RadioGroup
 {
     display: inline-block;
 }
-.RadioGroup .Radio
-{
-    margin-right: 10px;
-}
-.RadioGroup > label
+.RadioGroup label
 {
     display: block;
     margin-bottom: 5px;
     cursor: default;
 }
-.Radio
+.RadioGroup .Radio
 {
     position: relative;
     display: inline-block;
-    outline: none;
     white-space: nowrap;
     user-select: none;
     cursor: pointer;
+    outline: none;
 }
-.Radio::before
+.RadioGroup .Radio::before
 {
     content: '';
-    background: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.2);
     display: inline-block;
-    width: 12px;
-    height: 12px;
-    margin-right: 6px;
     position: relative;
     vertical-align: top;
-    border-radius: 50%;
+
+    background: var(--background);
+    border: var(--border);
+    padding: var(--checkbox-box-padding);
+    margin-right: var(--checkbox-box-margin-right);
+    border-radius: var(--radio-border-radius);
 }
-.Radio:hover::before
+.RadioGroup .Radio:hover::before
 {
-    border-color: rgba(0, 0, 0, 0.3);
+    border-color: var(--hover-border-color);
 }
-.Radio:focus::before
+.RadioGroup .Radio:focus::before
 {
-    border-color: #ffdb4d;
+    border-color: var(--focus-border-color);
+    box-shadow: var(--focus-box-shadow);
 }
-.Radio:focus::before
+.RadioGroup .Radio:active::before,
+.RadioGroup .Radio.active::before
 {
-    box-shadow: 0 0 0 1px #ffdb4d;
+    background: var(--active-background);
 }
-.Radio:active::before,
-.Radio.active::before
+.RadioGroup .Radio[aria-checked=true]::before
 {
-    background: #f3f1ed;
+    background: var(--checked-background);
 }
-.Radio[aria-checked=true]::before
-{
-    background: #ffeba0;
-}
-.Radio[aria-checked=true]::after
+.RadioGroup .Radio[aria-checked=true]::after
 {
     content: '';
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #000;
     position: absolute;
-    top: 4px;
-    left: 4px;
+    padding: 3px;
+    top: 0;
+    left: 0;
+    margin: 4px;
+    border-radius: var(--radio-border-radius);
+    background: var(--marker-background);
 }
-.Radio[aria-checked=true]:active::before,
-.Radio[aria-checked=true].active::before
+.RadioGroup .Radio[aria-checked=true]:active::before,
+.RadioGroup .Radio[aria-checked=true].active::before
 {
-    background: #fee481;
+    background: var(--checked-active-background);
 }
-.Radio[aria-disabled=true],
+.RadioGroup .Radio[aria-disabled=true],
 .RadioGroup[aria-disabled=true],
 .RadioGroup[aria-disabled=true] .Radio
 {
-    cursor: default;
-    color: rgba(0, 0, 0, 0.5);
+    cursor: var(--disabled-cursor);
+    color: var(--disabled-color);
 }
-.Radio[aria-disabled=true]::before,
+.RadioGroup .Radio[aria-disabled=true]::before,
 .RadioGroup[aria-disabled=true] .Radio::before
 {
-    background: rgba(0, 0, 0, 0.08);
-    border-color: transparent;
+    background: var(--disabled-background);
+    border-color: var(--disabled-border-color);
 }
-.Radio[aria-checked=true][aria-disabled=true]::before,
+.RadioGroup .Radio[aria-checked=true][aria-disabled=true]::before,
 .RadioGroup[aria-disabled=true] .Radio[aria-checked=true]::before
 {
-    background: rgba(0, 0, 0, 0.15);
-    border-color: transparent;
+    background: var(--checked-disabled-background);
 }
-.Radio[aria-checked=true][aria-disabled=true]::after,
+.RadioGroup .Radio[aria-checked=true][aria-disabled=true]::after,
 .RadioGroup[aria-disabled=true] .Radio[aria-checked=true]::after
 {
-    opacity: 0.4;
+    opacity: var(--disabled-marker-opacity);
+}
+.RadioGroup:not([aria-orientation=vertical]) .Radio
+{
+    margin-right: 10px;
 }
 .RadioGroup[aria-orientation=vertical]
 {

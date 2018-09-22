@@ -4,20 +4,20 @@
     outline: none;
 }
 .Link:focus,
-.Link:not([aria-disabled]):hover
+.Link:not([aria-disabled=true]):hover
 {
     text-decoration: underline;
 }
 .Link:focus
 {
-    box-shadow: 0 0 0 2px var(--focus-color);
+    box-shadow: 0 0 0 2px var(--focus-border-color);
 }
 .Link:hover
 {
     color: #c00;
     cursor: pointer;
 }
-.Link[aria-disabled]
+.Link[aria-disabled=true]
 {
     color: #ccc;
     cursor: default;

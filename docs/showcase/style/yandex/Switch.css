@@ -6,6 +6,7 @@
 {
     width: 50px;
     height: 20px;
+    padding: 0;
     border-radius: 10px;
     margin-right: 10px;
 }
@@ -21,7 +22,7 @@
     display: block;
     width: 14px;
     height: 14px;
-    border: 1px solid rgba(0, 0, 0, .1);
+    border: var(--border);
     border-radius: 50%;
     background: rgba(0, 0, 0, .1);
     top: 3px;
@@ -34,17 +35,17 @@
 .Switch[aria-checked=true]::after
 {
     left: 33px;
-    background: #ffeba0;
+    background: var(--checked-background);
 }
 .Switch[aria-checked].active::before
 {
-    background: #f3f1ed;
+    background: var(--active-background);
 }
 .Switch[aria-checked=true][aria-disabled=true]::before
 {
-    background: rgba(0, 0, 0, 0.08);
+    background: var(--disabled-background);
 }
 .Switch[aria-checked=true][aria-disabled=true]::after
 {
-    background: rgba(0, 0, 0, 0.15);
+    background: var(--checked-disabled-background);
 }

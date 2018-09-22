@@ -1,34 +1,21 @@
+:root
+{
+    --selected-background: var(--pressed-background);
+    --selected-active-background: var(--pressed-active-background);
+    --selected-disabled-background: var(--pressed-disabled-background);
+    --listbox-box-padding: 4px 0;
+    --option-padding: 4px 12px;
+    --option-checked-padding: 4px 12px 4px 25px;
+    --option-marker-padding: 4px 6px;
+    --hover-background: rgba(0, 0, 0, 0.01);
+    --expanded-box-shadow: 0 0 0 1px rgba(0, 0, 0, .06), 0 10px 20px -5px rgba(0, 0, 0, .4);
+}
 .ListBox
 {
     display: inline-block;
-    outline: none;
     white-space: nowrap;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-}
-.ListBox > span
-{
-    background: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    display: block;
-    position: relative;
-    overflow-y: auto;
+    user-select: none;
     outline: none;
-    padding: 4px 0;
-}
-.ListBox .Option
-{
-    display: block;
-    position: relative;
-    height: 24px;
-    padding: 0 13px;
-    line-height: 25px;
-    cursor: pointer;
-}
-.ListBox .Option[aria-checked]
-{
-    padding: 0 30px;
 }
 .ListBox label
 {
@@ -36,73 +23,101 @@
     margin-bottom: 5px;
     cursor: default;
 }
-
-.ListBox:not([aria-disabled=true]) .Option:hover
+.ListBox .box
 {
-    background: rgba(0, 0, 0, 0.01);
+    position: relative;
+    display: block;
+    overflow-y: auto;
+    background: var(--background);
+    border: var(--border);
+    padding: var(--listbox-box-padding);
 }
-
-.ListBox:hover > span
+.ListBox .Option
 {
-    border-color: rgba(0, 0, 0, 0.3);
+    display: block;
+    position: relative;
+    cursor: pointer;
+    padding: var(--option-padding);
 }
-
-.ListBox:focus > span
+.ListBox .Option[aria-hidden=true]
 {
-    border-color: #ffdb4d;
-    box-shadow: 0 0 0 1px #ffdb4d;
+    display: none;
 }
-.ListBox:focus .Option[aria-selected=true],
-.ListBox:not([aria-disabled=true]) .Option[aria-selected=true]
+.ListBox .Option[aria-checked]
 {
-    background: #ffeba0;
-}
-.ListBox:focus .Option[aria-selected=true]:active,
-.ListBox:focus .Option[aria-selected=true].active
-{
-    background: #fee481;
+    padding: var(--option-checked-padding);
 }
 .ListBox .Option[aria-checked=true]::before
 {
     content: url(images/checkmark-small.svg);
     position: absolute;
-    top: 2px;
-    left: 10px;
+    top: 0;
+    left: 0;
+    margin: var(--option-marker-padding);
+}
+.ListBox:not([aria-disabled=true]) .Option:hover
+{
+    background: var(--hover-background);
+}
+.ListBox:hover .box
+{
+    border-color: var(--hover-border-color);
+}
+.ListBox:focus .box
+{
+    border-color: var(--focus-border-color);
+    box-shadow: var(--focus-box-shadow);
+}
+.ListBox:focus .Option[aria-selected=true],
+.ListBox:not([aria-disabled=true]) .Option[aria-selected=true]
+{
+    background: var(--selected-background);
+}
+.ListBox:focus .Option[aria-selected=true]:active,
+.ListBox:focus .Option[aria-selected=true].active
+{
+    background: var(--selected-active-background);
 }
 
-.ListBox[aria-readonly=true] > span,
+.ListBox[aria-readonly=true] .box,
 .ListBox[aria-readonly=true] label
 {
-    opacity: 0.7;
+    opacity: var(--readonly-opacity);
 }
 
-.ListBox[aria-disabled=true] > span
+.ListBox[aria-disabled=true] .box
 {
-    background: rgba(0, 0, 0, 0.08);
-    border-color: transparent;
+    background: var(--disabled-background);
+    border-color: var(--disabled-border-color);
 }
 .ListBox[aria-disabled=true],
-.ListBox[aria-disabled=true] .Option
+.ListBox[aria-disabled=true] .Option,
+.ListBox .Option[aria-disabled=true]
 {
-    cursor: default;
-    color: rgba(0, 0, 0, 0.5);
+    color: var(--disabled-color);
+    cursor: var(--disabled-cursor);
 }
 
 .ListBox[aria-disabled=true] .Option[aria-selected=true]:not([aria-checked])
 {
-    background: rgba(0, 0, 0, 0.1);
+    background: var(--selected-disabled-background);
 }
 .ListBox[aria-disabled=true] .Option[aria-checked=true]::before
 {
-    opacity: 0.4;
+    opacity: var(--disabled-marker-opacity);
 }
 .ListBox[aria-expanded]
 {
+    display: block;
+    min-width: 100%;
     position: absolute;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, .06), 0 10px 20px -5px rgba(0, 0, 0, .4);
-    background: #fff;
     z-index: 1;
+    box-shadow: var(--expanded-box-shadow);
     transition: opacity .2s, transform .2s;
+}
+.ListBox[aria-expanded] .box
+{
+    border: none;
 }
 .ListBox[aria-hidden=true][aria-expanded=false]
 {

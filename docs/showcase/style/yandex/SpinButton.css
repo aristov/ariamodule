@@ -1,33 +1,45 @@
+:root
+{
+    --spinbutton-edit-padding: 5px;
+    --spinbutton-edit-width: 40px;
+    --spinbutton-button-padding: 5px 10px;
+}
 .SpinButton
 {
     display: inline-block;
     outline: none;
 }
+.SpinButton label
+{
+    display: block;
+    margin-bottom: 5px;
+    cursor: default;
+}
 .SpinButton .box
 {
     display: inline-block;
-    border: 1px solid rgba(0, 0, 0, .2);
-    border-radius: 4px;
+    border: var(--border);
+    border-radius: var(--border-radius);
 }
-.SpinButton .text
+.SpinButton .edit
 {
     display: inline-block;
     border-style: solid;
-    border-color: rgba(0, 0, 0, .2);
-    border-width: 0 1px;
-    padding: 5px;
-    width: 40px;
     white-space: nowrap;
     overflow: hidden;
     text-align: center;
     vertical-align: top;
     cursor: text;
     outline: none;
+    border-color: var(--border-color);
+    border-width: 0 var(--border-width);
+    padding: var(--spinbutton-edit-padding);
+    width: var(--spinbutton-edit-width);
 }
 .SpinButton .Button
 {
-    padding: 5px 10px;
     border: none;
+    padding: var(--spinbutton-button-padding);
 }
 .SpinButton .Button:first-child
 {
@@ -41,41 +53,35 @@
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
-.SpinButton label
-{
-    display: block;
-    margin-bottom: 5px;
-    cursor: default;
-}
 .SpinButton:hover .box,
-.SpinButton:hover:not(:focus):not([aria-disabled=true]) .text
+.SpinButton:hover:not(:focus):not([aria-disabled=true]) .edit
 {
-    border-color: rgba(0, 0, 0, .3);
+    border-color: var(--hover-border-color);
 }
 .SpinButton:focus .box
 {
-    border-color: #ffdb4d;
-    box-shadow: 0 0 0 1px #ffdb4d;
+    border-color: var(--focus-border-color);
+    box-shadow: var(--focus-box-shadow);
 }
 .SpinButton[aria-readonly=true]
 {
-    opacity: .7;
+    opacity: var(--readonly-opacity);
 }
 .SpinButton[aria-disabled=true]
 {
-    color: rgba(0, 0, 0, .5);
+    color: var(--disabled-color);
 }
-.SpinButton[aria-disabled=true] .box
+.SpinButton[aria-disabled=true] .box,
+.SpinButton[aria-disabled=true] .edit
 {
-    border-color: transparent;
+    border-color: var(--disabled-border-color);
 }
-.SpinButton[aria-disabled=true] .text
+.SpinButton[aria-disabled=true] .edit
 {
-    border-color: transparent;
-    background: rgba(0, 0, 0, .08);
-    cursor: default;
+    background: var(--disabled-background);
+    cursor: var(--disabled-cursor);
 }
-.SpinButton:not([aria-valuenow]) .text::before
+.SpinButton:not([aria-valuenow]) .edit::before
 {
     content: ' ';
 }

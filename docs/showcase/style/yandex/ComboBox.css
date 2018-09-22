@@ -1,63 +1,17 @@
+:root
+{
+    --invalid-border-color: red;
+}
 .ComboBox
 {
     display: inline-block;
     position: relative;
 }
-.ComboBox .TextBox
+.ComboBox .ListBox .box
 {
-    vertical-align: bottom;
-}
-.ComboBox .TextBox.focus + .Button
-{
-    border-left-color: #ffdb4d;
-}
-.ComboBox:not([aria-disabled=true]) .TextBox:hover:not(.focus) + .Button:not(:focus)
-{
-    border-left-color: rgba(0, 0, 0, 0.3);
-}
-.ComboBox .Button
-{
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    position: relative;
-}
-.ComboBox .Button::before
-{
-    content: url(./images/arrow-down.svg);
-    position: absolute;
-    left: 8px;
-    top: 4px;
-    transition: transform 0.1s ease-out 0s;
-}
-.ComboBox .ListBox
-{
-    display: block;
-    min-width: 100%;
-    margin-top: 3px;
-}
-.ComboBox .ListBox > span
-{
-    border: none;
-    box-shadow: none;
     max-height: 296px;
-}
-.ComboBox .ListBox .Option[aria-hidden=true]
-{
-    display: none;
-}
-.ComboBox[aria-expanded=true] .Button::before
-{
-    transform: rotate(-180deg) translateY(-2px);
-}
-.ComboBox[aria-disabled=true] .Button::before
-{
-    opacity: .3;
 }
 .ComboBox[aria-invalid=true] .TextBox .input
 {
-    border-color: red;
-}
-.ComboBox[aria-invalid=true] .TextBox + .Button
-{
-    border-color: red;
+    border-color: var(--invalid-border-color);
 }

@@ -1,60 +1,58 @@
 .Tree
 {
-    display: inline-block;
-    padding-left: 0;
     user-select: none;
 }
-.Tree .Group
-{
-    display: block;
-    padding-left: 20px;
-}
-.TreeItem
+.Tree .TreeItem
 {
     display: block;
     position: relative;
     cursor: pointer;
     outline: none;
 }
-.TreeItem:focus
+.Tree .Group
 {
-    box-shadow: 0 0 0 2px #ffdb4d;
+    padding-left: 20px;
 }
-.TreeItem[aria-expanded] > .Button
+.Tree .TreeItem:focus
+{
+    box-shadow: 0 0 0 2px var(--focus-border-color);
+}
+.Tree .TreeItem[aria-expanded] > .Button
 {
     position: absolute;
-    color: rgba(0, 0, 0, 0.5);
-    line-height: 11px;
+    top: 0;
+    left: 0;
     padding: 0 2px;
-    top: 4px;
-    left: 5px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    margin: 4px 5px;
+    line-height: 11px;
     border-radius: 2px;
-    background: white;
+    background: var(--background);
+    color: var(--disabled-color);
+    border: var(--border);
 }
-.TreeItem[aria-expanded] > .Button:hover
+.Tree .TreeItem[aria-expanded] > .Button:hover
 {
     border-color: rgba(0, 0, 0, 0.3);
     color: #000;
 }
-.TreeItem[aria-expanded=false] > .Button::before
+.Tree .TreeItem[aria-expanded=false] > .Button::before
 {
     content: '+';
 }
-.TreeItem[aria-expanded=true] > .Button::before
+.Tree .TreeItem[aria-expanded=true] > .Button::before
 {
     content: '−';
 }
-.TreeItem[aria-expanded=false] .Group
+.Tree .TreeItem[aria-expanded=false] .Group
 {
     display: none;
 }
-.TreeItem > label
+.Tree .TreeItem > label
 {
     display: block;
     padding: 3px 23px;
 }
-.TreeItem[aria-selected=true] > label
+.Tree .TreeItem[aria-selected=true] > label
 {
-    background: #ffeba0;
+    background: var(--selected-background);
 }

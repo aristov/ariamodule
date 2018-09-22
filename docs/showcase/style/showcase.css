@@ -23,7 +23,7 @@ h1 a:not(:hover)
 
 .ListBox > span
 {
-    max-height: 144px;
+    max-height: 138px;
 }
 .SelectBox .Button
 {

@@ -1,68 +1,28 @@
 .SelectBox
 {
     display: inline-block;
-    outline: none;
 }
-.SelectBox .Button
-{
-    position: relative;
-    padding-right: 24px;
-}
-.SelectBox:focus .Button
-{
-    border-color: #ffdb4d;
-    box-shadow: inset 0 0 0 1px #ffdb4d;
-}
-.SelectBox.active .Button
-{
-    background: #f3f1ed;
-}
-.SelectBox .Button::after
-{
-    content: url(images/arrow-down.svg);
-    position: absolute;
-    top: 4px;
-    right: 6px;
-    transition: transform .2s ease-out 0s;
-}
-.SelectBox.readonly label,
-.SelectBox.readonly .Button
-{
-    opacity: .7;
-}
-.SelectBox.disabled
-{
-    color: rgba(0, 0, 0, .5);
-}
-.SelectBox.disabled .Button::after
-{
-    opacity: .2;
-}
-.SelectBox > label
+.SelectBox label
 {
     display: block;
-    margin-bottom: 5px;
     cursor: default;
+    margin-bottom: 5px;
 }
 .SelectBox .ListBox
 {
     display: block;
     min-width: 150px;
 }
-.SelectBox .ListBox > span
+.SelectBox[aria-readonly=true] label,
+.SelectBox[aria-readonly=true] .Button
 {
-    border: none;
+    opacity: var(--readonly-opacity);
 }
-.SelectBox .Button[aria-expanded=true]::after
+.SelectBox[aria-disabled=true]
 {
-    transform: rotate(-180deg) translateY(-2px);
+    color: var(--disabled-color);
 }
-.SelectBox:focus .ListBox .Option[aria-selected=true]
+.SelectBox[aria-disabled=true] .Button::after
 {
-    background: #ffeba0;
-}
-.SelectBox .ListBox .Option[aria-selected=true]:active,
-.SelectBox .ListBox .Option[aria-selected=true].active
-{
-    background: #fee481;
+    opacity: .2;
 }

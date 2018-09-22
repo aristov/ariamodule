@@ -1,16 +1,23 @@
+:root
+{
+    --progressbar-width: 250px;
+    --progressbar-height: 6px;
+}
 .ProgressBar
 {
     position: relative;
-    width: 250px;
-    height: 6px;
-    margin: 15px 0;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 3px;
     overflow: hidden;
+
+    width: var(--progressbar-width);
+    height: var(--progressbar-height);
+    border: var(--border);
+    border-radius: var(--border-radius);
+    
+    margin: 15px 0;
 }
 .ProgressBar div
 {
     position: absolute;
     height: 100%;
-    background: #ffdb4d;
+    background: var(--checked-background);
 }

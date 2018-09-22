@@ -2,8 +2,9 @@
 {
     position: absolute;
     display: inline-block;
-    margin: 0 20px;
     z-index: 1;
+
+    margin: 0 20px;
     transition: opacity .3s;
 }
 .Dialog[aria-modal=true]
@@ -16,19 +17,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(0, 0, 0, 0.5);
+
+    --modal-background: rgba(0, 0, 0, 0.5);
+    background: var(--modal-background);
 }
-.Dialog > div
+.Dialog .content
 {
-    background: #fff;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 10px 20px -5px rgba(0, 0, 0, 0.4);
     box-sizing: border-box;
-    max-width: 300px;
     overflow: auto;
-    padding: 15px;
     z-index: 2;
+
+    background: var(--background);
+    box-shadow: var(--expanded-box-shadow);
+
+    max-width: 300px;
+    padding: 15px;
 }
-.Dialog > div
+.Dialog .content
 {
     transition: transform .3s;
 }
@@ -41,11 +46,11 @@
 {
     opacity: 0;
 }
-.Dialog[aria-hidden=false][aria-expanded=false] > div
+.Dialog[aria-hidden=false][aria-expanded=false] .content
 {
     transform: scale(.5);
 }
-.Dialog[aria-hidden=true][aria-expanded=true] > div
+.Dialog[aria-hidden=true][aria-expanded=true] .content
 {
     transform: scale(2);
 }

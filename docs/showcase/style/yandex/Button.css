@@ -1,73 +1,103 @@
+:root
+{
+    --background: #fff;
+    --border-color: rgba(0, 0, 0, .2);
+    --border-width: 1px;
+    --border-radius: 3px;
+    --border: var(--border-width) solid var(--border-color);
+
+    --hover-border-color: rgba(0, 0, 0, .3);
+
+    --focus-border-color: #ffdb4d;
+    --focus-box-shadow: 0 0 0 1px var(--focus-border-color);
+
+    --active-background: #f3f1ed;
+
+    --disabled-color: rgba(0, 0, 0, .5);
+    --disabled-background: rgba(0, 0, 0, .08);
+    --disabled-border-color: transparent;
+    --disabled-cursor: default;
+    
+    --pressed-background: #ffeba0;
+    --pressed-active-background: #fee481;
+    --pressed-disabled-background: rgba(0, 0, 0, .15);
+
+    --button-padding: 5px 12px;
+}
 .Button
 {
+    position: relative;
     display: inline-block;
-    outline: none;
     white-space: nowrap;
     cursor: pointer;
-    background: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 3px;
-    padding: 5px 12px;
     box-sizing: border-box;
     user-select: none;
+    outline: none;
+
+    padding: var(--button-padding);
+    border: var(--border);
+    border-radius: var(--border-radius);
+    background: var(--background);
 }
 .Button:hover
 {
-    border-color: rgba(0, 0, 0, 0.3);
+    border-color: var(--hover-border-color);
 }
 .Button:focus
 {
-    border-color: var(--focus-color);
-    box-shadow: 0 0 0 1px var(--focus-color);
+    border-color: var(--focus-border-color);
+    box-shadow: var(--focus-box-shadow);
 }
 .Button:active,
 .Button.active
 {
-    background: #f3f1ed;
+    background: var(--active-background);
 }
 .Button[aria-pressed=true]
 {
-    background: #ffeba0;
+    background: var(--pressed-background);
 }
 .Button[aria-pressed=true]:active,
 .Button[aria-pressed=true].active
 {
-    background: #fee481;
+    background: var(--pressed-active-background);
 }
 .Button[aria-disabled=true]
 {
-    cursor: default;
-    color: rgba(0, 0, 0, 0.5);
-    background: rgba(0, 0, 0, 0.08);
-    border-color: transparent;
+    cursor: var(--disabled-cursor);
+    color: var(--disabled-color);
+    background: var(--disabled-background);
+    border-color: var(--disabled-border-color);
 }
 .Button[aria-pressed=true][aria-disabled=true]
 {
-    background: rgba(0, 0, 0, 0.15);
-    border-color: transparent;
+    background: var(--pressed-disabled-background);
 }
 
 /*================================================================*/
 
-.Button[aria-haspopup=menu]
+.Button[aria-haspopup=menu],
+.Button[aria-haspopup=listbox]
 {
-    position: relative;
     padding-right: 24px;
 }
-.Button[aria-haspopup=menu]::after
+.Button[aria-haspopup=menu]::after,
+.Button[aria-haspopup=listbox]::after
 {
     content: url(images/arrow-down.svg);
     position: absolute;
-    top: 4px;
-    right: 6px;
-    transition: transform 0.1s ease-out 0s;
+    top: 0;
+    right: 0;
+    margin: 4px 6px;
+    transition: transform .1s ease-out 0s;
 }
 .Button[aria-haspopup=menu][aria-expanded=true]
 {
-    border-color: var(--focus-color);
-    box-shadow: 0 0 0 1px var(--focus-color);
+    border-color: var(--focus-border-color);
+    box-shadow: var(--focus-box-shadow);
 }
-.Button[aria-haspopup=menu][aria-expanded=true]::after
+.Button[aria-haspopup=menu][aria-expanded=true]::after,
+.Button[aria-haspopup=listbox][aria-expanded=true]::after
 {
     transform: rotate(-180deg) translateY(-2px);
 }

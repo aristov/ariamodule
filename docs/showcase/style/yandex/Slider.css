@@ -1,33 +1,33 @@
 .SliderTrack
 {
+    position: relative;
     display: block;
+    border: var(--border);
+    border-radius: var(--border-radius);
     width: 200px;
     height: 4px;
     margin: 20px 0 40px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
     background: rgba(0, 0, 0, 0.05);
-    border-radius: 3px;
-    position: relative;
 }
 .Slider
 {
     display: block;
     position: absolute;
+    outline: none;
+    border: var(--border);
+    border-radius: var(--border-radius);
+    background: var(--background);
     width: 26px;
     height: 26px;
-    border-radius: 3px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    background: white;
     margin-top: -12px;
-    outline: none;
 }
 .Slider:hover
 {
-    border-color: rgba(0, 0, 0, 0.3);
+    border-color: var(--hover-border-color);
 }
 .Slider:focus
 {
-    border-color: #ffdb4d;
-    box-shadow: 0 0 0 1px #ffdb4d;
+    border-color: var(--focus-border-color);
+    box-shadow: var(--focus-box-shadow);
     z-index: 1;
 }

@@ -1,20 +1,22 @@
 .Menu
 {
+    --menu-padding: 4px 0;
     position: relative;
     display: block;
-    outline: none;
     white-space: nowrap;
-    padding: 4px 0;
     user-select: none;
+    outline: none;
+    padding: var(--menu-padding);
 }
 .Menu[aria-expanded]
 {
+    --menu-expanded-margin: 1px;
     position: absolute;
-    margin: 1px;
-    background: #fff;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 10px 20px -5px rgba(0, 0, 0, 0.4);
     transition: opacity .2s, transform .2s;
     z-index: 1;
+    margin: var(--menu-expanded-margin);
+    background: var(--background);
+    box-shadow: var(--expanded-box-shadow);
 }
 .Menu .MenuItem
 {
@@ -37,7 +39,7 @@
 }
 .Menu .MenuItem[aria-disabled=true]
 {
-    color: rgba(0, 0, 0, 0.5);
+    color: var(--disabled-color);
     cursor: default;
 }
 .Menu .MenuItem[href]
@@ -94,7 +96,6 @@
 {
     transform: translateX(20px);
 }
-
 .MenuBar
 {
     display: inline-block;
