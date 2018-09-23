@@ -14,9 +14,14 @@
     min-width: 150px;
 }
 .SelectBox[aria-readonly=true] label,
-.SelectBox[aria-readonly=true] .Button
+.SelectBox[aria-readonly=true] .Button,
+.SelectBox[aria-readonly=true] .ListBox .Option
 {
     opacity: var(--readonly-opacity);
+}
+.SelectBox[aria-readonly=true] .ListBox .box
+{
+    opacity: 1;
 }
 .SelectBox[aria-disabled=true]
 {
