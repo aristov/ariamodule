@@ -48,7 +48,6 @@
 .Grid .GridCell[aria-selected=true],
 .Grid .Row[aria-selected=true] .Cell:not(.RowHeader)
 {
-    border-color: var(--focus-border-color);
     background: rgba(255, 235, 160, 0.8);
 }
 .Grid .GridCell[aria-disabled=true],

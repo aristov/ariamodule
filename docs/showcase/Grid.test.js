@@ -5,7 +5,6 @@ import {
     ColumnHeader,
     Grid,
     GridCell,
-    GridRow,
     Row,
     RowGroup,
     RowHeader
@@ -137,8 +136,9 @@ article({
                     new ColumnHeader('Five'),
                 ])),
                 new RowGroup(['A', 'B', 'C', 'D', 'E'].map((header, i) => {
-                    return new GridRow({
+                    return new Row({
                         selected : false,
+                        tabIndex : i? 0 : -1,
                         children : [
                             new RowHeader(header),
                             new Cell,
