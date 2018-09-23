@@ -70,17 +70,20 @@ article({
             h1(a('Navigation')),
             new Navigation([
                 new MenuBar([
-                    new MenuItemLink({
+                    new MenuItem({
+                        ownerElement : a(),
                         href : 'http://w3.org/TR/dom/',
                         target : '_blank',
                         children : 'DOM spec'
                     }),
-                    new MenuItemLink({
+                    new MenuItem({
+                        ownerElement : a(),
                         href : 'http://w3.org/TR/html/',
                         target : '_blank',
                         children : 'HTML spec'
                     }),
-                    new MenuItemLink({
+                    new MenuItem({
+                        ownerElement : a(),
                         href : 'https://www.w3.org/TR/wai-aria-1.1/',
                         target : '_blank',
                         children : 'WAI-ARIA spec'
