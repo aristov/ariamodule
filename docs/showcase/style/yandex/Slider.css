@@ -69,5 +69,5 @@
 .Slider[aria-disabled=true] .Thumb
 {
     border-color: var(--disabled-border-color);
-    background: #e8e8e8;
+    background: var(--disabled-background);
 }

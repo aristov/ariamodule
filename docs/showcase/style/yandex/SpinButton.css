@@ -85,3 +85,8 @@
 {
     content: ' ';
 }
+.SpinButton:not([aria-disabled=true]) .Button[aria-disabled=true]
+{
+    background: transparent;
+    color: #ccc;
+}

@@ -14,7 +14,7 @@
     --active-background: #f3f1ed;
 
     --disabled-color: rgba(0, 0, 0, .5);
-    --disabled-background: rgba(0, 0, 0, .08);
+    --disabled-background: #e8e8e8;
     --disabled-border-color: transparent;
     --disabled-cursor: default;
     
