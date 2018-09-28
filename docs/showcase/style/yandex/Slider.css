@@ -3,7 +3,7 @@
     display: inline-block;
     user-select: none;
 }
-.Slider .Bar
+.Slider .Track
 {
     position: relative;
     display: block;
@@ -46,7 +46,7 @@
 {
     margin-right: 20px;
 }
-.Slider[aria-orientation=vertical] .Bar
+.Slider[aria-orientation=vertical] .Track
 {
     width: 4px;
     height: 150px;
@@ -65,7 +65,7 @@
 {
     color: var(--disabled-color);
 }
-.Slider[aria-disabled=true] .Bar,
+.Slider[aria-disabled=true] .Track,
 .Slider[aria-disabled=true] .Thumb
 {
     border-color: var(--disabled-border-color);
