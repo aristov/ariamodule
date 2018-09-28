@@ -37,20 +37,20 @@
 {
     transition: transform .3s;
 }
-.Dialog[aria-hidden=true][aria-expanded=false]
+.Dialog[aria-expanded=false]
 {
     display: none;
 }
-.Dialog[aria-hidden=false][aria-expanded=false],
-.Dialog[aria-hidden=true][aria-expanded=true]
+.Dialog[aria-expanded=false-true],
+.Dialog[aria-expanded=true-false]
 {
     opacity: 0;
 }
-.Dialog[aria-hidden=false][aria-expanded=false] .content
+.Dialog[aria-expanded=false-true] .content
 {
     transform: scale(.5);
 }
-.Dialog[aria-hidden=true][aria-expanded=true] .content
+.Dialog[aria-expanded=true-false] .content
 {
     transform: scale(2);
 }
