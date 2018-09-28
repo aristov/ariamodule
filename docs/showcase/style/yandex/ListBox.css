@@ -119,16 +119,16 @@
 {
     border: none;
 }
-.ListBox[aria-hidden=true][aria-expanded=false]
+.ListBox[aria-expanded=false]
 {
     display: none;
 }
-.ListBox[aria-hidden=false][aria-expanded=false],
-.ListBox[aria-hidden=true][aria-expanded=true]
+.ListBox[aria-expanded=false-true]
 {
     opacity: 0;
-}
-.ListBox[aria-hidden=false][aria-expanded=false]
-{
     transform: translateY(20px);
+}
+.ListBox[aria-expanded=true-false]
+{
+    opacity: 0;
 }

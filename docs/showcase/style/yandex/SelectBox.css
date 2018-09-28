@@ -1,17 +1,13 @@
 .SelectBox
 {
+    position: relative;
     display: inline-block;
 }
-.SelectBox label
+.SelectBox .Button
 {
-    display: block;
-    cursor: default;
-    margin-bottom: 5px;
-}
-.SelectBox .ListBox
-{
-    display: block;
-    min-width: 150px;
+    width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .SelectBox[aria-readonly=true] label,
 .SelectBox[aria-readonly=true] .Button,
@@ -30,4 +26,10 @@
 .SelectBox[aria-disabled=true] .Button::after
 {
     opacity: .2;
+}
+.SelectBox label
+{
+    display: block;
+    cursor: default;
+    margin-bottom: 5px;
 }
