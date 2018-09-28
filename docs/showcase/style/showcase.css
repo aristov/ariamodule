@@ -82,10 +82,3 @@ h1 a:not(:hover)
 {
     color: rgba(0, 0, 0, 0.8);
 }
-#example-slider label
-{
-    display: block;
-    margin-bottom: 5px;
-    cursor: default;
-    user-select: none;
-}
