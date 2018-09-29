@@ -71,6 +71,10 @@
 {
     color: var(--disabled-color);
 }
+.SpinButton[aria-disabled=true] .box
+{
+    background: var(--disabled-background);
+}
 .SpinButton[aria-disabled=true] .box,
 .SpinButton[aria-disabled=true] .edit
 {
@@ -78,14 +82,13 @@
 }
 .SpinButton[aria-disabled=true] .edit
 {
-    background: var(--disabled-background);
     cursor: var(--disabled-cursor);
 }
 .SpinButton:not([aria-valuenow]) .edit::before
 {
     content: ' ';
 }
-.SpinButton:not([aria-disabled=true]) .Button[aria-disabled=true]
+.SpinButton .Button[aria-disabled=true]
 {
     background: transparent;
     color: #ccc;
