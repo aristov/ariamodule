@@ -9,7 +9,6 @@ import {
     MenuItem,
     MenuItemCheckBox,
     MenuItemRadio,
-    MenuItemLink,
     Navigation,
     Separator
 } from './ariamodule'

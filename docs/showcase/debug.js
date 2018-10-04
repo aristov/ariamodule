@@ -5,7 +5,7 @@ const prototype = (window.EventTarget || Node).prototype
 Object.defineProperties(prototype, {
     __instance__ : {
         get() {
-            return Role.getInstanceOf(this)
+            return Role.getAssemblerOf(this).getInstanceOf(this)
         }
     },
     __role__ : {

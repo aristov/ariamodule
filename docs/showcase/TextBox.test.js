@@ -28,8 +28,8 @@ article({
         section([
             new TextBox({
                 label : label('Read only'),
-                readOnly : true,
-                name : 'textbox-simple'
+                name : 'textbox-simple',
+                readOnly : true
             })
         ]),
         section([
