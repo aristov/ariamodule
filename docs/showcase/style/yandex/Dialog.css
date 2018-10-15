@@ -21,7 +21,7 @@
     --modal-background: rgba(0, 0, 0, 0.5);
     background: var(--modal-background);
 }
-.Dialog .content
+.Dialog .Inner
 {
     box-sizing: border-box;
     overflow: auto;
@@ -33,7 +33,7 @@
     max-width: 300px;
     padding: 15px;
 }
-.Dialog .content
+.Dialog .Inner
 {
     transition: transform .3s;
 }
@@ -46,11 +46,11 @@
 {
     opacity: 0;
 }
-.Dialog[aria-expanded=false-true] .content
+.Dialog[aria-expanded=false-true] .Inner
 {
     transform: scale(.5);
 }
-.Dialog[aria-expanded=true-false] .content
+.Dialog[aria-expanded=true-false] .Inner
 {
     transform: scale(2);
 }
