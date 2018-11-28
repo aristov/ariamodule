@@ -3,7 +3,7 @@
     padding-right: 26px;
     border-radius: 3px;
 }
-.SearchBox .clearbutton
+.SearchBox .SearchCancelButton
 {
     display: none;
     width: 27px;
@@ -15,12 +15,12 @@
     opacity: 0.25;
     outline: none;
 }
-.SearchBox:not([aria-readonly=true]):hover .clearbutton,
-.SearchBox:not([aria-readonly=true]).focus .clearbutton
+.SearchBox[data-value]:not([aria-readonly=true]):hover .SearchCancelButton,
+.SearchBox[data-value]:not([aria-readonly=true]).focus .SearchCancelButton
 {
     display: inline-block;
 }
-.SearchBox:not([aria-disabled=true]) .clearbutton:hover
+.SearchBox:not([aria-disabled=true]) .SearchCancelButton:hover
 {
     cursor: pointer;
     opacity: 1;
