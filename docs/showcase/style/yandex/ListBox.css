@@ -23,7 +23,7 @@
     margin-bottom: 5px;
     cursor: default;
 }
-.ListBox .box
+.ListBox .Box
 {
     position: relative;
     display: block;
@@ -59,11 +59,11 @@
 {
     background: var(--hover-background);
 }
-.ListBox:hover .box
+.ListBox:hover .Box
 {
     border-color: var(--hover-border-color);
 }
-.ListBox:focus .box
+.ListBox:focus .Box
 {
     border-color: var(--focus-border-color);
     box-shadow: var(--focus-box-shadow);
@@ -79,13 +79,13 @@
     background: var(--selected-active-background);
 }
 
-.ListBox[aria-readonly=true] .box,
+.ListBox[aria-readonly=true] .Box,
 .ListBox[aria-readonly=true] label
 {
     opacity: var(--readonly-opacity);
 }
 
-.ListBox[aria-disabled=true] .box
+.ListBox[aria-disabled=true] .Box
 {
     background: var(--disabled-background);
     border-color: var(--disabled-border-color);
@@ -115,7 +115,7 @@
     box-shadow: var(--expanded-box-shadow);
     transition: opacity .2s, transform .2s;
 }
-.ListBox[aria-expanded] .box
+.ListBox[aria-expanded] .Box
 {
     border: none;
 }

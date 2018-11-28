@@ -15,7 +15,7 @@
 {
     opacity: var(--readonly-opacity);
 }
-.SelectBox[aria-readonly=true] .ListBox .box
+.SelectBox[aria-readonly=true] .ListBox .Box
 {
     opacity: 1;
 }
