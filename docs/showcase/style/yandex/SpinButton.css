@@ -15,13 +15,13 @@
     margin-bottom: 5px;
     cursor: default;
 }
-.SpinButton .box
+.SpinButton .Box
 {
     display: inline-block;
     border: var(--border);
     border-radius: var(--border-radius);
 }
-.SpinButton .edit
+.SpinButton .Edit
 {
     display: inline-block;
     border-style: solid;
@@ -53,12 +53,12 @@
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
-.SpinButton:hover .box,
-.SpinButton:hover:not(:focus):not([aria-disabled=true]) .edit
+.SpinButton:hover .Box,
+.SpinButton:hover:not(:focus):not([aria-disabled=true]) .Edit
 {
     border-color: var(--hover-border-color);
 }
-.SpinButton:focus .box
+.SpinButton:focus .Box
 {
     border-color: var(--focus-border-color);
     box-shadow: var(--focus-box-shadow);
@@ -71,20 +71,20 @@
 {
     color: var(--disabled-color);
 }
-.SpinButton[aria-disabled=true] .box
+.SpinButton[aria-disabled=true] .Box
 {
     background: var(--disabled-background);
 }
-.SpinButton[aria-disabled=true] .box,
-.SpinButton[aria-disabled=true] .edit
+.SpinButton[aria-disabled=true] .Box,
+.SpinButton[aria-disabled=true] .Edit
 {
     border-color: var(--disabled-border-color);
 }
-.SpinButton[aria-disabled=true] .edit
+.SpinButton[aria-disabled=true] .Edit
 {
     cursor: var(--disabled-cursor);
 }
-.SpinButton:not([aria-valuenow]) .edit::before
+.SpinButton:not([aria-valuenow]) .Edit::before
 {
     content: ' ';
 }
