@@ -12,7 +12,7 @@
     display: inline-block;
     position: relative;
 }
-.TextBox .input
+.TextBox .Box
 {
     display: block;
     box-sizing: border-box;
@@ -21,7 +21,7 @@
     border: var(--border);
     background: var(--background);
 }
-.TextBox .edit
+.TextBox .Edit
 {
     display: block;
     overflow: hidden;
@@ -31,11 +31,11 @@
     height: var(--textbox-edit-height);
     padding: var(--textbox-edit-padding);
 }
-.TextBox:hover .input
+.TextBox:hover .Box
 {
     border-color: var(--hover-border-color);
 }
-.TextBox.focus .input
+.TextBox.focus .Box
 {
     border-color: var(--focus-border-color);
     box-shadow: var(--focus-box-shadow);
@@ -49,24 +49,24 @@
     color: var(--disabled-color);
     cursor: var(--disabled-cursor);
 }
-.TextBox[aria-disabled] .input
+.TextBox[aria-disabled] .Box
 {
     background: var(--disabled-background);
     border-color: var(--disabled-border-color);
 }
-.TextBox[aria-multiline] .edit
+.TextBox[aria-multiline] .Edit
 {
     white-space: normal;
     overflow: auto;
     height: var(--textbox-multiline-height);
 }
-.TextBox .placeholder
+.TextBox .Placeholder
 {
     position: absolute;
     padding: var(--textbox-edit-padding);
     color: var(--textbox-placeholder-color);
 }
-.TextBox[data-value] .placeholder
+.TextBox[data-value] .Placeholder
 {
     display: none;
 }

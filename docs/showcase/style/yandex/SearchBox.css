@@ -1,4 +1,4 @@
-.SearchBox .input
+.SearchBox .Box
 {
     padding-right: 26px;
     border-radius: 3px;
@@ -25,7 +25,7 @@
     cursor: pointer;
     opacity: 1;
 }
-.SearchBox[aria-invalid=true] .input
+.SearchBox[aria-invalid=true] .Box
 {
     border-color: red;
 }

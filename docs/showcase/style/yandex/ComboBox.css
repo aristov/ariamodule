@@ -11,7 +11,7 @@
 {
     max-height: 296px;
 }
-.ComboBox[aria-invalid=true] .TextBox .input
+.ComboBox[aria-invalid=true] .TextBox .Box
 {
     border-color: var(--invalid-border-color);
 }
