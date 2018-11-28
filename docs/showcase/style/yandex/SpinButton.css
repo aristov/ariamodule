@@ -41,13 +41,13 @@
     border: none;
     padding: var(--spinbutton-button-padding);
 }
-.SpinButton .Button:first-child
+.SpinButton .Button[data-sign="-"]
 {
     border-right: none;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
-.SpinButton .Button:last-child
+.SpinButton .Button[data-sign="+"]
 {
     border-left: none;
     border-top-left-radius: 0;
