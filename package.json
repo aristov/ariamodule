@@ -87,8 +87,8 @@
   },
   "homepage": "https://github.com/aristov/ariamodule#readme",
   "dependencies": {
-    "dommodule": "github:aristov/dommodule",
-    "htmlmodule": "github:aristov/htmlmodule"
+    "dommodule": "^0.7.1",
+    "htmlmodule": "^0.6.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
