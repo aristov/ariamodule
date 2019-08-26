@@ -40,18 +40,21 @@
 {
     border: none;
     padding: var(--spinbutton-button-padding);
+    opacity: .5;
 }
 .SpinButton .Button[data-sign="-"]
 {
     border-right: none;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+    background: url(images/Minus.svg) center center / 12px no-repeat;
 }
 .SpinButton .Button[data-sign="+"]
 {
     border-left: none;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+    background: url(images/Plus.svg) center center / 12px no-repeat;
 }
 .SpinButton:hover .Box,
 .SpinButton:hover:not(:focus):not([aria-disabled=true]) .Edit
@@ -90,6 +93,6 @@
 }
 .SpinButton .Button[aria-disabled=true]
 {
-    background: transparent;
+    opacity: .1;
     color: #ccc;
 }
