@@ -16,7 +16,10 @@ article({
             new ComboBox({
                 label : label('Autocomplete list'),
                 autoComplete : 'list',
-                options : suggest.map(name => new Option(name))
+                options : suggest.map((name, i) => new Option({
+                    value : 'item' + i,
+                    children : name
+                }))
             })
         ]),
         section([
