@@ -15,3 +15,9 @@
 {
     border-color: var(--invalid-border-color);
 }
+.ComboBox label
+{
+    display: block;
+    margin-bottom: 5px;
+    cursor: default;
+}
