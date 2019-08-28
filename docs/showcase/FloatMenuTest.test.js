@@ -1,7 +1,7 @@
 import { Button, Group, Menu, MenuItem } from './ariamodule'
+import './style/FloatMenuTest.css'
 
-class FloatMenuTest extends Group {
-}
+class FloatMenuTest extends Group {}
 
 function button() {
     return new Button({
