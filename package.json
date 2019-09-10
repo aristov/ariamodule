@@ -25,8 +25,7 @@
   },
   "homepage": "https://github.com/aristov/ariamodule#readme",
   "dependencies": {
-    "dommodule": "^0.7.1",
-    "htmlmodule": "^0.6.1"
+    "dommodule": "^0.7.1"
   },
   "devDependencies": {
     "autoprefixer": "^9.6.1",
@@ -44,7 +43,6 @@
   },
   "keywords": [
     "WAI-ARIA",
-    "HTML",
     "DOM",
     "ARIAAttrAssembler",
     "ActiveDescendant",
@@ -159,7 +157,6 @@
     "Section",
     "SectionHead",
     "Select",
-    "SelectBox",
     "Selected",
     "Separator",
     "SetSize",
