@@ -1,9 +1,0 @@
-body
-{
-    font: 13px Arial;
-}
-[hidden],
-[aria-hidden=true]
-{
-    display: none;
-}
