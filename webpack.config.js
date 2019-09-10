@@ -31,6 +31,7 @@ if(process.env.NODE_ENV === 'production') {
 }
 
 module.exports = {
+    mode : 'none',
     entry : './docs/showcase/index.test.js',
     output : {
         path : buildPath,

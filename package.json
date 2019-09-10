@@ -39,7 +39,8 @@
     "postcss-loader": "^3.0.0",
     "shim-keyboard-event-key": "^1.0.3",
     "style-loader": "^1.0.0",
-    "webpack": "^3.12.0"
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.8"
   },
   "keywords": [
     "WAI-ARIA",
