@@ -1,6 +1,6 @@
 {
   "name": "ariamodule",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "WAI-ARIA DOM implementation",
   "files": [
     "lib"
