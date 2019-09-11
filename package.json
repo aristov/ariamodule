@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/aristov/ariamodule#readme",
   "dependencies": {
-    "dommodule": "^0.7.1"
+    "dommodule": "github:aristov/dommodule"
   },
   "devDependencies": {
     "autoprefixer": "^9.6.1",
