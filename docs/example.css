@@ -1,0 +1,36 @@
+Main,
+Heading,
+Paragraph,
+Form
+{
+    display: block;
+}
+Heading
+{
+    font-size: 2rem;
+    font-weight: bold;
+    margin: .67em 0;
+}
+Paragraph
+{
+    margin: 1em 0;
+}
+TextBox,
+Button
+{
+    border: .1em solid #aaa;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: .5em;
+}
+TextBox
+{
+    padding: .5em;
+    min-width: 10em;
+    cursor: text;
+}
+Button
+{
+    cursor: pointer;
+    padding: .5em 1em;
+}
