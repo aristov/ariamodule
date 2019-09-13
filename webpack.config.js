@@ -1,13 +1,10 @@
 'use strict'
 
 const path = require('path')
-const buildPath = path.join(__dirname, 'docs/build')
-
-const CSS_EXT_RE = /\.css$/
 
 const rules = [
-    {
-        test : CSS_EXT_RE,
+    /*{
+        test : /\.css$/,
         use : [
             'style-loader',
             {
@@ -19,7 +16,7 @@ const rules = [
             },
             'postcss-loader'
         ]
-    }
+    }*/
 ]
 
 if(process.env.NODE_ENV === 'production') {
@@ -32,10 +29,10 @@ if(process.env.NODE_ENV === 'production') {
 
 module.exports = {
     mode : 'none',
-    entry : './docs/showcase/index.test.js',
+    entry : './lib/index.js',
     output : {
-        path : buildPath,
-        filename : 'build.index.js'
+        path : path.join(__dirname, 'dist'),
+        filename : 'dist.ariamodule.js'
     },
     module : { rules }
 }
