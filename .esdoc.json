@@ -1,0 +1,9 @@
+{
+  "source": "./lib",
+  "destination": "./dist/api/esdoc",
+  "plugins": [
+    {
+      "name": "esdoc-standard-plugin"
+    }
+  ]
+}

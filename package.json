@@ -12,6 +12,8 @@
   "scripts": {
     "watch": "webpack -w",
     "build": "webpack",
+    "esdoc": "esdoc",
+    "api": "rm -rf dist/api && npm run esdoc",
     "publish": "git push && git push --tags"
   },
   "repository": {
@@ -35,6 +37,8 @@
     "babel-preset-env": "^1.7.0",
     "css-loader": "^3.2.0",
     "dom4": "^2.1.5",
+    "esdoc": "^1.1.0",
+    "esdoc-standard-plugin": "^1.0.0",
     "postcss-loader": "^3.0.0",
     "shim-keyboard-event-key": "^1.0.3",
     "style-loader": "^1.0.0",
