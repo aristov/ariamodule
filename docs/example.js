@@ -1,21 +1,30 @@
 import { ElementAssembler } from 'dommodule'
-import { Role, Widget, Main, Heading, Paragraph, Form, ARIATextBox, ARIAButton } from '../lib'
+import {
+    Form,
+    Heading,
+    Main,
+    Paragraph,
+    Role,
+    RoleWidget,
+    RoleTextBox,
+    RoleButton
+} from '../lib'
 
 Role.debug()
 
 class Span extends ElementAssembler {
-    static get namespace() {
-        return 'http://www.w3.org/1999/xhtml'
-    }
-
     static get localName() {
         return super.localName.toLowerCase()
+    }
+
+    static get namespace() {
+        return 'http://www.w3.org/1999/xhtml'
     }
 }
 
 class Div extends Span {}
 
-class TextBox extends ARIATextBox {
+class TextBox extends RoleTextBox {
     create(init) {
         super.create(init)
         this.node.contentEditable = true
@@ -28,19 +37,21 @@ class TextBox extends ARIATextBox {
     }
 }
 
-class Button extends ARIAButton {
+class Button extends RoleButton {
     create(init) {
         super.create(init)
-        this.node.tabIndex = 0,
-            this.on('click', event => this.form.emit('submit'))
+        this.node.tabIndex = 0
+        this.on('click', event => this.form.emit('submit'))
         this.on('keydown', event => {
-            [' ', 'Enter'].includes(event.key) && this.node.click()
+            if([' ', 'Enter'].includes(event.key)) {
+                this.node.click()
+            }
         })
     }
 }
 
 Role.elementAssembler = Div
-Widget.elementAssembler = Span
+RoleWidget.elementAssembler = Span
 
 let label, textBox
 
