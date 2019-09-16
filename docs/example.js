@@ -8,7 +8,7 @@ import {
     RoleWidget,
     RoleTextBox,
     RoleButton
-} from '../lib'
+} from '../lib/Role.index'
 
 Role.debug()
 
