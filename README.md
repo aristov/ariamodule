@@ -1,6 +1,6 @@
 # ariamodule
 
-WAI-ARIA framework HTML DOM implementation.
+WAI-ARIA framework DOM implementation.
 
 _work in progress_
 
