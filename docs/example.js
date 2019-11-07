@@ -1,3 +1,4 @@
+import '../lib/debug'
 import { ElementAssembler } from 'dommodule'
 import {
     Form,
@@ -9,8 +10,6 @@ import {
     RoleTextBox,
     RoleButton
 } from './ariamodule'
-
-Role.debug()
 
 class Span extends ElementAssembler {
     static get localName() {
