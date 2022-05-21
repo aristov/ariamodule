@@ -16,7 +16,7 @@ module.exports = {
 
 if(process.env.NODE_ENV === 'production') {
   Object.assign(module.exports, {
-    module : {
+    /*module : {
       rules : [
         {
           test : /\.js$/,
@@ -29,13 +29,13 @@ if(process.env.NODE_ENV === 'production') {
           },
         },
       ],
-    },
+    },*/
     optimization : {
       minimize : true,
       minimizer : [
         new TerserPlugin({
           terserOptions : {
-            keep_fnames : true,
+            keep_classnames : true,
           },
         }),
       ],
