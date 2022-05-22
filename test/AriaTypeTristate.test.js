@@ -8,12 +8,16 @@ test('true', t => {
   })
   t.is(instance.pressed, true)
   t.is(instance.toString(), '<div aria-pressed="true" role="Button">Toggle</div>')
+
   instance.pressed = 'true'
   t.is(instance.pressed, true)
+
   instance.pressed = '*'
   t.is(instance.pressed, true)
+
   instance.pressed = 1
   t.is(instance.pressed, true)
+
   instance.pressed = 42
   t.is(instance.pressed, true)
 })
@@ -25,8 +29,10 @@ test('false', t => {
   })
   t.is(instance.pressed, false)
   t.is(instance.toString(), '<div aria-pressed="false" role="Button">Toggle</div>')
+
   instance.pressed = 'false'
   t.is(instance.pressed, false)
+
   instance.pressed = 0
   t.is(instance.pressed, false)
 })
@@ -47,10 +53,19 @@ test('undefined', t => {
   })
   t.is(instance.pressed, undefined)
   t.is(instance.toString(), '<div role="Button">Toggle</div>')
+
   instance.pressed = null
   t.is(instance.pressed, undefined)
+
+  instance.pressed = 'undefined'
+  t.is(instance.pressed, undefined)
+
+  instance.pressed = ''
+  t.is(instance.pressed, undefined)
+
   instance.node.setAttribute('aria-pressed', '')
   t.is(instance.pressed, undefined)
+
   instance.node.setAttribute('aria-pressed', 'undefined')
   t.is(instance.pressed, undefined)
 })
