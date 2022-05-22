@@ -1,7 +1,7 @@
 const test = require('ava')
 const { RoleButton } = require('..')
 
-test('true', t => {
+test('AriaDisabled: true', t => {
   const instance = RoleButton.render({
     text : 'OK',
     disabled : true,
@@ -25,7 +25,7 @@ test('true', t => {
   t.is(instance.disabled, true)
 })
 
-test('false', t => {
+test('AriaDisabled: false', t => {
   const instance = RoleButton.render({
     text : 'OK',
     disabled : false,

@@ -1,7 +1,7 @@
 const test = require('ava')
 const { RoleSpinButton } = require('..')
 
-test('0', t => {
+test('AriaValueNow: 0', t => {
   const instance = RoleSpinButton.render({
     text : 'Lorem ipsum',
     valueNow : .0,
@@ -43,7 +43,7 @@ test('0', t => {
   t.is(instance.valueNow, 0)
 })
 
-test('1', t => {
+test('AriaValueNow: 1', t => {
   const instance = RoleSpinButton.render({
     text : 'Lorem ipsum',
     valueNow : 1,
@@ -78,7 +78,7 @@ test('1', t => {
   t.is(instance.valueNow, 1)
 })
 
-test('4.2', t => {
+test('AriaValueNow: 4.2', t => {
   const instance = RoleSpinButton.render({
     text : 'Lorem ipsum',
     valueNow : 4.2,
@@ -108,7 +108,7 @@ test('4.2', t => {
   t.is(instance.valueNow, 4.2)
 })
 
-test('NaN', t => {
+test('AriaValueNow: NaN', t => {
   const instance = RoleSpinButton.render({
     text : 'Lorem ipsum',
     valueNow : NaN,
@@ -147,7 +147,7 @@ test('NaN', t => {
   t.is(instance.valueNow, NaN)
 })
 
-test('Infinity', t => {
+test('AriaValueNow: Infinity', t => {
   const instance = RoleSpinButton.render({
     text : 'Lorem ipsum',
     valueNow : Infinity,
@@ -159,7 +159,7 @@ test('Infinity', t => {
   t.is(instance.valueNow, Infinity)
 })
 
-test('null', t => {
+test('AriaValueNow: null', t => {
   const instance = RoleSpinButton.render({
     text : 'Lorem ipsum',
     valueNow : null,

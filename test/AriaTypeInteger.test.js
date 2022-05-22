@@ -1,7 +1,7 @@
 const test = require('ava')
 const { RoleArticle } = require('..')
 
-test('0', t => {
+test('AriaPosInSet: 0', t => {
   const instance = RoleArticle.render({
     text : 'Lorem ipsum',
     posInSet : .0,
@@ -43,7 +43,7 @@ test('0', t => {
   t.is(instance.posInSet, 0)
 })
 
-test('1', t => {
+test('AriaPosInSet: 1', t => {
   const instance = RoleArticle.render({
     text : 'Lorem ipsum',
     posInSet : 1.1,
@@ -79,7 +79,7 @@ test('1', t => {
   t.is(instance.posInSet, 1)
 })
 
-test('4', t => {
+test('AriaPosInSet: 4', t => {
   const instance = RoleArticle.render({
     text : 'Lorem ipsum',
     posInSet : 4.2,
@@ -109,7 +109,7 @@ test('4', t => {
   t.is(instance.posInSet, 4)
 })
 
-test('NaN', t => {
+test('AriaPosInSet: NaN', t => {
   const instance = RoleArticle.render({
     text : 'Lorem ipsum',
     posInSet : NaN,
@@ -148,7 +148,7 @@ test('NaN', t => {
   t.is(instance.posInSet, NaN)
 })
 
-test('Infinity', t => {
+test('AriaPosInSet: Infinity', t => {
   const instance = RoleArticle.render({
     text : 'Lorem ipsum',
     posInSet : Infinity,
@@ -160,7 +160,7 @@ test('Infinity', t => {
   t.is(instance.posInSet, Infinity)
 })
 
-test('null', t => {
+test('AriaPosInSet: null', t => {
   const instance = RoleArticle.render({
     text : 'Lorem ipsum',
     posInSet : null,

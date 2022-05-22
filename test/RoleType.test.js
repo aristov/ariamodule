@@ -14,19 +14,19 @@ class ToggleButton extends RoleButton
   onClick = () => this.setState({ pressed : !this.state.pressed })
 }
 
-test('role', t => {
+test('RoleButton: role', t => {
   const instance = RoleButton.render('Toggle')
   t.is(instance.node.getAttribute('role'), 'Button')
   t.is(instance.toString(), '<div role="Button">Toggle</div>')
 })
 
-test('className', t => {
+test('ToggleButton: className', t => {
   const instance = ToggleButton.render('Toggle')
   t.is(instance.node.className, 'ToggleButton')
   t.is(instance.toString(), '<div role="Button" class="ToggleButton" aria-pressed="false">Toggle</div>')
 })
 
-test('setState', t => {
+test('ToggleButton: setState', t => {
   const instance = ToggleButton.render({
     text : 'Toggle',
     pressed : false,

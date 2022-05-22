@@ -1,7 +1,7 @@
 const test = require('ava')
 const { RoleButton } = require('..')
 
-test('true', t => {
+test('AriaPressed: true', t => {
   const instance = RoleButton.render({
     text : 'Toggle',
     pressed : true,
@@ -22,7 +22,7 @@ test('true', t => {
   t.is(instance.pressed, true)
 })
 
-test('false', t => {
+test('AriaPressed: false', t => {
   const instance = RoleButton.render({
     text : 'Toggle',
     pressed : false,
@@ -37,7 +37,7 @@ test('false', t => {
   t.is(instance.pressed, false)
 })
 
-test('mixed', t => {
+test('AriaPressed: mixed', t => {
   const instance = RoleButton.render({
     text : 'Toggle',
     pressed : 'mixed',
@@ -46,7 +46,7 @@ test('mixed', t => {
   t.is(instance.toString(), '<div aria-pressed="mixed" role="Button">Toggle</div>')
 })
 
-test('undefined', t => {
+test('AriaPressed: undefined', t => {
   const instance = RoleButton.render({
     text : 'Toggle',
     pressed : undefined,

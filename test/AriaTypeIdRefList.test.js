@@ -1,7 +1,7 @@
 const test = require('ava')
 const { RoleButton } = require('..')
 
-test('id1', t => {
+test('AriaLabelledBy: id1', t => {
   const instance = RoleButton.render({
     labelledBy : 'id1'
   })
@@ -9,7 +9,7 @@ test('id1', t => {
   t.is(instance.toString(), '<div aria-labelledby="id1" role="Button"></div>')
 })
 
-test('[]', t => {
+test('AriaLabelledBy: []', t => {
   const instance = RoleButton.render({
     labelledBy : []
   })
@@ -17,7 +17,7 @@ test('[]', t => {
   t.is(instance.toString(), '<div role="Button"></div>')
 })
 
-test('[id1, id2, id3]', t => {
+test('AriaLabelledBy: [id1, id2, id3]', t => {
   const instance = RoleButton.render({
     labelledBy : ['id1', 'id2', 'id3']
   })
@@ -25,7 +25,7 @@ test('[id1, id2, id3]', t => {
   t.is(instance.toString(), '<div aria-labelledby="id1 id2 id3" role="Button"></div>')
 })
 
-test('[id1, null, id3]', t => {
+test('AriaLabelledBy: [id1, null, id3]', t => {
   const instance = RoleButton.render({
     labelledBy : ['id1', null, 'id3']
   })
@@ -33,7 +33,7 @@ test('[id1, null, id3]', t => {
   t.is(instance.toString(), '<div aria-labelledby="id1 id3" role="Button"></div>')
 })
 
-test('null', t => {
+test('AriaLabelledBy: null', t => {
   const instance = RoleButton.render({
     labelledBy : null
   })
