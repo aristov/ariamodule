@@ -21,7 +21,7 @@
     "coverage": "nyc --reporter=lcov npm test",
     "publish": "git push && git push --tags",
     "test": "ava",
-    "watch": "ava --watch"
+    "start": "ava --watch"
   },
   "dependencies": {
     "htmlmodule": "file:../htmlmodule"
