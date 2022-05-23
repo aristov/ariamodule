@@ -20,8 +20,8 @@
     "build": "webpack && NODE_ENV=production webpack",
     "coverage": "nyc --reporter=lcov npm test",
     "publish": "git push && git push --tags",
-    "test": "ava",
-    "start": "ava --watch"
+    "start": "ava --watch",
+    "test": "ava"
   },
   "dependencies": {
     "htmlmodule": "file:../htmlmodule"

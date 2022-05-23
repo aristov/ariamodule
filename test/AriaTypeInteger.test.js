@@ -38,9 +38,6 @@ test('AriaPosInSet: 0', t => {
 
   instance.node.setAttribute('aria-posinset', '.0e-1')
   t.is(instance.posInSet, 0)
-
-  instance.node.setAttribute('aria-posinset', '')
-  t.is(instance.posInSet, 0)
 })
 
 test('AriaPosInSet: 1', t => {
@@ -167,4 +164,7 @@ test('AriaPosInSet: null', t => {
   })
   t.is(instance.posInSet, null)
   t.is(instance.toString(), '<div role="Article">Lorem ipsum</div>')
+
+  instance.node.setAttribute('aria-posinset', '')
+  t.is(instance.posInSet, null)
 })

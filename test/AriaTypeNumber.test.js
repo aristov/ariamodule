@@ -38,9 +38,6 @@ test('AriaValueNow: 0', t => {
 
   instance.node.setAttribute('aria-valuenow', '.0e-1')
   t.is(instance.valueNow, 0)
-
-  instance.node.setAttribute('aria-valuenow', '')
-  t.is(instance.valueNow, 0)
 })
 
 test('AriaValueNow: 1', t => {
@@ -166,4 +163,7 @@ test('AriaValueNow: null', t => {
   })
   t.is(instance.valueNow, null)
   t.is(instance.toString(), '<div role="SpinButton">Lorem ipsum</div>')
+
+  instance.node.setAttribute('aria-valuenow', '')
+  t.is(instance.valueNow, null)
 })

@@ -3,6 +3,8 @@ const { RoleButton, RoleArticle, RoleRegion } = require('..')
 
 class ToggleButton extends RoleButton
 {
+  static localName = 'span'
+
   render() {
     if(!this.props.pressed) {
       this.pressed = 'false'
@@ -41,14 +43,14 @@ test('RoleButton: role', t => {
 test('ToggleButton: className', t => {
   const instance = ToggleButton.render()
   t.is(instance.node.className, 'ToggleButton')
-  t.is(instance.toString(), '<div role="Button" class="ToggleButton" aria-pressed="false">On</div>')
+  t.is(instance.toString(), '<span role="Button" class="ToggleButton" aria-pressed="false">On</span>')
 })
 
 test('Article: setState', t => {
   const instance = Article.render()
   t.is(instance.toString(),
-    '<div role="Article" class="Article"><div aria-pressed="false" role="Button" class="ToggleButton">On</div><div aria-expanded="false" role="Region"></div></div>')
+    '<div role="Article" class="Article"><span aria-pressed="false" role="Button" class="ToggleButton">On</span><div aria-expanded="false" role="Region"></div></div>')
   instance.toggle()
   t.is(instance.toString(),
-    '<div role="Article" class="Article"><div aria-pressed="true" role="Button" class="ToggleButton">Off</div><div aria-expanded="true" role="Region"></div></div>')
+    '<div role="Article" class="Article"><span aria-pressed="true" role="Button" class="ToggleButton">Off</span><div aria-expanded="true" role="Region"></div></div>')
 })
