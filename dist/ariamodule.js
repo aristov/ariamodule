@@ -23,9 +23,11 @@ module.exports = __webpack_require__(1)
 
 /***/ }),
 /* 1 */
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((module, exports, __webpack_require__) => {
 
-const AriaTypeApplicable = __webpack_require__(2)
+exports = module.exports = __webpack_require__(2)
+
+const AriaTypeApplicable = __webpack_require__(20)
 const AriaTypeBoolean = __webpack_require__(22)
 const AriaTypeIdRef = __webpack_require__(23)
 const AriaTypeIdRefList = __webpack_require__(24)
@@ -196,9 +198,7 @@ RoleType.defineAttrs([
 ])
 
 exports.RoleAlert.defineAttrs([
-  exports.AriaAtomic,
   exports.AriaExpanded,
-  exports.AriaLive,
 ])
 
 exports.RoleAlertDialog.defineAttrs([
@@ -259,7 +259,6 @@ exports.RoleColumnHeader.defineAttrs([
 exports.RoleComboBox.defineAttrs([
   exports.AriaAutoComplete,
   exports.AriaExpanded,
-  exports.AriaHasPopup,
   exports.AriaReadOnly,
   exports.AriaRequired,
 ])
@@ -371,7 +370,6 @@ exports.RoleListItem.defineAttrs([
 
 exports.RoleLog.defineAttrs([
   exports.AriaExpanded,
-  exports.AriaLive,
 ])
 
 exports.RoleMain.defineAttrs([
@@ -380,7 +378,6 @@ exports.RoleMain.defineAttrs([
 
 exports.RoleMarquee.defineAttrs([
   exports.AriaExpanded,
-  exports.AriaLive,
 ])
 
 exports.RoleMath.defineAttrs([
@@ -546,9 +543,7 @@ exports.RoleSpinButton.defineAttrs([
 ])
 
 exports.RoleStatus.defineAttrs([
-  exports.AriaAtomic,
   exports.AriaExpanded,
-  exports.AriaLive,
 ])
 
 exports.RoleStrong.defineAttrs([
@@ -597,10 +592,7 @@ exports.RoleTextBox.defineAttrs([
 ])
 
 exports.RoleTimer.defineAttrs([
-  exports.AriaAtomic,
   exports.AriaExpanded,
-  exports.AriaLive,
-  exports.AriaLive,
 ])
 
 exports.RoleToolBar.defineAttrs([
@@ -649,141 +641,29 @@ exports.RoleWindow.defineAttrs([
 
 /***/ }),
 /* 2 */
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-const AriaType = __webpack_require__(3)
-
-/**
- * Value representing true, false, or not applicable.
- * @see https://www.w3.org/TR/wai-aria-1.1/#valuetype_true-false-undefined
- * @abstract
- */
-class AriaTypeApplicable extends AriaType
-{
-  static defaultValue = undefined
-
-  /**
-   * value === 'true'
-   * value === '*' // non empty string
-   *      => true
-   *
-   * value === 'false'
-   *      => false
-   *
-   * value === 'undefined'
-   * value === ''
-   * no attr
-   *      => undefined
-   *
-   * @param {DomElem} elem
-   * @returns {boolean|undefined}
-   */
-  static get(elem) {
-    const value = super.get(elem)
-    if(value) {
-      return value === 'undefined'?
-        undefined :
-        Boolean(value) && value !== 'false'
-    }
-    return value
-  }
-
-  /**
-   * value = true
-   * value = 'true'
-   * value = '*' // non empty string
-   *      => 'true'
-   *
-   * value = false
-   * value = 'false'
-   *      => 'false'
-   *
-   * value = undefined
-   * value = 'undefined'
-   * value = ''
-   *      => no attr
-   *
-   * @param {DomElem} elem
-   * @param {*} value {boolean|undefined|string}
-   */
-  static set(elem, value) {
-    super.set(elem, String(Boolean(value) && value !== 'false'))
-  }
-}
-
-module.exports = AriaTypeApplicable
-
-
-/***/ }),
-/* 3 */
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-const { AttrType } = __webpack_require__(4)
-
-const ARIA_ATTR_PREFIX = 'aria-'
-
-/**
- * @see https://www.w3.org/TR/wai-aria-1.1/#host_general_attrs
- * @see https://www.w3.org/TR/html/dom.html#state-and-property-attributes
- * @see http://www.w3.org/ns/wai-aria/
- * @abstract
- */
-class AriaType extends AttrType
-{
-  /**
-   * @param {DomElem} elem
-   * @returns {string|null|*}
-   * @override
-   */
-  static get(elem) {
-    const value = super.get(elem)
-    return value || this.defaultValue
-  }
-
-  /**
-   * @returns {string}
-   * @override
-   */
-  static get attrName() {
-    const name = this.name.slice(4)
-    return name[0].toLowerCase() + name.slice(1)
-  }
-
-  /**
-   * @returns {string}
-   * @override
-   */
-  static get localName() {
-    return ARIA_ATTR_PREFIX + this.name.slice(4).toLowerCase()
-  }
-}
-
-module.exports = AriaType
-
-
-/***/ }),
-/* 4 */
 /***/ ((module, exports, __webpack_require__) => {
 
 /**
  * @module htmlmodule
  * @author Vyacheslav Aristov <vv.aristov@gmail.com>
  */
-exports = module.exports = __webpack_require__(5)
+exports = module.exports = __webpack_require__(3)
 
-exports.AttrType = __webpack_require__(8)
-exports.Dataset = __webpack_require__(7)
-exports.DomElem = __webpack_require__(9)
-exports.DomNode = __webpack_require__(11)
-exports.HtmlElem = __webpack_require__(6)
-exports.Style = __webpack_require__(21)
+exports.AttrType = __webpack_require__(6)
+exports.Dataset = __webpack_require__(5)
+exports.DomElem = __webpack_require__(7)
+exports.DomNode = __webpack_require__(9)
+exports.HtmlElem = __webpack_require__(4)
+exports.Style = __webpack_require__(19)
+
+exports.window = __webpack_require__(8)
 
 
 /***/ }),
-/* 5 */
+/* 3 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-const HtmlElem = __webpack_require__(6)
+const HtmlElem = __webpack_require__(4)
 
 exports.HtmlA = class HtmlA extends HtmlElem {}
 exports.HtmlAbbr = class HtmlAbbr extends HtmlElem {}
@@ -1538,12 +1418,12 @@ exports.HtmlVideo.defineProps([
 
 
 /***/ }),
-/* 6 */
+/* 4 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-const Dataset = __webpack_require__(7)
-const DomElem = __webpack_require__(9)
-const Style = __webpack_require__(21)
+const Dataset = __webpack_require__(5)
+const DomElem = __webpack_require__(7)
+const Style = __webpack_require__(19)
 
 /**
  * @see https://html.spec.whatwg.org/#htmlelement
@@ -1592,10 +1472,10 @@ module.exports = HtmlElem
 
 
 /***/ }),
-/* 7 */
+/* 5 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-const AttrType = __webpack_require__(8)
+const AttrType = __webpack_require__(6)
 
 let undefined
 
@@ -1635,7 +1515,7 @@ module.exports = Dataset
 
 
 /***/ }),
-/* 8 */
+/* 6 */
 /***/ ((module) => {
 
 /**
@@ -1704,11 +1584,11 @@ module.exports = AttrType
 
 
 /***/ }),
-/* 9 */
+/* 7 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-const window = __webpack_require__(10)
-const DomNode = __webpack_require__(11)
+const window = __webpack_require__(8)
+const DomNode = __webpack_require__(9)
 
 const { document } = window
 
@@ -1885,16 +1765,17 @@ class DomElem extends DomNode
    * @param {string[]|constructor[]} attrs
    */
   static defineAttrs(attrs) {
-    let attr, name
-    for(attr of attrs) {
-      name = typeof attr === 'string'? attr : attr.attrName
+    for(const attr of attrs) {
+      const name = typeof attr === 'string'? attr : attr.attrName
       Object.defineProperty(this.prototype, name, {
         configurable : true,
         get() {
           return this.getAttr(attr)
         },
         set(value) {
-          this.setAttr(attr, value)
+          if(value !== undefined) {
+            this.setAttr(attr, value)
+          }
         },
       })
     }
@@ -1933,7 +1814,7 @@ module.exports = DomElem
 
 
 /***/ }),
-/* 10 */
+/* 8 */
 /***/ ((module) => {
 
 /**
@@ -1950,12 +1831,12 @@ else module.exports = window
 
 
 /***/ }),
-/* 11 */
+/* 9 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-const window = __webpack_require__(10)
-const actualize = __webpack_require__(12)
-const events = __webpack_require__(19)
+const window = __webpack_require__(8)
+const actualize = __webpack_require__(10)
+const events = __webpack_require__(17)
 const {
   getKey,
   nodeWillMount,
@@ -1964,7 +1845,7 @@ const {
   nodeDidUpdate,
   childrenDidUpdate,
   nodeWillUnmount,
-} = __webpack_require__(20)
+} = __webpack_require__(18)
 
 const { CustomEvent, DocumentFragment, EventTarget, Node } = window
 
@@ -2239,7 +2120,7 @@ module.exports = DomNode
 
 
 /***/ }),
-/* 12 */
+/* 10 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /**
@@ -2247,15 +2128,15 @@ module.exports = DomNode
  * @author Vyacheslav Aristov <vv.aristov@gmail.com>
  * @see {@link https://github.com/aristov/actualize}
  */
-module.exports = __webpack_require__(13)
+module.exports = __webpack_require__(11)
 
 
 /***/ }),
-/* 13 */
+/* 11 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-const setChildren = __webpack_require__(14)
-const updateNode = __webpack_require__(17)
+const setChildren = __webpack_require__(12)
+const updateNode = __webpack_require__(15)
 
 const getNodeId = node => node.id
 
@@ -2290,14 +2171,14 @@ module.exports = actualize
 
 
 /***/ }),
-/* 14 */
+/* 12 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 module.exports = setChildren // avoiding empty exports for circular dependency
 
-const getKeyIndex = __webpack_require__(15)
-const setChildNodes = __webpack_require__(16)
-const updateNode = __webpack_require__(17)
+const getKeyIndex = __webpack_require__(13)
+const setChildNodes = __webpack_require__(14)
+const updateNode = __webpack_require__(15)
 
 const { indexOf } = Array.prototype
 
@@ -2370,7 +2251,7 @@ function setChildren(nodeA, nodeB, options) {
 
 
 /***/ }),
-/* 15 */
+/* 13 */
 /***/ ((module) => {
 
 const ELEMENT_NODE = 1
@@ -2400,10 +2281,10 @@ module.exports = getKeyIndex
 
 
 /***/ }),
-/* 16 */
+/* 14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-const updateNode = __webpack_require__(17)
+const updateNode = __webpack_require__(15)
 
 /**
  * @param {*|Element} nodeA
@@ -2444,11 +2325,11 @@ module.exports = setChildNodes
 
 
 /***/ }),
-/* 17 */
+/* 15 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-const setAttrs = __webpack_require__(18)
-const setChildren = __webpack_require__(14)
+const setAttrs = __webpack_require__(16)
+const setChildren = __webpack_require__(12)
 
 const ELEMENT_NODE = 1
 const TEXT_NODE = 3
@@ -2502,7 +2383,7 @@ module.exports = updateNode
 
 
 /***/ }),
-/* 18 */
+/* 16 */
 /***/ ((module) => {
 
 /**
@@ -2544,10 +2425,10 @@ module.exports = setAttrs
 
 
 /***/ }),
-/* 19 */
+/* 17 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-const window = __webpack_require__(10)
+const window = __webpack_require__(8)
 
 /**
  * type : [constructor, bubbles, cancelable]
@@ -2592,7 +2473,7 @@ module.exports = {
 
 
 /***/ }),
-/* 20 */
+/* 18 */
 /***/ ((module) => {
 
 module.exports = {
@@ -2687,10 +2568,10 @@ module.exports = {
 
 
 /***/ }),
-/* 21 */
+/* 19 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-const AttrType = __webpack_require__(8)
+const AttrType = __webpack_require__(6)
 
 class Style extends AttrType
 {
@@ -2718,10 +2599,127 @@ module.exports = Style
 
 
 /***/ }),
+/* 20 */
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const AriaType = __webpack_require__(21)
+
+/**
+ * Value representing true, false, or not applicable.
+ * @see https://www.w3.org/TR/wai-aria-1.1/#valuetype_true-false-undefined
+ * @abstract
+ */
+class AriaTypeApplicable extends AriaType
+{
+  static defaultValue = undefined
+
+  /**
+   * value === 'true'
+   * value === '*' // non empty string
+   *      => true
+   *
+   * value === 'false'
+   *      => false
+   *
+   * value === 'undefined'
+   * value === ''
+   * no attr
+   *      => undefined
+   *
+   * @param {DomElem} elem
+   * @returns {boolean|undefined}
+   */
+  static get(elem) {
+    const value = super.get(elem)
+    if(value) {
+      return value === 'undefined'?
+        undefined :
+        Boolean(value) && value !== 'false'
+    }
+    return value
+  }
+
+  /**
+   * value = true
+   * value = 'true'
+   * value = '*' // non empty string
+   *      => 'true'
+   *
+   * value = false
+   * value = 'false'
+   *      => 'false'
+   *
+   * value = undefined
+   * value = 'undefined'
+   * value = ''
+   *      => no attr
+   *
+   * @param {DomElem} elem
+   * @param {*} value {boolean|undefined|string}
+   */
+  static set(elem, value) {
+    if(value === 'undefined' || value === '') {
+      this.remove(elem)
+    }
+    else super.set(elem, String(Boolean(value) && value !== 'false'))
+  }
+}
+
+module.exports = AriaTypeApplicable
+
+
+/***/ }),
+/* 21 */
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const { AttrType } = __webpack_require__(2)
+
+const ARIA_ATTR_PREFIX = 'aria-'
+
+/**
+ * @see https://www.w3.org/TR/wai-aria-1.1/#host_general_attrs
+ * @see https://www.w3.org/TR/html/dom.html#state-and-property-attributes
+ * @see http://www.w3.org/ns/wai-aria/
+ * @abstract
+ */
+class AriaType extends AttrType
+{
+  /**
+   * @param {DomElem} elem
+   * @returns {string|null|*}
+   * @override
+   */
+  static get(elem) {
+    const value = super.get(elem)
+    return value || this.defaultValue
+  }
+
+  /**
+   * @returns {string}
+   * @override
+   */
+  static get attrName() {
+    const name = this.name.slice(4)
+    return name[0].toLowerCase() + name.slice(1)
+  }
+
+  /**
+   * @returns {string}
+   * @override
+   */
+  static get localName() {
+    return ARIA_ATTR_PREFIX + this.name.slice(4).toLowerCase()
+  }
+}
+
+module.exports = AriaType
+
+
+/***/ }),
 /* 22 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-const AriaType = __webpack_require__(3)
+const AriaType = __webpack_require__(21)
 
 /**
  * Value representing either true or false.
@@ -2750,6 +2748,32 @@ class AriaTypeBoolean extends AriaType
     const value = super.get(elem)
     return Boolean(value) && value !== 'false'
   }
+
+  /**
+   * value = true
+   * value = 'true'
+   * value = '*' // non empty string
+   * value = 1
+   * value = * // non zero
+   *      => 'true'
+   *
+   * value = false
+   * value = 'false'
+   * value = ''
+   * value = null
+   * value = undefined
+   * value = 0
+   *      => no attr
+   *
+   * @param {DomElem} elem
+   * @param {*} value {boolean|string|number|null|undefined}
+   */
+  static set(elem, value) {
+    if(value && value !== 'false') {
+      super.set(elem, 'true')
+    }
+    else this.remove(elem)
+  }
 }
 
 module.exports = AriaTypeBoolean
@@ -2759,7 +2783,7 @@ module.exports = AriaTypeBoolean
 /* 23 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-const AriaType = __webpack_require__(3)
+const AriaType = __webpack_require__(21)
 
 /**
  * Reference to the ID of another element in the same document
@@ -2777,7 +2801,7 @@ module.exports = AriaTypeIdRef
 /* 24 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-const AriaType = __webpack_require__(3)
+const AriaType = __webpack_require__(21)
 
 /**
  * A list of one or more ID references.
@@ -2820,7 +2844,7 @@ module.exports = AriaTypeIdRefList
 /* 25 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-const AriaType = __webpack_require__(3)
+const AriaType = __webpack_require__(21)
 
 /**
  * A numerical value without a fractional component.
@@ -2923,7 +2947,7 @@ module.exports = AriaTypeInteger
 /* 26 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-const AriaType = __webpack_require__(3)
+const AriaType = __webpack_require__(21)
 
 /**
  * Any real numerical value.
@@ -3023,7 +3047,7 @@ module.exports = AriaTypeNumber
 /* 27 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-const AriaType = __webpack_require__(3)
+const AriaType = __webpack_require__(21)
 
 /**
  * Unconstrained value type.
@@ -3042,7 +3066,7 @@ module.exports = AriaTypeString
 /* 28 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-const AriaType = __webpack_require__(3)
+const AriaType = __webpack_require__(21)
 
 /**
  * One of a limited set of allowed values. An explicit value
@@ -3073,6 +3097,17 @@ class AriaTypeToken extends AriaType
     }
     return value
   }
+
+  /**
+   * @param {DomElem} elem
+   * @param {string|undefined} value
+   */
+  static set(elem, value) {
+    if(value === 'undefined') {
+      elem.node.removeAttribute(this.localName)
+    }
+    else super.set(elem, value)
+  }
 }
 
 module.exports = AriaTypeToken
@@ -3082,7 +3117,7 @@ module.exports = AriaTypeToken
 /* 29 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-const AriaType = __webpack_require__(3)
+const AriaType = __webpack_require__(21)
 
 /**
  * A list of one or more tokens.
@@ -3107,14 +3142,15 @@ class AriaTypeTokenList extends AriaType
    * @param {*} value {string[]|string}
    */
   static set(elem, value) {
-    if(Array.isArray(value)) {
-      const list = value.filter(Boolean)
-      if(list.length) {
-        super.set(elem, list.join(' '))
-      }
-      else elem.node.removeAttribute(this.localName)
+    if(!Array.isArray(value)) {
+      super.set(elem, value)
+      return
     }
-    else super.set(elem, value)
+    const list = value.filter(Boolean)
+    if(list.length) {
+      super.set(elem, list.join(' '))
+    }
+    else elem.node.removeAttribute(this.localName)
   }
 }
 
@@ -3125,7 +3161,7 @@ module.exports = AriaTypeTokenList
 /* 30 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-const AriaType = __webpack_require__(3)
+const AriaType = __webpack_require__(21)
 
 /**
  * Value representing true or false, with an intermediate "mixed" value.
@@ -3159,15 +3195,15 @@ class AriaTypeTristate extends AriaType
    */
   static get(elem) {
     const value = super.get(elem)
-    if(value) {
-      if(value === 'mixed') {
-        return 'mixed'
-      }
-      return value === 'undefined'?
-        undefined :
-        Boolean(value) && value !== 'false'
+    if(!value) {
+      return value
     }
-    return value
+    if(value === 'mixed') {
+      return 'mixed'
+    }
+    return value === 'undefined'?
+      undefined :
+      Boolean(value) && value !== 'false'
   }
 
   /**
@@ -3195,7 +3231,10 @@ class AriaTypeTristate extends AriaType
    * @param {*} value {boolean|string}
    */
   static set(elem, value) {
-    if(value === 'mixed') {
+    if(value === 'undefined' || value === '') {
+      this.remove(elem)
+    }
+    else if(value === 'mixed') {
       super.set(elem, 'mixed')
     }
     else super.set(elem, String(Boolean(value) && value !== 'false'))
@@ -3209,8 +3248,8 @@ module.exports = AriaTypeTristate
 /* 31 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-const { document } = __webpack_require__(32)
-const { Dataset, DomElem, Style } = __webpack_require__(4)
+const { Dataset, DomElem, Style, window } = __webpack_require__(2)
+const { document } = window
 
 /**
  * @see https://www.w3.org/TR/wai-aria-1.1/#host_general_role
@@ -3278,23 +3317,6 @@ RoleType.defineProps([
 ], true)
 
 module.exports = RoleType
-
-
-/***/ }),
-/* 32 */
-/***/ ((module) => {
-
-/**
- * @module xwindow
- * @author Vyacheslav Aristov <vv.aristov@gmail.com>
- */
-if(typeof window === 'undefined') {
-  // Calling via eval() prevents jsdom extraction when using a module bundler
-  const { JSDOM } = eval('require("jsdom")')
-  const { window } = new JSDOM
-  module.exports = window
-}
-else module.exports = window
 
 
 /***/ })
