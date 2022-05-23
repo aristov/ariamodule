@@ -1,38 +1,54 @@
 const test = require('ava')
-const { RoleButton } = require('..')
+const { RoleButton, RoleArticle, RoleRegion } = require('..')
 
 class ToggleButton extends RoleButton
 {
-  state = { pressed : false }
+  render() {
+    if(!this.props.pressed) {
+      this.pressed = 'false'
+    }
+    return this.props.pressed ? 'Off' : 'On'
+  }
+}
+
+class Article extends RoleArticle
+{
+  state = { expanded : false }
 
   render() {
-    this.onclick = this.onClick
-    this.pressed = this.state.pressed
-    return this.props.children
+    return [
+      this._button = new ToggleButton({
+        pressed : this.state.expanded,
+        onclick : this.onClick,
+      }),
+      new RoleRegion({ expanded : this.state.expanded }),
+    ]
   }
 
-  onClick = () => this.setState({ pressed : !this.state.pressed })
+  onClick = () => this.setState({ expanded : !this.state.expanded })
+
+  toggle() {
+    this._button.click()
+  }
 }
 
 test('RoleButton: role', t => {
-  const instance = RoleButton.render('Toggle')
+  const instance = RoleButton.render('OK')
   t.is(instance.node.getAttribute('role'), 'Button')
-  t.is(instance.toString(), '<div role="Button">Toggle</div>')
+  t.is(instance.toString(), '<div role="Button">OK</div>')
 })
 
 test('ToggleButton: className', t => {
-  const instance = ToggleButton.render('Toggle')
+  const instance = ToggleButton.render()
   t.is(instance.node.className, 'ToggleButton')
-  t.is(instance.toString(), '<div role="Button" class="ToggleButton" aria-pressed="false">Toggle</div>')
+  t.is(instance.toString(), '<div role="Button" class="ToggleButton" aria-pressed="false">On</div>')
 })
 
-test('ToggleButton: setState', t => {
-  const instance = ToggleButton.render({
-    text : 'Toggle',
-    pressed : false,
-  })
-  t.is(instance.pressed, false)
-  instance.click()
-  t.is(instance.pressed, true)
-  t.is(instance.toString(), '<div aria-pressed="true" role="Button" class="ToggleButton">Toggle</div>')
+test('Article: setState', t => {
+  const instance = Article.render()
+  t.is(instance.toString(),
+    '<div role="Article" class="Article"><div aria-pressed="false" role="Button" class="ToggleButton">On</div><div aria-expanded="false" role="Region"></div></div>')
+  instance.toggle()
+  t.is(instance.toString(),
+    '<div role="Article" class="Article"><div aria-pressed="true" role="Button" class="ToggleButton">Off</div><div aria-expanded="true" role="Region"></div></div>')
 })
