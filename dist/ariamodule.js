@@ -1477,8 +1477,6 @@ module.exports = HtmlElem
 
 const AttrType = __webpack_require__(6)
 
-let undefined
-
 class Dataset extends AttrType
 {
   /**
@@ -1500,14 +1498,6 @@ class Dataset extends AttrType
         map[name] = dataset[name]
       }
     }
-  }
-
-  /**
-   * @param {DomElem} elem
-   * @returns {boolean}
-   */
-  static has(elem) {
-    return 'dataset' in elem.node
   }
 }
 
@@ -1539,30 +1529,6 @@ class AttrType
    */
   static set(elem, value) {
     elem.node.setAttribute(this.localName, value)
-  }
-
-  /**
-   * @param {DomElem} elem
-   * @returns {boolean}
-   */
-  static has(elem) {
-    return elem.node.hasAttribute(this.localName)
-  }
-
-  /**
-   * @param {DomElem} elem
-   */
-  static remove(elem) {
-    elem.node.removeAttribute(this.localName)
-  }
-
-  /**
-   * @param {DomElem} elem
-   * @param {*} value
-   * @returns {boolean}
-   */
-  static removeOnValue(elem, value) {
-    return value === null && !this.remove(elem)
   }
 
   /**
@@ -1609,12 +1575,12 @@ class DomElem extends DomNode
   createNode() {
     let constructor = this.constructor
     const { prefix, namespace } = constructor
-    do if(constructor.name.startsWith(prefix)) {
+    do if(constructor.name?.startsWith(prefix)) {
       const name = constructor.name.slice(prefix.length)
       return document.createElementNS(namespace, name.toLowerCase())
     }
     while(constructor = Object.getPrototypeOf(constructor))
-    return super.createNode()
+    throw Error(`Unable to resolve localName for "${ prefix }" prefix`)
   }
 
   /**
@@ -1656,7 +1622,7 @@ class DomElem extends DomNode
    */
   getAttr(attr) {
     if(typeof attr === 'function') {
-      return attr.has(this)? attr.get(this) : attr.defaultValue
+      return attr.get(this)
     }
     return this.node.getAttribute(attr)
   }
@@ -1669,36 +1635,12 @@ class DomElem extends DomNode
    */
   setAttr(attr, value) {
     if(typeof attr === 'function') {
-      if(!attr.removeOnValue(this, value)) {
-        attr.set(this, value)
-      }
+      value === null || attr.set(this, value)
     }
     else if(value === null) {
       this.node.removeAttribute(attr)
     }
     else this.node.setAttribute(attr, value)
-  }
-
-  /**
-   * @param {constructor|string} attr
-   * @param {function} [attr.has]
-   * @returns {boolean}
-   */
-  hasAttr(attr) {
-    return typeof attr === 'function'?
-      attr.has(this) :
-      this.node.hasAttribute(attr)
-  }
-
-  /**
-   * @param {constructor|string} attr
-   * @param {function} [attr.remove]
-   */
-  removeAttr(attr) {
-    if(typeof attr === 'function') {
-      attr.remove(this)
-    }
-    else this.node.removeAttribute(attr)
   }
 
   /**
@@ -1726,9 +1668,9 @@ class DomElem extends DomNode
    */
   set attrs(attrs) {
     for(const [name, value] of Object.entries(attrs)) {
-      value === null?
-        this.removeAttr(name) :
-        this.setAttr(name, value)
+      value === null ?
+        this.node.removeAttribute(name) :
+        this.node.setAttribute(name, value)
     }
   }
 
@@ -1755,18 +1697,11 @@ class DomElem extends DomNode
   }
 
   /**
-   * @returns {DOMRect}
-   */
-  get rect() {
-    return this.node.getBoundingClientRect()
-  }
-
-  /**
    * @param {string[]|constructor[]} attrs
    */
   static defineAttrs(attrs) {
     for(const attr of attrs) {
-      const name = typeof attr === 'string'? attr : attr.attrName
+      const name = typeof attr === 'string' ? attr : attr.attrName
       Object.defineProperty(this.prototype, name, {
         configurable : true,
         get() {
@@ -1848,6 +1783,12 @@ const {
 } = __webpack_require__(18)
 
 const { CustomEvent, DocumentFragment, EventTarget, Node } = window
+const SPECIAL_PROPS = {
+  children : true,
+  className : true,
+  key : true,
+  node : true,
+}
 
 /**
  * @see https://dom.spec.whatwg.org/#interface-node
@@ -1862,15 +1803,16 @@ class DomNode
    */
   constructor(props = {}) {
     this.__handlers = new Map
-    this.__prevProps = null
     this.props = props = this.normalizeProps(props)
     this.node = props.node || this.createNode()
     this.node.__instance = this
-    this.setProps()
+    if(props.key) {
+      this.key = props.key
+    }
   }
 
   /**
-   * @param {*} props
+   * @param {*} [props]
    * @return {{}}
    */
   normalizeProps(props) {
@@ -1891,10 +1833,11 @@ class DomNode
   }
 
   /**
-   * @param {boolean} deep
+   * @param {boolean} [deep]
    * @returns {this}
    */
-  init(deep = false) {
+  init(deep) {
+    this.setProps()
     this.props.children = this.normalizeChildren(this.render())
     this.node.append(...this.props.children.map(child => {
       if(child.node) {
@@ -1908,11 +1851,8 @@ class DomNode
   setProps() {
     let name, value
     for(name in this.props) {
-      if(!this.props.hasOwnProperty(name)) {
-        continue
-      }
       value = this.props[name]
-      if(name === 'node' || name === 'children') {
+      if(SPECIAL_PROPS[name]) {
         continue
       }
       if(name in this) {
@@ -1922,7 +1862,7 @@ class DomNode
   }
 
   /**
-   * @param {*} children
+   * @param {*} [children]
    * @return {(*|DomNode|string)[]}
    */
   normalizeChildren(children) {
@@ -1941,22 +1881,23 @@ class DomNode
    */
   setState(state) {
     const prevState = Object.assign({}, this.state)
-    Object.assign(this.state, typeof state === 'function' ? state(this.state) : state)
-    this.props.children = this.normalizeChildren(this.render())
-    if(this.props.children.length) {
-      const fragment = new DocumentFragment
-      fragment.append(...this.props.children.map(child => child.node || child))
-      actualize(this.node, fragment, {
-        childrenOnly : true,
-        getKey,
-        nodeWillMount,
-        nodeDidMount,
-        nodeWillUpdate,
-        nodeDidUpdate,
-        childrenDidUpdate,
-        nodeWillUnmount,
-      })
+    const fragment = new DocumentFragment
+    if(typeof state === 'function') {
+      state = state(this.state)
     }
+    Object.assign(this.state, state)
+    this.props.children = this.normalizeChildren(this.render())
+    fragment.append(...this.props.children.map(child => child.node || child))
+    actualize(this.node, fragment, {
+      childrenOnly : true,
+      getKey,
+      nodeWillMount,
+      nodeDidMount,
+      nodeWillUpdate,
+      nodeDidUpdate,
+      childrenDidUpdate,
+      nodeWillUnmount,
+    })
     this.componentDidUpdate(this.props, prevState)
   }
 
@@ -1980,7 +1921,7 @@ class DomNode
   }
 
   /**
-   * @param {boolean} keepNode
+   * @param {boolean} [keepNode]
    */
   destroy(keepNode = false) {
     if(!this.node) {
@@ -1992,6 +1933,7 @@ class DomNode
     }
     for(const type of this.__handlers.keys()) {
       this.node[type] = null
+      this.__handlers.delete(type)
     }
     keepNode || this.node.remove()
     this.node.__instance = null
@@ -2031,13 +1973,15 @@ class DomNode
         configurable : true,
         set(callback) {
           if(callback) {
-            this.node[name] = e => callback(e, e.target.__instance)
+            this.node[name] = e => callback.call(this, e, e.target.__instance)
             this.__handlers.set(name, callback)
+            return
           }
-          else this.__handlers.delete(name)
+          this.node[name] = null
+          this.__handlers.delete(name)
         },
         get() {
-          return this.node[name]
+          return this.__handlers.get(name) || null
         },
       })
     }
@@ -2476,6 +2420,16 @@ module.exports = {
 /* 18 */
 /***/ ((module) => {
 
+/**
+ * @param {DomElem|string} child
+ */
+const componentDidMount = child => {
+  if(child.node) {
+    child.componentDidMount()
+    child.props.children.forEach(componentDidMount)
+  }
+}
+
 module.exports = {
   /**
    * @param {Element} node
@@ -2494,18 +2448,7 @@ module.exports = {
    * @param {ChildNode|Element} nodeB
    */
   nodeDidMount(nodeB) {
-    const instanceB = nodeB.__instance
-    if(!instanceB) {
-      return
-    }
-    instanceB.componentDidMount()
-    let node = nodeB.firstElementChild
-    if(!node) {
-      return
-    }
-    while(node = node.nextElementSibling || node.firstElementChild) {
-      node.__instance?.componentDidMount()
-    }
+    nodeB.__instance && componentDidMount(nodeB.__instance)
   },
   /**
    * @param {Element} nodeA
@@ -2659,7 +2602,7 @@ class AriaTypeApplicable extends AriaType
    */
   static set(elem, value) {
     if(value === 'undefined' || value === '') {
-      this.remove(elem)
+      elem.node.removeAttribute(this.localName)
     }
     else super.set(elem, String(Boolean(value) && value !== 'false'))
   }
@@ -2772,7 +2715,7 @@ class AriaTypeBoolean extends AriaType
     if(value && value !== 'false') {
       super.set(elem, 'true')
     }
-    else this.remove(elem)
+    else elem.node.removeAttribute(this.localName)
   }
 }
 
@@ -2884,7 +2827,8 @@ class AriaTypeInteger extends AriaType
    * @returns {number}
    */
   static get(elem) {
-    return Math.floor(Number(super.get(elem)))
+    const value = super.get(elem)
+    return value && Math.floor(Number(value))
   }
 
   /**
@@ -2984,7 +2928,8 @@ class AriaTypeNumber extends AriaType
    * @returns {number}
    */
   static get(elem) {
-    return Number(super.get(elem))
+    const value = super.get(elem)
+    return value && Number(value)
   }
 
   /**
@@ -3232,7 +3177,7 @@ class AriaTypeTristate extends AriaType
    */
   static set(elem, value) {
     if(value === 'undefined' || value === '') {
-      this.remove(elem)
+      elem.node.removeAttribute(this.localName)
     }
     else if(value === 'mixed') {
       super.set(elem, 'mixed')
