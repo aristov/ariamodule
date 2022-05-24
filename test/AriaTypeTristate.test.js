@@ -7,7 +7,7 @@ test('AriaPressed: true', t => {
     pressed : true,
   })
   t.is(instance.pressed, true)
-  t.is(instance.toString(), '<div aria-pressed="true" role="Button">Toggle</div>')
+  t.is(instance.toString(), '<div role="Button" aria-pressed="true">Toggle</div>')
 
   instance.pressed = 'true'
   t.is(instance.pressed, true)
@@ -28,7 +28,7 @@ test('AriaPressed: false', t => {
     pressed : false,
   })
   t.is(instance.pressed, false)
-  t.is(instance.toString(), '<div aria-pressed="false" role="Button">Toggle</div>')
+  t.is(instance.toString(), '<div role="Button" aria-pressed="false">Toggle</div>')
 
   instance.pressed = 'false'
   t.is(instance.pressed, false)
@@ -43,7 +43,7 @@ test('AriaPressed: mixed', t => {
     pressed : 'mixed',
   })
   t.is(instance.pressed, 'mixed')
-  t.is(instance.toString(), '<div aria-pressed="mixed" role="Button">Toggle</div>')
+  t.is(instance.toString(), '<div role="Button" aria-pressed="mixed">Toggle</div>')
 })
 
 test('AriaPressed: undefined', t => {

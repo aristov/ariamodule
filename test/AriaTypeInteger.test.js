@@ -7,7 +7,7 @@ test('AriaPosInSet: 0', t => {
     posInSet : .0,
   })
   t.is(instance.posInSet, 0)
-  t.is(instance.toString(), '<div aria-posinset="0" role="Article">Lorem ipsum</div>')
+  t.is(instance.toString(), '<div role="Article" aria-posinset="0">Lorem ipsum</div>')
 
   instance.posInSet = .0e-1
   t.is(instance.posInSet, 0)
@@ -46,7 +46,7 @@ test('AriaPosInSet: 1', t => {
     posInSet : 1.1,
   })
   t.is(instance.posInSet, 1)
-  t.is(instance.toString(), '<div aria-posinset="1" role="Article">Lorem ipsum</div>')
+  t.is(instance.toString(), '<div role="Article" aria-posinset="1">Lorem ipsum</div>')
 
   instance.posInSet = 11e-1
   t.is(instance.posInSet, 1)
@@ -82,7 +82,7 @@ test('AriaPosInSet: 4', t => {
     posInSet : 4.2,
   })
   t.is(instance.posInSet, 4)
-  t.is(instance.toString(), '<div aria-posinset="4" role="Article">Lorem ipsum</div>')
+  t.is(instance.toString(), '<div role="Article" aria-posinset="4">Lorem ipsum</div>')
 
   instance.posInSet = 42e-1
   t.is(instance.posInSet, 4)
@@ -112,7 +112,7 @@ test('AriaPosInSet: NaN', t => {
     posInSet : NaN,
   })
   t.is(instance.posInSet, NaN)
-  t.is(instance.toString(), '<div aria-posinset="NaN" role="Article">Lorem ipsum</div>')
+  t.is(instance.toString(), '<div role="Article" aria-posinset="NaN">Lorem ipsum</div>')
 
   instance.posInSet = 'NaN'
   t.is(instance.posInSet, NaN)
@@ -151,7 +151,7 @@ test('AriaPosInSet: Infinity', t => {
     posInSet : Infinity,
   })
   t.is(instance.posInSet, Infinity)
-  t.is(instance.toString(), '<div aria-posinset="Infinity" role="Article">Lorem ipsum</div>')
+  t.is(instance.toString(), '<div role="Article" aria-posinset="Infinity">Lorem ipsum</div>')
 
   instance.posInSet = 'Infinity'
   t.is(instance.posInSet, Infinity)

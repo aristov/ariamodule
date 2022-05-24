@@ -7,7 +7,7 @@ test('AriaLive: polite', t => {
     live : 'polite',
   })
   t.is(instance.live, 'polite')
-  t.is(instance.toString(), '<div aria-live="polite" role="Alert">Warning!</div>')
+  t.is(instance.toString(), '<div role="Alert" aria-live="polite">Warning!</div>')
 })
 
 test('AriaLive: assertive', t => {
@@ -16,7 +16,7 @@ test('AriaLive: assertive', t => {
     live : 'assertive',
   })
   t.is(instance.live, 'assertive')
-  t.is(instance.toString(), '<div aria-live="assertive" role="Alert">Warning!</div>')
+  t.is(instance.toString(), '<div role="Alert" aria-live="assertive">Warning!</div>')
 })
 
 test('AriaLive: off', t => {
@@ -25,7 +25,7 @@ test('AriaLive: off', t => {
     live : 'off',
   })
   t.is(instance.live, 'off')
-  t.is(instance.toString(), '<div aria-live="off" role="Alert">Warning!</div>')
+  t.is(instance.toString(), '<div role="Alert" aria-live="off">Warning!</div>')
 })
 
 test('AriaLive: undefined', t => {

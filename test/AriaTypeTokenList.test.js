@@ -7,7 +7,7 @@ test('AriaRelevant: all', t => {
     relevant : 'all',
   })
   t.deepEqual(instance.relevant, ['all'])
-  t.is(instance.toString(), '<div aria-relevant="all" role="Application">Foo</div>')
+  t.is(instance.toString(), '<div role="Application" aria-relevant="all">Foo</div>')
 })
 
 test('AriaRelevant: [additions, removals, text]', t => {
@@ -16,7 +16,7 @@ test('AriaRelevant: [additions, removals, text]', t => {
     relevant : ['additions', 'removals', 'text'],
   })
   t.deepEqual(instance.relevant, ['additions', 'removals', 'text'])
-  t.is(instance.toString(), '<div aria-relevant="additions removals text" role="Application">Foo</div>')
+  t.is(instance.toString(), '<div role="Application" aria-relevant="additions removals text">Foo</div>')
 })
 
 test('AriaRelevant: []', t => {

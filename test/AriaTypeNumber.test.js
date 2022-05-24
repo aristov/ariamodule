@@ -7,7 +7,7 @@ test('AriaValueNow: 0', t => {
     valueNow : .0,
   })
   t.is(instance.valueNow, 0)
-  t.is(instance.toString(), '<div aria-valuenow="0" role="SpinButton">Lorem ipsum</div>')
+  t.is(instance.toString(), '<div role="SpinButton" aria-valuenow="0">Lorem ipsum</div>')
 
   instance.valueNow = .0e-1
   t.is(instance.valueNow, 0)
@@ -46,7 +46,7 @@ test('AriaValueNow: 1', t => {
     valueNow : 1,
   })
   t.is(instance.valueNow, 1)
-  t.is(instance.toString(), '<div aria-valuenow="1" role="SpinButton">Lorem ipsum</div>')
+  t.is(instance.toString(), '<div role="SpinButton" aria-valuenow="1">Lorem ipsum</div>')
 
   instance.valueNow = .1e1
   t.is(instance.valueNow, 1)
@@ -81,7 +81,7 @@ test('AriaValueNow: 4.2', t => {
     valueNow : 4.2,
   })
   t.is(instance.valueNow, 4.2)
-  t.is(instance.toString(), '<div aria-valuenow="4.2" role="SpinButton">Lorem ipsum</div>')
+  t.is(instance.toString(), '<div role="SpinButton" aria-valuenow="4.2">Lorem ipsum</div>')
 
   instance.valueNow = 42e-1
   t.is(instance.valueNow, 4.2)
@@ -111,7 +111,7 @@ test('AriaValueNow: NaN', t => {
     valueNow : NaN,
   })
   t.is(instance.valueNow, NaN)
-  t.is(instance.toString(), '<div aria-valuenow="NaN" role="SpinButton">Lorem ipsum</div>')
+  t.is(instance.toString(), '<div role="SpinButton" aria-valuenow="NaN">Lorem ipsum</div>')
 
   instance.valueNow = 'NaN'
   t.is(instance.valueNow, NaN)
@@ -150,7 +150,7 @@ test('AriaValueNow: Infinity', t => {
     valueNow : Infinity,
   })
   t.is(instance.valueNow, Infinity)
-  t.is(instance.toString(), '<div aria-valuenow="Infinity" role="SpinButton">Lorem ipsum</div>')
+  t.is(instance.toString(), '<div role="SpinButton" aria-valuenow="Infinity">Lorem ipsum</div>')
 
   instance.valueNow = 'Infinity'
   t.is(instance.valueNow, Infinity)

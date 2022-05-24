@@ -6,7 +6,7 @@ test('AriaLabelledBy: id1', t => {
     labelledBy : 'id1'
   })
   t.deepEqual(instance.labelledBy, ['id1'])
-  t.is(instance.toString(), '<div aria-labelledby="id1" role="Button"></div>')
+  t.is(instance.toString(), '<div role="Button" aria-labelledby="id1"></div>')
 })
 
 test('AriaLabelledBy: []', t => {
@@ -22,7 +22,7 @@ test('AriaLabelledBy: [id1, id2, id3]', t => {
     labelledBy : ['id1', 'id2', 'id3']
   })
   t.deepEqual(instance.labelledBy, ['id1', 'id2', 'id3'])
-  t.is(instance.toString(), '<div aria-labelledby="id1 id2 id3" role="Button"></div>')
+  t.is(instance.toString(), '<div role="Button" aria-labelledby="id1 id2 id3"></div>')
 })
 
 test('AriaLabelledBy: [id1, null, id3]', t => {
@@ -30,7 +30,7 @@ test('AriaLabelledBy: [id1, null, id3]', t => {
     labelledBy : ['id1', null, 'id3']
   })
   t.deepEqual(instance.labelledBy, ['id1', 'id3'])
-  t.is(instance.toString(), '<div aria-labelledby="id1 id3" role="Button"></div>')
+  t.is(instance.toString(), '<div role="Button" aria-labelledby="id1 id3"></div>')
 })
 
 test('AriaLabelledBy: null', t => {

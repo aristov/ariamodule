@@ -7,7 +7,7 @@ test('AriaHidden: true', t => {
     hidden : true,
   })
   t.is(instance.hidden, true)
-  t.is(instance.toString(), '<div aria-hidden="true" role="Button">Toggle</div>')
+  t.is(instance.toString(), '<div role="Button" aria-hidden="true">Toggle</div>')
 
   instance.hidden = 'true'
   t.is(instance.hidden, true)
@@ -28,7 +28,7 @@ test('AriaHidden: false', t => {
     hidden : false,
   })
   t.is(instance.hidden, false)
-  t.is(instance.toString(), '<div aria-hidden="false" role="Button">Toggle</div>')
+  t.is(instance.toString(), '<div role="Button" aria-hidden="false">Toggle</div>')
 
   instance.hidden = 'false'
   t.is(instance.hidden, false)

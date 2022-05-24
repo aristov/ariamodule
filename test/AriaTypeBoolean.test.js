@@ -7,7 +7,7 @@ test('AriaDisabled: true', t => {
     disabled : true,
   })
   t.is(instance.disabled, true)
-  t.is(instance.toString(), '<div aria-disabled="true" role="Button">OK</div>')
+  t.is(instance.toString(), '<div role="Button" aria-disabled="true">OK</div>')
 
   instance.disabled = 'true'
   t.is(instance.disabled, true)

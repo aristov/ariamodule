@@ -49,8 +49,8 @@ test('ToggleButton: className', t => {
 test('Article: setState', t => {
   const instance = Article.render()
   t.is(instance.toString(),
-    '<div role="Article" class="Article"><span aria-pressed="false" role="Button" class="ToggleButton">On</span><div aria-expanded="false" role="Region"></div></div>')
+    '<div role="Article" class="Article"><span role="Button" class="ToggleButton" aria-pressed="false">On</span><div role="Region" aria-expanded="false"></div></div>')
   instance.toggle()
   t.is(instance.toString(),
-    '<div role="Article" class="Article"><span aria-pressed="true" role="Button" class="ToggleButton">Off</span><div aria-expanded="true" role="Region"></div></div>')
+    '<div role="Article" class="Article"><span role="Button" class="ToggleButton" aria-pressed="true">Off</span><div role="Region" aria-expanded="true"></div></div>')
 })
