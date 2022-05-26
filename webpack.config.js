@@ -12,6 +12,9 @@ exports = module.exports = {
     },
     globalObject : 'this',
   },
+  externals : {
+    htmlmodule : 'htmlmodule',
+  },
 }
 
 if(process.env.NODE_ENV === 'production') {
