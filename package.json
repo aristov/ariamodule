@@ -1,7 +1,7 @@
 {
   "name": "ariamodule",
   "version": "0.1.13",
-  "description": "WAI-ARIA DOM implementation",
+  "description": "Library for creating an accessible UI based on WAI-ARIA",
   "homepage": "https://github.com/aristov/ariamodule#readme",
   "author": "Vyacheslav Aristov",
   "license": "MIT",
@@ -9,11 +9,10 @@
     "type": "git",
     "url": "git+ssh://git@github.com/aristov/ariamodule.git"
   },
-  "bugs": {
-    "url": "https://github.com/aristov/ariamodule/issues"
-  },
+  "bugs": "https://github.com/aristov/ariamodule/issues",
   "main": "index.js",
   "files": [
+    "dist",
     "lib"
   ],
   "scripts": {
@@ -27,7 +26,7 @@
     "test": "ava"
   },
   "dependencies": {
-    "htmlmodule": "file:../htmlmodule"
+    "htmlmodule": "^0.7.1"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.18.0",
@@ -38,11 +37,15 @@
     "nyc": "^15.1.0",
     "terser-webpack-plugin": "^5.3.1",
     "webpack": "^5.72.1",
-    "webpack-cli": "^4.9.2",
-    "xwindow": "^0.1.2"
+    "webpack-cli": "^4.9.2"
   },
   "keywords": [
+    "DOM",
+    "HTML",
+    "UI",
     "WAI-ARIA",
-    "DOM"
+    "component",
+    "library",
+    "virtual dom"
   ]
 }
