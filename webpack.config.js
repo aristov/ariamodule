@@ -1,51 +1,48 @@
-'use strict'
+const TerserPlugin = require('terser-webpack-plugin')
+const FILE_EXT = process.env.FILE_EXT || '.js'
 
-const path = require('path')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+exports = module.exports = {
+  mode : 'none',
+  entry : './index.js',
+  output : {
+    filename : 'ariamodule' + FILE_EXT,
+    library : {
+      name : 'ariamodule',
+      type : 'umd',
+    },
+    globalObject : 'this',
+  },
+  externals : {
+    htmlmodule : 'htmlmodule',
+  },
+}
 
-module.exports = [
-    {
-        mode : 'none',
-        entry : './lib/index.js',
-        output : {
-            path : path.join(__dirname, 'dist'),
-            filename : 'dist.ariamodule.js'
-        }
-    },
-    {
-        mode : 'none',
-        entry : './lib/index.js',
-        output : {
-            path : path.join(__dirname, 'dist'),
-            filename : 'dist.ariamodule.min.js'
+if(process.env.NODE_ENV === 'production') {
+  exports.optimization = {
+    minimize : true,
+    minimizer : [
+      new TerserPlugin({
+        terserOptions : FILE_EXT === '.es5.js' ?
+          { keep_fnames : true } :
+          { keep_classnames : true },
+      }),
+    ],
+  }
+  if(FILE_EXT === '.es5.js') {
+    exports.module = {
+      rules : [
+        {
+          test : /\.js$/,
+          use : {
+            loader : 'babel-loader',
+            options : {
+              presets : ['@babel/preset-env'],
+              plugins : ['@babel/plugin-transform-runtime'],
+            },
+          },
         },
-        module : {
-            rules : [
-                {
-                    test : /\.js$/,
-                    exclude : /(node_modules\/babel-polyfill|node_modules\/dom4|node_modules\/shim-keyboard-event-key)/,
-                    use : { loader : 'babel-loader' }
-                }
-            ]
-        },
-        plugins : [
-            new UglifyJsPlugin({
-                uglifyOptions : {
-                    keep_fnames : true,
-                    keep_classnames : true,
-                    output : {
-                        comments : false
-                    }
-                }
-            })
-        ]
-    },
-    {
-        mode : 'none',
-        entry : './docs/example.js',
-        output : {
-            path : path.join(__dirname, 'docs/build'),
-            filename : 'build.example.js'
-        }
+      ],
     }
-]
+  }
+}
+

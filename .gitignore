@@ -1,7 +1,5 @@
-.DS_Store
-/.idea/
-/node_modules/
-/dist/
-/docs/build/
-/tmp/
+/.nyc_output
+/coverage
+/node_modules
 /npm-debug.log
+/tmp
