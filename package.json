@@ -1,6 +1,6 @@
 {
   "name": "ariamodule",
-  "version": "0.1.13",
+  "version": "0.2.0",
   "description": "Library for creating an accessible UI based on WAI-ARIA",
   "homepage": "https://github.com/aristov/ariamodule#readme",
   "author": "Vyacheslav Aristov",
