@@ -1,6 +1,9 @@
 # ariamodule
 
 [![NPM Version](https://img.shields.io/npm/v/ariamodule.svg)](https://www.npmjs.com/package/ariamodule)
+[![Node.js CI](https://github.com/aristov/ariamodule/actions/workflows/node.js.yml/badge.svg)](https://github.com/aristov/ariamodule/actions/workflows/node.js.yml)
+[![Coverage Status](https://coveralls.io/repos/github/aristov/ariamodule/badge.svg?branch=master)](https://coveralls.io/github/aristov/ariamodule?branch=master)
+[![NPM](https://img.shields.io/npm/l/ariamodule)](https://raw.githubusercontent.com/aristov/ariamodule/master/LICENSE)
 
 AriaModule is a library for creating an accessible UI based on WAI-ARIA.
 This is an extension for [htmlmodule](https://npmjs.com/package/htmlmodule) 
