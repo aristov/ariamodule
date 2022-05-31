@@ -1,5 +1,15 @@
 const test = require('ava')
-const { RoleButton, RoleArticle, RoleRegion } = require('..')
+const { RoleArticle, RoleButton, RoleRegion, RoleWidget } = require('..')
+
+class Button extends RoleWidget
+{
+  role = 'Button'
+}
+
+class TextInputBox extends RoleWidget
+{
+  role = null
+}
 
 class ToggleButton extends RoleButton
 {
@@ -38,6 +48,24 @@ test('RoleButton: role', t => {
   const instance = RoleButton.render('OK')
   t.is(instance.node.getAttribute('role'), 'Button')
   t.is(instance.toString(), '<div role="Button">OK</div>')
+})
+
+test('Button: role', t => {
+  const instance = Button.render('OK')
+  t.is(instance.node.getAttribute('role'), 'Button')
+  t.is(instance.toString(), '<div role="Button" class="Button">OK</div>')
+})
+
+test('TextInputBox: role', t => {
+  const instance = TextInputBox.render()
+  t.is(instance.node.getAttribute('role'), null)
+  t.is(instance.toString(), '<div class="TextInputBox"></div>')
+})
+
+test('RoleWidget: role', t => {
+  const instance = RoleWidget.render({ role : 'Link' })
+  t.is(instance.node.getAttribute('role'), 'Link')
+  t.is(instance.toString(), '<div role="Link"></div>')
 })
 
 test('ToggleButton: className', t => {
