@@ -3,7 +3,7 @@ const { RoleButton } = require('..')
 
 test('AriaHidden: true', t => {
   const instance = RoleButton.render({
-    text : 'Toggle',
+    children : 'Toggle',
     hidden : true,
   })
   t.is(instance.hidden, true)
@@ -24,7 +24,7 @@ test('AriaHidden: true', t => {
 
 test('AriaHidden: false', t => {
   const instance = RoleButton.render({
-    text : 'Toggle',
+    children : 'Toggle',
     hidden : false,
   })
   t.is(instance.hidden, false)
@@ -39,7 +39,7 @@ test('AriaHidden: false', t => {
 
 test('AriaHidden: undefined', t => {
   const instance = RoleButton.render({
-    text : 'Toggle',
+    children : 'Toggle',
     hidden : undefined,
   })
   t.is(instance.hidden, undefined)

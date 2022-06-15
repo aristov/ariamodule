@@ -3,7 +3,7 @@ const { RoleButton } = require('..')
 
 test('AriaPressed: true', t => {
   const instance = RoleButton.render({
-    text : 'Toggle',
+    children : 'Toggle',
     pressed : true,
   })
   t.is(instance.pressed, true)
@@ -24,7 +24,7 @@ test('AriaPressed: true', t => {
 
 test('AriaPressed: false', t => {
   const instance = RoleButton.render({
-    text : 'Toggle',
+    children : 'Toggle',
     pressed : false,
   })
   t.is(instance.pressed, false)
@@ -39,7 +39,7 @@ test('AriaPressed: false', t => {
 
 test('AriaPressed: mixed', t => {
   const instance = RoleButton.render({
-    text : 'Toggle',
+    children : 'Toggle',
     pressed : 'mixed',
   })
   t.is(instance.pressed, 'mixed')
@@ -48,7 +48,7 @@ test('AriaPressed: mixed', t => {
 
 test('AriaPressed: undefined', t => {
   const instance = RoleButton.render({
-    text : 'Toggle',
+    children : 'Toggle',
     pressed : undefined,
   })
   t.is(instance.pressed, undefined)

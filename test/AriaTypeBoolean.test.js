@@ -3,7 +3,7 @@ const { RoleButton } = require('..')
 
 test('AriaDisabled: true', t => {
   const instance = RoleButton.render({
-    text : 'OK',
+    children : 'OK',
     disabled : true,
   })
   t.is(instance.disabled, true)
@@ -27,7 +27,7 @@ test('AriaDisabled: true', t => {
 
 test('AriaDisabled: false', t => {
   const instance = RoleButton.render({
-    text : 'OK',
+    children : 'OK',
     disabled : false,
   })
   t.is(instance.disabled, false)

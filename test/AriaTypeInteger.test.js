@@ -3,7 +3,7 @@ const { RoleArticle } = require('..')
 
 test('AriaPosInSet: 0', t => {
   const instance = RoleArticle.render({
-    text : 'Lorem ipsum',
+    children : 'Lorem ipsum',
     posInSet : .0,
   })
   t.is(instance.posInSet, 0)
@@ -42,7 +42,7 @@ test('AriaPosInSet: 0', t => {
 
 test('AriaPosInSet: 1', t => {
   const instance = RoleArticle.render({
-    text : 'Lorem ipsum',
+    children : 'Lorem ipsum',
     posInSet : 1.1,
   })
   t.is(instance.posInSet, 1)
@@ -78,7 +78,7 @@ test('AriaPosInSet: 1', t => {
 
 test('AriaPosInSet: 4', t => {
   const instance = RoleArticle.render({
-    text : 'Lorem ipsum',
+    children : 'Lorem ipsum',
     posInSet : 4.2,
   })
   t.is(instance.posInSet, 4)
@@ -108,7 +108,7 @@ test('AriaPosInSet: 4', t => {
 
 test('AriaPosInSet: NaN', t => {
   const instance = RoleArticle.render({
-    text : 'Lorem ipsum',
+    children : 'Lorem ipsum',
     posInSet : NaN,
   })
   t.is(instance.posInSet, NaN)
@@ -147,7 +147,7 @@ test('AriaPosInSet: NaN', t => {
 
 test('AriaPosInSet: Infinity', t => {
   const instance = RoleArticle.render({
-    text : 'Lorem ipsum',
+    children : 'Lorem ipsum',
     posInSet : Infinity,
   })
   t.is(instance.posInSet, Infinity)
@@ -159,7 +159,7 @@ test('AriaPosInSet: Infinity', t => {
 
 test('AriaPosInSet: null', t => {
   const instance = RoleArticle.render({
-    text : 'Lorem ipsum',
+    children : 'Lorem ipsum',
     posInSet : null,
   })
   t.is(instance.posInSet, null)

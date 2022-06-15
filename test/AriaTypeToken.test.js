@@ -3,7 +3,7 @@ const { RoleAlert } = require('..')
 
 test('AriaLive: polite', t => {
   const instance = RoleAlert.render({
-    text : 'Warning!',
+    children : 'Warning!',
     live : 'polite',
   })
   t.is(instance.live, 'polite')
@@ -12,7 +12,7 @@ test('AriaLive: polite', t => {
 
 test('AriaLive: assertive', t => {
   const instance = RoleAlert.render({
-    text : 'Warning!',
+    children : 'Warning!',
     live : 'assertive',
   })
   t.is(instance.live, 'assertive')
@@ -21,7 +21,7 @@ test('AriaLive: assertive', t => {
 
 test('AriaLive: off', t => {
   const instance = RoleAlert.render({
-    text : 'Warning!',
+    children : 'Warning!',
     live : 'off',
   })
   t.is(instance.live, 'off')
@@ -30,7 +30,7 @@ test('AriaLive: off', t => {
 
 test('AriaLive: undefined', t => {
   const instance = RoleAlert.render({
-    text : 'Warning!',
+    children : 'Warning!',
     live : undefined,
   })
   t.is(instance.live, undefined)

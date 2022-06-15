@@ -3,7 +3,7 @@ const { RoleApplication } = require('..')
 
 test('AriaRelevant: all', t => {
   const instance = RoleApplication.render({
-    text : 'Foo',
+    children : 'Foo',
     relevant : 'all',
   })
   t.deepEqual(instance.relevant, ['all'])
@@ -12,7 +12,7 @@ test('AriaRelevant: all', t => {
 
 test('AriaRelevant: [additions, removals, text]', t => {
   const instance = RoleApplication.render({
-    text : 'Foo',
+    children : 'Foo',
     relevant : ['additions', 'removals', 'text'],
   })
   t.deepEqual(instance.relevant, ['additions', 'removals', 'text'])
@@ -21,7 +21,7 @@ test('AriaRelevant: [additions, removals, text]', t => {
 
 test('AriaRelevant: []', t => {
   const instance = RoleApplication.render({
-    text : 'Foo',
+    children : 'Foo',
     relevant : [],
   })
   t.deepEqual(instance.relevant, [])
@@ -31,7 +31,7 @@ test('AriaRelevant: []', t => {
 
 test('AriaRelevant: null', t => {
   const instance = RoleApplication.render({
-    text : 'Foo',
+    children : 'Foo',
     relevant : null,
   })
   t.deepEqual(instance.relevant, [])
