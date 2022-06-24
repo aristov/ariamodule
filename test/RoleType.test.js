@@ -45,40 +45,48 @@ class Article extends RoleArticle
 }
 
 test('RoleButton: role', t => {
-  const instance = RoleButton.render('OK')
-  t.is(instance.node.getAttribute('role'), 'Button')
-  t.is(instance.toString(), '<div role="Button">OK</div>')
+  const elem = RoleButton.render('OK')
+
+  t.is(elem.node.getAttribute('role'), 'Button')
+  t.is(elem.toString(), '<div role="Button">OK</div>')
 })
 
 test('Button: role', t => {
-  const instance = Button.render('OK')
-  t.is(instance.node.getAttribute('role'), 'Button')
-  t.is(instance.toString(), '<div role="Button" class="Button">OK</div>')
+  const elem = Button.render('OK')
+
+  t.is(elem.node.getAttribute('role'), 'Button')
+  t.is(elem.toString(), '<div role="Button" class="Button">OK</div>')
 })
 
 test('TextInputBox: role', t => {
-  const instance = TextInputBox.render()
-  t.is(instance.node.getAttribute('role'), null)
-  t.is(instance.toString(), '<div class="TextInputBox"></div>')
+  const elem = TextInputBox.render()
+
+  t.is(elem.node.getAttribute('role'), null)
+  t.is(elem.toString(), '<div class="TextInputBox"></div>')
 })
 
 test('RoleWidget: role', t => {
-  const instance = RoleWidget.render({ role : 'Link' })
-  t.is(instance.node.getAttribute('role'), 'Link')
-  t.is(instance.toString(), '<div role="Link"></div>')
+  const elem = RoleWidget.render({ role : 'Link' })
+
+  t.is(elem.node.getAttribute('role'), 'Link')
+  t.is(elem.toString(), '<div role="Link"></div>')
 })
 
 test('ToggleButton: className', t => {
-  const instance = ToggleButton.render()
-  t.is(instance.node.className, 'ToggleButton')
-  t.is(instance.toString(), '<span role="Button" class="ToggleButton" aria-pressed="false">On</span>')
+  const elem = ToggleButton.render()
+
+  t.is(elem.node.className, 'ToggleButton')
+  t.is(elem.toString(), '<span role="Button" class="ToggleButton" aria-pressed="false">On</span>')
 })
 
 test('Article: setState', t => {
-  const instance = Article.render()
-  t.is(instance.toString(),
+  const elem = Article.render()
+
+  t.is(elem.toString(),
     '<div role="Article" class="Article"><span role="Button" class="ToggleButton" aria-pressed="false">On</span><div role="Region" aria-expanded="false"></div></div>')
-  instance.toggle()
-  t.is(instance.toString(),
+
+  elem.toggle()
+
+  t.is(elem.toString(),
     '<div role="Article" class="Article"><span role="Button" class="ToggleButton" aria-pressed="true">Off</span><div role="Region" aria-expanded="true"></div></div>')
 })
