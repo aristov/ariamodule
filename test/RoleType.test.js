@@ -3,17 +3,17 @@ const { RoleArticle, RoleButton, RoleRegion, RoleWidget } = require('..')
 
 class Button extends RoleWidget
 {
-  role = 'Button'
+  static role = 'Button'
 }
 
 class TextInputBox extends RoleWidget
 {
-  role = null
+  static role = null
 }
 
 class ToggleButton extends RoleButton
 {
-  static localName = 'span'
+  static tagName = 'span'
 
   render() {
     if(!this.props.pressed) {
