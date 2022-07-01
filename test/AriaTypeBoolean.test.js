@@ -2,55 +2,69 @@ const test = require('ava')
 const { RoleButton } = require('..')
 
 test('AriaDisabled: true', t => {
-  const instance = RoleButton.render({
+  const elem = RoleButton.render({
     children : 'OK',
     disabled : true,
   })
-  t.is(instance.disabled, true)
-  t.is(instance.toString(), '<div role="Button" aria-disabled="true">OK</div>')
 
-  instance.disabled = 'true'
-  t.is(instance.disabled, true)
+  t.is(elem.disabled, true)
+  t.is(elem.toString(), '<div role="Button" aria-disabled="true">OK</div>')
 
-  instance.disabled = 'foo'
-  t.is(instance.disabled, true)
+  elem.disabled = 'true'
 
-  instance.disabled = 1
-  t.is(instance.disabled, true)
+  t.is(elem.disabled, true)
 
-  instance.disabled = 42
-  t.is(instance.disabled, true)
+  elem.disabled = 'foo'
 
-  instance.node.setAttribute('aria-disabled', 'foo')
-  t.is(instance.disabled, true)
+  t.is(elem.disabled, true)
+
+  elem.disabled = 1
+
+  t.is(elem.disabled, true)
+
+  elem.disabled = 42
+
+  t.is(elem.disabled, true)
+
+  elem.node.setAttribute('aria-disabled', 'foo')
+
+  t.is(elem.disabled, true)
 })
 
 test('AriaDisabled: false', t => {
-  const instance = RoleButton.render({
+  const elem = RoleButton.render({
     children : 'OK',
     disabled : false,
   })
-  t.is(instance.disabled, false)
-  t.is(instance.toString(), '<div role="Button">OK</div>')
 
-  instance.disabled = 'false'
-  t.is(instance.disabled, false)
+  t.is(elem.disabled, false)
+  t.is(elem.toString(), '<div role="Button">OK</div>')
 
-  instance.disabled = ''
-  t.is(instance.disabled, false)
+  elem.disabled = 'false'
 
-  instance.disabled = null
-  t.is(instance.disabled, false)
+  t.is(elem.disabled, false)
 
-  instance.disabled = undefined
-  t.is(instance.disabled, false)
+  elem.disabled = ''
 
-  instance.disabled = 0
-  t.is(instance.disabled, false)
+  t.is(elem.disabled, false)
 
-  instance.node.setAttribute('aria-disabled', 'false')
-  t.is(instance.disabled, false)
+  elem.disabled = null
 
-  instance.node.setAttribute('aria-disabled', '')
-  t.is(instance.disabled, false)
+  t.is(elem.disabled, false)
+
+  elem.disabled = undefined
+
+  t.is(elem.disabled, false)
+
+  elem.disabled = 0
+
+  t.is(elem.disabled, false)
+
+  elem.node.setAttribute('aria-disabled', 'false')
+
+  t.is(elem.disabled, false)
+
+  elem.node.setAttribute('aria-disabled', '')
+
+  t.is(elem.disabled, false)
 })

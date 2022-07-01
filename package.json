@@ -26,7 +26,7 @@
     "test": "ava"
   },
   "dependencies": {
-    "htmlmodule": "github:aristov/htmlmodule#v0.8"
+    "htmlmodule": "^0.8.0"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.18.0",
