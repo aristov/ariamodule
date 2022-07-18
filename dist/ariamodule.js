@@ -1750,19 +1750,14 @@ RoleType.defineMethods([
   'focus',
 ])
 
-RoleType.defineProps([
-  'offsetHeight',
-  'offsetLeft',
-  'offsetTop',
-  'offsetWidth',
-])
-
-RoleType.defineProps([
-  'autofocus',
-  'contentEditable',
-  'inputMode',
-  'tabIndex',
-], true)
+RoleType.defineProps({
+  autofocus : 'autofocus',
+  contentEditable : 'contenteditable',
+  inputMode : 'inputmode',
+  lang : 'lang',
+  tabIndex : 'tabindex',
+  translate : 'translate',
+})
 
 module.exports = RoleType
 
