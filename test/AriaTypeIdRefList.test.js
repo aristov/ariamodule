@@ -44,8 +44,4 @@ test('AriaLabelledBy: null', t => {
 
   t.deepEqual(elem.labelledBy, [])
   t.is(elem.toString(), '<div role="Button"></div>')
-
-  elem.node.setAttribute('aria-labelledby', '')
-
-  t.deepEqual(elem.labelledBy, [])
 })

@@ -75,12 +75,4 @@ test('AriaPressed: undefined', t => {
   elem.pressed = ''
 
   t.is(elem.pressed, undefined)
-
-  elem.node.setAttribute('aria-pressed', '')
-
-  t.is(elem.pressed, undefined)
-
-  elem.node.setAttribute('aria-pressed', 'undefined')
-
-  t.is(elem.pressed, undefined)
 })

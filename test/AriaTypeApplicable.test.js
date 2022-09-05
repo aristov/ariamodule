@@ -65,12 +65,4 @@ test('AriaHidden: undefined', t => {
   elem.hidden = ''
 
   t.is(elem.hidden, undefined)
-
-  elem.node.setAttribute('aria-hidden', '')
-
-  t.is(elem.hidden, undefined)
-
-  elem.node.setAttribute('aria-hidden', 'undefined')
-
-  t.is(elem.hidden, undefined)
 })
