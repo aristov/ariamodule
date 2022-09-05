@@ -25,10 +25,6 @@ test('AriaDisabled: true', t => {
   elem.disabled = 42
 
   t.is(elem.disabled, true)
-
-  elem.node.setAttribute('aria-disabled', 'foo')
-
-  t.is(elem.disabled, true)
 })
 
 test('AriaDisabled: false', t => {
@@ -57,14 +53,6 @@ test('AriaDisabled: false', t => {
   t.is(elem.disabled, false)
 
   elem.disabled = 0
-
-  t.is(elem.disabled, false)
-
-  elem.node.setAttribute('aria-disabled', 'false')
-
-  t.is(elem.disabled, false)
-
-  elem.node.setAttribute('aria-disabled', '')
 
   t.is(elem.disabled, false)
 })

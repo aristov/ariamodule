@@ -41,14 +41,6 @@ test('AriaValueNow: 0', t => {
   elem.valueNow = false
 
   t.is(elem.valueNow, 0)
-
-  elem.node.setAttribute('aria-valuenow', '.0')
-
-  t.is(elem.valueNow, 0)
-
-  elem.node.setAttribute('aria-valuenow', '.0e-1')
-
-  t.is(elem.valueNow, 0)
 })
 
 test('AriaValueNow: 1', t => {
@@ -83,14 +75,6 @@ test('AriaValueNow: 1', t => {
   elem.valueNow = true
 
   t.is(elem.valueNow, 1)
-
-  elem.node.setAttribute('aria-valuenow', '1')
-
-  t.is(elem.valueNow, 1)
-
-  elem.node.setAttribute('aria-valuenow', '.1e1')
-
-  t.is(elem.valueNow, 1)
 })
 
 test('AriaValueNow: 4.2', t => {
@@ -119,14 +103,6 @@ test('AriaValueNow: 4.2', t => {
   t.is(elem.valueNow, 4.2)
 
   elem.valueNow = ['4.2']
-
-  t.is(elem.valueNow, 4.2)
-
-  elem.node.setAttribute('aria-valuenow', '4.2')
-
-  t.is(elem.valueNow, 4.2)
-
-  elem.node.setAttribute('aria-valuenow', '42e-1')
 
   t.is(elem.valueNow, 4.2)
 })
@@ -163,22 +139,6 @@ test('AriaValueNow: NaN', t => {
   elem.valueNow = undefined
 
   t.is(elem.valueNow, NaN)
-
-  elem.node.setAttribute('aria-valuenow', 'true')
-
-  t.is(elem.valueNow, NaN)
-
-  elem.node.setAttribute('aria-valuenow', 'false')
-
-  t.is(elem.valueNow, NaN)
-
-  elem.node.setAttribute('aria-valuenow', 'undefined')
-
-  t.is(elem.valueNow, NaN)
-
-  elem.node.setAttribute('aria-valuenow', 'xyz')
-
-  t.is(elem.valueNow, NaN)
 })
 
 test('AriaValueNow: Infinity', t => {
@@ -203,8 +163,4 @@ test('AriaValueNow: null', t => {
 
   t.is(elem.valueNow, null)
   t.is(elem.toString(), '<div role="SpinButton">Lorem ipsum</div>')
-
-  elem.node.setAttribute('aria-valuenow', '')
-
-  t.is(elem.valueNow, null)
 })

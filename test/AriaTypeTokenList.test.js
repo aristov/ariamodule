@@ -40,8 +40,4 @@ test('AriaRelevant: null', t => {
 
   t.deepEqual(elem.relevant, [])
   t.is(elem.toString(), '<div role="Application">Foo</div>')
-
-  elem.node.setAttribute('aria-relevant', '')
-
-  t.deepEqual(elem.relevant, [])
 })

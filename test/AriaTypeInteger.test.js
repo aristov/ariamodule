@@ -41,14 +41,6 @@ test('AriaPosInSet: 0', t => {
   elem.posInSet = false
 
   t.is(elem.posInSet, 0)
-
-  elem.node.setAttribute('aria-posinset', '.0')
-
-  t.is(elem.posInSet, 0)
-
-  elem.node.setAttribute('aria-posinset', '.0e-1')
-
-  t.is(elem.posInSet, 0)
 })
 
 test('AriaPosInSet: 1', t => {
@@ -87,14 +79,6 @@ test('AriaPosInSet: 1', t => {
   elem.posInSet = true
 
   t.is(elem.posInSet, 1)
-
-  elem.node.setAttribute('aria-posinset', '1.1')
-
-  t.is(elem.posInSet, 1)
-
-  elem.node.setAttribute('aria-posinset', '11e-1')
-
-  t.is(elem.posInSet, 1)
 })
 
 test('AriaPosInSet: 4', t => {
@@ -123,14 +107,6 @@ test('AriaPosInSet: 4', t => {
   t.is(elem.posInSet, 4)
 
   elem.posInSet = ['4.2']
-
-  t.is(elem.posInSet, 4)
-
-  elem.node.setAttribute('aria-posinset', '4.2')
-
-  t.is(elem.posInSet, 4)
-
-  elem.node.setAttribute('aria-posinset', '42e-1')
 
   t.is(elem.posInSet, 4)
 })
@@ -167,22 +143,6 @@ test('AriaPosInSet: NaN', t => {
   elem.posInSet = undefined
 
   t.is(elem.posInSet, NaN)
-
-  elem.node.setAttribute('aria-posinset', 'true')
-
-  t.is(elem.posInSet, NaN)
-
-  elem.node.setAttribute('aria-posinset', 'false')
-
-  t.is(elem.posInSet, NaN)
-
-  elem.node.setAttribute('aria-posinset', 'undefined')
-
-  t.is(elem.posInSet, NaN)
-
-  elem.node.setAttribute('aria-posinset', 'xyz')
-
-  t.is(elem.posInSet, NaN)
 })
 
 test('AriaPosInSet: Infinity', t => {
@@ -207,8 +167,4 @@ test('AriaPosInSet: null', t => {
 
   t.is(elem.posInSet, null)
   t.is(elem.toString(), '<div role="Article">Lorem ipsum</div>')
-
-  elem.node.setAttribute('aria-posinset', '')
-
-  t.is(elem.posInSet, null)
 })

@@ -43,8 +43,4 @@ test('AriaLive: undefined', t => {
   elem.live = 'undefined'
 
   t.is(elem.live, undefined)
-
-  elem.node.setAttribute('aria-live', 'undefined')
-
-  t.is(elem.live, undefined)
 })
