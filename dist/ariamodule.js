@@ -805,7 +805,6 @@ exports.RoleListBox.defineAttrs([
   exports.AriaExpanded,
   exports.AriaMultiSelectable,
   exports.AriaOrientation,
-  exports.AriaOrientation,
   exports.AriaReadOnly,
   exports.AriaRequired,
 ])
@@ -837,14 +836,11 @@ exports.RoleMenu.defineAttrs([
   exports.AriaActiveDescendant,
   exports.AriaExpanded,
   exports.AriaOrientation,
-  exports.AriaOrientation,
 ])
 
 exports.RoleMenuBar.defineAttrs([
   exports.AriaActiveDescendant,
   exports.AriaExpanded,
-  exports.AriaOrientation,
-  exports.AriaOrientation,
   exports.AriaOrientation,
 ])
 
@@ -933,10 +929,7 @@ exports.RoleRowHeader.defineAttrs([
 exports.RoleScrollBar.defineAttrs([
   exports.AriaOrientation,
   exports.AriaValueMax,
-  exports.AriaValueMax,
   exports.AriaValueMin,
-  exports.AriaValueMin,
-  exports.AriaValueNow,
   exports.AriaValueNow,
   exports.AriaValueText,
 ])
@@ -972,10 +965,7 @@ exports.RoleSlider.defineAttrs([
   exports.AriaOrientation,
   exports.AriaReadOnly,
   exports.AriaValueMax,
-  exports.AriaValueMax,
   exports.AriaValueMin,
-  exports.AriaValueMin,
-  exports.AriaValueNow,
   exports.AriaValueNow,
   exports.AriaValueText,
 ])
@@ -984,8 +974,6 @@ exports.RoleSpinButton.defineAttrs([
   exports.AriaReadOnly,
   exports.AriaRequired,
   exports.AriaValueMax,
-  exports.AriaValueMax,
-  exports.AriaValueMin,
   exports.AriaValueMin,
   exports.AriaValueNow,
   exports.AriaValueText,
@@ -1059,7 +1047,6 @@ exports.RoleTree.defineAttrs([
   exports.AriaExpanded,
   exports.AriaMultiSelectable,
   exports.AriaOrientation,
-  exports.AriaOrientation,
   exports.AriaRequired,
 ])
 
@@ -1129,9 +1116,7 @@ class AriaTypeApplicable extends AriaType
   static get(elem) {
     const value = super.get(elem)
     if(value) {
-      return value === 'undefined'?
-        undefined :
-        Boolean(value) && value !== 'false'
+      return Boolean(value) && value !== 'false'
     }
     return value
   }
@@ -1156,7 +1141,7 @@ class AriaTypeApplicable extends AriaType
    */
   static set(elem, value) {
     if(String(value) === 'undefined' || value === '') {
-      elem.node.removeAttribute(this.nodeName)
+      delete elem.vnode.attributes[this.nodeName]
     }
     else super.set(elem, String(Boolean(value) && value !== 'false'))
   }
@@ -1250,7 +1235,7 @@ class AriaTypeBoolean extends AriaType
     if(value && value !== 'false') {
       super.set(elem, 'true')
     }
-    else elem.node.removeAttribute(this.nodeName)
+    else delete elem.vnode.attributes[this.nodeName]
   }
 }
 
@@ -1295,8 +1280,8 @@ class AriaTypeIdRefList extends AriaType
    * @returns {string[]}
    */
   static get(elem) {
-    const value = elem.node.getAttribute(this.nodeName)
-    return value? value.split(' ') : this.defaultValue
+    const value = elem.vnode.attributes[this.nodeName]
+    return value ? value.split(' ') : this.defaultValue
   }
 
   /**
@@ -1304,14 +1289,15 @@ class AriaTypeIdRefList extends AriaType
    * @param {*} value {string[]|string}
    */
   static set(elem, value) {
-    if(Array.isArray(value)) {
-      const list = value.filter(Boolean)
-      if(list.length) {
-        super.set(elem, list.join(' '))
-      }
-      else elem.node.removeAttribute(this.nodeName)
+    if(!Array.isArray(value)) {
+      super.set(elem, value)
+      return
     }
-    else super.set(elem, value)
+    const list = value.filter(Boolean)
+    if(list.length) {
+      super.set(elem, list.join(' '))
+    }
+    else delete elem.vnode.attributes[this.nodeName]
   }
 }
 
@@ -1559,32 +1545,12 @@ class AriaTypeToken extends AriaType
   static defaultValue = undefined
 
   /**
-   * value === 'token'
-   *      => 'token'
-   *
-   * value === 'undefined'
-   * value === ''
-   * no attr
-   *      => undefined
-   *
-   * @param {ElemType} elem
-   * @returns {string|undefined}
-   */
-  static get(elem) {
-    const value = super.get(elem)
-    if(value === 'undefined') {
-      return undefined
-    }
-    return value
-  }
-
-  /**
    * @param {ElemType} elem
    * @param {string|undefined} value
    */
   static set(elem, value) {
     if(String(value) === 'undefined') {
-      elem.node.removeAttribute(this.nodeName)
+      delete elem.vnode.attributes[this.nodeName]
     }
     else super.set(elem, value)
   }
@@ -1613,8 +1579,8 @@ class AriaTypeTokenList extends AriaType
    * @returns {string[]}
    */
   static get(elem) {
-    const value = elem.node.getAttribute(this.nodeName)
-    return value? value.split(' ') : this.defaultValue
+    const value = elem.vnode.attributes[this.nodeName]
+    return value ? value.split(' ') : this.defaultValue
   }
 
   /**
@@ -1630,7 +1596,7 @@ class AriaTypeTokenList extends AriaType
     if(list.length) {
       super.set(elem, list.join(' '))
     }
-    else elem.node.removeAttribute(this.nodeName)
+    else delete elem.vnode.attributes[this.nodeName]
   }
 }
 
@@ -1665,7 +1631,6 @@ class AriaTypeTristate extends AriaType
    * value === 'mixed'
    *      => 'mixed'
    *
-   * value === 'undefined'
    * value === ''
    * no attr
    *      => undefined
@@ -1681,9 +1646,7 @@ class AriaTypeTristate extends AriaType
     if(value === 'mixed') {
       return 'mixed'
     }
-    return value === 'undefined'?
-      undefined :
-      Boolean(value) && value !== 'false'
+    return Boolean(value) && value !== 'false'
   }
 
   /**
@@ -1712,7 +1675,7 @@ class AriaTypeTristate extends AriaType
    */
   static set(elem, value) {
     if(String(value) === 'undefined' || value === '') {
-      elem.node.removeAttribute(this.nodeName)
+      delete elem.vnode.attributes[this.nodeName]
     }
     else if(value === 'mixed') {
       super.set(elem, 'mixed')
@@ -1728,8 +1691,7 @@ module.exports = AriaTypeTristate
 /* 14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-const { ElemType, HtmlType } = __webpack_require__(2)
-const innerText = Object.getOwnPropertyDescriptor(HtmlType.prototype, 'innerText')
+const { ElemType } = __webpack_require__(2)
 
 /**
  * @see https://www.w3.org/TR/wai-aria-1.1/#host_general_role
@@ -1742,8 +1704,6 @@ class RoleType extends ElemType
   static class = undefined
 }
 
-Object.defineProperty(RoleType.prototype, 'innerText', innerText)
-
 RoleType.defineMethods([
   'blur',
   'click',
@@ -1753,6 +1713,7 @@ RoleType.defineMethods([
 RoleType.defineProps({
   autofocus : 'autofocus',
   contentEditable : 'contenteditable',
+  innerText : null,
   inputMode : 'inputmode',
   lang : 'lang',
   tabIndex : 'tabindex',
